@@ -1,5 +1,5 @@
 {
- "note": "Summary of the Cu-Zr ESPEI demonstration (orchid-espei-demo), extracted from its result files; no MCMC chains. All runs are review-only demonstrations of data reuse, not assessments. Releases: v1 ORCHID bundle v2026.10 as of 2026-10-23 morning; v2 fixed bundle of 2026-10-23 PM; v3/v4 orchid-data 16d5eca83.",
+ "note": "Summary of the Cu-Zr ESPEI demonstration (orchid-espei-demo), extracted from its result files; no MCMC chains. All runs are review-only demonstrations of data reuse, not assessments. Releases: v1 ORCHID bundle v2026.10 as of 2026-10-23 morning; v2 fixed bundle of 2026-10-23 PM; v3/v4 orchid-data 16d5eca83. m7: orchid-espei-demo commit 487f746 (results/v4_m7).",
  "gate_rule": "(as v2, fixed before fitting): the optimum passes when, for every model reaction with a printed ORCHID temperature\nin the FIT set, its invariant temperature lies within 2u of the nearest printed value (u printed, else 5 K).",
  "variants": [
   {
@@ -82,6 +82,22 @@
    "method": "Kunselman gradient branch, 3 starts",
    "gate_reactions_pass": 10,
    "gate_reactions": 13,
+   "outcome": "gate FAILS"
+  },
+  {
+   "key": "v4_m7_zpf_x30",
+   "label": "m7 = m6 + third liquid term 2L, ZPF weight x30 (post hoc, model-adequacy test)",
+   "method": "Kunselman gradient branch, 3 starts (orchid-espei-demo 487f746)",
+   "gate_reactions_pass": 8,
+   "gate_reactions": 13,
+   "activity_rmse_kJ_fit_heldout": [
+    2.28,
+    1.11
+   ],
+   "invariant_mae_K_fit_heldout": [
+    29,
+    26
+   ],
    "outcome": "gate FAILS"
   }
  ],

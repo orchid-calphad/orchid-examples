@@ -1,0 +1,354 @@
+{
+ "status": "POST-HOC (Amendment 4 fallback m7), model-adequacy test, not a tuned result; v3 is the pre-registered result",
+ "selection_rule": "ZPF factor whose m6 optimum fails the fewest gate reactions (ties: larger activity improvement)",
+ "selection": {
+  "x1": 10,
+  "x3": 8,
+  "x10": 4,
+  "x30": 3
+ },
+ "start": {
+  "invariants": {
+   "L = FCC + Cu5Zr (eutectic)": 1240.90625,
+   "L + Cu51Zr14 = Cu5Zr (peritectic)": 1287.53125,
+   "L = Cu51Zr14 (congruent)": 1385.78125,
+   "L + Cu51Zr14 = Cu8Zr3": 1195.34375,
+   "L = Cu8Zr3 + Cu10Zr7 (eutectic)": 1164.21875,
+   "L = Cu10Zr7 (congruent)": 1164.46875,
+   "L = Cu10Zr7 + CuZr (eutectic)": 1163.15625,
+   "L = CuZr (congruent)": 1208.65625,
+   "L = CuZr + CuZr2 (eutectic)": 1196.78125,
+   "L = CuZr2 (congruent)": 1274.78125,
+   "L = CuZr2 + BCC (eutectic)": 1269.65625,
+   "BCC = CuZr2 + HCP (eutectoid)": 1088.71875,
+   "CuZr = Cu10Zr7 + CuZr2 (eutectoid)": 976.65625
+  },
+  "gate_reactions_pass": 12,
+  "invariant_errors": {
+   "fit_mae_K": 17.67489035087719,
+   "holdout_mae_K": 10.2875
+  }
+ },
+ "m7": {
+  "model": "m7",
+  "zpf_factor": 30,
+  "data": "data/v4_w30 (data/v4_m7 is a symlink)",
+  "starts": {
+   "P2": {
+    "lnL": -24746.614613161728,
+    "theta": [
+     -69789.12973311235,
+     20.49973227044262,
+     -8081.560653068059,
+     7.793736462519972,
+     -231459.74898651117,
+     -18778.792117373618,
+     -11399.146051303196
+    ],
+    "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+    "nit": 36,
+    "nfev": 42,
+    "wall_s": 450.60861897468567,
+    "gate_reactions_pass": 8
+   },
+   "P4": {
+    "lnL": -24746.623246568357,
+    "theta": [
+     -69846.42016748374,
+     20.54549766093217,
+     -7776.773953289273,
+     7.5598054282459355,
+     -231461.67450271212,
+     -18779.137267238384,
+     -11399.34801883452
+    ],
+    "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+    "nit": 36,
+    "nfev": 38,
+    "wall_s": 410.6519830226898,
+    "gate_reactions_pass": 8
+   },
+   "SGTE": {
+    "lnL": -24749.58695804399,
+    "theta": [
+     -70012.26887722212,
+     20.781451332005698,
+     -7593.518282957564,
+     7.521390821222447,
+     -231025.6981939909,
+     -18721.626112309867,
+     -11768.026578770552
+    ],
+    "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+    "nit": 47,
+    "nfev": 56,
+    "wall_s": 606.5706717967987,
+    "gate_reactions_pass": 7
+   }
+  },
+  "best_start": "P2",
+  "symbols": [
+   "VV0000",
+   "VV0001",
+   "VV0002",
+   "VV0003",
+   "VV0004",
+   "VV0005",
+   "VV0006"
+  ],
+  "theta_opt": [
+   -69789.12973311235,
+   20.49973227044262,
+   -8081.560653068059,
+   7.793736462519972,
+   -231459.74898651117,
+   -18778.792117373618,
+   -11399.146051303196
+  ],
+  "lnL_opt": -24746.614613161728,
+  "at_bound": [],
+  "lnL_per_type_start": {
+   "ActivityResidual": -1975.605847227559,
+   "FixedConfigurationPropertyResidual": -6957.679634800802,
+   "ZPFResidual": -20217.89502418092,
+   "EquilibriumPropertyResidual": 0.0
+  },
+  "lnL_per_type_opt": {
+   "ActivityResidual": -917.3641129194626,
+   "FixedConfigurationPropertyResidual": -7147.817326816524,
+   "ZPFResidual": -16681.433173425743,
+   "EquilibriumPropertyResidual": 0.0
+  },
+  "rmse": {
+   "fit/ACR": {
+    "start": 3596.996472192506,
+    "optimum": 2284.786869025343,
+    "unit": "J/mol (chemical potential)"
+   },
+   "fit/HM_FORM_DFT": {
+    "start": 2609.3184020895314,
+    "optimum": 2905.515970739179,
+    "unit": "J/mol-atom"
+   },
+   "fit/HM_FORM_exp": {
+    "start": 5337.250478781252,
+    "optimum": 5575.418589622667,
+    "unit": "J/mol-atom"
+   },
+   "fit/SM_FORM_exp": {
+    "start": 3.8080598311817564,
+    "optimum": 3.8080598311817564,
+    "unit": "J/K/mol-atom"
+   },
+   "fit/ZPF_assessed": {
+    "start": 99.50249044570766,
+    "optimum": 10.143764725039224,
+    "unit": "J/mol (driving force)"
+   },
+   "fit/ZPF_bracket": {
+    "start": 165.11215164551683,
+    "optimum": 165.43296988858305,
+    "unit": "J/mol (driving force)"
+   },
+   "fit/ZPF_dense": {
+    "start": 403.96525230762546,
+    "optimum": 321.83599404365225,
+    "unit": "J/mol (driving force)"
+   },
+   "fit/ZPF_liquid": {
+    "start": 6.981045809257358e-08,
+    "optimum": 6.174865438723944e-08,
+    "unit": "J/mol (driving force)"
+   },
+   "fit/ZPF_literature": {
+    "start": 604.6669796837424,
+    "optimum": 565.9411483699056,
+    "unit": "J/mol (driving force)"
+   },
+   "holdout/ACR": {
+    "start": 2588.869958522898,
+    "optimum": 1110.6853855424317,
+    "unit": "J/mol (chemical potential)"
+   },
+   "holdout/HM_FORM_exp": {
+    "start": 5667.0912337726795,
+    "optimum": 6003.098712117203,
+    "unit": "J/mol-atom"
+   },
+   "holdout/SM_FORM_exp": {
+    "start": 7.28,
+    "optimum": 7.28,
+    "unit": "J/K/mol-atom"
+   },
+   "holdout/ZPF_literature": {
+    "start": 90.7174501957868,
+    "optimum": 178.77923111320408,
+    "unit": "J/mol (driving force)"
+   }
+  },
+  "invariants_opt": {
+   "L = FCC + Cu5Zr (eutectic)": 1231.21875,
+   "L + Cu51Zr14 = Cu5Zr (peritectic)": 1286.90625,
+   "L = Cu51Zr14 (congruent)": 1447.34375,
+   "L + Cu51Zr14 = Cu8Zr3": 1273.78125,
+   "L = Cu8Zr3 + Cu10Zr7 (eutectic)": 1185.46875,
+   "L = Cu10Zr7 (congruent)": 1185.40625,
+   "L = Cu10Zr7 + CuZr (eutectic)": 1185.34375,
+   "L = CuZr (congruent)": 1223.65625,
+   "L = CuZr + CuZr2 (eutectic)": 1212.40625,
+   "L = CuZr2 (congruent)": 1291.96875,
+   "L = CuZr2 + BCC (eutectic)": 1260.90625,
+   "BCC = CuZr2 + HCP (eutectoid)": 1088.71875,
+   "CuZr = Cu10Zr7 + CuZr2 (eutectoid)": 1036.96875
+  },
+  "invariants_opt_all_starts": {
+   "P2": {
+    "L = FCC + Cu5Zr (eutectic)": 1231.21875,
+    "L + Cu51Zr14 = Cu5Zr (peritectic)": 1286.90625,
+    "L = Cu51Zr14 (congruent)": 1447.34375,
+    "L + Cu51Zr14 = Cu8Zr3": 1273.78125,
+    "L = Cu8Zr3 + Cu10Zr7 (eutectic)": 1185.46875,
+    "L = Cu10Zr7 (congruent)": 1185.40625,
+    "L = Cu10Zr7 + CuZr (eutectic)": 1185.34375,
+    "L = CuZr (congruent)": 1223.65625,
+    "L = CuZr + CuZr2 (eutectic)": 1212.40625,
+    "L = CuZr2 (congruent)": 1291.96875,
+    "L = CuZr2 + BCC (eutectic)": 1260.90625,
+    "BCC = CuZr2 + HCP (eutectoid)": 1088.71875,
+    "CuZr = Cu10Zr7 + CuZr2 (eutectoid)": 1036.96875
+   },
+   "P4": {
+    "L = FCC + Cu5Zr (eutectic)": 1231.21875,
+    "L + Cu51Zr14 = Cu5Zr (peritectic)": 1286.90625,
+    "L = Cu51Zr14 (congruent)": 1447.03125,
+    "L + Cu51Zr14 = Cu8Zr3": 1273.78125,
+    "L = Cu8Zr3 + Cu10Zr7 (eutectic)": 1185.46875,
+    "L = Cu10Zr7 (congruent)": 1185.40625,
+    "L = Cu10Zr7 + CuZr (eutectic)": 1185.34375,
+    "L = CuZr (congruent)": 1223.65625,
+    "L = CuZr + CuZr2 (eutectic)": 1212.40625,
+    "L = CuZr2 (congruent)": 1291.96875,
+    "L = CuZr2 + BCC (eutectic)": 1260.59375,
+    "BCC = CuZr2 + HCP (eutectoid)": 1088.71875,
+    "CuZr = Cu10Zr7 + CuZr2 (eutectoid)": 1036.96875
+   },
+   "SGTE": {
+    "L = FCC + Cu5Zr (eutectic)": 1230.90625,
+    "L + Cu51Zr14 = Cu5Zr (peritectic)": 1286.90625,
+    "L = Cu51Zr14 (congruent)": 1449.21875,
+    "L + Cu51Zr14 = Cu8Zr3": 1277.53125,
+    "L = Cu8Zr3 + Cu10Zr7 (eutectic)": 1187.03125,
+    "L = Cu10Zr7 (congruent)": 1186.96875,
+    "L = Cu10Zr7 + CuZr (eutectic)": 1186.90625,
+    "L = CuZr (congruent)": 1223.96875,
+    "L = CuZr + CuZr2 (eutectic)": 1213.03125,
+    "L = CuZr2 (congruent)": 1292.90625,
+    "L = CuZr2 + BCC (eutectic)": 1260.28125,
+    "BCC = CuZr2 + HCP (eutectoid)": 1088.71875,
+    "CuZr = Cu10Zr7 + CuZr2 (eutectoid)": 1039.78125
+   }
+  },
+  "invariant_errors": {
+   "fit_mae_K": 28.696820175438596,
+   "holdout_mae_K": 26.4625
+  },
+  "gate_pass": false,
+  "gate_reactions_pass": 8,
+  "gate_reactions": 13,
+  "gate_detail": {
+   "L = FCC + Cu5Zr (eutectic)": {
+    "model_K": 1231.21875,
+    "nearest_printed_K": 1237.0,
+    "u_K": 5.0,
+    "pass": true
+   },
+   "L + Cu51Zr14 = Cu5Zr (peritectic)": {
+    "model_K": 1286.90625,
+    "nearest_printed_K": 1287.0,
+    "u_K": 5.0,
+    "pass": true
+   },
+   "L = Cu8Zr3 + Cu10Zr7 (eutectic)": {
+    "model_K": 1185.46875,
+    "nearest_printed_K": 1177.0,
+    "u_K": 5.0,
+    "pass": true
+   },
+   "L = Cu10Zr7 (congruent)": {
+    "model_K": 1185.40625,
+    "nearest_printed_K": 1185.0,
+    "u_K": 3.0,
+    "pass": true
+   },
+   "L = Cu10Zr7 + CuZr (eutectic)": {
+    "model_K": 1185.34375,
+    "nearest_printed_K": 1164,
+    "u_K": 5.0,
+    "pass": false
+   },
+   "L = CuZr (congruent)": {
+    "model_K": 1223.65625,
+    "nearest_printed_K": 1206.0,
+    "u_K": 5.0,
+    "pass": false
+   },
+   "L = CuZr + CuZr2 (eutectic)": {
+    "model_K": 1212.40625,
+    "nearest_printed_K": 1202,
+    "u_K": 5.0,
+    "pass": true
+   },
+   "L = CuZr2 (congruent)": {
+    "model_K": 1291.96875,
+    "nearest_printed_K": 1285.0,
+    "u_K": 5.0,
+    "pass": true
+   },
+   "L = Cu51Zr14 (congruent)": {
+    "model_K": 1447.34375,
+    "nearest_printed_K": 1411.0,
+    "u_K": 5.0,
+    "pass": false
+   },
+   "L + Cu51Zr14 = Cu8Zr3": {
+    "model_K": 1273.78125,
+    "nearest_printed_K": 1248.0,
+    "u_K": 5.0,
+    "pass": false
+   },
+   "CuZr = Cu10Zr7 + CuZr2 (eutectoid)": {
+    "model_K": 1036.96875,
+    "nearest_printed_K": 1003,
+    "u_K": 5.0,
+    "pass": false
+   },
+   "L = CuZr2 + BCC (eutectic)": {
+    "model_K": 1260.90625,
+    "nearest_printed_K": 1268.0,
+    "u_K": 10.0,
+    "pass": true
+   },
+   "BCC = CuZr2 + HCP (eutectoid)": {
+    "model_K": 1088.71875,
+    "nearest_printed_K": 1095.0,
+    "u_K": 10.0,
+    "pass": true
+   }
+  }
+ },
+ "pass_criterion": {
+  "activities_improved_fit": true,
+  "activities_improved_holdout": true,
+  "gate_passed": false,
+  "PASS": false
+ },
+ "printed": {
+  "L = CuZr (congruent)": [
+   1206.0
+  ],
+  "L = Cu10Zr7 (congruent)": [
+   1168.0,
+   1185.0
+  ]
+ }
+}
