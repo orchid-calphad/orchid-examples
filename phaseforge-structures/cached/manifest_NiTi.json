@@ -1,0 +1,201 @@
+{
+ "system": "NI-TI",
+ "elements": [
+  "Ni",
+  "Ti"
+ ],
+ "wall_seconds_total": 17.18,
+ "cpu_count": 10,
+ "platform": "macOS-14.3-arm64-arm-64bit",
+ "machine": "arm64",
+ "python": "3.12.14",
+ "m_scraps": "0.6.0",
+ "m_scraps_commit_if_source_tree": "",
+ "seed": 2026,
+ "mpi_ranks": 4,
+ "orchid_data": "/Users/raymundo.arroyave/projects/orchid-data",
+ "orchid_data_commit": "d91a44102d7ed8f9fccbf937cee004484cae5241",
+ "volumes_A3_per_atom": {
+  "Ni": 10.94,
+  "Ti": 17.67
+ },
+ "n_relaxations": 19,
+ "n_liquid": 5,
+ "timings": [
+  {
+   "item": "FCC_A1/sqs_lev=0_a_Ni=1",
+   "seconds": 0.01,
+   "n_atoms": 1
+  },
+  {
+   "item": "FCC_A1/sqs_lev=0_a_Ti=1",
+   "seconds": 0.0,
+   "n_atoms": 1
+  },
+  {
+   "item": "FCC_A1/sqs_lev=1_a_Ni=0.5,a_Ti=0.5",
+   "seconds": 1.43,
+   "n_atoms": 64
+  },
+  {
+   "item": "FCC_A1/sqs_lev=2_a_Ni=0.75,a_Ti=0.25",
+   "seconds": 1.08,
+   "n_atoms": 64
+  },
+  {
+   "item": "FCC_A1/sqs_lev=2_a_Ni=0.25,a_Ti=0.75",
+   "seconds": 1.08,
+   "n_atoms": 64
+  },
+  {
+   "item": "BCC_A2/sqs_lev=0_a_Ni=1",
+   "seconds": 0.0,
+   "n_atoms": 1
+  },
+  {
+   "item": "BCC_A2/sqs_lev=0_a_Ti=1",
+   "seconds": 0.01,
+   "n_atoms": 1
+  },
+  {
+   "item": "BCC_A2/sqs_lev=1_a_Ni=0.5,a_Ti=0.5",
+   "seconds": 1.43,
+   "n_atoms": 64
+  },
+  {
+   "item": "BCC_A2/sqs_lev=2_a_Ni=0.75,a_Ti=0.25",
+   "seconds": 1.08,
+   "n_atoms": 64
+  },
+  {
+   "item": "BCC_A2/sqs_lev=2_a_Ni=0.25,a_Ti=0.75",
+   "seconds": 0.99,
+   "n_atoms": 64
+  },
+  {
+   "item": "HCP_A3/sqs_lev=0_a_Ni=1",
+   "seconds": 0.0,
+   "n_atoms": 2
+  },
+  {
+   "item": "HCP_A3/sqs_lev=0_a_Ti=1",
+   "seconds": 0.0,
+   "n_atoms": 2
+  },
+  {
+   "item": "HCP_A3/sqs_lev=1_a_Ni=0.5,a_Ti=0.5",
+   "seconds": 2.32,
+   "n_atoms": 64
+  },
+  {
+   "item": "HCP_A3/sqs_lev=2_a_Ni=0.75,a_Ti=0.25",
+   "seconds": 1.74,
+   "n_atoms": 64
+  },
+  {
+   "item": "HCP_A3/sqs_lev=2_a_Ni=0.25,a_Ti=0.75",
+   "seconds": 1.48,
+   "n_atoms": 64
+  },
+  {
+   "item": "LIQUID/sqs_lev=0_a_Ni=1",
+   "seconds": 0.0,
+   "n_atoms": 108
+  },
+  {
+   "item": "LIQUID/sqs_lev=0_a_Ti=1",
+   "seconds": 0.0,
+   "n_atoms": 108
+  },
+  {
+   "item": "LIQUID/sqs_lev=1_a_Ni=0.5,a_Ti=0.5",
+   "seconds": 0.72,
+   "n_atoms": 108
+  },
+  {
+   "item": "LIQUID/sqs_lev=2_a_Ni=0.75,a_Ti=0.25",
+   "seconds": 1.04,
+   "n_atoms": 108
+  },
+  {
+   "item": "LIQUID/sqs_lev=2_a_Ni=0.25,a_Ti=0.75",
+   "seconds": 1.03,
+   "n_atoms": 108
+  },
+  {
+   "item": "COMPOUNDS (4 made, 2 skipped)",
+   "seconds": 1.7
+  }
+ ],
+ "compounds": [
+  {
+   "source": "Materials Project structure mp-aaaaaccf (ORCHID DFT hull vertex)",
+   "material_id": "mp-aaaaaccf",
+   "nsites": 16,
+   "phase": "NI3TI_D024",
+   "n_atoms": 16,
+   "x_target": 0.25,
+   "x_structure": 0.25,
+   "composition_matches": true,
+   "registry_space_group": "P6_3/mmc",
+   "detected_space_group_number": 194,
+   "seconds": 0.22
+  },
+  {
+   "source": "Materials Project structure mp-aaaaaboi (ORCHID DFT hull vertex)",
+   "material_id": "mp-aaaaaboi",
+   "nsites": 4,
+   "phase": "NITI_B19",
+   "n_atoms": 4,
+   "x_target": 0.5,
+   "x_structure": 0.5,
+   "composition_matches": true,
+   "registry_space_group": "P2_1/m",
+   "detected_space_group_number": 11,
+   "seconds": 0.0
+  },
+  {
+   "source": "Materials Project structure mp-aaaaaboi (ORCHID DFT hull vertex)",
+   "material_id": "mp-aaaaaboi",
+   "nsites": 4,
+   "phase": "NITI_B19P",
+   "n_atoms": 4,
+   "x_target": 0.5,
+   "x_structure": 0.5,
+   "composition_matches": true,
+   "registry_space_group": "P2_1/m",
+   "detected_space_group_number": 11,
+   "seconds": 0.0
+  },
+  {
+   "source": "pymatgen AFLOW prototype AB_cP2_221_b_a (B2), cell scaled to Vegard volume",
+   "decoration_ambiguous": true,
+   "phase": "NITI_B2",
+   "n_atoms": 2,
+   "x_target": 0.5,
+   "x_structure": 0.5,
+   "composition_matches": true,
+   "registry_space_group": "Pm-3m",
+   "detected_space_group_number": 221,
+   "seconds": 0.01
+  }
+ ],
+ "skipped": [
+  {
+   "phase": "NI3TI2",
+   "structure_type": "st:ni8ti5-hr52",
+   "pearson": "hR52",
+   "space_group": "R-3m",
+   "x_Ti": 0.4,
+   "reason": "no curated file, no matching Materials Project hull structure (same composition and space group), no AFLOW prototype"
+  },
+  {
+   "phase": "NI4TI3",
+   "structure_type": "st:pd4pu3-hr14",
+   "pearson": "hR14",
+   "space_group": "R-3",
+   "x_Ti": 0.428571,
+   "reason": "no curated file, no matching Materials Project hull structure (same composition and space group), no AFLOW prototype"
+  }
+ ]
+}

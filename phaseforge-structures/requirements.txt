@@ -1,0 +1,8 @@
+# CPython 3.12. m_scraps is not on PyPI: build it from github.com/rarroyave/m_scraps at 776e69854d5445749fc36533fd4f16557e2e4023
+# (needs Homebrew open-mpi and eigen on macOS: `MPICXX=$(brew --prefix open-mpi)/bin/mpic++ uv pip install ./m_scraps`).
+numpy==2.3.2
+scipy==1.16.1
+ase==3.29.0
+spglib==2.8.0
+pymatgen==2026.10.24
+pymatgen-core==2026.10.16
