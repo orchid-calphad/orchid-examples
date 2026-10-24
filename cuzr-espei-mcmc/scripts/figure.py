@@ -1,7 +1,7 @@
 """The documented negative result of the classic ESPEI route for Cu-Zr, from cached/espei_demo_summary.json (no chains).
 
 a  invariant reactions within the gate (of 13) for every variant of the orchid-espei-demo study: SGTE start, the
-   pre-registered gradient fit (v3) and the post-hoc gradient variants (v4); the MCMC runs are annotated (v1: gate not
+   pre-registered gradient fit (v3), the post-hoc gradient variants (v4) and the model-adequacy fallback m7; the MCMC runs are annotated (v1: gate not
    yet defined; v2: 0 % of posterior draws pass, chains not converged). No variant passes (13/13).
 b  v1 MCMC (ESPEI 0.9.1, emcee): temperature at which liquid and compound Gibbs energies are equal at the compound
    composition (an upper bound of its melting point), SGTE start vs posterior median, against the printed congruent
@@ -42,7 +42,7 @@ def main(out):
                    else f"0 % of posterior draws pass;\nsplit R-hat up to {v['split_rhat_range'][1]:.0f}")
             ax.text(0.2, i, txt, va="center", fontsize=5, color=S.C_MODEL)
     ax.axvline(13, color=S.INK, lw=0.5, ls="--"); ax.text(12.9, -0.9, "pass = 13", ha="right", fontsize=5)
-    lab = {"sgte_start": "SGTE start", "v1_mcmc": "v1 MCMC, 8 par.", "v2_mcmc": "v2 MCMC, 16 par.", "v3_gradient": "v3 gradient (pre-reg.)"}
+    lab = {"sgte_start": "SGTE start", "v1_mcmc": "v1 MCMC, 8 par.", "v2_mcmc": "v2 MCMC, 16 par.", "v3_gradient": "v3 gradient (pre-reg.)", "v4_m7_zpf_x30": "m7 (m6 + 2L), ZPF ×30"}
     ax.set_yticks(y); ax.set_yticklabels([lab.get(v["key"], v["key"].replace("v4_zpf_x", "v4 gradient, ZPF ×")) for v in rows], fontsize=5.5)
     ax.invert_yaxis(); ax.set_xlim(0, 14); ax.set_xlabel("Invariants within the gate (of 13)")
     S.panel_label(ax, "a", x=-0.55)

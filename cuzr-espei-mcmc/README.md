@@ -3,7 +3,8 @@
 This example shows the classic ESPEI route with ORCHID data: load the released ESPEI datasets with
 `load_datasets`, choose evidence with `apply_tags`, and refine part of an existing assessment (the SGTE Cu–Zr
 description of Zeng et al. 1994) with ESPEI's MCMC. It is kept as a **negative example**: in the study behind the
-paper, no variant of this refinement passed the gate, and the figure and numbers below say so.
+paper, no variant of this refinement passed the gate (best 10/13; the last, pre-registered fallback m7 reached 8/13),
+and the figure and numbers below say so.
 
 ![negative result](figures/fig_espei_negative.png)
 
@@ -16,13 +17,21 @@ ORCHID temperature in the fit set (13 reactions) to lie within twice its uncerta
 | v1, 8 coefficients (liquid 0L, 1L; four compound constants) | ESPEI 0.9.1 MCMC (emcee), 16 chains × 1,500 iterations, 3.1 h | not converged; activities fit better, but CuZr and CuZr2 melt 150–180 K too high (panel b). ESPEI 0.9.1 gives no ZPF driving force for a liquid point at a line-compound composition once the compound is stable, so congruent melting constrains the model in one direction only |
 | v2, 16 coefficients, + invariant brackets, assessed and liquid-stability points | ESPEI 0.9.1 MCMC, 2 × 32 walkers, stopped at ~955 iterations | not converged (split R-hat up to 12); 0 % of posterior draws pass (panel c) |
 | v3, 6 coefficients (pre-registered) | gradient ESPEI (Kunselman), L-BFGS-B, 6 starts | 3/13 |
-| v4, dense assessed-field points, ZPF weight ×1/×3/×10/×30 (post hoc) | gradient ESPEI, 3 starts each | 3, 5, 9, 10 of 13; none passes |
+| v4, dense assessed-field points, ZPF weight ×1/×3/×10/×30 (post hoc; m6 = the v3 six-parameter model) | gradient ESPEI, 3 starts each | 3, 5, 9, 10 of 13; none passes |
+| m7 (m6 + 2L liquid), ZPF ×30, post hoc (pre-registered fallback) | gradient ESPEI, 3 starts | activity RMSE fit/held-out 2.28/1.11 kJ/mol (SGTE 3.60/2.59), invariant MAE 29/26 K (SGTE 18/10), 8/13 reactions, **gate FAILS** |
 
-The fitted descriptions also lost accuracy elsewhere (v3: invariant MAE 18 → 54 K on the fit set). The lesson the
-paper draws is about the route, not the data: refining a few coefficients of an existing description against
-heterogeneous data with ZPF terms that are blind in one direction misfires; the PhaseForge+ example (gradient
-tuning of a full MLIP-informed parameter set, more phase evidence) reached 9/13, in-sample. All refined TDBs are
-review-only and are not distributed.
+**In plain terms: refining six or seven parameters of the 1994 assessment with ORCHID data improves the
+activities but cannot keep the invariants within the gate.** Every refinement that fits the activities better moves
+invariant temperatures away from the printed ones (v3: invariant MAE 18 → 54 K on the fit set; m7: 18 → 29 K), and
+adding a third liquid term (m7) does not fix it. This is a model-adequacy result for this parameterisation of the
+1994 description, not a defect of the data. The paper's Cu–Zr example therefore uses the PhaseForgePlus gradient route
+instead (`../cuzr-phaseforgeplus`: a full MLIP-informed parameter set tuned with more phase evidence, 9/13, in-sample).
+
+The m7 result is in `cached/v4_m7/` (summary from orchid-espei-demo commit 487f746), with its starting and
+refined databases in `tdb/review_only/` (`CuZr-94Zen-LB_param_v4_m7.tdb`, `CuZr-94Zen-LB_ORCHID-v4_m7_REVIEW-ONLY.tdb`:
+**review only, not an assessment; do not copy into a database**) and the scripts that produced it in
+`scripts/source_v4_m7/` (reference copies; they need the source repository). Other refined TDBs and all chains are
+not distributed (`../ZENODO_LARGE_FILES.md`).
 
 ## Quick path: cached summary → figure (no ESPEI, about 40 s)
 
