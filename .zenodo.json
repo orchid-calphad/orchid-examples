@@ -1,0 +1,24 @@
+{
+  "upload_type": "software",
+  "title": "ORCHID examples: runnable workflows on the ORCHID CALPHAD data (PhaseForge+, ESPEI, one-shot MLIP phase diagrams, MLIP formation enthalpies, quickstart)",
+  "description": "Runnable, documented examples of the workflows described in the ORCHID paper, each rebuildable in minutes without a GPU from cached outputs: tuning an MLIP-informed Cu-Zr CALPHAD description with gradient-based ESPEI against ORCHID data (PhaseForge+), the classic ESPEI MCMC route as a documented negative example, prevalence-weighted scoring of one-shot MLIP phase diagrams against ORCHID evidence, the saturation of MLIP formation-enthalpy accuracy at the DFT level, and a quickstart notebook. Each example pins the ORCHID release commit and its software versions.",
+  "license": "MIT",
+  "version": "2026.10",
+  "creators": [
+    {"name": "Arróyave, Raymundo", "affiliation": "Texas A&M University", "orcid": "0000-0001-7548-8686"},
+    {"name": "Saal, James", "affiliation": "Citrine Informatics", "orcid": "0000-0003-0935-158X"},
+    {"name": "Shin, Dongwon", "affiliation": "Oak Ridge National Laboratory", "orcid": "0000-0002-5797-3423"}
+  ],
+  "keywords": ["CALPHAD", "ESPEI", "pycalphad", "PhaseForge", "machine-learned interatomic potentials", "phase diagrams", "benchmark"],
+  "communities": [{"identifier": "TODO-orchid-zenodo-community"}],
+  "related_identifiers": [
+    {"identifier": "https://github.com/orchid-calphad/orchid-examples", "relation": "isSupplementTo", "scheme": "url"},
+    {"identifier": "https://data.orchid-project.org", "relation": "references", "scheme": "url"},
+    {"identifier": "10.1016/j.actamat.2025.121453", "relation": "references", "scheme": "doi"},
+    {"identifier": "10.1016/j.actamat.2026.122412", "relation": "references", "scheme": "doi"},
+    {"identifier": "10.1557/mrc.2019.59", "relation": "references", "scheme": "doi"},
+    {"identifier": "10.5281/zenodo.15730912", "relation": "references", "scheme": "doi"},
+    {"identifier": "10.5281/zenodo.17519087", "relation": "references", "scheme": "doi"}
+  ],
+  "notes": "TODO before the first release: replace the community placeholder with the ORCHID Zenodo community identifier (or remove it), and add the paper DOI. Supported by the U.S. National Science Foundation, award OAC-2608825 (CSSI Elements: PhaseForge). Code is MIT-licensed; data files keep their sources' licences (LICENSE-DATA.md)."
+}

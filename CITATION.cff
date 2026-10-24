@@ -1,0 +1,121 @@
+cff-version: 1.2.0
+message: "If you use these examples, please cite them as below, together with the ORCHID data release you used, the ORCHID paper, the software each example credits, and the original sources of the data."
+title: "ORCHID examples: runnable workflows on the ORCHID CALPHAD data (PhaseForge+, ESPEI, one-shot MLIP phase diagrams, MLIP formation enthalpies, quickstart)"
+type: software
+authors:
+  - family-names: "Arróyave"
+    given-names: "Raymundo"
+    orcid: "https://orcid.org/0000-0001-7548-8686"
+    affiliation: "Texas A&M University"
+  - family-names: "Saal"
+    given-names: "James"
+    orcid: "https://orcid.org/0000-0003-0935-158X"
+    affiliation: "Citrine Informatics"
+  - family-names: "Shin"
+    given-names: "Dongwon"
+    orcid: "https://orcid.org/0000-0002-5797-3423"
+    affiliation: "Oak Ridge National Laboratory"
+version: "2026.10"
+date-released: "2026-10-24"
+license: MIT
+url: "https://orchid-project.org"
+repository-code: "https://github.com/orchid-calphad/orchid-examples"
+keywords:
+  - CALPHAD
+  - ESPEI
+  - pycalphad
+  - PhaseForge
+  - machine-learned interatomic potentials
+  - phase diagrams
+  - benchmark
+references:
+  - type: data
+    title: "ORCHID data"
+    authors:
+      - family-names: "Arróyave"
+        given-names: "Raymundo"
+      - family-names: "Saal"
+        given-names: "James"
+      - family-names: "Shin"
+        given-names: "Dongwon"
+    version: "2026.10"
+    url: "https://data.orchid-project.org"
+    repository: "https://github.com/orchid-calphad/orchid-data"
+  - type: article
+    title: "Analytical gradient-based optimization of CALPHAD model parameters"
+    authors:
+      - family-names: "Kunselman"
+        given-names: "Courtney"
+      - family-names: "Bocklund"
+        given-names: "Brandon"
+      - family-names: "Otis"
+        given-names: "Richard"
+      - family-names: "Arróyave"
+        given-names: "Raymundo"
+    journal: "Acta Materialia"
+    volume: 300
+    start: "121453"
+    year: 2025
+    doi: "10.1016/j.actamat.2025.121453"
+  - type: article
+    title: "Gradient-informed Hamiltonian Monte Carlo for multicomponent CALPHAD model optimization and uncertainty quantification"
+    authors:
+      - family-names: "Kunselman"
+        given-names: "Courtney"
+      - family-names: "Bocklund"
+        given-names: "Brandon"
+      - family-names: "Otis"
+        given-names: "Richard"
+      - family-names: "Arróyave"
+        given-names: "Raymundo"
+    journal: "Acta Materialia"
+    volume: 315
+    start: "122412"
+    year: 2026
+    doi: "10.1016/j.actamat.2026.122412"
+  - type: article
+    title: "ESPEI for efficient thermodynamic database development, modification, and uncertainty quantification: application to Cu-Mg"
+    authors:
+      - family-names: "Bocklund"
+        given-names: "Brandon"
+      - family-names: "Otis"
+        given-names: "Richard"
+      - family-names: "Egorov"
+        given-names: "Aleksei"
+      - family-names: "Obaied"
+        given-names: "Abdulmonem"
+      - family-names: "Roslyakova"
+        given-names: "Irina"
+      - family-names: "Liu"
+        given-names: "Zi-Kui"
+    journal: "MRS Communications"
+    volume: 9
+    issue: 2
+    start: "618"
+    end: "627"
+    year: 2019
+    doi: "10.1557/mrc.2019.59"
+  - type: software
+    title: "PhaseForge"
+    authors:
+      - family-names: "Sarıtürk"
+        given-names: "Doğuhan"
+      - family-names: "Zhu"
+        given-names: "Siya"
+      - family-names: "Arróyave"
+        given-names: "Raymundo"
+    version: "v1.0.0"
+    doi: "10.5281/zenodo.15730912"
+    url: "https://github.com/dogusariturk/PhaseForge"
+  - type: software
+    title: "PhaseForgePlus"
+    authors:
+      - family-names: "Sarıtürk"
+        given-names: "Doğuhan"
+      - family-names: "Kunselman"
+        given-names: "Courtney"
+      - family-names: "Zhu"
+        given-names: "Siya"
+    version: "v0.1.0"
+    doi: "10.5281/zenodo.17519087"
+    url: "https://github.com/dogusariturk/PhaseForgePlus"

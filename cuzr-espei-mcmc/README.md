@@ -1,0 +1,73 @@
+# Cu–Zr with classic ESPEI MCMC: a documented negative example
+
+This example shows the classic ESPEI route with ORCHID data: load the released ESPEI datasets with
+`load_datasets`, choose evidence with `apply_tags`, and refine part of an existing assessment (the SGTE Cu–Zr
+description of Zeng et al. 1994) with ESPEI's MCMC. It is kept as a **negative example**: in the study behind the
+paper, no variant of this refinement passed the gate, and the figure and numbers below say so.
+
+![negative result](figures/fig_espei_negative.png)
+
+**What happened (orchid-espei-demo, 2026-10-23/24).** The gate requires every invariant reaction with a printed
+ORCHID temperature in the fit set (13 reactions) to lie within twice its uncertainty of the nearest printed value.
+
+| variant | method | result |
+|---|---|---|
+| SGTE start (Zeng 1994) | – | 12/13 (fails L + Cu51Zr14 = Cu8Zr3) |
+| v1, 8 coefficients (liquid 0L, 1L; four compound constants) | ESPEI 0.9.1 MCMC (emcee), 16 chains × 1,500 iterations, 3.1 h | not converged; activities fit better, but CuZr and CuZr2 melt 150–180 K too high (panel b). ESPEI 0.9.1 gives no ZPF driving force for a liquid point at a line-compound composition once the compound is stable, so congruent melting constrains the model in one direction only |
+| v2, 16 coefficients, + invariant brackets, assessed and liquid-stability points | ESPEI 0.9.1 MCMC, 2 × 32 walkers, stopped at ~955 iterations | not converged (split R-hat up to 12); 0 % of posterior draws pass (panel c) |
+| v3, 6 coefficients (pre-registered) | gradient ESPEI (Kunselman), L-BFGS-B, 6 starts | 3/13 |
+| v4, dense assessed-field points, ZPF weight ×1/×3/×10/×30 (post hoc) | gradient ESPEI, 3 starts each | 3, 5, 9, 10 of 13; none passes |
+
+The fitted descriptions also lost accuracy elsewhere (v3: invariant MAE 18 → 54 K on the fit set). The lesson the
+paper draws is about the route, not the data: refining a few coefficients of an existing description against
+heterogeneous data with ZPF terms that are blind in one direction misfires; the PhaseForge+ example (gradient
+tuning of a full MLIP-informed parameter set, more phase evidence) reached 9/13, in-sample. All refined TDBs are
+review-only and are not distributed.
+
+## Quick path: cached summary → figure (no ESPEI, about 40 s)
+
+```sh
+python -m venv .venv && . .venv/bin/activate      # CPython 3.12
+pip install -r requirements.txt                  # numpy 2.3.2, matplotlib 3.10.7
+sh run_quick.sh                                  # -> figures/fig_espei_negative.{png,pdf}, figures/gate_sgte_start.json
+```
+
+`cached/espei_demo_summary.json` holds the numbers of every variant, extracted from orchid-espei-demo's result
+files (posterior summaries, gate tables; no chains). `scripts/gate.py` recomputes the SGTE start's gate (12/13) with the
+analytic Cu–Zr model of `cuzr-phaseforgeplus`.
+
+## Full path: select data, run ESPEI MCMC, apply the gate
+
+ORCHID data: orchid-data commit **`778cc6bfa67db292e3f917f5ac6d691e0f37fc1a`** (the release used by the PhaseForge+
+example; the cached v1–v4 results were run on earlier 2026-10-23/24 states of the bundle, so a rerun will not
+reproduce them exactly). Files are fetched from the pinned commit (or from `ORCHID_DATA`, a local checkout at that
+commit; see `../common/orchid_data.py`).
+
+```sh
+python -m venv .venv-espei && . .venv-espei/bin/activate      # CPython 3.13
+pip install -r requirements-full.txt                         # ESPEI 0.9.1, pycalphad 0.11.2, emcee 2.2.1, dask
+python scripts/select_datasets.py --iterations 1500 --cores 5 [--evidence measured] [--drop-single-reader]
+cd work && espei --input espei-in.yaml && cd ..
+python scripts/gate.py --trace work/trace.npy --tdb work/refined_REVIEW_ONLY.tdb
+```
+
+`select_datasets.py` gathers the Cu–Zr datasets of the chosen evidence classes (experimental, invariant tables,
+literature DFT for CuZr-94Zen-LB; optionally the derived invariant brackets, liquid-stability points and assessed
+phase-assemblage points), keeps those whose phases map to CuZr-94Zen-LB through the ORCHID phase registry, loads them
+with `espei.datasets.load_datasets`, applies the tag choices with `apply_tags` (the same tags go into
+`espei-in.yaml`), and writes the ESPEI input: 8 coefficients of `tdb/CuZr-94Zen-LB_param.tdb` (made by
+`scripts/make_param_tdb.py`), normal priors centred on the SGTE values (sd = |value|), 2 chains per parameter.
+At the pinned release it keeps 104 datasets (32 activity, 17 formation-enthalpy, 55 phase-equilibrium).
+
+Measured cost: one MCMC iteration (16 chains, 104 datasets) takes about 40 s on one core of a Mac Studio M1 Max, so
+1,500 iterations take about 16 h on one core or about 3 h with 5 dask workers (v1: 3.1 h). A 2-iteration smoke run
+(`--iterations 2 --scheduler none`, about 2 min) finished with finite log-probabilities for all 16 chains; it is
+not a result. Chains and refined databases are not committed (`work/` is git-ignored).
+
+## Credits
+
+ESPEI (B. Bocklund et al., MRS Commun. 9 (2019) 618, doi:10.1557/mrc.2019.59) and pycalphad (R. Otis, Z.-K. Liu,
+J. Open Res. Softw. 5 (2017) 1, doi:10.5334/jors.140); the gradient variants v3/v4 used C. Kunselman's analytic-gradient
+ESPEI branch (see `../cuzr-phaseforgeplus`). Starting model: K.-J. Zeng, M. Hämäläinen, H.L. Lukas, J. Phase Equilib.
+15 (1994) 577 (doi:10.1007/BF02647618), from B. Hallstedt, Calphad 89 (2025) 102833 (CC BY 4.0), unchanged in
+`tdb/CuZr-94Zen-LB.tdb`.

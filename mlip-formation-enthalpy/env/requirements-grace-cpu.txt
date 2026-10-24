@@ -1,0 +1,5 @@
+# GRACE on aarch64: TensorFlow's aarch64 wheels are CPU-only (no [and-cuda] on aarch64).
+tensorflow==2.20.0
+tensorpotential==0.6.2.1
+ase==3.29.0
+pymatgen==2026.10.24

@@ -1,0 +1,272 @@
+{
+ "components": [
+  "CU",
+  "VA",
+  "ZR"
+ ],
+ "phases": [
+  "LIQUID"
+ ],
+ "conditions": {
+  "P": 101325,
+  "T": [
+   2178.0,
+   2178.0,
+   2178.0,
+   2178.0,
+   2178.0,
+   2178.0,
+   2178.0,
+   2178.0,
+   2178.0
+  ]
+ },
+ "output": "ZPF",
+ "values": [
+  [
+   [
+    "LIQUID",
+    [
+     "ZR"
+    ],
+    [
+     0.1
+    ]
+   ]
+  ],
+  [
+   [
+    "LIQUID",
+    [
+     "ZR"
+    ],
+    [
+     0.2
+    ]
+   ]
+  ],
+  [
+   [
+    "LIQUID",
+    [
+     "ZR"
+    ],
+    [
+     0.3
+    ]
+   ]
+  ],
+  [
+   [
+    "LIQUID",
+    [
+     "ZR"
+    ],
+    [
+     0.4
+    ]
+   ]
+  ],
+  [
+   [
+    "LIQUID",
+    [
+     "ZR"
+    ],
+    [
+     0.5
+    ]
+   ]
+  ],
+  [
+   [
+    "LIQUID",
+    [
+     "ZR"
+    ],
+    [
+     0.6
+    ]
+   ]
+  ],
+  [
+   [
+    "LIQUID",
+    [
+     "ZR"
+    ],
+    [
+     0.7
+    ]
+   ]
+  ],
+  [
+   [
+    "LIQUID",
+    [
+     "ZR"
+    ],
+    [
+     0.8
+    ]
+   ]
+  ],
+  [
+   [
+    "LIQUID",
+    [
+     "ZR"
+    ],
+    [
+     0.9
+    ]
+   ]
+  ]
+ ],
+ "reference": "derived by ORCHID from the system's sources (see orchid.basis)",
+ "tags": [
+  "derived",
+  "derived_liquid_stability",
+  "orchid"
+ ],
+ "comment": "DERIVED phase constraints (not measured): single-phase liquid above the highest liquidus evidence, where the sources show complete liquid miscibility. Rule: README.md, 'Phase constraints'.",
+ "orchid": {
+  "evidence_class": "derived",
+  "derivation": "liquid_stability",
+  "rule": "Single-phase LIQUID points at x = 0.1 ... 0.9 at T = T_liq_max + 50 K, where T_liq_max is the highest of the melting points of the two elements (SGTE unary data), every accepted printed temperature of an experimental literature value of the system that involves the liquid (invariants, liquidus and ZPF points) and every assessed (handbook) two-phase field point that contains the liquid. Written only where the evidence shows complete liquid miscibility: the system has an assessed (handbook) diagram with a single-phase liquid field and no second liquid (no L#2 field), no literature value of the system has two liquids (monotectic, syntectic or two liquid labels), both elements are condensed liquids at 1 atm (metals and metalloids) and T stays below both normal boiling points. Purpose: forbid spurious liquid miscibility gaps (and solids stable above the liquidus) in a fit. DERIVED, not measured.",
+  "target_tdb": "CuZr-06Wan.tdb",
+  "basis": {
+   "T_liq_max_K": 2128,
+   "element_melting_K": {
+    "CU": 1357.77,
+    "ZR": 2128
+   },
+   "highest_literature_liquid_T_K": 1413.0,
+   "highest_assessed_liquid_two_phase_T_K": 1340.089587,
+   "lowest_boiling_point_K": 2835,
+   "margin_K": 50.0
+  }
+ },
+ "orchid_uncertainty_budget": {
+  "sigma_rule": "derived point at T_liq_max + margin_K (orchid.basis); not a measurement, no sigma",
+  "points": [
+   {
+    "temperature_K": {
+     "sigma_printed": null,
+     "sigma_reading": null,
+     "sigma_method": null,
+     "sigma_composition": null,
+     "sigma_scatter": null,
+     "sigma_conversion": null,
+     "sigma_effective": null,
+     "margin_K": 50.0,
+     "sigma_effective_reason": "derived constraint, not a measurement"
+    }
+   },
+   {
+    "temperature_K": {
+     "sigma_printed": null,
+     "sigma_reading": null,
+     "sigma_method": null,
+     "sigma_composition": null,
+     "sigma_scatter": null,
+     "sigma_conversion": null,
+     "sigma_effective": null,
+     "margin_K": 50.0,
+     "sigma_effective_reason": "derived constraint, not a measurement"
+    }
+   },
+   {
+    "temperature_K": {
+     "sigma_printed": null,
+     "sigma_reading": null,
+     "sigma_method": null,
+     "sigma_composition": null,
+     "sigma_scatter": null,
+     "sigma_conversion": null,
+     "sigma_effective": null,
+     "margin_K": 50.0,
+     "sigma_effective_reason": "derived constraint, not a measurement"
+    }
+   },
+   {
+    "temperature_K": {
+     "sigma_printed": null,
+     "sigma_reading": null,
+     "sigma_method": null,
+     "sigma_composition": null,
+     "sigma_scatter": null,
+     "sigma_conversion": null,
+     "sigma_effective": null,
+     "margin_K": 50.0,
+     "sigma_effective_reason": "derived constraint, not a measurement"
+    }
+   },
+   {
+    "temperature_K": {
+     "sigma_printed": null,
+     "sigma_reading": null,
+     "sigma_method": null,
+     "sigma_composition": null,
+     "sigma_scatter": null,
+     "sigma_conversion": null,
+     "sigma_effective": null,
+     "margin_K": 50.0,
+     "sigma_effective_reason": "derived constraint, not a measurement"
+    }
+   },
+   {
+    "temperature_K": {
+     "sigma_printed": null,
+     "sigma_reading": null,
+     "sigma_method": null,
+     "sigma_composition": null,
+     "sigma_scatter": null,
+     "sigma_conversion": null,
+     "sigma_effective": null,
+     "margin_K": 50.0,
+     "sigma_effective_reason": "derived constraint, not a measurement"
+    }
+   },
+   {
+    "temperature_K": {
+     "sigma_printed": null,
+     "sigma_reading": null,
+     "sigma_method": null,
+     "sigma_composition": null,
+     "sigma_scatter": null,
+     "sigma_conversion": null,
+     "sigma_effective": null,
+     "margin_K": 50.0,
+     "sigma_effective_reason": "derived constraint, not a measurement"
+    }
+   },
+   {
+    "temperature_K": {
+     "sigma_printed": null,
+     "sigma_reading": null,
+     "sigma_method": null,
+     "sigma_composition": null,
+     "sigma_scatter": null,
+     "sigma_conversion": null,
+     "sigma_effective": null,
+     "margin_K": 50.0,
+     "sigma_effective_reason": "derived constraint, not a measurement"
+    }
+   },
+   {
+    "temperature_K": {
+     "sigma_printed": null,
+     "sigma_reading": null,
+     "sigma_method": null,
+     "sigma_composition": null,
+     "sigma_scatter": null,
+     "sigma_conversion": null,
+     "sigma_effective": null,
+     "margin_K": 50.0,
+     "sigma_effective_reason": "derived constraint, not a measurement"
+    }
+   }
+  ]
+ }
+}

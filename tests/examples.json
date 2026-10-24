@@ -1,0 +1,18 @@
+{
+  "_note": "Quick path of each example: run_quick.sh OUT writes these files into OUT; each must equal the committed file (sha256), or, with --pixel-tol, PNGs may differ by an RMS pixel difference up to the tolerance (cross-platform CI). PDFs and JSON are compared by sha256 only when PNGs are exact or when --strict.",
+  "cuzr-phaseforgeplus": {"minutes": 6, "outputs": {
+    "gate.json": "cached/gate.json",
+    "fig_cuzr_overlay.png": "figures/fig_cuzr_overlay.png", "fig_cuzr_overlay.pdf": "figures/fig_cuzr_overlay.pdf",
+    "fig_cuzr_panels.png": "figures/fig_cuzr_panels.png", "fig_cuzr_panels.pdf": "figures/fig_cuzr_panels.pdf"}},
+  "cuzr-espei-mcmc": {"minutes": 2, "outputs": {
+    "gate_sgte_start.json": "figures/gate_sgte_start.json",
+    "fig_espei_negative.png": "figures/fig_espei_negative.png", "fig_espei_negative.pdf": "figures/fig_espei_negative.pdf"}},
+  "oneshot-benchmark": {"minutes": 2, "outputs": {
+    "grace_grid_score.json": "figures/grace_grid_score.json",
+    "fig_cuzr_oneshot.png": "figures/fig_cuzr_oneshot.png", "fig_cuzr_oneshot.pdf": "figures/fig_cuzr_oneshot.pdf"}},
+  "mlip-formation-enthalpy": {"minutes": 2, "outputs": {
+    "summary.json": "results/summary.json",
+    "mlip_benchmark.png": "figures/mlip_benchmark.png", "mlip_benchmark.pdf": "figures/mlip_benchmark.pdf"}},
+  "quickstart": {"minutes": 2, "outputs": {
+    "cuzr_exp_vs_dft.png": "figures/cuzr_exp_vs_dft.png", "cuzr_exp_vs_dft.pdf": "figures/cuzr_exp_vs_dft.pdf"}}
+}

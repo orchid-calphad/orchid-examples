@@ -1,0 +1,2 @@
+# optional (only with an HF token whose account accepted the facebook/UMA licence): installed into the torch venv
+fairchem-core==2.24.0

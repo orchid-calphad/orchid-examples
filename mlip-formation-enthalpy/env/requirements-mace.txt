@@ -1,0 +1,4 @@
+torch==2.14.1
+mace-torch==0.3.16
+ase==3.29.0
+pymatgen==2026.10.24

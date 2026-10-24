@@ -1,0 +1,145 @@
+{
+ "components": [
+  "CU",
+  "VA",
+  "ZR"
+ ],
+ "phases": [
+  "CU51ZR14"
+ ],
+ "conditions": {
+  "P": 101325,
+  "T": 298.15
+ },
+ "output": "HM_FORM",
+ "values": [
+  [
+   [
+    -14070.0
+   ]
+  ]
+ ],
+ "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+ "tags": [
+  "experimental",
+  "thermochemical_table",
+  "orchid_caveat",
+  "orchid",
+  "compound_formation_endmember"
+ ],
+ "comment": "ORCHID literature values, Version 1, machine-extracted. Evidence class: experimental. ORCHID observation ids (orchid-literature `id`, one per value, in value order): ORC-24JPYAVIYR",
+ "orchid_temperature_note": "temperature from the published records (page-checked correction of the stored temperature)",
+ "weight": 0.132837,
+ "bibtex": "turchanin2008_458466",
+ "orchid": {
+  "status": "Version 1, machine-extracted",
+  "evidence_class": "experimental",
+  "observations": [
+   {
+    "id": "ORC-24JPYAVIYR",
+    "reader_agreement": "multi_reader",
+    "paper": "doi:10.1007/s11106-008-9039-x",
+    "caveats": [
+     "basis_inferred_from_magnitude"
+    ]
+   }
+  ],
+  "papers": [
+   "doi:10.1007/s11106-008-9039-x",
+   "doi:10.1007/bf02667755"
+  ],
+  "dois": [
+   "10.1007/bf02667755",
+   "10.1007/s11106-008-9039-x"
+  ],
+  "source_dataset": "db-v2.1/general/espei/CuZr-08Tur/hmr-03.json"
+ },
+ "orchid_uncertainty": {
+  "unit": "J/mol-atom",
+  "default_sigma": {
+   "value": 500.0,
+   "name": "ESPEI experimental default sigma_HM = 500 J/mol"
+  },
+  "weight_rule": "dataset weight = ESPEI experimental default sigma_HM = 500 J/mol / median sigma_effective of the dataset's values (uncertainty budget of the published values: max(printed, reading, method floor) with composition / conversion in quadrature, group scatter when larger); ESPEI 0.9.1 equilibrium/activity data take one weight per dataset",
+  "sigma_rule": "sigma_effective = max(sqrt(max(printed, reading, method)^2 + composition^2 + conversion^2), scatter) (literature release `uncertainty_budget`; components kept per value in `budget`)",
+  "values": [
+   {
+    "sigma": 1860.0,
+    "sigma_basis": "printed",
+    "budget": {
+     "sigma_printed": 1240.0,
+     "sigma_reading": 0.5,
+     "sigma_method": 3500.0,
+     "sigma_composition": 1386.0,
+     "sigma_scatter": null,
+     "sigma_conversion": null,
+     "sigma_effective": 3764.0,
+     "method_class": "unknown",
+     "method_basis": "calibrated",
+     "method_n_pairs": 296,
+     "method_entry": "value_types/HM_FORM/classes/unknown"
+    },
+    "printed": {
+     "value": 1.86,
+     "unit": "kJ/mol-atom",
+     "interval": "printed sigma combined in quadrature with |dx| x local hull slope: the source measured the historical formula of this phase (page-checked; printed sigma in the record's uncertainty_stored)",
+     "coverage": "printed_with_composition_offset",
+     "note": "sqrt(1.240^2 + (|dx| 0.0346 x slope 40.05 kJ/mol per unit x)^2): printed sigma and the offset between Cu3Zr (measured, x_Zr 0.2500) and Cu51Zr14 (x_Zr 0.2154); slope = median |slope| of the 298.15 K lower hull segment in nine Cu-Zr assessments (open-tdb sgte-binary CuZr-*.tdb)"
+    },
+    "sigma_effective_used": 3764.0,
+    "weight_per_value_equivalent": 0.132837,
+    "weight_used": 0.132837
+   }
+  ]
+ },
+ "orchid_weight_floor": {
+  "superseded": "superseded on 2026-10-24 (PI decision): the dataset weight now follows sigma_effective of the published uncertainty budget (method-class floors calibrated from ORCHID, never below ESPEI's experimental default) by default, so no opt-in is needed; this block keeps the former optional suggestion (sigma floor = ESPEI's default) for comparison only",
+  "suggested_weight": 0.268817,
+  "weight_before_2026_10_24": 0.268817,
+  "weight_written": 0.132837,
+  "sigma_floor": 500.0,
+  "sigma_floor_unit": "J/mol",
+  "rule": "former optional minimum-sigma policy (E6, superseded): sigma_eff = max(sigma, sigma_floor) with sigma_floor = ESPEI's experimental default for the property (500 J/mol for enthalpies and for the chemical potential of activities, 0.2 J/mol/K for entropies and heat capacities); suggested_weight = min(weight, 1). The printed sigma is unchanged (orchid_uncertainty); use suggested_weight when printed sigmas are much smaller than the scatter between sources (e.g. formation enthalpies printed with +-80 J/mol-atom while other measurements differ by 1-2 kJ/mol-atom)"
+ },
+ "orchid_phase_assignment": {
+  "phases": [
+   "CU51ZR14"
+  ],
+  "basis": {
+   "printed_labels": 1
+  },
+  "rule": "tools/phase_rule.py; README.md, 'Phase assignment'",
+  "endmember": {
+   "tdb": "CuZr-08Tur.tdb",
+   "path": "databases/sgte-binary/CuZr-08Tur.tdb",
+   "sha256": "799997b40952ad1681f7d16b2caa00b3527482981d9d5f934b73468107a1b9c3",
+   "phase": "CU51ZR14",
+   "reference": "SER phases of the TDB's ELEMENT lines (ESPEI _FORM convention); the value's printed reference state names the same phases (or none)"
+  }
+ },
+ "solver": {
+  "mode": "manual",
+  "sublattice_site_ratios": [
+   51.0,
+   14.0
+  ],
+  "sublattice_configurations": [
+   [
+    "CU",
+    "ZR"
+   ]
+  ]
+ },
+ "orchid_certification": {
+  "basis": "pycalphad_invariant_agreement",
+  "all_values_certified": false,
+  "n_certified": 0,
+  "values": [
+   {
+    "id": "ORC-24JPYAVIYR",
+    "espei_certified": false,
+    "calphad_check": "not_available"
+   }
+  ]
+ }
+}
