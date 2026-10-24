@@ -1,0 +1,199 @@
+{
+ "system": "CU-ZR",
+ "elements": [
+  "Cu",
+  "Zr"
+ ],
+ "wall_seconds_total": 15.56,
+ "cpu_count": 10,
+ "platform": "macOS-14.3-arm64-arm-64bit",
+ "machine": "arm64",
+ "python": "3.12.14",
+ "m_scraps": "0.6.0",
+ "m_scraps_commit_if_source_tree": "",
+ "seed": 2026,
+ "mpi_ranks": 4,
+ "orchid_data": "/Users/raymundo.arroyave/projects/orchid-data",
+ "orchid_data_commit": "d91a44102d7ed8f9fccbf937cee004484cae5241",
+ "volumes_A3_per_atom": {
+  "Cu": 11.81,
+  "Zr": 23.27
+ },
+ "n_relaxations": 21,
+ "n_liquid": 5,
+ "timings": [
+  {
+   "item": "FCC_A1/sqs_lev=0_a_Cu=1",
+   "seconds": 0.01,
+   "n_atoms": 1
+  },
+  {
+   "item": "FCC_A1/sqs_lev=0_a_Zr=1",
+   "seconds": 0.0,
+   "n_atoms": 1
+  },
+  {
+   "item": "FCC_A1/sqs_lev=1_a_Cu=0.5,a_Zr=0.5",
+   "seconds": 1.47,
+   "n_atoms": 64
+  },
+  {
+   "item": "FCC_A1/sqs_lev=2_a_Cu=0.75,a_Zr=0.25",
+   "seconds": 1.08,
+   "n_atoms": 64
+  },
+  {
+   "item": "FCC_A1/sqs_lev=2_a_Cu=0.25,a_Zr=0.75",
+   "seconds": 1.08,
+   "n_atoms": 64
+  },
+  {
+   "item": "BCC_A2/sqs_lev=0_a_Cu=1",
+   "seconds": 0.0,
+   "n_atoms": 1
+  },
+  {
+   "item": "BCC_A2/sqs_lev=0_a_Zr=1",
+   "seconds": 0.0,
+   "n_atoms": 1
+  },
+  {
+   "item": "BCC_A2/sqs_lev=1_a_Cu=0.5,a_Zr=0.5",
+   "seconds": 1.09,
+   "n_atoms": 64
+  },
+  {
+   "item": "BCC_A2/sqs_lev=2_a_Cu=0.75,a_Zr=0.25",
+   "seconds": 1.08,
+   "n_atoms": 64
+  },
+  {
+   "item": "BCC_A2/sqs_lev=2_a_Cu=0.25,a_Zr=0.75",
+   "seconds": 1.02,
+   "n_atoms": 64
+  },
+  {
+   "item": "HCP_A3/sqs_lev=0_a_Cu=1",
+   "seconds": 0.0,
+   "n_atoms": 2
+  },
+  {
+   "item": "HCP_A3/sqs_lev=0_a_Zr=1",
+   "seconds": 0.0,
+   "n_atoms": 2
+  },
+  {
+   "item": "HCP_A3/sqs_lev=1_a_Cu=0.5,a_Zr=0.5",
+   "seconds": 2.34,
+   "n_atoms": 64
+  },
+  {
+   "item": "HCP_A3/sqs_lev=2_a_Cu=0.75,a_Zr=0.25",
+   "seconds": 1.73,
+   "n_atoms": 64
+  },
+  {
+   "item": "HCP_A3/sqs_lev=2_a_Cu=0.25,a_Zr=0.75",
+   "seconds": 1.49,
+   "n_atoms": 64
+  },
+  {
+   "item": "LIQUID/sqs_lev=0_a_Cu=1",
+   "seconds": 0.0,
+   "n_atoms": 108
+  },
+  {
+   "item": "LIQUID/sqs_lev=0_a_Zr=1",
+   "seconds": 0.0,
+   "n_atoms": 108
+  },
+  {
+   "item": "LIQUID/sqs_lev=1_a_Cu=0.5,a_Zr=0.5",
+   "seconds": 0.75,
+   "n_atoms": 108
+  },
+  {
+   "item": "LIQUID/sqs_lev=2_a_Cu=0.75,a_Zr=0.25",
+   "seconds": 1.04,
+   "n_atoms": 108
+  },
+  {
+   "item": "LIQUID/sqs_lev=2_a_Cu=0.25,a_Zr=0.75",
+   "seconds": 1.05,
+   "n_atoms": 108
+  },
+  {
+   "item": "COMPOUNDS (6 made, 0 skipped)",
+   "seconds": 0.31
+  }
+ ],
+ "compounds": [
+  {
+   "source": "curated file /Users/raymundo.arroyave/projects/orchid-phaseforge-demo/structures/CU10ZR7.vasp",
+   "phase": "CU10ZR7",
+   "n_atoms": 34,
+   "x_target": 0.411765,
+   "x_structure": 0.411765,
+   "composition_matches": true,
+   "registry_space_group": "Cmce",
+   "detected_space_group_number": 64,
+   "seconds": 0.22
+  },
+  {
+   "source": "curated file /Users/raymundo.arroyave/projects/orchid-phaseforge-demo/structures/CU51ZR14.vasp",
+   "phase": "CU51ZR14",
+   "n_atoms": 65,
+   "x_target": 0.215385,
+   "x_structure": 0.215385,
+   "composition_matches": true,
+   "registry_space_group": "P6/m",
+   "detected_space_group_number": 174,
+   "seconds": 0.01
+  },
+  {
+   "source": "curated file /Users/raymundo.arroyave/projects/orchid-phaseforge-demo/structures/CU5ZR_C15B.vasp",
+   "phase": "CU5ZR_C15B",
+   "n_atoms": 6,
+   "x_target": 0.166667,
+   "x_structure": 0.166667,
+   "composition_matches": true,
+   "registry_space_group": "F-43m",
+   "detected_space_group_number": 216,
+   "seconds": 0.0
+  },
+  {
+   "source": "curated file /Users/raymundo.arroyave/projects/orchid-phaseforge-demo/structures/CU8ZR3.vasp",
+   "phase": "CU8ZR3",
+   "n_atoms": 44,
+   "x_target": 0.272727,
+   "x_structure": 0.272727,
+   "composition_matches": true,
+   "registry_space_group": "Pnma",
+   "detected_space_group_number": 62,
+   "seconds": 0.01
+  },
+  {
+   "source": "curated file /Users/raymundo.arroyave/projects/orchid-phaseforge-demo/structures/CUZR_B2.vasp",
+   "phase": "CUZR_B2",
+   "n_atoms": 2,
+   "x_target": 0.5,
+   "x_structure": 0.5,
+   "composition_matches": true,
+   "registry_space_group": "Pm-3m",
+   "detected_space_group_number": 221,
+   "seconds": 0.0
+  },
+  {
+   "source": "curated file /Users/raymundo.arroyave/projects/orchid-phaseforge-demo/structures/CUZR2.vasp",
+   "phase": "CUZR2",
+   "n_atoms": 3,
+   "x_target": 0.666667,
+   "x_structure": 0.666667,
+   "composition_matches": true,
+   "registry_space_group": "I4/mmm",
+   "detected_space_group_number": 139,
+   "seconds": 0.0
+  }
+ ],
+ "skipped": []
+}
