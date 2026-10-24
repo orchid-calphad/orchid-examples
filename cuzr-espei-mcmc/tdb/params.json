@@ -1,0 +1,42 @@
+[
+ {
+  "symbol": "VV0000",
+  "parameter": "L0(LIQUID) a",
+  "start": -61685.53
+ },
+ {
+  "symbol": "VV0001",
+  "parameter": "L0(LIQUID) b",
+  "start": 11.29235
+ },
+ {
+  "symbol": "VV0002",
+  "parameter": "L1(LIQUID) a",
+  "start": -8830.66
+ },
+ {
+  "symbol": "VV0003",
+  "parameter": "L1(LIQUID) b",
+  "start": 5.04565
+ },
+ {
+  "symbol": "VV0004",
+  "parameter": "G(CU51ZR14) a (J/mol-formula, 65 atoms)",
+  "start": -843412.7
+ },
+ {
+  "symbol": "VV0005",
+  "parameter": "G(CU10ZR7) a (J/mol-formula, 17 atoms)",
+  "start": -241750.0
+ },
+ {
+  "symbol": "VV0006",
+  "parameter": "G(CUZR_B2) a (J/mol-formula, 2 atoms)",
+  "start": -20104.24
+ },
+ {
+  "symbol": "VV0007",
+  "parameter": "G(CUZR2) a (J/mol-formula, 3 atoms)",
+  "start": -43904.01
+ }
+]

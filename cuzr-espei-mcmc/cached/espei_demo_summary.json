@@ -1,0 +1,195 @@
+{
+ "note": "Summary of the Cu-Zr ESPEI demonstration (orchid-espei-demo), extracted from its result files; no MCMC chains. All runs are review-only demonstrations of data reuse, not assessments. Releases: v1 ORCHID bundle v2026.10 as of 2026-10-23 morning; v2 fixed bundle of 2026-10-23 PM; v3/v4 orchid-data 16d5eca83.",
+ "gate_rule": "(as v2, fixed before fitting): the optimum passes when, for every model reaction with a printed ORCHID temperature\nin the FIT set, its invariant temperature lies within 2u of the nearest printed value (u printed, else 5 K).",
+ "variants": [
+  {
+   "key": "sgte_start",
+   "label": "SGTE start (Zeng 1994)",
+   "method": "-",
+   "gate_reactions_pass": 12,
+   "gate_reactions": 13
+  },
+  {
+   "key": "v1_mcmc",
+   "label": "v1 ESPEI MCMC (emcee), 8 parameters",
+   "method": "ESPEI 0.9.1 mcmc, 16 chains x 1500 iterations, 3.1 h",
+   "converged": false,
+   "outcome": "activities fit better; melting points of CuZr and CuZr2 raised by 150-180 K against the ZPF data (liquid/compound equal-G temperatures below); gate not evaluated (defined later)"
+  },
+  {
+   "key": "v2_mcmc",
+   "label": "v2 ESPEI MCMC (emcee), 16 parameters, phase constraints",
+   "method": "ESPEI 0.9.1 mcmc, 2 x 32 walkers, stopped at ~955 iterations (PI)",
+   "converged": false,
+   "split_rhat_range": [
+    1.35,
+    12.3
+   ],
+   "posterior_gate_pass_fraction": 0.0,
+   "per_reaction_pass_fraction": {
+    "L = FCC + Cu5Zr (eutectic)": 0.38,
+    "L + Cu51Zr14 = Cu5Zr (peritectic)": 0.025,
+    "L = Cu8Zr3 + Cu10Zr7 (eutectic)": 0.41,
+    "L = Cu10Zr7 (congruent)": 0.0,
+    "L = Cu10Zr7 + CuZr (eutectic)": 0.155,
+    "L = CuZr (congruent)": 0.01,
+    "L = CuZr + CuZr2 (eutectic)": 0.235,
+    "L = CuZr2 (congruent)": 0.27,
+    "L = Cu51Zr14 (congruent)": 0.0,
+    "L + Cu51Zr14 = Cu8Zr3": 0.0,
+    "CuZr = Cu10Zr7 + CuZr2 (eutectoid)": 0.005,
+    "L = CuZr2 + BCC (eutectic)": 0.0,
+    "BCC = CuZr2 + HCP (eutectoid)": 0.485
+   },
+   "outcome": "interim analysis at 630 iterations: chains still burning in; 0 % of posterior draws pass the gate"
+  },
+  {
+   "key": "v3_gradient",
+   "label": "v3 gradient ESPEI (L-BFGS-B), 6 parameters (pre-registered)",
+   "method": "Kunselman gradient branch ec7c9f31, 6 starts",
+   "gate_reactions_pass": 3,
+   "gate_reactions": 13,
+   "laplace_draws_pass_fraction": 0.0,
+   "outcome": "gate FAILS"
+  },
+  {
+   "key": "v4_zpf_x1",
+   "label": "v4 gradient, dense assessed-field points, ZPF weight x1 (post hoc)",
+   "method": "Kunselman gradient branch, 3 starts",
+   "gate_reactions_pass": 3,
+   "gate_reactions": 13,
+   "outcome": "gate FAILS"
+  },
+  {
+   "key": "v4_zpf_x3",
+   "label": "v4 gradient, dense assessed-field points, ZPF weight x3 (post hoc)",
+   "method": "Kunselman gradient branch, 3 starts",
+   "gate_reactions_pass": 5,
+   "gate_reactions": 13,
+   "outcome": "gate FAILS"
+  },
+  {
+   "key": "v4_zpf_x10",
+   "label": "v4 gradient, dense assessed-field points, ZPF weight x10 (post hoc)",
+   "method": "Kunselman gradient branch, 3 starts",
+   "gate_reactions_pass": 9,
+   "gate_reactions": 13,
+   "outcome": "gate FAILS"
+  },
+  {
+   "key": "v4_zpf_x30",
+   "label": "v4 gradient, dense assessed-field points, ZPF weight x30 (post hoc)",
+   "method": "Kunselman gradient branch, 3 starts",
+   "gate_reactions_pass": 10,
+   "gate_reactions": 13,
+   "outcome": "gate FAILS"
+  }
+ ],
+ "v1_liquid_compound_equal_G_temperature_K": {
+  "start_SGTE": {
+   "CU51ZR14": 1385.7,
+   "CU10ZR7": 1164.3,
+   "CUZR_B2": 1208.5,
+   "CUZR2": 1274.9,
+   "CU5ZR_C15B": 1319.1,
+   "CU8ZR3": 1277.6
+  },
+  "main_posterior_median": {
+   "CU51ZR14": 1397.1,
+   "CU10ZR7": 1308.4,
+   "CUZR_B2": 1385.7,
+   "CUZR2": 1418.1,
+   "CU5ZR_C15B": 1381.8,
+   "CU8ZR3": 1336.2
+  },
+  "perturbed_posterior_median": {
+   "CU51ZR14": 1306.5,
+   "CU10ZR7": 1241.7,
+   "CUZR_B2": 1316.0,
+   "CUZR2": 1411.3,
+   "CU5ZR_C15B": 1376.2,
+   "CU8ZR3": 1344.8
+  },
+  "data_note": {
+   "CU51ZR14": "congruent 1386-1413 K (ORCHID ZPF)",
+   "CUZR_B2": "L+CuZr at 1208 K (ORCHID ZPF; B2 melts near 1208-1233 K)",
+   "CUZR2": "congruent 1273 K (ORCHID ZPF)",
+   "CU10ZR7": "L+Cu10Zr7 1168-1204 K (ORCHID ZPF)"
+  }
+ },
+ "v1_posterior": {
+  "VV0000": {
+   "parameter": "L0(LIQUID) a",
+   "sgte_value": -61685.53,
+   "posterior_median": -81237.74671947773,
+   "ci95": [
+    -86412.00167177878,
+    -75241.28410181409
+   ]
+  },
+  "VV0001": {
+   "parameter": "L0(LIQUID) b",
+   "sgte_value": 11.29235,
+   "posterior_median": 27.47100003632603,
+   "ci95": [
+    23.74910902609304,
+    30.469146283937253
+   ]
+  },
+  "VV0002": {
+   "parameter": "L1(LIQUID) a",
+   "sgte_value": -8830.66,
+   "posterior_median": -17815.396506593806,
+   "ci95": [
+    -30223.664472402383,
+    -2419.7170914598355
+   ]
+  },
+  "VV0003": {
+   "parameter": "L1(LIQUID) b",
+   "sgte_value": 5.04565,
+   "posterior_median": 14.068266553626813,
+   "ci95": [
+    3.1080846527716854,
+    21.749671985372025
+   ]
+  },
+  "VV0004": {
+   "parameter": "G(CU51ZR14) a (J/mol-formula, 65 atoms)",
+   "sgte_value": -843412.7,
+   "posterior_median": -795838.7880744558,
+   "ci95": [
+    -809424.3325698938,
+    -763083.4272454384
+   ]
+  },
+  "VV0005": {
+   "parameter": "G(CU10ZR7) a (J/mol-formula, 17 atoms)",
+   "sgte_value": -241750.0,
+   "posterior_median": -262688.8457592587,
+   "ci95": [
+    -270512.17696035834,
+    -253942.84793690185
+   ]
+  },
+  "VV0006": {
+   "parameter": "G(CUZR_B2) a (J/mol-formula, 2 atoms)",
+   "sgte_value": -20104.24,
+   "posterior_median": -21689.38993128413,
+   "ci95": [
+    -22291.336168106656,
+    -20984.692349249788
+   ]
+  },
+  "VV0007": {
+   "parameter": "G(CUZR2) a (J/mol-formula, 3 atoms)",
+   "sgte_value": -43904.01,
+   "posterior_median": -48586.0954790343,
+   "ci95": [
+    -49921.7239529891,
+    -47407.508912898404
+   ]
+  }
+ },
+ "v1_runtime_s": 11110.2
+}

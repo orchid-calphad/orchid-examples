@@ -1,0 +1,10 @@
+# torch family on aarch64 (SevenNet-Omni, ORB v3, MatterSim, CHGNet). Same versions as the pilot and the Vision bundle.
+# torch comes from download.pytorch.org (aarch64 CUDA wheels: cu130, else cu128), chosen in setup_envs.sh.
+torch==2.13.0
+sevenn==0.13.0
+orb-models==0.6.2
+mattersim==1.2.5
+chgnet==0.4.2
+ase==3.29.0
+pymatgen==2026.10.24
+numpy==2.4.6

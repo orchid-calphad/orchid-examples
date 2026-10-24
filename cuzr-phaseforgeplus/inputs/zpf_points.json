@@ -1,0 +1,509 @@
+{
+"note": "ORCHID phase-equilibrium points (fit / held out) and assessed phase-assemblage points (Dataset 6), as read from the PhaseForge+ fit data; derived coordinates only",
+"points": [
+{
+"x_Zr": 0.2438432581,
+"T_K": 922.5895867,
+"split": "fit",
+"kind": "assessed",
+"file": "assessed__CU-ZR__CuZr-94Zen-LB.CU-ZR-p371.json"
+},
+{
+"x_Zr": 0.3425091176,
+"T_K": 1021.089587,
+"split": "fit",
+"kind": "assessed",
+"file": "assessed__CU-ZR__CuZr-94Zen-LB.CU-ZR-p371.json"
+},
+{
+"x_Zr": 0.9840876254,
+"T_K": 1492.089587,
+"split": "fit",
+"kind": "assessed",
+"file": "assessed__CU-ZR__CuZr-94Zen-LB.CU-ZR-p371.json"
+},
+{
+"x_Zr": 0.4942642213,
+"T_K": 1733.589587,
+"split": "fit",
+"kind": "assessed",
+"file": "assessed__CU-ZR__CuZr-94Zen-LB.CU-ZR-p371.json"
+},
+{
+"x_Zr": 0.8133005285,
+"T_K": 1241.089587,
+"split": "fit",
+"kind": "assessed",
+"file": "assessed__CU-ZR__CuZr-94Zen-LB.CU-ZR-p371.json"
+},
+{
+"x_Zr": 0.6284898576,
+"T_K": 1246.089587,
+"split": "fit",
+"kind": "assessed",
+"file": "assessed__CU-ZR__CuZr-94Zen-LB.CU-ZR-p371.json"
+},
+{
+"x_Zr": 0.3029426054,
+"T_K": 1286.089587,
+"split": "fit",
+"kind": "assessed",
+"file": "assessed__CU-ZR__CuZr-94Zen-LB.CU-ZR-p371.json"
+},
+{
+"x_Zr": 0.02547617813,
+"T_K": 1303.589587,
+"split": "fit",
+"kind": "assessed",
+"file": "assessed__CU-ZR__CuZr-94Zen-LB.CU-ZR-p371.json"
+},
+{
+"x_Zr": 0.2533592547,
+"T_K": 1338.589587,
+"split": "fit",
+"kind": "assessed",
+"file": "assessed__CU-ZR__CuZr-94Zen-LB.CU-ZR-p371.json"
+},
+{
+"x_Zr": 0.1757287561,
+"T_K": 1340.089587,
+"split": "fit",
+"kind": "assessed",
+"file": "assessed__CU-ZR__CuZr-94Zen-LB.CU-ZR-p371.json"
+},
+{
+"x_Zr": 0.215385,
+"T_K": 1373.0,
+"split": "fit",
+"kind": "exp",
+"file": "experimental__CU-ZR__CuZr-94Zen-LB.zpf-00.json"
+},
+{
+"x_Zr": 0.5,
+"T_K": 1208.0,
+"split": "fit",
+"kind": "exp",
+"file": "experimental__CU-ZR__CuZr-94Zen-LB.zpf-00.json"
+},
+{
+"x_Zr": 0.666667,
+"T_K": 1273.0,
+"split": "fit",
+"kind": "exp",
+"file": "experimental__CU-ZR__CuZr-94Zen-LB.zpf-00.json"
+},
+{
+"x_Zr": 0.411765,
+"T_K": 1168.0,
+"split": "fit",
+"kind": "exp",
+"file": "experimental__CU-ZR__CuZr-94Zen-LB.zpf-00.json"
+},
+{
+"x_Zr": 0.215385,
+"T_K": 1386.0,
+"split": "fit",
+"kind": "exp",
+"file": "experimental__CU-ZR__CuZr-94Zen-LB.zpf-01.json"
+},
+{
+"x_Zr": 0.215385,
+"T_K": 1413.0,
+"split": "fit",
+"kind": "exp",
+"file": "experimental__CU-ZR__CuZr-94Zen-LB.zpf-03.json"
+},
+{
+"x_Zr": 0.215385,
+"T_K": 1385.0,
+"split": "fit",
+"kind": "exp",
+"file": "experimental__CU-ZR__CuZr-94Zen-LB.zpf-04.json"
+},
+{
+"x_Zr": 0.215385,
+"T_K": 1377.0,
+"split": "fit",
+"kind": "exp",
+"file": "experimental__CU-ZR__CuZr-94Zen-LB.zpf-05.json"
+},
+{
+"x_Zr": 0.666667,
+"T_K": 1338.0,
+"split": "fit",
+"kind": "exp",
+"file": "experimental__CU-ZR__CuZr-94Zen-LB.zpf-06.json"
+},
+{
+"x_Zr": 0.088,
+"T_K": 1250.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-00.json"
+},
+{
+"x_Zr": 0.4118,
+"T_K": 1185.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-01.json"
+},
+{
+"x_Zr": 0.5,
+"T_K": 1206.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-01.json"
+},
+{
+"x_Zr": 0.6667,
+"T_K": 1279.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-01.json"
+},
+{
+"x_Zr": 0.2154,
+"T_K": 1393.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-01.json"
+},
+{
+"x_Zr": 0.082,
+"T_K": 1240.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-02.json"
+},
+{
+"x_Zr": 0.105,
+"T_K": 1283.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-02.json"
+},
+{
+"x_Zr": 0.2222,
+"T_K": 1377.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-02.json"
+},
+{
+"x_Zr": 0.089,
+"T_K": 1244.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-04.json"
+},
+{
+"x_Zr": 0.2,
+"T_K": 1386.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-04.json"
+},
+{
+"x_Zr": 0.355,
+"T_K": 1177.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-05.json"
+},
+{
+"x_Zr": 0.09,
+"T_K": 1253.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-06.json"
+},
+{
+"x_Zr": 0.007,
+"T_K": 1253.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-06.json"
+},
+{
+"x_Zr": 0.25,
+"T_K": 1411.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-06.json"
+},
+{
+"x_Zr": 0.6667,
+"T_K": 1285.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-07.json"
+},
+{
+"x_Zr": 0.106,
+"T_K": 1271.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-07.json"
+},
+{
+"x_Zr": 0.125,
+"T_K": 1311.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-07.json"
+},
+{
+"x_Zr": 0.098,
+"T_K": 1243.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-08.json"
+},
+{
+"x_Zr": 0.382,
+"T_K": 1158.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-09.json"
+},
+{
+"x_Zr": 0.4,
+"T_K": 1168.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-09.json"
+},
+{
+"x_Zr": 0.54,
+"T_K": 1201.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-09.json"
+},
+{
+"x_Zr": 0.67,
+"T_K": 1273.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-09.json"
+},
+{
+"x_Zr": 0.72,
+"T_K": 1268.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-09.json"
+},
+{
+"x_Zr": 0.94,
+"T_K": 1268.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-09.json"
+},
+{
+"x_Zr": 0.98,
+"T_K": 1095.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-09.json"
+},
+{
+"x_Zr": 0.07,
+"T_K": 1238.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-09.json"
+},
+{
+"x_Zr": 0.25,
+"T_K": 1373.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-09.json"
+},
+{
+"x_Zr": 0.31,
+"T_K": 1343.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-09.json"
+},
+{
+"x_Zr": 0.42,
+"T_K": 1150.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-10.json"
+},
+{
+"x_Zr": 0.1,
+"T_K": 1250.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-10.json"
+},
+{
+"x_Zr": 0.25,
+"T_K": 1383.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-10.json"
+},
+{
+"x_Zr": 0.67,
+"T_K": 1338.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-11.json"
+},
+{
+"x_Zr": 0.74,
+"T_K": 1271.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-11.json"
+},
+{
+"x_Zr": 0.93,
+"T_K": 1189.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-08Tur.zpf-11.json"
+},
+{
+"x_Zr": 0.666667,
+"T_K": 1299,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-10Zho.zpf-03.json"
+},
+{
+"x_Zr": 0.5,
+"T_K": 1229,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-10Zho.zpf-03.json"
+},
+{
+"x_Zr": 0.411765,
+"T_K": 1204,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-10Zho.zpf-03.json"
+},
+{
+"x_Zr": 0.724,
+"T_K": 1268,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-10Zho.zpf-05.json"
+},
+{
+"x_Zr": 0.065,
+"T_K": 1283,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-10Zho.zpf-05.json"
+},
+{
+"x_Zr": 0.54,
+"T_K": 1200,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-10Zho.zpf-05.json"
+},
+{
+"x_Zr": 0.308,
+"T_K": 1343,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-10Zho.zpf-05.json"
+},
+{
+"x_Zr": 0.382,
+"T_K": 1160,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-10Zho.zpf-05.json"
+},
+{
+"x_Zr": 0.978,
+"T_K": 1095,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-10Zho.zpf-05.json"
+},
+{
+"x_Zr": 0.44,
+"T_K": 1164,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-11Gie.zpf-04.json"
+},
+{
+"x_Zr": 0.091,
+"T_K": 1237.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-94Zen-LB.zpf-07.json"
+},
+{
+"x_Zr": 0.543,
+"T_K": 1201.0,
+"split": "fit",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-94Zen-LB.zpf-10.json"
+},
+{
+"x_Zr": 0.215385,
+"T_K": 1388.0,
+"split": "holdout",
+"kind": "exp",
+"file": "experimental__CU-ZR__CuZr-94Zen-LB.zpf-02.json"
+},
+{
+"x_Zr": 0.4148,
+"T_K": 1185.0,
+"split": "holdout",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-17Liu.zpf-01.json"
+},
+{
+"x_Zr": 0.065,
+"T_K": 1238.0,
+"split": "holdout",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-17Liu.zpf-02.json"
+},
+{
+"x_Zr": 0.25,
+"T_K": 1413.0,
+"split": "holdout",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-17Liu.zpf-06.json"
+},
+{
+"x_Zr": 0.107,
+"T_K": 1283.0,
+"split": "holdout",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-17Liu.zpf-06.json"
+},
+{
+"x_Zr": 0.094,
+"T_K": 1253.0,
+"split": "holdout",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-17Liu.zpf-08.json"
+},
+{
+"x_Zr": 0.25,
+"T_K": 1385.0,
+"split": "holdout",
+"kind": "exp",
+"file": "invariants__CU-ZR__CuZr-17Liu.zpf-10.json"
+}
+]
+}

@@ -1,0 +1,12 @@
+# local work products of the full paths and runs
+work/
+export/
+results/raw/
+.cache/
+*.part
+# environments and caches
+.venv*/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store

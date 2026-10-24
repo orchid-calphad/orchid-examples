@@ -1,0 +1,3 @@
+# Quick path (analysis from cached predictions + figure): CPython 3.12
+numpy==2.3.2
+matplotlib==3.10.7

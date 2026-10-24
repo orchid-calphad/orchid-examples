@@ -1,0 +1,1615 @@
+{
+ "invariants": [
+  {
+   "reaction": "L = FCC + Cu5Zr (eutectic)",
+   "printed_fit": [
+    1237.0,
+    1238.0,
+    1240.0,
+    1243.0,
+    1244.0,
+    1250.0,
+    1253.0,
+    1271.0,
+    1283
+   ],
+   "printed_holdout": [
+    1238.0,
+    1253.0
+   ],
+   "SGTE": 1240.859375,
+   "SGTE_nearest": 1240.0,
+   "SGTE_u": 5.0,
+   "SGTE_gate": 1.0,
+   "MLIP-only": 1302.890625,
+   "MLIP-only_nearest": 1283,
+   "MLIP-only_u": 5.0,
+   "MLIP-only_gate": 0.0,
+   "tuned": 1268.203125,
+   "tuned_nearest": 1271.0,
+   "tuned_u": 5.0,
+   "tuned_gate": 1.0,
+   "final": 1261.640625,
+   "final_nearest": 1253.0,
+   "final_u": 5.0,
+   "final_gate": 1.0
+  },
+  {
+   "reaction": "L + Cu51Zr14 = Cu5Zr (peritectic)",
+   "printed_fit": [
+    1277.0,
+    1283.0,
+    1287.0,
+    1311.0
+   ],
+   "printed_holdout": [
+    1283.0
+   ],
+   "SGTE": 1287.546875,
+   "SGTE_nearest": 1287.0,
+   "SGTE_u": 5.0,
+   "SGTE_gate": 1.0,
+   "MLIP-only": 1481.296875,
+   "MLIP-only_nearest": 1311.0,
+   "MLIP-only_u": 5.0,
+   "MLIP-only_gate": 0.0,
+   "tuned": 1352.859375,
+   "tuned_nearest": 1311.0,
+   "tuned_u": 5.0,
+   "tuned_gate": 0.0,
+   "final": 1329.578125,
+   "final_nearest": 1311.0,
+   "final_u": 5.0,
+   "final_gate": 0.0
+  },
+  {
+   "reaction": "L = Cu51Zr14 (congruent)",
+   "printed_fit": [
+    1373.0,
+    1377.0,
+    1383.0,
+    1386.0,
+    1393.0,
+    1411.0
+   ],
+   "printed_holdout": [
+    1385.0,
+    1413.0
+   ],
+   "SGTE": 1385.734375,
+   "SGTE_nearest": 1386.0,
+   "SGTE_u": 5.0,
+   "SGTE_gate": 1.0,
+   "MLIP-only": 1597.609375,
+   "MLIP-only_nearest": 1411.0,
+   "MLIP-only_u": 5.0,
+   "MLIP-only_gate": 0.0,
+   "tuned": 1407.609375,
+   "tuned_nearest": 1411.0,
+   "tuned_u": 5.0,
+   "tuned_gate": 1.0,
+   "final": 1419.796875,
+   "final_nearest": 1411.0,
+   "final_u": 5.0,
+   "final_gate": 1.0
+  },
+  {
+   "reaction": "L + Cu51Zr14 = Cu8Zr3",
+   "printed_fit": [
+    1243.0,
+    1343.0
+   ],
+   "printed_holdout": [
+    1240.0
+   ],
+   "SGTE": 1195.265625,
+   "SGTE_nearest": 1243.0,
+   "SGTE_u": 5.0,
+   "SGTE_gate": 0.0,
+   "MLIP-only": null,
+   "MLIP-only_gate": false,
+   "MLIP-only_nearest": null,
+   "tuned": 1323.859375,
+   "tuned_nearest": 1343.0,
+   "tuned_u": 10.0,
+   "tuned_gate": 1.0,
+   "final": 1249.015625,
+   "final_nearest": 1243.0,
+   "final_u": 5.0,
+   "final_gate": 1.0
+  },
+  {
+   "reaction": "L = Cu8Zr3 + Cu10Zr7 (eutectic)",
+   "printed_fit": [
+    1150.0,
+    1158.0,
+    1160.0,
+    1177.0,
+    1201
+   ],
+   "printed_holdout": [],
+   "SGTE": 1164.296875,
+   "SGTE_nearest": 1160.0,
+   "SGTE_u": 5.0,
+   "SGTE_gate": 1.0,
+   "MLIP-only": 1444.296875,
+   "MLIP-only_nearest": 1201,
+   "MLIP-only_u": 5.0,
+   "MLIP-only_gate": 0.0,
+   "tuned": 1287.421875,
+   "tuned_nearest": 1201,
+   "tuned_u": 5.0,
+   "tuned_gate": 0.0,
+   "final": 1142.265625,
+   "final_nearest": 1150.0,
+   "final_u": 5.0,
+   "final_gate": 1.0
+  },
+  {
+   "reaction": "L = Cu10Zr7 (congruent)",
+   "printed_fit": [
+    1168.0,
+    1185.0
+   ],
+   "printed_holdout": [
+    1185.0
+   ],
+   "SGTE": 1164.296875,
+   "SGTE_nearest": 1168.0,
+   "SGTE_u": 10.0,
+   "SGTE_gate": 1.0,
+   "MLIP-only": 1453.671875,
+   "MLIP-only_nearest": 1185.0,
+   "MLIP-only_u": 3.0,
+   "MLIP-only_gate": 0.0,
+   "tuned": 1307.109375,
+   "tuned_nearest": 1185.0,
+   "tuned_u": 3.0,
+   "tuned_gate": 0.0,
+   "final": 1150.859375,
+   "final_nearest": 1168.0,
+   "final_u": 10.0,
+   "final_gate": 1.0
+  },
+  {
+   "reaction": "L = Cu10Zr7 + CuZr (eutectic)",
+   "printed_fit": [
+    1143.0,
+    1164
+   ],
+   "printed_holdout": [],
+   "SGTE": 1163.203125,
+   "SGTE_nearest": 1164,
+   "SGTE_u": 5.0,
+   "SGTE_gate": 1.0,
+   "MLIP-only": 1453.671875,
+   "MLIP-only_nearest": 1164,
+   "MLIP-only_u": 5.0,
+   "MLIP-only_gate": 0.0,
+   "tuned": 1287.734375,
+   "tuned_nearest": 1164,
+   "tuned_u": 5.0,
+   "tuned_gate": 0.0,
+   "final": 1141.171875,
+   "final_nearest": 1143.0,
+   "final_u": 5.0,
+   "final_gate": 1.0
+  },
+  {
+   "reaction": "L = CuZr (congruent)",
+   "printed_fit": [
+    1206.0
+   ],
+   "printed_holdout": [],
+   "SGTE": 1208.578125,
+   "SGTE_nearest": 1206.0,
+   "SGTE_u": 5.0,
+   "SGTE_gate": 1.0,
+   "MLIP-only": 1453.578125,
+   "MLIP-only_nearest": 1206.0,
+   "MLIP-only_u": 5.0,
+   "MLIP-only_gate": 0.0,
+   "tuned": 1297.171875,
+   "tuned_nearest": 1206.0,
+   "tuned_u": 5.0,
+   "tuned_gate": 0.0,
+   "final": 1312.015625,
+   "final_nearest": 1206.0,
+   "final_u": 5.0,
+   "final_gate": 0.0
+  },
+  {
+   "reaction": "L = CuZr + CuZr2 (eutectic)",
+   "printed_fit": [
+    1145.0,
+    1200,
+    1201.0,
+    1202
+   ],
+   "printed_holdout": [],
+   "SGTE": 1196.640625,
+   "SGTE_nearest": 1200,
+   "SGTE_u": 5.0,
+   "SGTE_gate": 1.0,
+   "MLIP-only": 1522.890625,
+   "MLIP-only_nearest": 1202,
+   "MLIP-only_u": 5.0,
+   "MLIP-only_gate": 0.0,
+   "tuned": 1287.890625,
+   "tuned_nearest": 1202,
+   "tuned_u": 5.0,
+   "tuned_gate": 0.0,
+   "final": 1192.890625,
+   "final_nearest": 1200,
+   "final_u": 5.0,
+   "final_gate": 1.0
+  },
+  {
+   "reaction": "L = CuZr2 (congruent)",
+   "printed_fit": [
+    1273.0,
+    1279.0,
+    1285.0,
+    1338.0
+   ],
+   "printed_holdout": [],
+   "SGTE": 1274.859375,
+   "SGTE_nearest": 1273.0,
+   "SGTE_u": 10.0,
+   "SGTE_gate": 1.0,
+   "MLIP-only": 1719.546875,
+   "MLIP-only_nearest": 1338.0,
+   "MLIP-only_u": 5.0,
+   "MLIP-only_gate": 0.0,
+   "tuned": 1406.265625,
+   "tuned_nearest": 1338.0,
+   "tuned_u": 5.0,
+   "tuned_gate": 0.0,
+   "final": 1317.359375,
+   "final_nearest": 1338.0,
+   "final_u": 5.0,
+   "final_gate": 0.0
+  },
+  {
+   "reaction": "L = CuZr2 + BCC (eutectic)",
+   "printed_fit": [
+    1268.0,
+    1271.0
+   ],
+   "printed_holdout": [],
+   "SGTE": 1269.484375,
+   "SGTE_nearest": 1268.0,
+   "SGTE_u": 10.0,
+   "SGTE_gate": 1.0,
+   "MLIP-only": 1815.734375,
+   "MLIP-only_nearest": 1271.0,
+   "MLIP-only_u": 5.0,
+   "MLIP-only_gate": 0.0,
+   "tuned": 1381.828125,
+   "tuned_nearest": 1271.0,
+   "tuned_u": 5.0,
+   "tuned_gate": 0.0,
+   "final": 1264.171875,
+   "final_nearest": 1268.0,
+   "final_u": 10.0,
+   "final_gate": 1.0
+  },
+  {
+   "reaction": "BCC = CuZr2 + HCP (eutectoid)",
+   "printed_fit": [
+    1095.0,
+    1189.0
+   ],
+   "printed_holdout": [],
+   "SGTE": 1088.828125,
+   "SGTE_nearest": 1095.0,
+   "SGTE_u": 10.0,
+   "SGTE_gate": 1.0,
+   "MLIP-only": 912.578125,
+   "MLIP-only_nearest": 1095.0,
+   "MLIP-only_u": 10.0,
+   "MLIP-only_gate": 0.0,
+   "tuned": 1091.328125,
+   "tuned_nearest": 1095.0,
+   "tuned_u": 10.0,
+   "tuned_gate": 1.0,
+   "final": 1095.390625,
+   "final_nearest": 1095.0,
+   "final_u": 10.0,
+   "final_gate": 1.0
+  },
+  {
+   "reaction": "CuZr = Cu10Zr7 + CuZr2 (eutectoid)",
+   "printed_fit": [
+    985.0,
+    988.0,
+    1003
+   ],
+   "printed_holdout": [],
+   "SGTE": 976.640625,
+   "SGTE_nearest": 985.0,
+   "SGTE_u": 5.0,
+   "SGTE_gate": 1.0,
+   "MLIP-only": null,
+   "MLIP-only_gate": false,
+   "MLIP-only_nearest": null,
+   "tuned": null,
+   "tuned_gate": false,
+   "tuned_nearest": null,
+   "final": 968.984375,
+   "final_nearest": 985.0,
+   "final_u": 5.0,
+   "final_gate": 0.0
+  }
+ ],
+ "gate": {
+  "SGTE": false,
+  "MLIP-only": false,
+  "tuned": false,
+  "final": false
+ },
+ "gate_counts": {
+  "SGTE": [
+   12,
+   13
+  ],
+  "MLIP-only": [
+   0,
+   13
+  ],
+  "tuned": [
+   4,
+   13
+  ],
+  "final": [
+   9,
+   13
+  ]
+ },
+ "compounds": {
+  "CU5ZR_C15B": {
+   "experimental": [
+    {
+     "value_kJ": -9.624,
+     "sigma_kJ": 0.7879997100161067,
+     "T_K": 1123.0,
+     "split": "fit",
+     "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+     "file": "experimental__CU-ZR__CuZr-08Tur.hmr-01-CU5ZR_C15B.json"
+    },
+    {
+     "value_kJ": -8.7,
+     "sigma_kJ": 2.522004489167991,
+     "T_K": 298.15,
+     "split": "fit",
+     "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+     "file": "experimental__CU-ZR__CuZr-08Tur.hmr-00-CU5ZR_C15B.json"
+    }
+   ],
+   "MLIP_kJ": -13.77793053892832,
+   "sigma_MLIP_kJ": 9.686929176396278,
+   "SGTE_H_kJ": -10.299,
+   "SGTE_S_J_K": 0.0,
+   "MLIP-only_H_kJ": -13.7779305,
+   "MLIP-only_S_J_K": -0.0,
+   "tuned_H_kJ": -9.693106,
+   "tuned_S_J_K": -0.0,
+   "final_H_kJ": -9.624519666666668,
+   "final_S_J_K": -0.0,
+   "exp_fit_weighted_mean_kJ": -9.541817671343011,
+   "exp_fit_sigma_of_mean_kJ": 0.7521407020665034,
+   "exp_fit_min_sigma_kJ": 0.7879997100161067,
+   "tuned_minus_MLIP_kJ": 4.08482453892832,
+   "tuned_minus_expmean_kJ": -0.15128832865698882,
+   "governs": "experiment (sigma 0.79 vs MLIP 9.7 kJ/mol-atom)"
+  },
+  "CU51ZR14": {
+   "experimental": [
+    {
+     "value_kJ": -14.07,
+     "sigma_kJ": 1.8600014136010745,
+     "T_K": 298.15,
+     "split": "fit",
+     "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+     "file": "experimental__CU-ZR__CuZr-08Tur.hmr-03-CU51ZR14.json"
+    },
+    {
+     "value_kJ": -10.335,
+     "sigma_kJ": 0.5,
+     "T_K": 1123.0,
+     "split": "fit",
+     "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+     "file": "experimental__CU-ZR__CuZr-08Tur.hmr-04-CU51ZR14.json"
+    }
+   ],
+   "MLIP_kJ": -16.749232655960178,
+   "sigma_MLIP_kJ": 9.686929176396278,
+   "SGTE_H_kJ": -12.97558,
+   "SGTE_S_J_K": -0.0,
+   "MLIP-only_H_kJ": -16.749232661538464,
+   "MLIP-only_S_J_K": -0.0,
+   "tuned_H_kJ": -11.897802030769231,
+   "tuned_S_J_K": -0.0,
+   "final_H_kJ": -11.934533184615384,
+   "final_S_J_K": -0.0,
+   "exp_fit_weighted_mean_kJ": -10.586711418037213,
+   "exp_fit_sigma_of_mean_kJ": 0.48285799794789375,
+   "exp_fit_min_sigma_kJ": 0.5,
+   "tuned_minus_MLIP_kJ": 4.851430625190947,
+   "tuned_minus_expmean_kJ": -1.311090612732018,
+   "governs": "experiment (sigma 0.5 vs MLIP 9.7 kJ/mol-atom)"
+  },
+  "CU8ZR3": {
+   "experimental": [
+    {
+     "value_kJ": -11.982,
+     "sigma_kJ": 0.5,
+     "T_K": 1123.0,
+     "split": "fit",
+     "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+     "file": "experimental__CU-ZR__CuZr-08Tur.hmr-06-CU8ZR3.json"
+    }
+   ],
+   "MLIP_kJ": -16.848621006704743,
+   "sigma_MLIP_kJ": 9.686929176396278,
+   "SGTE_H_kJ": -13.460281818181818,
+   "SGTE_S_J_K": -0.0,
+   "MLIP-only_H_kJ": -16.848620999999998,
+   "MLIP-only_S_J_K": -0.0,
+   "tuned_H_kJ": -12.997635636363636,
+   "tuned_S_J_K": -0.0,
+   "final_H_kJ": -13.017139181818184,
+   "final_S_J_K": -0.0,
+   "exp_fit_weighted_mean_kJ": -11.982,
+   "exp_fit_sigma_of_mean_kJ": 0.5,
+   "exp_fit_min_sigma_kJ": 0.5,
+   "tuned_minus_MLIP_kJ": 3.8509853703411068,
+   "tuned_minus_expmean_kJ": -1.015635636363637,
+   "governs": "experiment (sigma 0.5 vs MLIP 9.7 kJ/mol-atom)"
+  },
+  "CU10ZR7": {
+   "experimental": [
+    {
+     "value_kJ": -20.272,
+     "sigma_kJ": 5.629996622002027,
+     "T_K": 1123.0,
+     "split": "holdout",
+     "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+     "file": "experimental__CU-ZR__CuZr-08Tur.hmr-09-CU10ZR7.json"
+    },
+    {
+     "value_kJ": -12.31,
+     "sigma_kJ": 5.629996622002027,
+     "T_K": 298.15,
+     "split": "holdout",
+     "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+     "file": "experimental__CU-ZR__CuZr-08Tur.hmr-08-CU10ZR7.json"
+    }
+   ],
+   "MLIP_kJ": -17.358557636398647,
+   "sigma_MLIP_kJ": 9.686929176396278,
+   "SGTE_H_kJ": -14.220588235294118,
+   "SGTE_S_J_K": 0.0,
+   "MLIP-only_H_kJ": -17.358557647058824,
+   "MLIP-only_S_J_K": -0.0,
+   "tuned_H_kJ": -15.011319352941177,
+   "tuned_S_J_K": -0.0,
+   "final_H_kJ": -14.744042058823528,
+   "final_S_J_K": -0.0,
+   "tuned_minus_MLIP_kJ": 2.34723828345747,
+   "governs": "MLIP only (no experimental HM_FORM in the fit set)"
+  },
+  "CUZR_B2": {
+   "experimental": [
+    {
+     "value_kJ": -24.4,
+     "sigma_kJ": 8.74905947610632,
+     "T_K": 298.15,
+     "split": "fit",
+     "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+     "file": "experimental__CU-ZR__CuZr-08Tur.hmr-11-CUZR_B2.json"
+    },
+    {
+     "value_kJ": -15.179,
+     "sigma_kJ": 8.74905947610632,
+     "T_K": 1123.0,
+     "split": "fit",
+     "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+     "file": "experimental__CU-ZR__CuZr-08Tur.hmr-13-CUZR_B2.json"
+    },
+    {
+     "value_kJ": -9.05,
+     "sigma_kJ": 8.74905947610632,
+     "T_K": 298.15,
+     "split": "fit",
+     "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+     "file": "experimental__CU-ZR__CuZr-08Tur.hmr-12-CUZR_B2.json"
+    }
+   ],
+   "MLIP_kJ": -11.200552923974382,
+   "sigma_MLIP_kJ": 9.686929176396278,
+   "SGTE_H_kJ": -10.05212,
+   "SGTE_S_J_K": 3.8159799999993993,
+   "MLIP-only_H_kJ": -11.200553,
+   "MLIP-only_S_J_K": -0.0,
+   "tuned_H_kJ": -15.1032345,
+   "tuned_S_J_K": -0.0,
+   "final_H_kJ": -9.809168,
+   "final_S_J_K": 4.6959215000006225,
+   "exp_fit_weighted_mean_kJ": -16.209666666666667,
+   "exp_fit_sigma_of_mean_kJ": 5.051271843686029,
+   "exp_fit_min_sigma_kJ": 8.74905947610632,
+   "tuned_minus_MLIP_kJ": -3.9026815760256177,
+   "tuned_minus_expmean_kJ": 1.1064321666666679,
+   "governs": "experiment (sigma 8.7 vs MLIP 9.7 kJ/mol-atom)"
+  },
+  "CUZR2": {
+   "experimental": [
+    {
+     "value_kJ": -16.992,
+     "sigma_kJ": 3.481991141814535,
+     "T_K": 1123.0,
+     "split": "fit",
+     "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+     "file": "experimental__CU-ZR__CuZr-08Tur.hmr-17-CUZR2.json"
+    },
+    {
+     "value_kJ": -17.3,
+     "sigma_kJ": 3.481991141814535,
+     "T_K": 298.15,
+     "split": "fit",
+     "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+     "file": "experimental__CU-ZR__CuZr-08Tur.hmr-15-CUZR2.json"
+    },
+    {
+     "value_kJ": -10.95,
+     "sigma_kJ": 3.481991141814535,
+     "T_K": 298.15,
+     "split": "fit",
+     "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+     "file": "experimental__CU-ZR__CuZr-08Tur.hmr-16-CUZR2.json"
+    }
+   ],
+   "MLIP_kJ": -13.572914606087949,
+   "sigma_MLIP_kJ": 9.686929176396278,
+   "SGTE_H_kJ": -14.63467,
+   "SGTE_S_J_K": -1.7301700000001194,
+   "MLIP-only_H_kJ": -13.572914666666666,
+   "MLIP-only_S_J_K": -0.0,
+   "tuned_H_kJ": -13.681770666666669,
+   "tuned_S_J_K": -0.0,
+   "final_H_kJ": -13.632455666666669,
+   "final_S_J_K": -0.0,
+   "exp_fit_weighted_mean_kJ": -15.080666666666666,
+   "exp_fit_sigma_of_mean_kJ": 2.010328523042514,
+   "exp_fit_min_sigma_kJ": 3.481991141814535,
+   "tuned_minus_MLIP_kJ": -0.1088560605787201,
+   "tuned_minus_expmean_kJ": 1.398895999999997,
+   "governs": "experiment (sigma 3.5 vs MLIP 9.7 kJ/mol-atom)"
+  }
+ },
+ "metrics": {
+  "SGTE": {
+   "fit|ZPF_assessed": {
+    "n": 18,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 99.5024904457177,
+    "mean_abs": 24.33261905471631,
+    "residual_classes": {
+     "ZPFResidual": 18
+    }
+   },
+   "fit|ZPF_bracket": {
+    "n": 67,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 1217.1702606050967,
+    "mean_abs": 203.16232353414247,
+    "residual_classes": {
+     "ZPFResidual": 67
+    }
+   },
+   "fit|ZPF_liquid": {
+    "n": 9,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 6.982985119232402e-08,
+    "mean_abs": 2.3347739544179703e-08,
+    "residual_classes": {
+     "ZPFResidual": 9
+    }
+   },
+   "fit|ACR": {
+    "n": 30,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 3596.9964721925403,
+    "mean_abs": 2491.4929665777067,
+    "residual_classes": {
+     "ActivityResidual": 30
+    }
+   },
+   "fit|HM_FORM": {
+    "n": 11,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 4979.565025515117,
+    "mean_abs": 3333.7719834710733,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 11
+    }
+   },
+   "fit|ZPF_literature": {
+    "n": 173,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 960.3501849335503,
+    "mean_abs": 186.47872996097885,
+    "residual_classes": {
+     "ZPFResidual": 173
+    }
+   },
+   "holdout|ACR": {
+    "n": 12,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 2588.8699585229037,
+    "mean_abs": 2036.7817986073362,
+    "residual_classes": {
+     "ActivityResidual": 12
+    }
+   },
+   "holdout|HM_FORM": {
+    "n": 2,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 4487.2002268043,
+    "mean_abs": 3981.000000000002,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 2
+    }
+   },
+   "holdout|ZPF_literature": {
+    "n": 24,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 121.1633438178633,
+    "mean_abs": 56.140048274084315,
+    "residual_classes": {
+     "ZPFResidual": 24
+    }
+   },
+   "dft_check|DFT_HM_FORM": {
+    "n": 9,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 2609.318402089532,
+    "mean_abs": 2121.6868568033306,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 9
+    }
+   },
+   "mlip_anchor|HM_FORM:CU10ZR7": {
+    "n": 1,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 3137.969401104532,
+    "mean_abs": 3137.969401104532,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 1
+    }
+   },
+   "mlip_anchor|HM_FORM:CU51ZR14": {
+    "n": 1,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 3773.6526559601825,
+    "mean_abs": 3773.6526559601825,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 1
+    }
+   },
+   "mlip_anchor|HM_FORM:CU5ZR_C15B": {
+    "n": 1,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 3478.9305389283218,
+    "mean_abs": 3478.9305389283218,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 1
+    }
+   },
+   "mlip_anchor|HM_FORM:CU8ZR3": {
+    "n": 1,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 3388.3391885229285,
+    "mean_abs": 3388.3391885229285,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 1
+    }
+   },
+   "mlip_anchor|HM_FORM:CUZR2": {
+    "n": 1,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 1061.7553939120462,
+    "mean_abs": 1061.7553939120462,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 1
+    }
+   },
+   "mlip_anchor|HM_FORM:CUZR_B2": {
+    "n": 1,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 1148.4329239743856,
+    "mean_abs": 1148.4329239743856,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 1
+    }
+   },
+   "mlip_anchor|HM_MIX:BCC_A2": {
+    "n": 9,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 5824.2110717556125,
+    "mean_abs": 5517.2426977992745,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 9
+    }
+   },
+   "mlip_anchor|HM_MIX:FCC_A1": {
+    "n": 9,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 3466.476392049287,
+    "mean_abs": 3301.2797161150484,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 9
+    }
+   },
+   "mlip_anchor|HM_MIX:HCP_A3": {
+    "n": 9,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 5229.005360654323,
+    "mean_abs": 4593.9620598,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 9
+    }
+   },
+   "mlip_anchor|HM_MIX:LIQUID": {
+    "n": 9,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 4164.236576097627,
+    "mean_abs": 3891.190834288606,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 9
+    }
+   }
+  },
+  "MLIP-only": {
+   "fit|ZPF_assessed": {
+    "n": 18,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 1112.5927057384467,
+    "mean_abs": 583.2624459900479,
+    "residual_classes": {
+     "ZPFResidual": 18
+    }
+   },
+   "fit|ZPF_bracket": {
+    "n": 67,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 2333.634025698471,
+    "mean_abs": 1449.0540086702072,
+    "residual_classes": {
+     "ZPFResidual": 67
+    }
+   },
+   "fit|ZPF_liquid": {
+    "n": 9,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 7.994825346035014e-08,
+    "mean_abs": 2.6710848841402267e-08,
+    "residual_classes": {
+     "ZPFResidual": 9
+    }
+   },
+   "fit|ACR": {
+    "n": 30,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 10328.780481910037,
+    "mean_abs": 6633.977814282282,
+    "residual_classes": {
+     "ActivityResidual": 30
+    }
+   },
+   "fit|HM_FORM": {
+    "n": 11,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 5577.426058357583,
+    "mean_abs": 4753.589059673658,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 11
+    }
+   },
+   "fit|ZPF_literature": {
+    "n": 173,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 2558.4170496349116,
+    "mean_abs": 1652.000304830814,
+    "residual_classes": {
+     "ZPFResidual": 173
+    }
+   },
+   "holdout|ACR": {
+    "n": 12,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 5092.988597035704,
+    "mean_abs": 3590.2853684015986,
+    "residual_classes": {
+     "ActivityResidual": 12
+    }
+   },
+   "holdout|HM_FORM": {
+    "n": 2,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 4121.655047404354,
+    "mean_abs": 3981.0000000000036,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 2
+    }
+   },
+   "holdout|ZPF_literature": {
+    "n": 24,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 1708.652358474778,
+    "mean_abs": 970.74545482346,
+    "residual_classes": {
+     "ZPFResidual": 24
+    }
+   },
+   "dft_check|DFT_HM_FORM": {
+    "n": 9,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 1569.9584970191586,
+    "mean_abs": 1441.747055555554,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 9
+    }
+   },
+   "mlip_anchor|HM_FORM:CU10ZR7": {
+    "n": 1,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 1.0660172847565264e-05,
+    "mean_abs": 1.0660172847565264e-05,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 1
+    }
+   },
+   "mlip_anchor|HM_FORM:CU51ZR14": {
+    "n": 1,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 5.578287527896464e-06,
+    "mean_abs": 5.578287527896464e-06,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 1
+    }
+   },
+   "mlip_anchor|HM_FORM:CU5ZR_C15B": {
+    "n": 1,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 3.892832319252193e-05,
+    "mean_abs": 3.892832319252193e-05,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 1
+    }
+   },
+   "mlip_anchor|HM_FORM:CU8ZR3": {
+    "n": 1,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 6.704740371787921e-06,
+    "mean_abs": 6.704740371787921e-06,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 1
+    }
+   },
+   "mlip_anchor|HM_FORM:CUZR2": {
+    "n": 1,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 6.057871905795764e-05,
+    "mean_abs": 6.057871905795764e-05,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 1
+    }
+   },
+   "mlip_anchor|HM_FORM:CUZR_B2": {
+    "n": 1,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 7.602561709063593e-05,
+    "mean_abs": 7.602561709063593e-05,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 1
+    }
+   },
+   "mlip_anchor|HM_MIX:BCC_A2": {
+    "n": 9,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 2.7766817368522602e-05,
+    "mean_abs": 2.4316003620899413e-05,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 9
+    }
+   },
+   "mlip_anchor|HM_MIX:FCC_A1": {
+    "n": 9,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 5.2520678117972845e-05,
+    "mean_abs": 4.9448381837969966e-05,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 9
+    }
+   },
+   "mlip_anchor|HM_MIX:HCP_A3": {
+    "n": 9,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 3.6262355822614984e-05,
+    "mean_abs": 3.0870943665680293e-05,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 9
+    }
+   },
+   "mlip_anchor|HM_MIX:LIQUID": {
+    "n": 9,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 5.3719916403013395e-05,
+    "mean_abs": 5.095527472399731e-05,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 9
+    }
+   }
+  },
+  "tuned": {
+   "fit|ZPF_assessed": {
+    "n": 18,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 96.64238236010071,
+    "mean_abs": 29.51481749805478,
+    "residual_classes": {
+     "ZPFResidual": 18
+    }
+   },
+   "fit|ZPF_bracket": {
+    "n": 67,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 607.8745562380097,
+    "mean_abs": 245.85783934773775,
+    "residual_classes": {
+     "ZPFResidual": 67
+    }
+   },
+   "fit|ZPF_liquid": {
+    "n": 9,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 5.758683884941903e-08,
+    "mean_abs": 1.9263502003418075e-08,
+    "residual_classes": {
+     "ZPFResidual": 9
+    }
+   },
+   "fit|ACR": {
+    "n": 30,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 759.737185768665,
+    "mean_abs": 558.720755928214,
+    "residual_classes": {
+     "ActivityResidual": 30
+    }
+   },
+   "fit|HM_FORM": {
+    "n": 11,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 3858.548419069201,
+    "mean_abs": 2808.985679063358,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 11
+    }
+   },
+   "fit|ZPF_literature": {
+    "n": 173,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 568.861451164454,
+    "mean_abs": 271.3100882670101,
+    "residual_classes": {
+     "ZPFResidual": 173
+    }
+   },
+   "holdout|ACR": {
+    "n": 12,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 3684.624605827033,
+    "mean_abs": 2273.5784974167095,
+    "residual_classes": {
+     "ActivityResidual": 12
+    }
+   },
+   "holdout|HM_FORM": {
+    "n": 2,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 4181.619729059177,
+    "mean_abs": 3981.0000000000055,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 2
+    }
+   },
+   "holdout|ZPF_literature": {
+    "n": 24,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 298.72819842675375,
+    "mean_abs": 135.5501283656637,
+    "residual_classes": {
+     "ZPFResidual": 24
+    }
+   },
+   "dft_check|DFT_HM_FORM": {
+    "n": 9,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 3378.474988606894,
+    "mean_abs": 3068.901239750446,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 9
+    }
+   },
+   "mlip_anchor|HM_FORM:CU10ZR7": {
+    "n": 1,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 2347.238283457471,
+    "mean_abs": 2347.238283457471,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 1
+    }
+   },
+   "mlip_anchor|HM_FORM:CU51ZR14": {
+    "n": 1,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 4851.430625190949,
+    "mean_abs": 4851.430625190949,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 1
+    }
+   },
+   "mlip_anchor|HM_FORM:CU5ZR_C15B": {
+    "n": 1,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 4084.824538928322,
+    "mean_abs": 4084.824538928322,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 1
+    }
+   },
+   "mlip_anchor|HM_FORM:CU8ZR3": {
+    "n": 1,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 3850.98537034111,
+    "mean_abs": 3850.98537034111,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 1
+    }
+   },
+   "mlip_anchor|HM_FORM:CUZR2": {
+    "n": 1,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 108.85606057871883,
+    "mean_abs": 108.85606057871883,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 1
+    }
+   },
+   "mlip_anchor|HM_FORM:CUZR_B2": {
+    "n": 1,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 3902.681576025616,
+    "mean_abs": 3902.681576025616,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 1
+    }
+   },
+   "mlip_anchor|HM_MIX:BCC_A2": {
+    "n": 9,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 3648.7286146508136,
+    "mean_abs": 3339.393764465941,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 9
+    }
+   },
+   "mlip_anchor|HM_MIX:FCC_A1": {
+    "n": 9,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 55.442006168647495,
+    "mean_abs": 49.552666115048446,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 9
+    }
+   },
+   "mlip_anchor|HM_MIX:HCP_A3": {
+    "n": 9,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 2028.028442727814,
+    "mean_abs": 1826.7796931333332,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 9
+    }
+   },
+   "mlip_anchor|HM_MIX:LIQUID": {
+    "n": 9,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 6795.615765905042,
+    "mean_abs": 6414.726867621939,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 9
+    }
+   }
+  },
+  "final": {
+   "fit|ZPF_assessed": {
+    "n": 18,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 23.459875304073798,
+    "mean_abs": 6.951346354737729,
+    "residual_classes": {
+     "ZPFResidual": 18
+    }
+   },
+   "fit|ZPF_bracket": {
+    "n": 67,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 179.5012018382138,
+    "mean_abs": 70.2895575443321,
+    "residual_classes": {
+     "ZPFResidual": 67
+    }
+   },
+   "fit|ZPF_liquid": {
+    "n": 9,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 4.9398970149037215e-08,
+    "mean_abs": 1.6530975699424744e-08,
+    "residual_classes": {
+     "ZPFResidual": 9
+    }
+   },
+   "fit|ACR": {
+    "n": 30,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 1763.3395075104324,
+    "mean_abs": 1174.0530376378597,
+    "residual_classes": {
+     "ActivityResidual": 30
+    }
+   },
+   "fit|HM_FORM": {
+    "n": 11,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 5074.730383514689,
+    "mean_abs": 3284.0504407713483,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 11
+    }
+   },
+   "fit|ZPF_literature": {
+    "n": 173,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 168.27694134004213,
+    "mean_abs": 87.78297225759346,
+    "residual_classes": {
+     "ZPFResidual": 173
+    }
+   },
+   "holdout|ACR": {
+    "n": 12,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 1706.9743093620968,
+    "mean_abs": 1337.5225983149055,
+    "residual_classes": {
+     "ActivityResidual": 12
+    }
+   },
+   "holdout|HM_FORM": {
+    "n": 2,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 4270.999867919566,
+    "mean_abs": 3981.0,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 2
+    }
+   },
+   "holdout|ZPF_literature": {
+    "n": 24,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 113.02703728300709,
+    "mean_abs": 61.567785072402636,
+    "residual_classes": {
+     "ZPFResidual": 24
+    }
+   },
+   "dft_check|DFT_HM_FORM": {
+    "n": 9,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 2759.542700112385,
+    "mean_abs": 2360.412633392754,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 9
+    }
+   },
+   "mlip_anchor|HM_FORM:CU10ZR7": {
+    "n": 1,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 2614.515577575119,
+    "mean_abs": 2614.515577575119,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 1
+    }
+   },
+   "mlip_anchor|HM_FORM:CU51ZR14": {
+    "n": 1,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 4814.699471344791,
+    "mean_abs": 4814.699471344791,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 1
+    }
+   },
+   "mlip_anchor|HM_FORM:CU5ZR_C15B": {
+    "n": 1,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 4153.410872261658,
+    "mean_abs": 4153.410872261658,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 1
+    }
+   },
+   "mlip_anchor|HM_FORM:CU8ZR3": {
+    "n": 1,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 3831.4818248865595,
+    "mean_abs": 3831.4818248865595,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 1
+    }
+   },
+   "mlip_anchor|HM_FORM:CUZR2": {
+    "n": 1,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 59.5410605787165,
+    "mean_abs": 59.5410605787165,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 1
+    }
+   },
+   "mlip_anchor|HM_FORM:CUZR_B2": {
+    "n": 1,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 1391.3849239743831,
+    "mean_abs": 1391.3849239743831,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 1
+    }
+   },
+   "mlip_anchor|HM_MIX:BCC_A2": {
+    "n": 9,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 4557.01383372043,
+    "mean_abs": 4317.969685534059,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 9
+    }
+   },
+   "mlip_anchor|HM_MIX:FCC_A1": {
+    "n": 9,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 117.62115599122082,
+    "mean_abs": 112.05209944838174,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 9
+    }
+   },
+   "mlip_anchor|HM_MIX:HCP_A3": {
+    "n": 9,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 3696.934564319709,
+    "mean_abs": 3430.533493133333,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 9
+    }
+   },
+   "mlip_anchor|HM_MIX:LIQUID": {
+    "n": 9,
+    "n_nonfinite": 0,
+    "nonfinite_files": [],
+    "rmse": 10244.598210894474,
+    "mean_abs": 9758.550317621939,
+    "residual_classes": {
+     "FixedConfigurationPropertyResidual": 9
+    }
+   }
+  }
+ },
+ "tuning": {
+  "symbols": [
+   "VV0000",
+   "VV0001",
+   "VV0002",
+   "VV0003",
+   "VV0004",
+   "VV0005",
+   "VV0006",
+   "VV0007",
+   "VV0008",
+   "VV0009",
+   "VV0010",
+   "VV0011",
+   "VV0012",
+   "VV0013",
+   "VV0014",
+   "VV0015",
+   "VV0016",
+   "VV0017",
+   "VV0018",
+   "VV0019",
+   "VV0020",
+   "VV0021"
+  ],
+  "x_mlip": [
+   -40.460853,
+   0.0,
+   -19.992637,
+   0.0,
+   -15.77398,
+   0.0,
+   1.257604,
+   0.0,
+   -37.475181,
+   0.0,
+   -8.507189,
+   0.0,
+   -13.721125,
+   0.0,
+   -27.829259,
+   0.0,
+   -82.667583,
+   -1088.700123,
+   -185.334831,
+   -295.09548,
+   -22.401106,
+   -40.718744
+  ],
+  "x0": [
+   -75.45028867272038,
+   23.91711024562733,
+   -7.36462352325945,
+   8.838209635388074,
+   -15.50369349813282,
+   0.08477963406481216,
+   1.5217273122201096,
+   0.08331523171041605,
+   -19.260315048441463,
+   -8.622056130291444,
+   -22.44861075285427,
+   1.6176836528997842,
+   -3.7568713050159186,
+   3.151897837678819,
+   -18.742185965881028,
+   2.8329733604821694,
+   -58.15874120781062,
+   -773.3535482877444,
+   -142.97417492453576,
+   -255.19284464466958,
+   -30.206366698956824,
+   -41.04533022450182
+  ],
+  "x": [
+   -75.45027166477162,
+   23.917116355886822,
+   -7.364618685795619,
+   8.838211705263037,
+   -15.503693362524364,
+   0.08477967809533181,
+   1.5217274490865844,
+   0.08331527470845261,
+   -19.26030580178847,
+   -8.622052150898185,
+   -22.448619258838338,
+   1.617680124970872,
+   -3.756871543938576,
+   3.151897825726215,
+   -18.742185947768554,
+   2.8329733723933077,
+   -58.158636337121514,
+   -773.357132248505,
+   -142.97399174422543,
+   -255.1924291896133,
+   -30.20646886645655,
+   -41.04531221571597
+  ],
+  "neg_lnL0": 3717.288907324063,
+  "neg_lnL": 3717.287524699799,
+  "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+  "nit": 2,
+  "n_eval": 15,
+  "wall_s": 1060.924186706543,
+  "method": "L-BFGS-B (scaled)",
+  "maxiter": 300,
+  "data_files": [
+   "assessed__CU-ZR__CuZr-94Zen-LB.CU-ZR-p371.json",
+   "derived__invariant-brackets__CU-ZR__CuZr-08Tur.zpf-00.json",
+   "derived__invariant-brackets__CU-ZR__CuZr-08Tur.zpf-01.json",
+   "derived__invariant-brackets__CU-ZR__CuZr-08Tur.zpf-02.json",
+   "derived__invariant-brackets__CU-ZR__CuZr-08Tur.zpf-03.json",
+   "derived__invariant-brackets__CU-ZR__CuZr-08Tur.zpf-04.json",
+   "derived__invariant-brackets__CU-ZR__CuZr-08Tur.zpf-05.json",
+   "derived__invariant-brackets__CU-ZR__CuZr-08Tur.zpf-06.json",
+   "derived__invariant-brackets__CU-ZR__CuZr-08Tur.zpf-07.json",
+   "derived__invariant-brackets__CU-ZR__CuZr-08Tur.zpf-09.json",
+   "derived__invariant-brackets__CU-ZR__CuZr-08Tur.zpf-10.json",
+   "derived__invariant-brackets__CU-ZR__CuZr-08Tur.zpf-11.json",
+   "derived__invariant-brackets__CU-ZR__CuZr-10Zho.zpf-03.json",
+   "derived__invariant-brackets__CU-ZR__CuZr-10Zho.zpf-05.json",
+   "derived__invariant-brackets__CU-ZR__CuZr-94Zen-LB.zpf-00.json",
+   "derived__invariant-brackets__CU-ZR__CuZr-94Zen-LB.zpf-06.json",
+   "derived__invariant-brackets__CU-ZR__CuZr-94Zen-LB.zpf-07.json",
+   "derived__invariant-brackets__CU-ZR__CuZr-94Zen-LB.zpf-10.json",
+   "derived__liquid-stability__CU-ZR__CuZr-94Zen-LB.liquid-stability.json",
+   "experimental__CU-ZR__CuZr-06Wan.acr_cu-00.json",
+   "experimental__CU-ZR__CuZr-06Wan.acr_cu-02.json",
+   "experimental__CU-ZR__CuZr-06Wan.acr_cu-04.json",
+   "experimental__CU-ZR__CuZr-06Wan.acr_cu-06.json",
+   "experimental__CU-ZR__CuZr-06Wan.acr_cu-10.json",
+   "experimental__CU-ZR__CuZr-06Wan.acr_cu-12.json",
+   "experimental__CU-ZR__CuZr-06Wan.acr_cu-14.json",
+   "experimental__CU-ZR__CuZr-06Wan.acr_cu-20.json",
+   "experimental__CU-ZR__CuZr-06Wan.acr_cu-22.json",
+   "experimental__CU-ZR__CuZr-06Wan.acr_cu-28.json",
+   "experimental__CU-ZR__CuZr-06Wan.acr_cu-30.json",
+   "experimental__CU-ZR__CuZr-06Wan.acr_zr-01.json",
+   "experimental__CU-ZR__CuZr-06Wan.acr_zr-03.json",
+   "experimental__CU-ZR__CuZr-06Wan.acr_zr-05.json",
+   "experimental__CU-ZR__CuZr-06Wan.acr_zr-07.json",
+   "experimental__CU-ZR__CuZr-06Wan.acr_zr-11.json",
+   "experimental__CU-ZR__CuZr-06Wan.acr_zr-13.json",
+   "experimental__CU-ZR__CuZr-06Wan.acr_zr-15.json",
+   "experimental__CU-ZR__CuZr-06Wan.acr_zr-21.json",
+   "experimental__CU-ZR__CuZr-06Wan.acr_zr-23.json",
+   "experimental__CU-ZR__CuZr-06Wan.acr_zr-29.json",
+   "experimental__CU-ZR__CuZr-06Wan.acr_zr-31.json",
+   "experimental__CU-ZR__CuZr-08Tur.hmr-00-CU5ZR_C15B.json",
+   "experimental__CU-ZR__CuZr-08Tur.hmr-01-CU5ZR_C15B.json",
+   "experimental__CU-ZR__CuZr-08Tur.hmr-03-CU51ZR14.json",
+   "experimental__CU-ZR__CuZr-08Tur.hmr-04-CU51ZR14.json",
+   "experimental__CU-ZR__CuZr-08Tur.hmr-06-CU8ZR3.json",
+   "experimental__CU-ZR__CuZr-08Tur.hmr-11-CUZR_B2.json",
+   "experimental__CU-ZR__CuZr-08Tur.hmr-12-CUZR_B2.json",
+   "experimental__CU-ZR__CuZr-08Tur.hmr-13-CUZR_B2.json",
+   "experimental__CU-ZR__CuZr-08Tur.hmr-15-CUZR2.json",
+   "experimental__CU-ZR__CuZr-08Tur.hmr-16-CUZR2.json",
+   "experimental__CU-ZR__CuZr-08Tur.hmr-17-CUZR2.json",
+   "experimental__CU-ZR__CuZr-08Tur.smr-02-CU5ZR_C15B.json",
+   "experimental__CU-ZR__CuZr-08Tur.smr-05-CU51ZR14.json",
+   "experimental__CU-ZR__CuZr-08Tur.smr-07-CU8ZR3.json",
+   "experimental__CU-ZR__CuZr-08Tur.smr-14-CUZR_B2.json",
+   "experimental__CU-ZR__CuZr-08Tur.smr-18-CUZR2.json",
+   "experimental__CU-ZR__CuZr-94Zen-LB.hmr-07-CU51ZR14.json",
+   "experimental__CU-ZR__CuZr-94Zen-LB.hmr-07-CUZR2.json",
+   "experimental__CU-ZR__CuZr-94Zen-LB.hmr-07-CUZR_B2.json",
+   "experimental__CU-ZR__CuZr-94Zen-LB.hmr-08-CUZR2.json",
+   "experimental__CU-ZR__CuZr-94Zen-LB.hmr-08-CUZR_B2.json",
+   "experimental__CU-ZR__CuZr-94Zen-LB.zpf-00.json",
+   "experimental__CU-ZR__CuZr-94Zen-LB.zpf-01.json",
+   "experimental__CU-ZR__CuZr-94Zen-LB.zpf-03.json",
+   "experimental__CU-ZR__CuZr-94Zen-LB.zpf-04.json",
+   "experimental__CU-ZR__CuZr-94Zen-LB.zpf-05.json",
+   "experimental__CU-ZR__CuZr-94Zen-LB.zpf-06.json",
+   "invariants__CU-ZR__CuZr-08Tur.zpf-00.json",
+   "invariants__CU-ZR__CuZr-08Tur.zpf-01.json",
+   "invariants__CU-ZR__CuZr-08Tur.zpf-02.json",
+   "invariants__CU-ZR__CuZr-08Tur.zpf-03.json",
+   "invariants__CU-ZR__CuZr-08Tur.zpf-04.json",
+   "invariants__CU-ZR__CuZr-08Tur.zpf-05.json",
+   "invariants__CU-ZR__CuZr-08Tur.zpf-06.json",
+   "invariants__CU-ZR__CuZr-08Tur.zpf-07.json",
+   "invariants__CU-ZR__CuZr-08Tur.zpf-08.json",
+   "invariants__CU-ZR__CuZr-08Tur.zpf-09.json",
+   "invariants__CU-ZR__CuZr-08Tur.zpf-10.json",
+   "invariants__CU-ZR__CuZr-08Tur.zpf-11.json",
+   "invariants__CU-ZR__CuZr-10Zho.zpf-03.json",
+   "invariants__CU-ZR__CuZr-10Zho.zpf-05.json",
+   "invariants__CU-ZR__CuZr-11Gie.zpf-04.json",
+   "invariants__CU-ZR__CuZr-94Zen-LB.zpf-00.json",
+   "invariants__CU-ZR__CuZr-94Zen-LB.zpf-06.json",
+   "invariants__CU-ZR__CuZr-94Zen-LB.zpf-07.json",
+   "invariants__CU-ZR__CuZr-94Zen-LB.zpf-10.json",
+   "mlip_HM_FORM_CU10ZR7.json",
+   "mlip_HM_FORM_CU51ZR14.json",
+   "mlip_HM_FORM_CU5ZR_C15B.json",
+   "mlip_HM_FORM_CU8ZR3.json",
+   "mlip_HM_FORM_CUZR2.json",
+   "mlip_HM_FORM_CUZR_B2.json",
+   "mlip_HM_MIX_BCC_A2.json",
+   "mlip_HM_MIX_FCC_A1.json",
+   "mlip_HM_MIX_HCP_A3.json",
+   "mlip_HM_MIX_LIQUID.json"
+  ]
+ },
+ "sigma": {
+  "sigma_DFT_kJ": 9.532,
+  "sigma_DFT_source": "CALIBRATION.json sources.mp.strata['on_hull_single|metal'].sigma_robust",
+  "sigma_MLIP_to_DFT_kJ": 1.7255645072026324,
+  "n_pairs": 8,
+  "mean_MLIP_minus_DFT_kJ": -1.5620457032639432,
+  "sigma_MLIP_kJ": 9.686929176396278,
+  "espei_weight": 0.05161594462962819
+ }
+}

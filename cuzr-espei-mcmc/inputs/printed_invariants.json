@@ -1,0 +1,1089 @@
+[
+ {
+  "reaction": "L = FCC + Cu5Zr (eutectic)",
+  "phases": [
+   "CU5ZR_C15B",
+   "FCC_A1",
+   "LIQUID"
+  ],
+  "T_K": 1250.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-R4PEE6PHQ2",
+  "also_reported_as": [
+   "ORC-ED4ZXYAH5L"
+  ],
+  "printed": "L <=> (Cu) + Cu5Zr",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-00.json"
+ },
+ {
+  "reaction": "L + Cu51Zr14 = Cu5Zr (peritectic)",
+  "phases": [
+   "CU51ZR14",
+   "CU5ZR_C15B",
+   "LIQUID"
+  ],
+  "T_K": 1287.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-VFWZIGGC5K",
+  "also_reported_as": [
+   "ORC-K22Q65MQO6",
+   "ORC-BY5Q7YPLLK"
+  ],
+  "printed": "L + Cu51Zr14 <=> Cu5Zr",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-00.json"
+ },
+ {
+  "reaction": "L = Cu8Zr3 + Cu10Zr7 (eutectic)",
+  "phases": [
+   "CU10ZR7",
+   "CU8ZR3",
+   "LIQUID"
+  ],
+  "T_K": 1160.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-JN52P3B3AY",
+  "also_reported_as": [],
+  "printed": "L <=> Cu8Zr3 + Cu10Zr7",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-01.json"
+ },
+ {
+  "reaction": "L = Cu10Zr7 (congruent)",
+  "phases": [
+   "CU10ZR7",
+   "LIQUID"
+  ],
+  "T_K": 1185.0,
+  "u_K": 3.0,
+  "u_used_K": 3.0,
+  "split": "fit",
+  "id": "ORC-F7APSYWJLH",
+  "also_reported_as": [],
+  "printed": "L <=> Cu10Zr7",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-01.json"
+ },
+ {
+  "reaction": "L = Cu10Zr7 + CuZr (eutectic)",
+  "phases": [
+   "CU10ZR7",
+   "CUZR_B2",
+   "LIQUID"
+  ],
+  "T_K": 1143.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-GKRI7O6X3N",
+  "also_reported_as": [],
+  "printed": "L <=> Cu10Zr7 + CuZr",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-01.json"
+ },
+ {
+  "reaction": "L = CuZr (congruent)",
+  "phases": [
+   "CUZR_B2",
+   "LIQUID"
+  ],
+  "T_K": 1206.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-6NSN5PDW4I",
+  "also_reported_as": [
+   "ORC-B5KUXLLJ4K"
+  ],
+  "printed": "L <=> CuZr",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-01.json"
+ },
+ {
+  "reaction": "L = CuZr + CuZr2 (eutectic)",
+  "phases": [
+   "CUZR2",
+   "CUZR_B2",
+   "LIQUID"
+  ],
+  "T_K": 1145.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-RSGFDH6J2C",
+  "also_reported_as": [],
+  "printed": "L <=> CuZr + CuZr2",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-01.json"
+ },
+ {
+  "reaction": "L = CuZr2 (congruent)",
+  "phases": [
+   "CUZR2",
+   "LIQUID"
+  ],
+  "T_K": 1279.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-SOALR52AHT",
+  "also_reported_as": [
+   "ORC-XFAWKPECCI"
+  ],
+  "printed": "L <=> CuZr2",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-01.json"
+ },
+ {
+  "reaction": "L + Cu51Zr14 = Cu5Zr (peritectic)",
+  "phases": [
+   "CU51ZR14",
+   "CU5ZR_C15B",
+   "LIQUID"
+  ],
+  "T_K": 1277.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-M5EZ2EPHVO",
+  "also_reported_as": [
+   "ORC-BXTPTL5YXZ"
+  ],
+  "printed": "L + Cu51Zr14 <=> Cu5Zr",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-01.json"
+ },
+ {
+  "reaction": "L = Cu51Zr14 (congruent)",
+  "phases": [
+   "CU51ZR14",
+   "LIQUID"
+  ],
+  "T_K": 1393.0,
+  "u_K": 6.0,
+  "u_used_K": 6.0,
+  "split": "fit",
+  "id": "ORC-TB6X5GL4ZL",
+  "also_reported_as": [
+   "ORC-3MGNJFIWMV"
+  ],
+  "printed": "L <=> Cu51Zr14",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-01.json"
+ },
+ {
+  "reaction": "L + Cu51Zr14 = Cu8Zr3",
+  "phases": [
+   "CU51ZR14",
+   "CU8ZR3",
+   "LIQUID"
+  ],
+  "T_K": 1243.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-YWAVRM5E6J",
+  "also_reported_as": [],
+  "printed": "L + Cu51Zr14 <=> Cu8Zr3",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-01.json"
+ },
+ {
+  "reaction": "L = FCC + Cu5Zr (eutectic)",
+  "phases": [
+   "CU5ZR_C15B",
+   "FCC_A1",
+   "LIQUID"
+  ],
+  "T_K": 1240.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-47VXTQ576T",
+  "also_reported_as": [
+   "ORC-AL4POCZYNT"
+  ],
+  "printed": "L <=> (Cu) + Cu5Zr",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-02.json"
+ },
+ {
+  "reaction": "L + Cu51Zr14 = Cu5Zr (peritectic)",
+  "phases": [
+   "CU51ZR14",
+   "CU5ZR_C15B",
+   "LIQUID"
+  ],
+  "T_K": 1283.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-ZPUO274MFA",
+  "also_reported_as": [
+   "ORC-VHWZOFYGRG"
+  ],
+  "printed": "L + Cu51Zr14 <=> Cu5Zr",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-02.json"
+ },
+ {
+  "reaction": "L = Cu51Zr14 (congruent)",
+  "phases": [
+   "CU51ZR14",
+   "LIQUID"
+  ],
+  "T_K": 1377.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-6HMOUELYXC",
+  "also_reported_as": [
+   "ORC-G442MKBK5P"
+  ],
+  "printed": "L <=> Cu51Zr14",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-02.json"
+ },
+ {
+  "reaction": "CuZr = Cu10Zr7 + CuZr2 (eutectoid)",
+  "phases": [
+   "CU10ZR7",
+   "CUZR2",
+   "CUZR_B2"
+  ],
+  "T_K": 985.0,
+  "u_K": 5.0,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-KGWJ2CYS7B",
+  "also_reported_as": [
+   "ORC-WZFU6D6UZZ",
+   "ORC-3KXW3UX2V5"
+  ],
+  "printed": "CuZr <=> Cu10Zr7 + CuZr2",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-03.json"
+ },
+ {
+  "reaction": "L = FCC + Cu5Zr (eutectic)",
+  "phases": [
+   "CU5ZR_C15B",
+   "FCC_A1",
+   "LIQUID"
+  ],
+  "T_K": 1244.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-KAJ4IW5EJG",
+  "also_reported_as": [
+   "ORC-ZZ7CVVTXH2",
+   "ORC-PWEUYOZ6ZK"
+  ],
+  "printed": "L <=> (Cu) + Cu5Zr",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-04.json"
+ },
+ {
+  "reaction": "L = Cu51Zr14 (congruent)",
+  "phases": [
+   "CU51ZR14",
+   "LIQUID"
+  ],
+  "T_K": 1386.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-6HTUDLFMCZ",
+  "also_reported_as": [
+   "ORC-J54DYAELUS"
+  ],
+  "printed": "L <=> Cu51Zr14",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-04.json"
+ },
+ {
+  "reaction": "L = Cu8Zr3 + Cu10Zr7 (eutectic)",
+  "phases": [
+   "CU10ZR7",
+   "CU8ZR3",
+   "LIQUID"
+  ],
+  "T_K": 1177.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-WV34CWISGE",
+  "also_reported_as": [],
+  "printed": "L <=> Cu8Zr3 + Cu10Zr7",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-05.json"
+ },
+ {
+  "reaction": "L = FCC + Cu5Zr (eutectic)",
+  "phases": [
+   "CU5ZR_C15B",
+   "FCC_A1",
+   "LIQUID"
+  ],
+  "T_K": 1253.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-RI3T672G4N",
+  "also_reported_as": [
+   "ORC-CC4MAVSJOT"
+  ],
+  "printed": "L <=> (Cu) + Cu5Zr",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-06.json"
+ },
+ {
+  "reaction": "L = Cu51Zr14 (congruent)",
+  "phases": [
+   "CU51ZR14",
+   "LIQUID"
+  ],
+  "T_K": 1411.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-3BIUMPXWT5",
+  "also_reported_as": [],
+  "printed": "L <=> Cu51Zr14",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-06.json"
+ },
+ {
+  "reaction": "L = CuZr2 (congruent)",
+  "phases": [
+   "CUZR2",
+   "LIQUID"
+  ],
+  "T_K": 1285.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-Y3QUAXETHU",
+  "also_reported_as": [
+   "ORC-4E7DVAIJH3"
+  ],
+  "printed": "L <=> CuZr2",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-07.json"
+ },
+ {
+  "reaction": "L = FCC + Cu5Zr (eutectic)",
+  "phases": [
+   "CU5ZR_C15B",
+   "FCC_A1",
+   "LIQUID"
+  ],
+  "T_K": 1271.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-KBYKSSQCKG",
+  "also_reported_as": [],
+  "printed": "L <=> (Cu) + Cu5Zr",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-07.json"
+ },
+ {
+  "reaction": "L + Cu51Zr14 = Cu5Zr (peritectic)",
+  "phases": [
+   "CU51ZR14",
+   "CU5ZR_C15B",
+   "LIQUID"
+  ],
+  "T_K": 1311.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-JPMRL3IY5S",
+  "also_reported_as": [
+   "ORC-H4EOR76WBZ"
+  ],
+  "printed": "L + Cu51Zr14 <=> Cu5Zr",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-07.json"
+ },
+ {
+  "reaction": "L = FCC + Cu5Zr (eutectic)",
+  "phases": [
+   "CU5ZR_C15B",
+   "FCC_A1",
+   "LIQUID"
+  ],
+  "T_K": 1243.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-LZIUKEXZC4",
+  "also_reported_as": [
+   "ORC-Y2H2VXWVPB"
+  ],
+  "printed": "L <=> (Cu) + Cu5Zr",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-08.json"
+ },
+ {
+  "reaction": "L = Cu8Zr3 + Cu10Zr7 (eutectic)",
+  "phases": [
+   "CU10ZR7",
+   "CU8ZR3",
+   "LIQUID"
+  ],
+  "T_K": 1158.0,
+  "u_K": 10.0,
+  "u_used_K": 10.0,
+  "split": "fit",
+  "id": "ORC-NW2ACW5QNI",
+  "also_reported_as": [
+   "ORC-Q7JZKRB2IY"
+  ],
+  "printed": "L <=> Cu8Zr3 + Cu10Zr7",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-09.json"
+ },
+ {
+  "reaction": "L = Cu10Zr7 (congruent)",
+  "phases": [
+   "CU10ZR7",
+   "LIQUID"
+  ],
+  "T_K": 1168.0,
+  "u_K": 10.0,
+  "u_used_K": 10.0,
+  "split": "fit",
+  "id": "ORC-PUDDEC5QXK",
+  "also_reported_as": [
+   "ORC-DZVAPYWENR"
+  ],
+  "printed": "L <=> Cu10Zr7",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-09.json"
+ },
+ {
+  "reaction": "L = CuZr + CuZr2 (eutectic)",
+  "phases": [
+   "CUZR2",
+   "CUZR_B2",
+   "LIQUID"
+  ],
+  "T_K": 1201.0,
+  "u_K": 10.0,
+  "u_used_K": 10.0,
+  "split": "fit",
+  "id": "ORC-3TYZUMMZEV",
+  "also_reported_as": [],
+  "printed": "L <=> CuZr + CuZr2",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-09.json"
+ },
+ {
+  "reaction": "L = CuZr2 (congruent)",
+  "phases": [
+   "CUZR2",
+   "LIQUID"
+  ],
+  "T_K": 1273.0,
+  "u_K": 10.0,
+  "u_used_K": 10.0,
+  "split": "fit",
+  "id": "ORC-KBFIV5RQL3",
+  "also_reported_as": [
+   "ORC-S2X35WDT4J"
+  ],
+  "printed": "L <=> CuZr2",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-09.json"
+ },
+ {
+  "reaction": "L = CuZr2 + BCC (eutectic)",
+  "phases": [
+   "BCC_A2",
+   "CUZR2",
+   "LIQUID"
+  ],
+  "T_K": 1268.0,
+  "u_K": 10.0,
+  "u_used_K": 10.0,
+  "split": "fit",
+  "id": "ORC-HIGOKJ4S64",
+  "also_reported_as": [],
+  "printed": "L <=> CuZr2 + (\u03b2Zr)",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-09.json"
+ },
+ {
+  "reaction": "BCC = CuZr2 + HCP (eutectoid)",
+  "phases": [
+   "BCC_A2",
+   "CUZR2",
+   "HCP_A3"
+  ],
+  "T_K": 1095.0,
+  "u_K": 10.0,
+  "u_used_K": 10.0,
+  "split": "fit",
+  "id": "ORC-XCJOTJ2GKA",
+  "also_reported_as": [],
+  "printed": "(\u03b2Zr) <=> CuZr2 + (\u03b1Zr)",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-09.json"
+ },
+ {
+  "reaction": "L = FCC + Cu5Zr (eutectic)",
+  "phases": [
+   "CU5ZR_C15B",
+   "FCC_A1",
+   "LIQUID"
+  ],
+  "T_K": 1238.0,
+  "u_K": 10.0,
+  "u_used_K": 10.0,
+  "split": "fit",
+  "id": "ORC-CYBHIOM3CE",
+  "also_reported_as": [],
+  "printed": "L <=> (Cu) + Cu5Zr",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-09.json"
+ },
+ {
+  "reaction": "L = Cu51Zr14 (congruent)",
+  "phases": [
+   "CU51ZR14",
+   "LIQUID"
+  ],
+  "T_K": 1373.0,
+  "u_K": 10.0,
+  "u_used_K": 10.0,
+  "split": "fit",
+  "id": "ORC-SFMHQKTADZ",
+  "also_reported_as": [
+   "ORC-3RUDYW5FZK"
+  ],
+  "printed": "L <=> Cu51Zr14",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-09.json"
+ },
+ {
+  "reaction": "L + Cu51Zr14 = Cu8Zr3",
+  "phases": [
+   "CU51ZR14",
+   "CU8ZR3",
+   "LIQUID"
+  ],
+  "T_K": 1343.0,
+  "u_K": 10.0,
+  "u_used_K": 10.0,
+  "split": "fit",
+  "id": "ORC-VMNTYO567G",
+  "also_reported_as": [],
+  "printed": "L + Cu51Zr14 <=> Cu8Zr3",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-09.json"
+ },
+ {
+  "reaction": "L = Cu8Zr3 + Cu10Zr7 (eutectic)",
+  "phases": [
+   "CU10ZR7",
+   "CU8ZR3",
+   "LIQUID"
+  ],
+  "T_K": 1150.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-4WBXWTTEOD",
+  "also_reported_as": [
+   "ORC-RRAO6YXLBG"
+  ],
+  "printed": "L <=> Cu8Zr3 + Cu10Zr7",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-10.json"
+ },
+ {
+  "reaction": "L = FCC + Cu5Zr (eutectic)",
+  "phases": [
+   "CU5ZR_C15B",
+   "FCC_A1",
+   "LIQUID"
+  ],
+  "T_K": 1250.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-R6VT7HDMCK",
+  "also_reported_as": [
+   "ORC-U5WG537YPW"
+  ],
+  "printed": "L <=> (Cu) + Cu5Zr",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-10.json"
+ },
+ {
+  "reaction": "L = Cu51Zr14 (congruent)",
+  "phases": [
+   "CU51ZR14",
+   "LIQUID"
+  ],
+  "T_K": 1383.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-R4ZSQKNHV6",
+  "also_reported_as": [],
+  "printed": "L <=> Cu51Zr14",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-10.json"
+ },
+ {
+  "reaction": "L = CuZr2 (congruent)",
+  "phases": [
+   "CUZR2",
+   "LIQUID"
+  ],
+  "T_K": 1338.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-IRNRCZQNU3",
+  "also_reported_as": [],
+  "printed": "L <=> CuZr2",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-11.json"
+ },
+ {
+  "reaction": "L = CuZr2 + BCC (eutectic)",
+  "phases": [
+   "BCC_A2",
+   "CUZR2",
+   "LIQUID"
+  ],
+  "T_K": 1271.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-57SZ7MDEPE",
+  "also_reported_as": [
+   "ORC-RMMUJPQ4HM"
+  ],
+  "printed": "L <=> CuZr2 + (\u03b2Zr)",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-11.json"
+ },
+ {
+  "reaction": "BCC = CuZr2 + HCP (eutectoid)",
+  "phases": [
+   "BCC_A2",
+   "CUZR2",
+   "HCP_A3"
+  ],
+  "T_K": 1189.0,
+  "u_K": 15.0,
+  "u_used_K": 15.0,
+  "split": "fit",
+  "id": "ORC-VZ5RH7A7CU",
+  "also_reported_as": [
+   "ORC-3EMIVMGW4E"
+  ],
+  "printed": "(\u03b2Zr) <=> CuZr2 + (\u03b1Zr)",
+  "reference": "Turchanin 2008, doi:10.1007/s11106-008-9039-x",
+  "file": "invariants__CU-ZR__CuZr-08Tur.zpf-11.json"
+ },
+ {
+  "reaction": "L = Cu8Zr3 + Cu10Zr7 (eutectic)",
+  "phases": [
+   "CU10ZR7",
+   "CU8ZR3",
+   "LIQUID"
+  ],
+  "T_K": 1177,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-OATLEB3VIM",
+  "also_reported_as": [
+   "ORC-QOMN3TGKS6"
+  ],
+  "printed": "Liq -> \u03bc + \u03c6",
+  "reference": "doi:10.1515/ijmr-1986-770109",
+  "file": "invariants__CU-ZR__CuZr-10Zho.zpf-02.json"
+ },
+ {
+  "reaction": null,
+  "phases": [
+   "BCC_A2",
+   "CU10ZR7",
+   "CU8ZR3"
+  ],
+  "T_K": 885,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-TVIPSUQNML",
+  "also_reported_as": [],
+  "printed": "\u03b4 -> \u03b2 + \u03c6",
+  "reference": "doi:10.1515/ijmr-1986-770109",
+  "file": "invariants__CU-ZR__CuZr-10Zho.zpf-02.json"
+ },
+ {
+  "reaction": "L = CuZr + CuZr2 (eutectic)",
+  "phases": [
+   "CUZR2",
+   "CUZR_B2",
+   "LIQUID"
+  ],
+  "T_K": 1202,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-JX5BR6NCOT",
+  "also_reported_as": [],
+  "printed": "Liq -> B2 + C11b",
+  "reference": "1998, Braga MH, Malheiros LF, Castro F, Soares D. Z Metallk 1998;89:541\u20135.",
+  "file": "invariants__CU-ZR__CuZr-10Zho.zpf-03.json"
+ },
+ {
+  "reaction": "L = Cu8Zr3 + Cu10Zr7 (eutectic)",
+  "phases": [
+   "CU10ZR7",
+   "CU8ZR3",
+   "LIQUID"
+  ],
+  "T_K": 1201,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-24PN3XYCOE",
+  "also_reported_as": [
+   "ORC-PJVS7PRLXS"
+  ],
+  "printed": "Liq -> \u03b4 + \u03c6",
+  "reference": "1998, Braga MH, Malheiros LF, Castro F, Soares D. Z Metallk 1998;89:541\u20135.",
+  "file": "invariants__CU-ZR__CuZr-10Zho.zpf-03.json"
+ },
+ {
+  "reaction": "CuZr = Cu10Zr7 + CuZr2 (eutectoid)",
+  "phases": [
+   "CU10ZR7",
+   "CUZR2",
+   "CUZR_B2"
+  ],
+  "T_K": 1003,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-4CBII3K6R2",
+  "also_reported_as": [],
+  "printed": "B2 -> \u03c6 + C11b",
+  "reference": "1998, Braga MH, Malheiros LF, Castro F, Soares D. Z Metallk 1998;89:541\u20135.",
+  "file": "invariants__CU-ZR__CuZr-10Zho.zpf-03.json"
+ },
+ {
+  "reaction": "L = CuZr2 + BCC (eutectic)",
+  "phases": [
+   "BCC_A2",
+   "CUZR2",
+   "LIQUID"
+  ],
+  "T_K": 1268,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-PEMZI4I53E",
+  "also_reported_as": [
+   "ORC-3USERDJ4PC",
+   "ORC-GFVHSV4PNF"
+  ],
+  "printed": "Liq -> C11b + bcc",
+  "reference": "1953, Lundin CE, McPherson DJ, Hansen M. Trans AIME 1953;197: 273\u20138.",
+  "file": "invariants__CU-ZR__CuZr-10Zho.zpf-05.json"
+ },
+ {
+  "reaction": "L = FCC + Cu5Zr (eutectic)",
+  "phases": [
+   "CU5ZR_C15B",
+   "FCC_A1",
+   "LIQUID"
+  ],
+  "T_K": 1283,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-YAQWBKAB2H",
+  "also_reported_as": [],
+  "printed": "Liq -> fcc + C15b",
+  "reference": "1953, Lundin CE, McPherson DJ, Hansen M. Trans AIME 1953;197: 273\u20138.",
+  "file": "invariants__CU-ZR__CuZr-10Zho.zpf-05.json"
+ },
+ {
+  "reaction": "L = CuZr + CuZr2 (eutectic)",
+  "phases": [
+   "CUZR2",
+   "CUZR_B2",
+   "LIQUID"
+  ],
+  "T_K": 1200,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-7RE3GOTOLX",
+  "also_reported_as": [],
+  "printed": "Liq -> B2 + C11b",
+  "reference": "1953, Lundin CE, McPherson DJ, Hansen M. Trans AIME 1953;197: 273\u20138.",
+  "file": "invariants__CU-ZR__CuZr-10Zho.zpf-05.json"
+ },
+ {
+  "reaction": null,
+  "phases": [
+   "BCC_A2",
+   "CU8ZR3",
+   "LIQUID"
+  ],
+  "T_K": 1343,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-M7PX53B2VL",
+  "also_reported_as": [],
+  "printed": "Liq + \u03b2 -> \u03b4",
+  "reference": "1953, Lundin CE, McPherson DJ, Hansen M. Trans AIME 1953;197: 273\u20138.",
+  "file": "invariants__CU-ZR__CuZr-10Zho.zpf-05.json"
+ },
+ {
+  "reaction": "L = Cu8Zr3 + Cu10Zr7 (eutectic)",
+  "phases": [
+   "CU10ZR7",
+   "CU8ZR3",
+   "LIQUID"
+  ],
+  "T_K": 1160,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-FXYO2FTWQD",
+  "also_reported_as": [],
+  "printed": "Liq -> \u03b4 + \u03c6",
+  "reference": "1953, Lundin CE, McPherson DJ, Hansen M. Trans AIME 1953;197: 273\u20138.",
+  "file": "invariants__CU-ZR__CuZr-10Zho.zpf-05.json"
+ },
+ {
+  "reaction": "BCC = CuZr2 + HCP (eutectoid)",
+  "phases": [
+   "BCC_A2",
+   "CUZR2",
+   "HCP_A3"
+  ],
+  "T_K": 1095,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-PXRTVGO67F",
+  "also_reported_as": [
+   "ORC-2DY5437SZG"
+  ],
+  "printed": "bcc -> C11b + hcp",
+  "reference": "1953, Lundin CE, McPherson DJ, Hansen M. Trans AIME 1953;197: 273\u20138.",
+  "file": "invariants__CU-ZR__CuZr-10Zho.zpf-05.json"
+ },
+ {
+  "reaction": "L = Cu10Zr7 + CuZr (eutectic)",
+  "phases": [
+   "CU10ZR7",
+   "CUZR_B2",
+   "LIQUID"
+  ],
+  "T_K": 1164,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-BDVLUKGK2X",
+  "also_reported_as": [],
+  "printed": "Liquid = Cu10Zr7 + CuZr",
+  "reference": "1953, C. Lundin, D. McPherson, M. Hansen, Trans. AIME 197 (1953) 273\u2013278.",
+  "file": "invariants__CU-ZR__CuZr-11Gie.zpf-04.json"
+ },
+ {
+  "reaction": "CuZr = Cu10Zr7 + CuZr2 (eutectoid)",
+  "phases": [
+   "CU10ZR7",
+   "CUZR2",
+   "CUZR_B2"
+  ],
+  "T_K": 988.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-B7TQGLDMGB",
+  "also_reported_as": [],
+  "printed": "CuZr -> Cu10Zr7 + CuZr2",
+  "reference": "Carvalho 1980, doi:10.1007/bf00551811",
+  "file": "invariants__CU-ZR__CuZr-94Zen-LB.zpf-00.json"
+ },
+ {
+  "reaction": "L = FCC + Cu5Zr (eutectic)",
+  "phases": [
+   "CU5ZR_C15B",
+   "FCC_A1",
+   "LIQUID"
+  ],
+  "T_K": 1237.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-22LCRDUTXL",
+  "also_reported_as": [],
+  "printed": "L -> (Cu) + Cu5Zr",
+  "reference": "Zeng 1994, doi:10.1007/bf02647618",
+  "file": "invariants__CU-ZR__CuZr-94Zen-LB.zpf-07.json"
+ },
+ {
+  "reaction": "L = CuZr + CuZr2 (eutectic)",
+  "phases": [
+   "CUZR2",
+   "CUZR_B2",
+   "LIQUID"
+  ],
+  "T_K": 1201.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "fit",
+  "id": "ORC-2524WOZNCZ",
+  "also_reported_as": [],
+  "printed": "L -> CuZr + CuZr2",
+  "reference": "Zeng 1994, doi:10.1007/bf02647618",
+  "file": "invariants__CU-ZR__CuZr-94Zen-LB.zpf-10.json"
+ },
+ {
+  "reaction": "L = Cu10Zr7 (congruent)",
+  "phases": [
+   "CU10ZR7",
+   "LIQUID"
+  ],
+  "T_K": 1185.0,
+  "u_K": 3.0,
+  "u_used_K": 3.0,
+  "split": "holdout",
+  "id": "ORC-C3QG5VGDKV",
+  "also_reported_as": [],
+  "printed": "Liquid <-> Cu10Zr7",
+  "reference": "Liu 2017, doi:10.1007/s11669-017-0522-2",
+  "file": "invariants__CU-ZR__CuZr-17Liu.zpf-01.json"
+ },
+ {
+  "reaction": "L + Cu51Zr14 = Cu8Zr3",
+  "phases": [
+   "CU51ZR14",
+   "CU8ZR3",
+   "LIQUID"
+  ],
+  "T_K": 1240.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "holdout",
+  "id": "ORC-YVEONHASBD",
+  "also_reported_as": [],
+  "printed": "Liquid + Cu51Zr14 <-> Cu8Zr3",
+  "reference": "Liu 2017, doi:10.1007/s11669-017-0522-2",
+  "file": "invariants__CU-ZR__CuZr-17Liu.zpf-01.json"
+ },
+ {
+  "reaction": "L = FCC + Cu5Zr (eutectic)",
+  "phases": [
+   "CU5ZR_C15B",
+   "FCC_A1",
+   "LIQUID"
+  ],
+  "T_K": 1238.0,
+  "u_K": 10.0,
+  "u_used_K": 10.0,
+  "split": "holdout",
+  "id": "ORC-V4URXUO47Z",
+  "also_reported_as": [
+   "ORC-LCVB4E7G6I"
+  ],
+  "printed": "Liquid <-> (Cu) + Cu5Zr",
+  "reference": "Liu 2017, doi:10.1007/s11669-017-0522-2",
+  "file": "invariants__CU-ZR__CuZr-17Liu.zpf-02.json"
+ },
+ {
+  "reaction": "L = Cu51Zr14 (congruent)",
+  "phases": [
+   "CU51ZR14",
+   "LIQUID"
+  ],
+  "T_K": 1413.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "holdout",
+  "id": "ORC-QWNTPMN3OX",
+  "also_reported_as": [],
+  "printed": "Liquid <-> Cu51Zr14",
+  "reference": "Liu 2017, doi:10.1007/s11669-017-0522-2",
+  "file": "invariants__CU-ZR__CuZr-17Liu.zpf-06.json"
+ },
+ {
+  "reaction": "L + Cu51Zr14 = Cu5Zr (peritectic)",
+  "phases": [
+   "CU51ZR14",
+   "CU5ZR_C15B",
+   "LIQUID"
+  ],
+  "T_K": 1283.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "holdout",
+  "id": "ORC-56P3H7SUYI",
+  "also_reported_as": [
+   "ORC-QVHM26QECO"
+  ],
+  "printed": "Liquid + Cu51Zr14 <-> Cu5Zr",
+  "reference": "Liu 2017, doi:10.1007/s11669-017-0522-2",
+  "file": "invariants__CU-ZR__CuZr-17Liu.zpf-06.json"
+ },
+ {
+  "reaction": "L = FCC + Cu5Zr (eutectic)",
+  "phases": [
+   "CU5ZR_C15B",
+   "FCC_A1",
+   "LIQUID"
+  ],
+  "T_K": 1253.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "holdout",
+  "id": "ORC-SNSFOQTE7O",
+  "also_reported_as": [
+   "ORC-UEALUBZB7C"
+  ],
+  "printed": "Liquid <-> (Cu) + Cu5Zr",
+  "reference": "Liu 2017, doi:10.1007/s11669-017-0522-2",
+  "file": "invariants__CU-ZR__CuZr-17Liu.zpf-08.json"
+ },
+ {
+  "reaction": "L = Cu51Zr14 (congruent)",
+  "phases": [
+   "CU51ZR14",
+   "LIQUID"
+  ],
+  "T_K": 1385.0,
+  "u_K": null,
+  "u_used_K": 5.0,
+  "split": "holdout",
+  "id": "ORC-SXEAY7FQDC",
+  "also_reported_as": [],
+  "printed": "Liquid <-> Cu51Zr14",
+  "reference": "Liu 2017, doi:10.1007/s11669-017-0522-2",
+  "file": "invariants__CU-ZR__CuZr-17Liu.zpf-10.json"
+ }
+]

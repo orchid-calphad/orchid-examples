@@ -1,0 +1,112 @@
+{
+ "_note": "MLIPs benchmarked. family = environment (dependency conflicts: MACE conflicts with SevenNet/MatterSim/fairchem; GRACE needs TensorFlow). kwargs go to the MaterialsFramework calculator class. training = main training data (overlap with MP/Alexandria/OMat24 matters for MLIP-vs-DFT).",
+ "grace-2l-omat": {
+  "family": "grace",
+  "class": "GraceCalculator",
+  "kwargs": {
+   "model": "GRACE-2L-OMAT"
+  },
+  "training": "OMat24 (PBE/PBE+U, VASP 54)",
+  "mp_compatible": false,
+  "licence": "tensorpotential code and GRACE-2L-OMAT weights: Academic Software License (ASL, non-commercial; publishing results allowed)",
+  "predicts_mp2020_corrected": false
+ },
+ "mace-mpa-0": {
+  "family": "mace",
+  "class": "MACECalculator",
+  "kwargs": {
+   "model": "medium-mpa-0",
+   "default_dtype": "float64"
+  },
+  "training": "MPtrj + sAlex (MP-compatible PBE/PBE+U)",
+  "mp_compatible": true,
+  "licence": "MIT (mace-torch code; MACE-MPA-0 weights MIT per mace foundations_models)",
+  "predicts_mp2020_corrected": false
+ },
+ "mace-omat-0": {
+  "family": "mace",
+  "class": "MACECalculator",
+  "kwargs": {
+   "model": "medium-omat-0",
+   "default_dtype": "float64"
+  },
+  "training": "OMat24",
+  "mp_compatible": false,
+  "licence": "MIT code; MACE-OMAT-0 weights Academic Software License (ASL, non-commercial; publishing results allowed)",
+  "predicts_mp2020_corrected": false
+ },
+ "sevennet-omni": {
+  "family": "torch",
+  "class": "SevenNetCalculator",
+  "kwargs": {
+   "model": "7net-omni",
+   "modal": "mpa"
+  },
+  "training": "multi-fidelity: MPtrj, sAlex, OMat24, ... (modal mpa = MP-compatible head)",
+  "mp_compatible": true,
+  "licence": "MIT (sevenn code and bundled 7net-omni weights)",
+  "predicts_mp2020_corrected": false
+ },
+ "orb-v3-mpa": {
+  "family": "torch",
+  "class": "ORBCalculator",
+  "kwargs": {
+   "model": "orb-v3-conservative-inf-mpa",
+   "precision": "float32-highest"
+  },
+  "training": "MPtrj + Alexandria",
+  "mp_compatible": true,
+  "licence": "Apache-2.0 (code and weights)",
+  "predicts_mp2020_corrected": false
+ },
+ "orb-v3-omat": {
+  "family": "torch",
+  "class": "ORBCalculator",
+  "kwargs": {
+   "model": "orb-v3-conservative-inf-omat",
+   "precision": "float32-highest"
+  },
+  "training": "OMat24",
+  "mp_compatible": false,
+  "licence": "Apache-2.0 (code and weights)",
+  "predicts_mp2020_corrected": false
+ },
+ "mattersim-5m": {
+  "family": "torch",
+  "class": "MatterSimCalculator",
+  "kwargs": {
+   "model": "mattersim-v1.0.0-5m"
+  },
+  "training": "MatterSim proprietary sampling (PBE/PBE+U, MP-compatible settings), ~17M structures",
+  "mp_compatible": true,
+  "licence": "MIT (code and bundled weights)",
+  "predicts_mp2020_corrected": false
+ },
+ "chgnet-0.3.0": {
+  "family": "torch",
+  "class": "CHGNetCalculator",
+  "kwargs": {
+   "model": "0.3.0",
+   "check_cuda_mem": false
+  },
+  "training": "MPtrj",
+  "mp_compatible": true,
+  "licence": "Modified BSD-3-Clause (LBNL / UC Berkeley), code and bundled weights",
+  "predicts_mp2020_corrected": true,
+  "_note": "check_cuda_mem false: CHGNet's default queries nvmlDeviceGetMemoryInfo to pick a GPU, which is NotSupported on GB10 unified memory (DGX Spark); it only affects device selection, not energies."
+ },
+ "uma-m-1p1": {
+  "family": "torch",
+  "class": "UMACalculator",
+  "kwargs": {
+   "model": "uma-m-1p1",
+   "task_name": "omat"
+  },
+  "training": "OMat24 + OMol25 + OC20 + ODAC + OMC (task omat)",
+  "mp_compatible": false,
+  "licence": "FAIR Chemistry License v1 (weights gated on Hugging Face facebook/UMA; research use and publishing results permitted under its acceptable-use policy; needs HF token with accepted licence)",
+  "requires_hf_token": true,
+  "predicts_mp2020_corrected": false
+ },
+ "_note_correction": "predicts_mp2020_corrected: the model's training targets already include the Materials Project 2020 compatibility corrections (CHGNet: MPtrj corrected energies); then no correction is added. Verified empirically in the pilot (MLIP - MP on compounds with a non-zero MP correction)."
+}

@@ -1,0 +1,132 @@
+{
+ "sigma_DFT_kJ": 9.532,
+ "sigma_DFT_source": "CALIBRATION.json sources.mp.strata['on_hull_single|metal'].sigma_robust",
+ "sigma_MLIP_to_DFT_kJ": 1.7255645072026324,
+ "n_pairs": 8,
+ "mean_MLIP_minus_DFT_kJ": -1.5620457032639432,
+ "sigma_MLIP_kJ": 9.686929176396278,
+ "espei_weight": 0.05161594462962819,
+ "pairs": [
+  {
+   "phase": "CU5ZR_C15B",
+   "source": "Materials Project",
+   "entry": "mp-aaaabthb",
+   "dft_kJ": -11.236,
+   "space_group": "F-43m",
+   "e_above_hull_eV": 0.944,
+   "mlip_kJ": -13.77793053892832,
+   "diff_kJ": -2.5419305389283195,
+   "used": true
+  },
+  {
+   "phase": "CU5ZR_C15B",
+   "source": "OQMD",
+   "entry": "oqmd-17177",
+   "dft_kJ": -11.305,
+   "space_group": "F-43m",
+   "e_above_hull_eV": 0.0,
+   "mlip_kJ": -13.77793053892832,
+   "diff_kJ": -2.4729305389283205,
+   "used": true
+  },
+  {
+   "phase": "CU51ZR14",
+   "source": "Materials Project",
+   "entry": "mp-aaacrfmf",
+   "dft_kJ": -15.74,
+   "space_group": "P-6",
+   "e_above_hull_eV": 0.0,
+   "mlip_kJ": -16.749232655960178,
+   "diff_kJ": -1.0092326559601776,
+   "used": true
+  },
+  {
+   "phase": "CU8ZR3",
+   "source": "Materials Project",
+   "entry": "mp-aaacqazd",
+   "dft_kJ": -16.12,
+   "space_group": "Pnma",
+   "e_above_hull_eV": 0.0,
+   "mlip_kJ": -16.848621006704743,
+   "diff_kJ": -0.7286210067047421,
+   "used": true
+  },
+  {
+   "phase": "CU8ZR3",
+   "source": "OQMD",
+   "entry": "oqmd-2052365",
+   "dft_kJ": -15.764,
+   "space_group": "Pnma",
+   "e_above_hull_eV": 0.0,
+   "mlip_kJ": -16.848621006704743,
+   "diff_kJ": -1.0846210067047437,
+   "used": true
+  },
+  {
+   "phase": "CU10ZR7",
+   "source": "Materials Project",
+   "entry": "mp-aaacppnh",
+   "dft_kJ": -15.275,
+   "space_group": "Cmce",
+   "e_above_hull_eV": 0.0,
+   "mlip_kJ": -17.358557636398647,
+   "diff_kJ": -2.0835576363986466,
+   "used": true
+  },
+  {
+   "phase": "CU10ZR7",
+   "source": "OQMD",
+   "entry": "oqmd-20874",
+   "dft_kJ": -15.415,
+   "space_group": "Aba2",
+   "e_above_hull_eV": 0.0,
+   "mlip_kJ": -17.358557636398647,
+   "diff_kJ": -1.9435576363986478,
+   "used": true
+  },
+  {
+   "phase": "CUZR_B2",
+   "source": "Materials Project",
+   "entry": "mp-aaacjlri",
+   "dft_kJ": -12.296,
+   "space_group": "Cm",
+   "e_above_hull_eV": 2.171,
+   "mlip_kJ": -11.200552923974382,
+   "diff_kJ": 1.0954470760256179,
+   "used": false
+  },
+  {
+   "phase": "CUZR_B2",
+   "source": "OQMD",
+   "entry": "oqmd-756640",
+   "dft_kJ": -12.626,
+   "space_group": "Pbcm",
+   "e_above_hull_eV": 2.047,
+   "mlip_kJ": -11.200552923974382,
+   "diff_kJ": 1.425447076025618,
+   "used": false
+  },
+  {
+   "phase": "CUZR2",
+   "source": "Materials Project",
+   "entry": "mp-aaaaaahl",
+   "dft_kJ": -12.941,
+   "space_group": "I4/mmm",
+   "e_above_hull_eV": 0.0,
+   "mlip_kJ": -13.572914606087949,
+   "diff_kJ": -0.6319146060879479,
+   "used": true
+  },
+  {
+   "phase": "CUZR2",
+   "source": "OQMD",
+   "entry": "oqmd-1895393",
+   "dft_kJ": -13.274,
+   "space_group": "P4mm",
+   "e_above_hull_eV": 0.0,
+   "mlip_kJ": -13.572914606087949,
+   "diff_kJ": -0.2989146060879495,
+   "used": false
+  }
+ ]
+}

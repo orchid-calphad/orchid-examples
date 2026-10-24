@@ -1,0 +1,62 @@
+{
+ "cuzr_grace-cuzr_sgte_94Zen": {
+  "field": {
+   "n": 28,
+   "delta_weighted_recall": -0.2962962962962963,
+   "ci95": [
+    -0.4339622641509434,
+    -0.15992156862745133
+   ],
+   "p_boot_le0": 0.0
+  },
+  "boundary": {
+   "n": 287,
+   "delta_weighted_recall": -0.3271604938271605,
+   "ci95": [
+    -0.3565217391304347,
+    -0.2978703848560701
+   ],
+   "p_boot_le0": 0.0
+  }
+ },
+ "cuzr_phaseforgeplus_final-cuzr_sgte_94Zen": {
+  "field": {
+   "n": 28,
+   "delta_weighted_recall": 0.03703703703703698,
+   "ci95": [
+    0.0,
+    0.09259259259259256
+   ],
+   "p_boot_le0": 0.125
+  },
+  "boundary": {
+   "n": 287,
+   "delta_weighted_recall": -0.07037037037037042,
+   "ci95": [
+    -0.10281923972896057,
+    -0.03945503326796522
+   ],
+   "p_boot_le0": 0.0
+  }
+ },
+ "cuzr_phaseforgeplus_final-cuzr_grace": {
+  "field": {
+   "n": 28,
+   "delta_weighted_recall": 0.33333333333333326,
+   "ci95": [
+    0.18867924528301894,
+    0.47272727272727266
+   ],
+   "p_boot_le0": 0.0
+  },
+  "boundary": {
+   "n": 287,
+   "delta_weighted_recall": 0.2567901234567901,
+   "ci95": [
+    0.21912747724652581,
+    0.2938247333293004
+   ],
+   "p_boot_le0": 0.0
+  }
+ }
+}

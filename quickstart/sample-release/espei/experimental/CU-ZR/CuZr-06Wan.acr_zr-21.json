@@ -1,0 +1,145 @@
+{
+ "components": [
+  "CU",
+  "VA",
+  "ZR"
+ ],
+ "phases": [
+  "LIQUID"
+ ],
+ "conditions": {
+  "P": 101325,
+  "T": 1191.0,
+  "X_ZR": [
+   0.447
+  ]
+ },
+ "output": "ACR_ZR",
+ "values": [
+  [
+   [
+    0.112
+   ]
+  ]
+ ],
+ "reference": "Zaitsev 2003, doi:10.1039/b305089k",
+ "tags": [
+  "experimental",
+  "thermochemical_table",
+  "no_printed_uncertainty",
+  "orchid"
+ ],
+ "comment": "ORCHID literature values, Version 1, machine-extracted. Evidence class: experimental. ORCHID observation ids (orchid-literature `id`, one per value, in value order): ORC-SJAFM2LLZF.c6fe55",
+ "reference_state": {
+  "phases": [
+   "LIQUID"
+  ],
+  "conditions": {
+   "P": 101325,
+   "T": 1191.0,
+   "X_ZR": 1.0
+  }
+ },
+ "weight": 0.172412,
+ "bibtex": "zaitsev2003_306816",
+ "orchid": {
+  "status": "Version 1, machine-extracted",
+  "evidence_class": "experimental",
+  "observations": [
+   {
+    "id": "ORC-SJAFM2LLZF.c6fe55",
+    "reader_agreement": "multi_reader",
+    "paper": "doi:10.1016/j.calphad.2006.06.002",
+    "measured_in": "doi:10.1039/b305089k",
+    "also_read_as": [
+     "ORC-SJAFM2LLZF.c6fe55"
+    ]
+   }
+  ],
+  "papers": [
+   "doi:10.1039/b305089k",
+   "doi:10.1016/j.calphad.2006.06.002"
+  ],
+  "dois": [
+   "10.1016/j.calphad.2006.06.002",
+   "10.1039/b305089k"
+  ],
+  "source_dataset": "db-v2.1/general/espei/CuZr-06Wan/acr_zr-21.json",
+  "values_dropped": 1
+ },
+ "orchid_uncertainty": {
+  "unit": "1 (activity)",
+  "default_sigma": {
+   "value": 500.0,
+   "name": "ESPEI experimental default sigma_ACR = 500 J/mol"
+  },
+  "weight_rule": "dataset weight = ESPEI experimental default sigma_ACR = 500 J/mol / median sigma_effective of the dataset's values (uncertainty budget of the published values: max(printed, reading, method floor) with composition / conversion in quadrature, group scatter when larger; activities: sigma_mu = R T sigma_a / a); ESPEI 0.9.1 equilibrium/activity data take one weight per dataset",
+  "sigma_rule": "sigma_effective = max(sqrt(max(printed, reading, method)^2 + composition^2 + conversion^2), scatter) (literature release `uncertainty_budget`; components kept per value in `budget`)",
+  "values": [
+   {
+    "sigma": null,
+    "sigma_basis": "not printed",
+    "budget": {
+     "sigma_printed": null,
+     "sigma_reading": 0.0005,
+     "sigma_reading_mu_J_per_mol": 44.207701,
+     "sigma_method": 0.0328,
+     "sigma_method_mu_J_per_mol": 2900.025172,
+     "sigma_composition": null,
+     "sigma_scatter": null,
+     "sigma_conversion": null,
+     "sigma_effective": 0.0328,
+     "sigma_effective_mu_J_per_mol": 2900.025172,
+     "method_class": "unknown",
+     "method_basis": "cleaned_below_threshold",
+     "method_n_pairs": 9,
+     "method_entry": "value_types/ACTIVITY/classes/unknown"
+    },
+    "sigma_effective_used": 2900.025172,
+    "weight_per_value_equivalent": 0.172412,
+    "weight_used": 0.172412
+   }
+  ]
+ },
+ "orchid_reference_state": {
+  "element": "ZR",
+  "phase": "LIQUID",
+  "basis": "printed",
+  "quote": "Comparison of the measured [12] and present calculated activities of the components in the Cu-Zr melt (reference states: liquid pure components)",
+  "where": "table 3 caption, p. 7",
+  "record_reference_state_agrees": false,
+  "written_before_audit": [
+   "HCP_A3"
+  ]
+ },
+ "orchid_weight_floor": {
+  "superseded": "superseded on 2026-10-24 (PI decision): the dataset weight now follows sigma_effective of the published uncertainty budget (method-class floors calibrated from ORCHID, never below ESPEI's experimental default) by default, so no opt-in is needed; this block keeps the former optional suggestion (sigma floor = ESPEI's default) for comparison only",
+  "suggested_weight": 1.0,
+  "weight_before_2026_10_24": 1.0,
+  "weight_written": 0.172412,
+  "sigma_floor": 500.0,
+  "sigma_floor_unit": "J/mol",
+  "rule": "former optional minimum-sigma policy (E6, superseded): sigma_eff = max(sigma, sigma_floor) with sigma_floor = ESPEI's experimental default for the property (500 J/mol for enthalpies and for the chemical potential of activities, 0.2 J/mol/K for entropies and heat capacities); suggested_weight = min(weight, 1). The printed sigma is unchanged (orchid_uncertainty); use suggested_weight when printed sigmas are much smaller than the scatter between sources (e.g. formation enthalpies printed with +-80 J/mol-atom while other measurements differ by 1-2 kJ/mol-atom)"
+ },
+ "orchid_phase_assignment": {
+  "phases": [
+   "LIQUID"
+  ],
+  "basis": {
+   "printed_labels": 1
+  },
+  "rule": "tools/phase_rule.py; README.md, 'Phase assignment'"
+ },
+ "orchid_certification": {
+  "basis": "pycalphad_invariant_agreement",
+  "all_values_certified": false,
+  "n_certified": 0,
+  "values": [
+   {
+    "id": "ORC-SJAFM2LLZF.c6fe55",
+    "espei_certified": false,
+    "calphad_check": "not_available"
+   }
+  ]
+ }
+}

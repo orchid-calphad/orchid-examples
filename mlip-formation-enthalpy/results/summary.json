@@ -1,0 +1,2885 @@
+{
+ "n_records": 1138,
+ "n_compounds": 455,
+ "n_systems": 185,
+ "units": "kJ/mol-atom",
+ "residual": "computed - experiment",
+ "same_set": {
+  "chgnet-0.3.0": {
+   "all": {
+    "n": 1138,
+    "bias_mean": 0.379,
+    "bias_median": -0.958,
+    "sigma_robust": 9.731,
+    "q68_abs": 10.885,
+    "q95_abs": 28.423,
+    "rmse": 17.258,
+    "mae": 10.321,
+    "ci95_cluster_system": {
+     "bias_median": [
+      -2.671,
+      1.018
+     ],
+     "q68_abs": [
+      8.881,
+      12.646
+     ],
+     "q95_abs": [
+      24.204,
+      31.794
+     ],
+     "rmse": [
+      11.899,
+      24.372
+     ],
+     "sigma_robust": [
+      8.174,
+      11.7
+     ]
+    }
+   },
+   "strata": {
+    "chem:magnetic_3d": {
+     "n": 182,
+     "bias_mean": -3.751,
+     "bias_median": -3.158,
+     "sigma_robust": 6.436,
+     "q68_abs": 6.752,
+     "q95_abs": 17.578,
+     "rmse": 8.056,
+     "mae": 5.977,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -6.005,
+       -0.594
+      ],
+      "q68_abs": [
+       4.942,
+       9.682
+      ],
+      "q95_abs": [
+       9.619,
+       25.575
+      ],
+      "rmse": [
+       5.479,
+       10.711
+      ],
+      "sigma_robust": [
+       4.484,
+       8.236
+      ]
+     }
+    },
+    "chem:metal": {
+     "n": 430,
+     "bias_mean": 3.45,
+     "bias_median": 2.463,
+     "sigma_robust": 9.622,
+     "q68_abs": 9.734,
+     "q95_abs": 25.659,
+     "rmse": 12.314,
+     "mae": 8.753,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -0.272,
+       4.861
+      ],
+      "q68_abs": [
+       7.661,
+       11.257
+      ],
+      "q95_abs": [
+       19.196,
+       32.393
+      ],
+      "rmse": [
+       9.956,
+       14.672
+      ],
+      "sigma_robust": [
+       7.712,
+       11.461
+      ]
+     }
+    },
+    "chem:pblock_anion": {
+     "n": 526,
+     "bias_mean": -0.702,
+     "bias_median": -2.798,
+     "sigma_robust": 12.893,
+     "q68_abs": 14.656,
+     "q95_abs": 31.744,
+     "rmse": 22.315,
+     "mae": 13.106,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -5.301,
+       1.048
+      ],
+      "q68_abs": [
+       10.64,
+       19.031
+      ],
+      "q95_abs": [
+       25.627,
+       45.691
+      ],
+      "rmse": [
+       13.294,
+       33.462
+      ],
+      "sigma_robust": [
+       8.911,
+       18.184
+      ]
+     }
+    },
+    "match:on_hull_single": {
+     "n": 435,
+     "bias_mean": 1.054,
+     "bias_median": -0.054,
+     "sigma_robust": 9.959,
+     "q68_abs": 10.446,
+     "q95_abs": 25.275,
+     "rmse": 12.123,
+     "mae": 8.873,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -2.095,
+       2.514
+      ],
+      "q68_abs": [
+       8.486,
+       12.129
+      ],
+      "q95_abs": [
+       19.836,
+       28.422
+      ],
+      "rmse": [
+       10.21,
+       13.955
+      ],
+      "sigma_robust": [
+       7.892,
+       11.923
+      ]
+     }
+    },
+    "match:polymorph_ambiguous": {
+     "n": 501,
+     "bias_mean": -0.34,
+     "bias_median": -2.651,
+     "sigma_robust": 10.478,
+     "q68_abs": 12.627,
+     "q95_abs": 32.006,
+     "rmse": 22.32,
+     "mae": 12.421,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -4.952,
+       0.445
+      ],
+      "q68_abs": [
+       8.873,
+       16.792
+      ],
+      "q95_abs": [
+       25.401,
+       58.533
+      ],
+      "rmse": [
+       12.385,
+       33.849
+      ],
+      "sigma_robust": [
+       7.623,
+       15.211
+      ]
+     }
+    },
+    "match:above_hull": {
+     "n": 202,
+     "bias_mean": 0.711,
+     "bias_median": -0.295,
+     "sigma_robust": 8.569,
+     "q68_abs": 8.551,
+     "q95_abs": 22.691,
+     "rmse": 11.218,
+     "mae": 8.23,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -2.296,
+       2.934
+      ],
+      "q68_abs": [
+       6.69,
+       12.033
+      ],
+      "q95_abs": [
+       18.046,
+       30.082
+      ],
+      "rmse": [
+       9.06,
+       13.398
+      ],
+      "sigma_robust": [
+       6.908,
+       11.273
+      ]
+     }
+    }
+   }
+  },
+  "grace-2l-omat": {
+   "all": {
+    "n": 1138,
+    "bias_mean": 3.057,
+    "bias_median": 1.841,
+    "sigma_robust": 8.61,
+    "q68_abs": 10.687,
+    "q95_abs": 29.832,
+    "rmse": 17.911,
+    "mae": 10.151,
+    "ci95_cluster_system": {
+     "bias_median": [
+      1.001,
+      3.276
+     ],
+     "q68_abs": [
+      8.947,
+      12.964
+     ],
+     "q95_abs": [
+      24.341,
+      35.738
+     ],
+     "rmse": [
+      12.265,
+      25.297
+     ],
+     "sigma_robust": [
+      6.987,
+      10.912
+     ]
+    }
+   },
+   "strata": {
+    "chem:magnetic_3d": {
+     "n": 182,
+     "bias_mean": 0.658,
+     "bias_median": 1.216,
+     "sigma_robust": 5.112,
+     "q68_abs": 4.995,
+     "q95_abs": 13.122,
+     "rmse": 6.367,
+     "mae": 4.742,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -1.182,
+       3.192
+      ],
+      "q68_abs": [
+       3.822,
+       7.879
+      ],
+      "q95_abs": [
+       8.81,
+       19.545
+      ],
+      "rmse": [
+       4.656,
+       8.207
+      ],
+      "sigma_robust": [
+       3.798,
+       6.96
+      ]
+     }
+    },
+    "chem:metal": {
+     "n": 430,
+     "bias_mean": 6.784,
+     "bias_median": 4.363,
+     "sigma_robust": 7.704,
+     "q68_abs": 10.023,
+     "q95_abs": 27.843,
+     "rmse": 13.325,
+     "mae": 9.027,
+     "ci95_cluster_system": {
+      "bias_median": [
+       3.064,
+       6.712
+      ],
+      "q68_abs": [
+       7.651,
+       12.515
+      ],
+      "q95_abs": [
+       21.782,
+       34.631
+      ],
+      "rmse": [
+       10.49,
+       16.238
+      ],
+      "sigma_robust": [
+       5.775,
+       9.967
+      ]
+     }
+    },
+    "chem:pblock_anion": {
+     "n": 526,
+     "bias_mean": 0.839,
+     "bias_median": -0.056,
+     "sigma_robust": 12.077,
+     "q68_abs": 14.636,
+     "q95_abs": 32.623,
+     "rmse": 23.129,
+     "mae": 12.941,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -3.186,
+       1.841
+      ],
+      "q68_abs": [
+       10.172,
+       18.001
+      ],
+      "q95_abs": [
+       26.13,
+       45.427
+      ],
+      "rmse": [
+       13.408,
+       34.023
+      ],
+      "sigma_robust": [
+       7.778,
+       17.204
+      ]
+     }
+    },
+    "match:on_hull_single": {
+     "n": 435,
+     "bias_mean": 3.676,
+     "bias_median": 2.454,
+     "sigma_robust": 8.129,
+     "q68_abs": 9.241,
+     "q95_abs": 27.106,
+     "rmse": 12.199,
+     "mae": 8.369,
+     "ci95_cluster_system": {
+      "bias_median": [
+       1.316,
+       3.778
+      ],
+      "q68_abs": [
+       6.602,
+       11.714
+      ],
+      "q95_abs": [
+       22.402,
+       29.684
+      ],
+      "rmse": [
+       9.998,
+       14.244
+      ],
+      "sigma_robust": [
+       6.084,
+       10.052
+      ]
+     }
+    },
+    "match:polymorph_ambiguous": {
+     "n": 501,
+     "bias_mean": 1.396,
+     "bias_median": 0.279,
+     "sigma_robust": 9.582,
+     "q68_abs": 11.374,
+     "q95_abs": 35.58,
+     "rmse": 23.019,
+     "mae": 11.953,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -1.609,
+       2.197
+      ],
+      "q68_abs": [
+       8.555,
+       15.358
+      ],
+      "q95_abs": [
+       25.097,
+       80.404
+      ],
+      "rmse": [
+       12.595,
+       35.727
+      ],
+      "sigma_robust": [
+       6.701,
+       13.614
+      ]
+     }
+    },
+    "match:above_hull": {
+     "n": 202,
+     "bias_mean": 5.843,
+     "bias_median": 4.729,
+     "sigma_robust": 8.24,
+     "q68_abs": 11.858,
+     "q95_abs": 25.791,
+     "rmse": 13.144,
+     "mae": 9.517,
+     "ci95_cluster_system": {
+      "bias_median": [
+       2.578,
+       7.914
+      ],
+      "q68_abs": [
+       9.619,
+       14.551
+      ],
+      "q95_abs": [
+       20.99,
+       31.674
+      ],
+      "rmse": [
+       10.961,
+       15.372
+      ],
+      "sigma_robust": [
+       5.983,
+       10.439
+      ]
+     }
+    }
+   }
+  },
+  "mace-mpa-0": {
+   "all": {
+    "n": 1138,
+    "bias_mean": 3.564,
+    "bias_median": 2.433,
+    "sigma_robust": 8.892,
+    "q68_abs": 10.573,
+    "q95_abs": 31.22,
+    "rmse": 18.138,
+    "mae": 10.441,
+    "ci95_cluster_system": {
+     "bias_median": [
+      1.109,
+      3.77
+     ],
+     "q68_abs": [
+      8.906,
+      12.718
+     ],
+     "q95_abs": [
+      26.448,
+      37.187
+     ],
+     "rmse": [
+      12.464,
+      25.402
+     ],
+     "sigma_robust": [
+      7.366,
+      10.905
+     ]
+    }
+   },
+   "strata": {
+    "chem:magnetic_3d": {
+     "n": 182,
+     "bias_mean": 0.729,
+     "bias_median": 1.15,
+     "sigma_robust": 4.657,
+     "q68_abs": 5.009,
+     "q95_abs": 12.652,
+     "rmse": 6.203,
+     "mae": 4.555,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -0.583,
+       2.508
+      ],
+      "q68_abs": [
+       3.673,
+       7.836
+      ],
+      "q95_abs": [
+       8.867,
+       19.563
+      ],
+      "rmse": [
+       4.517,
+       7.876
+      ],
+      "sigma_robust": [
+       3.285,
+       6.585
+      ]
+     }
+    },
+    "chem:metal": {
+     "n": 430,
+     "bias_mean": 7.068,
+     "bias_median": 4.657,
+     "sigma_robust": 8.174,
+     "q68_abs": 10.244,
+     "q95_abs": 29.573,
+     "rmse": 13.735,
+     "mae": 9.272,
+     "ci95_cluster_system": {
+      "bias_median": [
+       2.837,
+       6.965
+      ],
+      "q68_abs": [
+       7.804,
+       12.995
+      ],
+      "q95_abs": [
+       22.585,
+       35.721
+      ],
+      "rmse": [
+       10.864,
+       16.887
+      ],
+      "sigma_robust": [
+       6.123,
+       10.032
+      ]
+     }
+    },
+    "chem:pblock_anion": {
+     "n": 526,
+     "bias_mean": 1.68,
+     "bias_median": 0.034,
+     "sigma_robust": 12.0,
+     "q68_abs": 14.205,
+     "q95_abs": 35.697,
+     "rmse": 23.328,
+     "mae": 13.433,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -2.72,
+       3.966
+      ],
+      "q68_abs": [
+       10.081,
+       19.049
+      ],
+      "q95_abs": [
+       26.875,
+       50.495
+      ],
+      "rmse": [
+       13.807,
+       34.965
+      ],
+      "sigma_robust": [
+       8.889,
+       16.57
+      ]
+     }
+    },
+    "match:on_hull_single": {
+     "n": 435,
+     "bias_mean": 4.288,
+     "bias_median": 2.5,
+     "sigma_robust": 7.542,
+     "q68_abs": 8.853,
+     "q95_abs": 29.423,
+     "rmse": 12.707,
+     "mae": 8.579,
+     "ci95_cluster_system": {
+      "bias_median": [
+       1.19,
+       4.491
+      ],
+      "q68_abs": [
+       6.831,
+       11.69
+      ],
+      "q95_abs": [
+       22.697,
+       34.94
+      ],
+      "rmse": [
+       10.315,
+       15.15
+      ],
+      "sigma_robust": [
+       6.058,
+       9.72
+      ]
+     }
+    },
+    "match:polymorph_ambiguous": {
+     "n": 501,
+     "bias_mean": 1.751,
+     "bias_median": 0.916,
+     "sigma_robust": 10.225,
+     "q68_abs": 11.659,
+     "q95_abs": 35.582,
+     "rmse": 23.04,
+     "mae": 12.231,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -2.377,
+       3.215
+      ],
+      "q68_abs": [
+       8.845,
+       16.554
+      ],
+      "q95_abs": [
+       26.259,
+       58.236
+      ],
+      "rmse": [
+       12.764,
+       34.682
+      ],
+      "sigma_robust": [
+       7.381,
+       13.548
+      ]
+     }
+    },
+    "match:above_hull": {
+     "n": 202,
+     "bias_mean": 6.5,
+     "bias_median": 4.716,
+     "sigma_robust": 8.517,
+     "q68_abs": 12.087,
+     "q95_abs": 26.244,
+     "rmse": 13.747,
+     "mae": 10.011,
+     "ci95_cluster_system": {
+      "bias_median": [
+       2.875,
+       8.078
+      ],
+      "q68_abs": [
+       8.449,
+       16.735
+      ],
+      "q95_abs": [
+       21.875,
+       31.691
+      ],
+      "rmse": [
+       11.304,
+       16.095
+      ],
+      "sigma_robust": [
+       6.12,
+       11.759
+      ]
+     }
+    }
+   }
+  },
+  "mace-omat-0": {
+   "all": {
+    "n": 1138,
+    "bias_mean": 3.176,
+    "bias_median": 2.688,
+    "sigma_robust": 9.238,
+    "q68_abs": 10.998,
+    "q95_abs": 31.541,
+    "rmse": 18.317,
+    "mae": 10.56,
+    "ci95_cluster_system": {
+     "bias_median": [
+      1.305,
+      3.814
+     ],
+     "q68_abs": [
+      9.326,
+      12.693
+     ],
+     "q95_abs": [
+      25.735,
+      39.106
+     ],
+     "rmse": [
+      12.469,
+      25.536
+     ],
+     "sigma_robust": [
+      7.447,
+      10.953
+     ]
+    }
+   },
+   "strata": {
+    "chem:magnetic_3d": {
+     "n": 182,
+     "bias_mean": 0.971,
+     "bias_median": 1.365,
+     "sigma_robust": 5.32,
+     "q68_abs": 5.235,
+     "q95_abs": 12.434,
+     "rmse": 6.325,
+     "mae": 4.832,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -0.641,
+       3.579
+      ],
+      "q68_abs": [
+       4.213,
+       7.859
+      ],
+      "q95_abs": [
+       9.318,
+       19.165
+      ],
+      "rmse": [
+       4.788,
+       7.788
+      ],
+      "sigma_robust": [
+       4.099,
+       6.929
+      ]
+     }
+    },
+    "chem:metal": {
+     "n": 430,
+     "bias_mean": 7.058,
+     "bias_median": 4.692,
+     "sigma_robust": 7.789,
+     "q68_abs": 10.476,
+     "q95_abs": 27.942,
+     "rmse": 13.649,
+     "mae": 9.266,
+     "ci95_cluster_system": {
+      "bias_median": [
+       3.506,
+       6.64
+      ],
+      "q68_abs": [
+       7.548,
+       12.948
+      ],
+      "q95_abs": [
+       22.864,
+       35.391
+      ],
+      "rmse": [
+       10.563,
+       16.643
+      ],
+      "sigma_robust": [
+       5.729,
+       9.912
+      ]
+     }
+    },
+    "chem:pblock_anion": {
+     "n": 526,
+     "bias_mean": 0.765,
+     "bias_median": 0.633,
+     "sigma_robust": 13.366,
+     "q68_abs": 14.567,
+     "q95_abs": 34.381,
+     "rmse": 23.659,
+     "mae": 13.6,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -3.487,
+       3.438
+      ],
+      "q68_abs": [
+       11.253,
+       18.798
+      ],
+      "q95_abs": [
+       27.498,
+       52.202
+      ],
+      "rmse": [
+       13.84,
+       35.387
+      ],
+      "sigma_robust": [
+       9.003,
+       17.916
+      ]
+     }
+    },
+    "match:on_hull_single": {
+     "n": 435,
+     "bias_mean": 3.968,
+     "bias_median": 3.246,
+     "sigma_robust": 8.019,
+     "q68_abs": 9.661,
+     "q95_abs": 27.651,
+     "rmse": 12.521,
+     "mae": 8.608,
+     "ci95_cluster_system": {
+      "bias_median": [
+       1.536,
+       4.272
+      ],
+      "q68_abs": [
+       6.662,
+       11.596
+      ],
+      "q95_abs": [
+       22.887,
+       29.041
+      ],
+      "rmse": [
+       10.25,
+       14.677
+      ],
+      "sigma_robust": [
+       6.139,
+       10.109
+      ]
+     }
+    },
+    "match:polymorph_ambiguous": {
+     "n": 501,
+     "bias_mean": 1.401,
+     "bias_median": 1.226,
+     "sigma_robust": 10.497,
+     "q68_abs": 12.039,
+     "q95_abs": 37.835,
+     "rmse": 23.524,
+     "mae": 12.583,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -1.871,
+       3.443
+      ],
+      "q68_abs": [
+       9.134,
+       15.41
+      ],
+      "q95_abs": [
+       25.43,
+       66.278
+      ],
+      "rmse": [
+       13.198,
+       35.866
+      ],
+      "sigma_robust": [
+       7.253,
+       14.71
+      ]
+     }
+    },
+    "match:above_hull": {
+     "n": 202,
+     "bias_mean": 5.873,
+     "bias_median": 5.383,
+     "sigma_robust": 8.67,
+     "q68_abs": 11.306,
+     "q95_abs": 25.997,
+     "rmse": 13.419,
+     "mae": 9.747,
+     "ci95_cluster_system": {
+      "bias_median": [
+       2.425,
+       8.483
+      ],
+      "q68_abs": [
+       9.351,
+       13.761
+      ],
+      "q95_abs": [
+       21.534,
+       35.701
+      ],
+      "rmse": [
+       11.069,
+       15.835
+      ],
+      "sigma_robust": [
+       6.787,
+       11.013
+      ]
+     }
+    }
+   }
+  },
+  "mattersim-5m": {
+   "all": {
+    "n": 1138,
+    "bias_mean": 2.801,
+    "bias_median": 2.003,
+    "sigma_robust": 8.852,
+    "q68_abs": 11.018,
+    "q95_abs": 32.041,
+    "rmse": 18.426,
+    "mae": 10.607,
+    "ci95_cluster_system": {
+     "bias_median": [
+      0.585,
+      3.346
+     ],
+     "q68_abs": [
+      9.106,
+      13.048
+     ],
+     "q95_abs": [
+      26.029,
+      41.702
+     ],
+     "rmse": [
+      12.747,
+      25.494
+     ],
+     "sigma_robust": [
+      7.216,
+      10.958
+     ]
+    }
+   },
+   "strata": {
+    "chem:magnetic_3d": {
+     "n": 182,
+     "bias_mean": 1.029,
+     "bias_median": 1.232,
+     "sigma_robust": 5.509,
+     "q68_abs": 5.925,
+     "q95_abs": 15.658,
+     "rmse": 8.99,
+     "mae": 5.578,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -1.834,
+       3.161
+      ],
+      "q68_abs": [
+       4.091,
+       7.645
+      ],
+      "q95_abs": [
+       8.468,
+       21.186
+      ],
+      "rmse": [
+       5.094,
+       13.126
+      ],
+      "sigma_robust": [
+       4.279,
+       7.892
+      ]
+     }
+    },
+    "chem:metal": {
+     "n": 430,
+     "bias_mean": 6.791,
+     "bias_median": 4.7,
+     "sigma_robust": 8.528,
+     "q68_abs": 9.649,
+     "q95_abs": 28.433,
+     "rmse": 13.546,
+     "mae": 9.082,
+     "ci95_cluster_system": {
+      "bias_median": [
+       3.27,
+       6.94
+      ],
+      "q68_abs": [
+       7.972,
+       12.194
+      ],
+      "q95_abs": [
+       22.432,
+       36.09
+      ],
+      "rmse": [
+       10.764,
+       16.552
+      ],
+      "sigma_robust": [
+       6.649,
+       10.032
+      ]
+     }
+    },
+    "chem:pblock_anion": {
+     "n": 526,
+     "bias_mean": 0.153,
+     "bias_median": 0.051,
+     "sigma_robust": 13.578,
+     "q68_abs": 13.872,
+     "q95_abs": 36.976,
+     "rmse": 23.592,
+     "mae": 13.593,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -3.48,
+       2.691
+      ],
+      "q68_abs": [
+       11.427,
+       18.427
+      ],
+      "q95_abs": [
+       27.914,
+       48.219
+      ],
+      "rmse": [
+       13.867,
+       34.657
+      ],
+      "sigma_robust": [
+       8.76,
+       17.504
+      ]
+     }
+    },
+    "match:on_hull_single": {
+     "n": 435,
+     "bias_mean": 3.958,
+     "bias_median": 3.084,
+     "sigma_robust": 7.957,
+     "q68_abs": 9.264,
+     "q95_abs": 27.513,
+     "rmse": 12.667,
+     "mae": 8.691,
+     "ci95_cluster_system": {
+      "bias_median": [
+       0.852,
+       5.02
+      ],
+      "q68_abs": [
+       7.379,
+       11.314
+      ],
+      "q95_abs": [
+       22.433,
+       30.613
+      ],
+      "rmse": [
+       10.467,
+       14.806
+      ],
+      "sigma_robust": [
+       6.574,
+       9.687
+      ]
+     }
+    },
+    "match:polymorph_ambiguous": {
+     "n": 501,
+     "bias_mean": 0.608,
+     "bias_median": 0.233,
+     "sigma_robust": 10.07,
+     "q68_abs": 12.077,
+     "q95_abs": 38.568,
+     "rmse": 23.622,
+     "mae": 12.533,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -2.248,
+       1.847
+      ],
+      "q68_abs": [
+       9.022,
+       14.822
+      ],
+      "q95_abs": [
+       26.423,
+       60.583
+      ],
+      "rmse": [
+       13.173,
+       35.338
+      ],
+      "sigma_robust": [
+       6.879,
+       14.282
+      ]
+     }
+    },
+    "match:above_hull": {
+     "n": 202,
+     "bias_mean": 5.749,
+     "bias_median": 5.44,
+     "sigma_robust": 9.111,
+     "q68_abs": 12.614,
+     "q95_abs": 27.22,
+     "rmse": 13.54,
+     "mae": 9.955,
+     "ci95_cluster_system": {
+      "bias_median": [
+       3.467,
+       8.175
+      ],
+      "q68_abs": [
+       8.56,
+       15.265
+      ],
+      "q95_abs": [
+       20.357,
+       34.031
+      ],
+      "rmse": [
+       11.189,
+       16.115
+      ],
+      "sigma_robust": [
+       6.555,
+       11.067
+      ]
+     }
+    }
+   }
+  },
+  "orb-v3-mpa": {
+   "all": {
+    "n": 1138,
+    "bias_mean": 3.044,
+    "bias_median": 1.67,
+    "sigma_robust": 8.781,
+    "q68_abs": 10.895,
+    "q95_abs": 30.498,
+    "rmse": 17.928,
+    "mae": 10.195,
+    "ci95_cluster_system": {
+     "bias_median": [
+      0.616,
+      3.301
+     ],
+     "q68_abs": [
+      8.803,
+      12.725
+     ],
+     "q95_abs": [
+      24.648,
+      35.597
+     ],
+     "rmse": [
+      12.23,
+      25.257
+     ],
+     "sigma_robust": [
+      6.876,
+      10.98
+     ]
+    }
+   },
+   "strata": {
+    "chem:magnetic_3d": {
+     "n": 182,
+     "bias_mean": 0.242,
+     "bias_median": 0.841,
+     "sigma_robust": 4.46,
+     "q68_abs": 4.693,
+     "q95_abs": 13.455,
+     "rmse": 6.391,
+     "mae": 4.553,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -0.668,
+       2.236
+      ],
+      "q68_abs": [
+       3.76,
+       7.133
+      ],
+      "q95_abs": [
+       8.344,
+       20.955
+      ],
+      "rmse": [
+       4.587,
+       8.189
+      ],
+      "sigma_robust": [
+       3.1,
+       6.304
+      ]
+     }
+    },
+    "chem:metal": {
+     "n": 430,
+     "bias_mean": 7.027,
+     "bias_median": 4.646,
+     "sigma_robust": 8.091,
+     "q68_abs": 10.065,
+     "q95_abs": 29.152,
+     "rmse": 13.737,
+     "mae": 9.299,
+     "ci95_cluster_system": {
+      "bias_median": [
+       3.3,
+       6.943
+      ],
+      "q68_abs": [
+       7.917,
+       12.428
+      ],
+      "q95_abs": [
+       21.344,
+       37.479
+      ],
+      "rmse": [
+       10.53,
+       17.145
+      ],
+      "sigma_robust": [
+       6.61,
+       10.054
+      ]
+     }
+    },
+    "chem:pblock_anion": {
+     "n": 526,
+     "bias_mean": 0.758,
+     "bias_median": -0.319,
+     "sigma_robust": 12.004,
+     "q68_abs": 13.472,
+     "q95_abs": 34.335,
+     "rmse": 22.957,
+     "mae": 12.879,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -3.733,
+       2.499
+      ],
+      "q68_abs": [
+       10.791,
+       18.041
+      ],
+      "q95_abs": [
+       26.047,
+       44.667
+      ],
+      "rmse": [
+       13.151,
+       34.025
+      ],
+      "sigma_robust": [
+       7.851,
+       17.531
+      ]
+     }
+    },
+    "match:on_hull_single": {
+     "n": 435,
+     "bias_mean": 3.981,
+     "bias_median": 2.232,
+     "sigma_robust": 7.561,
+     "q68_abs": 9.489,
+     "q95_abs": 28.345,
+     "rmse": 12.596,
+     "mae": 8.528,
+     "ci95_cluster_system": {
+      "bias_median": [
+       0.857,
+       4.078
+      ],
+      "q68_abs": [
+       7.059,
+       11.554
+      ],
+      "q95_abs": [
+       21.948,
+       33.924
+      ],
+      "rmse": [
+       10.081,
+       15.225
+      ],
+      "sigma_robust": [
+       6.041,
+       9.93
+      ]
+     }
+    },
+    "match:polymorph_ambiguous": {
+     "n": 501,
+     "bias_mean": 0.994,
+     "bias_median": -0.041,
+     "sigma_robust": 9.179,
+     "q68_abs": 11.505,
+     "q95_abs": 34.903,
+     "rmse": 22.976,
+     "mae": 11.964,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -2.743,
+       1.671
+      ],
+      "q68_abs": [
+       8.259,
+       16.035
+      ],
+      "q95_abs": [
+       25.08,
+       60.05
+      ],
+      "rmse": [
+       12.578,
+       35.05
+      ],
+      "sigma_robust": [
+       6.325,
+       13.576
+      ]
+     }
+    },
+    "match:above_hull": {
+     "n": 202,
+     "bias_mean": 6.111,
+     "bias_median": 4.663,
+     "sigma_robust": 8.134,
+     "q68_abs": 11.853,
+     "q95_abs": 24.648,
+     "rmse": 12.645,
+     "mae": 9.396,
+     "ci95_cluster_system": {
+      "bias_median": [
+       3.106,
+       8.47
+      ],
+      "q68_abs": [
+       9.414,
+       15.044
+      ],
+      "q95_abs": [
+       20.014,
+       31.325
+      ],
+      "rmse": [
+       10.593,
+       14.754
+      ],
+      "sigma_robust": [
+       6.237,
+       10.605
+      ]
+     }
+    }
+   }
+  },
+  "orb-v3-omat": {
+   "all": {
+    "n": 1138,
+    "bias_mean": 3.191,
+    "bias_median": 1.93,
+    "sigma_robust": 8.579,
+    "q68_abs": 10.717,
+    "q95_abs": 30.383,
+    "rmse": 17.913,
+    "mae": 10.172,
+    "ci95_cluster_system": {
+     "bias_median": [
+      0.642,
+      3.348
+     ],
+     "q68_abs": [
+      8.687,
+      13.115
+     ],
+     "q95_abs": [
+      25.874,
+      34.985
+     ],
+     "rmse": [
+      12.163,
+      25.202
+     ],
+     "sigma_robust": [
+      6.768,
+      10.496
+     ]
+    }
+   },
+   "strata": {
+    "chem:magnetic_3d": {
+     "n": 182,
+     "bias_mean": 0.761,
+     "bias_median": 1.224,
+     "sigma_robust": 4.784,
+     "q68_abs": 5.264,
+     "q95_abs": 13.165,
+     "rmse": 6.365,
+     "mae": 4.676,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -0.272,
+       3.273
+      ],
+      "q68_abs": [
+       3.858,
+       7.165
+      ],
+      "q95_abs": [
+       8.252,
+       19.483
+      ],
+      "rmse": [
+       4.591,
+       8.14
+      ],
+      "sigma_robust": [
+       3.426,
+       6.632
+      ]
+     }
+    },
+    "chem:metal": {
+     "n": 430,
+     "bias_mean": 7.022,
+     "bias_median": 4.797,
+     "sigma_robust": 8.175,
+     "q68_abs": 10.303,
+     "q95_abs": 27.943,
+     "rmse": 13.787,
+     "mae": 9.403,
+     "ci95_cluster_system": {
+      "bias_median": [
+       3.187,
+       7.121
+      ],
+      "q68_abs": [
+       8.024,
+       13.017
+      ],
+      "q95_abs": [
+       21.823,
+       35.523
+      ],
+      "rmse": [
+       10.817,
+       16.757
+      ],
+      "sigma_robust": [
+       6.545,
+       10.278
+      ]
+     }
+    },
+    "chem:pblock_anion": {
+     "n": 526,
+     "bias_mean": 0.9,
+     "bias_median": -0.362,
+     "sigma_robust": 11.771,
+     "q68_abs": 13.747,
+     "q95_abs": 32.954,
+     "rmse": 22.908,
+     "mae": 12.704,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -2.935,
+       2.057
+      ],
+      "q68_abs": [
+       10.161,
+       18.052
+      ],
+      "q95_abs": [
+       26.589,
+       51.947
+      ],
+      "rmse": [
+       13.149,
+       34.744
+      ],
+      "sigma_robust": [
+       7.484,
+       17.035
+      ]
+     }
+    },
+    "match:on_hull_single": {
+     "n": 435,
+     "bias_mean": 3.983,
+     "bias_median": 2.496,
+     "sigma_robust": 8.052,
+     "q68_abs": 9.682,
+     "q95_abs": 27.402,
+     "rmse": 12.508,
+     "mae": 8.556,
+     "ci95_cluster_system": {
+      "bias_median": [
+       1.042,
+       4.176
+      ],
+      "q68_abs": [
+       7.25,
+       12.137
+      ],
+      "q95_abs": [
+       21.912,
+       31.759
+      ],
+      "rmse": [
+       10.231,
+       14.747
+      ],
+      "sigma_robust": [
+       6.191,
+       10.257
+      ]
+     }
+    },
+    "match:polymorph_ambiguous": {
+     "n": 501,
+     "bias_mean": 1.114,
+     "bias_median": 0.022,
+     "sigma_robust": 9.192,
+     "q68_abs": 10.837,
+     "q95_abs": 34.709,
+     "rmse": 22.826,
+     "mae": 11.731,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -2.234,
+       1.803
+      ],
+      "q68_abs": [
+       8.27,
+       14.538
+      ],
+      "q95_abs": [
+       25.257,
+       58.195
+      ],
+      "rmse": [
+       12.449,
+       34.912
+      ],
+      "sigma_robust": [
+       6.203,
+       13.077
+      ]
+     }
+    },
+    "match:above_hull": {
+     "n": 202,
+     "bias_mean": 6.637,
+     "bias_median": 5.626,
+     "sigma_robust": 8.516,
+     "q68_abs": 12.068,
+     "q95_abs": 24.213,
+     "rmse": 13.359,
+     "mae": 9.788,
+     "ci95_cluster_system": {
+      "bias_median": [
+       3.381,
+       7.808
+      ],
+      "q68_abs": [
+       8.801,
+       14.994
+      ],
+      "q95_abs": [
+       19.533,
+       33.624
+      ],
+      "rmse": [
+       10.896,
+       15.802
+      ],
+      "sigma_robust": [
+       5.83,
+       10.642
+      ]
+     }
+    }
+   }
+  },
+  "sevennet-omni": {
+   "all": {
+    "n": 1138,
+    "bias_mean": 3.197,
+    "bias_median": 2.13,
+    "sigma_robust": 8.873,
+    "q68_abs": 11.034,
+    "q95_abs": 30.827,
+    "rmse": 18.184,
+    "mae": 10.435,
+    "ci95_cluster_system": {
+     "bias_median": [
+      0.723,
+      3.37
+     ],
+     "q68_abs": [
+      8.989,
+      13.383
+     ],
+     "q95_abs": [
+      26.048,
+      36.99
+     ],
+     "rmse": [
+      12.504,
+      25.211
+     ],
+     "sigma_robust": [
+      7.047,
+      11.108
+     ]
+    }
+   },
+   "strata": {
+    "chem:magnetic_3d": {
+     "n": 182,
+     "bias_mean": 0.275,
+     "bias_median": 0.81,
+     "sigma_robust": 4.692,
+     "q68_abs": 4.794,
+     "q95_abs": 13.76,
+     "rmse": 6.508,
+     "mae": 4.694,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -1.029,
+       2.415
+      ],
+      "q68_abs": [
+       3.842,
+       7.69
+      ],
+      "q95_abs": [
+       8.632,
+       21.26
+      ],
+      "rmse": [
+       4.625,
+       8.439
+      ],
+      "sigma_robust": [
+       3.309,
+       6.75
+      ]
+     }
+    },
+    "chem:metal": {
+     "n": 430,
+     "bias_mean": 7.274,
+     "bias_median": 4.966,
+     "sigma_robust": 7.957,
+     "q68_abs": 10.493,
+     "q95_abs": 29.935,
+     "rmse": 13.787,
+     "mae": 9.369,
+     "ci95_cluster_system": {
+      "bias_median": [
+       3.356,
+       6.941
+      ],
+      "q68_abs": [
+       7.909,
+       12.897
+      ],
+      "q95_abs": [
+       22.643,
+       35.603
+      ],
+      "rmse": [
+       10.869,
+       16.857
+      ],
+      "sigma_robust": [
+       6.15,
+       9.704
+      ]
+     }
+    },
+    "chem:pblock_anion": {
+     "n": 526,
+     "bias_mean": 0.875,
+     "bias_median": -0.327,
+     "sigma_robust": 12.269,
+     "q68_abs": 14.437,
+     "q95_abs": 36.23,
+     "rmse": 23.352,
+     "mae": 13.293,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -3.844,
+       2.505
+      ],
+      "q68_abs": [
+       10.358,
+       18.759
+      ],
+      "q95_abs": [
+       26.27,
+       49.582
+      ],
+      "rmse": [
+       13.45,
+       34.432
+      ],
+      "sigma_robust": [
+       8.035,
+       17.905
+      ]
+     }
+    },
+    "match:on_hull_single": {
+     "n": 435,
+     "bias_mean": 4.174,
+     "bias_median": 2.893,
+     "sigma_robust": 8.181,
+     "q68_abs": 9.142,
+     "q95_abs": 29.389,
+     "rmse": 12.83,
+     "mae": 8.785,
+     "ci95_cluster_system": {
+      "bias_median": [
+       1.482,
+       4.472
+      ],
+      "q68_abs": [
+       7.481,
+       11.717
+      ],
+      "q95_abs": [
+       22.763,
+       34.504
+      ],
+      "rmse": [
+       10.345,
+       15.169
+      ],
+      "sigma_robust": [
+       6.193,
+       10.167
+      ]
+     }
+    },
+    "match:polymorph_ambiguous": {
+     "n": 501,
+     "bias_mean": 1.039,
+     "bias_median": 0.094,
+     "sigma_robust": 9.377,
+     "q68_abs": 11.798,
+     "q95_abs": 36.326,
+     "rmse": 23.115,
+     "mae": 12.101,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -2.411,
+       2.315
+      ],
+      "q68_abs": [
+       8.175,
+       16.027
+      ],
+      "q95_abs": [
+       24.303,
+       56.847
+      ],
+      "rmse": [
+       12.601,
+       34.686
+      ],
+      "sigma_robust": [
+       6.401,
+       14.317
+      ]
+     }
+    },
+    "match:above_hull": {
+     "n": 202,
+     "bias_mean": 6.446,
+     "bias_median": 4.796,
+     "sigma_robust": 8.629,
+     "q68_abs": 12.287,
+     "q95_abs": 26.201,
+     "rmse": 13.532,
+     "mae": 9.858,
+     "ci95_cluster_system": {
+      "bias_median": [
+       3.351,
+       8.131
+      ],
+      "q68_abs": [
+       8.898,
+       15.758
+      ],
+      "q95_abs": [
+       20.465,
+       30.473
+      ],
+      "rmse": [
+       11.242,
+       15.951
+      ],
+      "sigma_robust": [
+       6.191,
+       11.372
+      ]
+     }
+    }
+   }
+  },
+  "mp": {
+   "all": {
+    "n": 1138,
+    "bias_mean": 3.723,
+    "bias_median": 2.447,
+    "sigma_robust": 8.8,
+    "q68_abs": 11.018,
+    "q95_abs": 31.375,
+    "rmse": 18.183,
+    "mae": 10.442,
+    "ci95_cluster_system": {
+     "bias_median": [
+      0.98,
+      4.039
+     ],
+     "q68_abs": [
+      9.028,
+      13.171
+     ],
+     "q95_abs": [
+      26.141,
+      36.189
+     ],
+     "rmse": [
+      12.592,
+      25.845
+     ],
+     "sigma_robust": [
+      7.13,
+      11.037
+     ]
+    }
+   },
+   "strata": {
+    "chem:magnetic_3d": {
+     "n": 182,
+     "bias_mean": 0.875,
+     "bias_median": 1.701,
+     "sigma_robust": 4.669,
+     "q68_abs": 5.348,
+     "q95_abs": 13.76,
+     "rmse": 6.517,
+     "mae": 4.825,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -0.206,
+       3.106
+      ],
+      "q68_abs": [
+       4.093,
+       7.776
+      ],
+      "q95_abs": [
+       8.842,
+       20.304
+      ],
+      "rmse": [
+       4.736,
+       8.292
+      ],
+      "sigma_robust": [
+       3.353,
+       6.796
+      ]
+     }
+    },
+    "chem:metal": {
+     "n": 430,
+     "bias_mean": 7.747,
+     "bias_median": 5.765,
+     "sigma_robust": 8.687,
+     "q68_abs": 10.543,
+     "q95_abs": 30.774,
+     "rmse": 14.089,
+     "mae": 9.681,
+     "ci95_cluster_system": {
+      "bias_median": [
+       4.091,
+       7.518
+      ],
+      "q68_abs": [
+       8.114,
+       13.036
+      ],
+      "q95_abs": [
+       23.069,
+       35.427
+      ],
+      "rmse": [
+       11.148,
+       17.27
+      ],
+      "sigma_robust": [
+       6.648,
+       10.11
+      ]
+     }
+    },
+    "chem:pblock_anion": {
+     "n": 526,
+     "bias_mean": 1.418,
+     "bias_median": 0.208,
+     "sigma_robust": 11.881,
+     "q68_abs": 13.98,
+     "q95_abs": 35.385,
+     "rmse": 23.203,
+     "mae": 13.007,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -3.101,
+       2.263
+      ],
+      "q68_abs": [
+       10.099,
+       18.152
+      ],
+      "q95_abs": [
+       26.971,
+       50.898
+      ],
+      "rmse": [
+       13.371,
+       34.893
+      ],
+      "sigma_robust": [
+       7.657,
+       16.709
+      ]
+     }
+    },
+    "match:on_hull_single": {
+     "n": 435,
+     "bias_mean": 4.714,
+     "bias_median": 3.106,
+     "sigma_robust": 7.923,
+     "q68_abs": 9.638,
+     "q95_abs": 29.146,
+     "rmse": 12.909,
+     "mae": 8.877,
+     "ci95_cluster_system": {
+      "bias_median": [
+       1.296,
+       5.702
+      ],
+      "q68_abs": [
+       7.299,
+       12.489
+      ],
+      "q95_abs": [
+       22.563,
+       34.165
+      ],
+      "rmse": [
+       10.447,
+       15.551
+      ],
+      "sigma_robust": [
+       6.299,
+       10.427
+      ]
+     }
+    },
+    "match:polymorph_ambiguous": {
+     "n": 501,
+     "bias_mean": 1.371,
+     "bias_median": 0.494,
+     "sigma_robust": 8.784,
+     "q68_abs": 11.273,
+     "q95_abs": 35.114,
+     "rmse": 22.921,
+     "mae": 11.816,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -1.706,
+       2.188
+      ],
+      "q68_abs": [
+       8.179,
+       14.891
+      ],
+      "q95_abs": [
+       24.374,
+       71.407
+      ],
+      "rmse": [
+       12.337,
+       35.441
+      ],
+      "sigma_robust": [
+       6.327,
+       13.159
+      ]
+     }
+    },
+    "match:above_hull": {
+     "n": 202,
+     "bias_mean": 7.421,
+     "bias_median": 5.704,
+     "sigma_robust": 8.798,
+     "q68_abs": 13.095,
+     "q95_abs": 26.637,
+     "rmse": 14.17,
+     "mae": 10.403,
+     "ci95_cluster_system": {
+      "bias_median": [
+       3.917,
+       9.026
+      ],
+      "q68_abs": [
+       9.227,
+       16.49
+      ],
+      "q95_abs": [
+       23.095,
+       33.336
+      ],
+      "rmse": [
+       11.837,
+       16.585
+      ],
+      "sigma_robust": [
+       6.193,
+       11.151
+      ]
+     }
+    }
+   }
+  },
+  "oqmd": {
+   "all": {
+    "n": 1138,
+    "bias_mean": 4.648,
+    "bias_median": 2.261,
+    "sigma_robust": 7.48,
+    "q68_abs": 8.916,
+    "q95_abs": 26.723,
+    "rmse": 16.693,
+    "mae": 9.009,
+    "ci95_cluster_system": {
+     "bias_median": [
+      1.013,
+      3.735
+     ],
+     "q68_abs": [
+      7.386,
+      10.903
+     ],
+     "q95_abs": [
+      22.697,
+      35.146
+     ],
+     "rmse": [
+      10.904,
+      24.081
+     ],
+     "sigma_robust": [
+      6.411,
+      9.061
+     ]
+    }
+   },
+   "strata": {
+    "chem:magnetic_3d": {
+     "n": 182,
+     "bias_mean": 0.276,
+     "bias_median": 1.238,
+     "sigma_robust": 5.062,
+     "q68_abs": 5.409,
+     "q95_abs": 16.136,
+     "rmse": 7.123,
+     "mae": 5.119,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -1.96,
+       2.802
+      ],
+      "q68_abs": [
+       4.128,
+       7.603
+      ],
+      "q95_abs": [
+       8.41,
+       23.04
+      ],
+      "rmse": [
+       4.94,
+       9.324
+      ],
+      "sigma_robust": [
+       3.479,
+       7.2
+      ]
+     }
+    },
+    "chem:metal": {
+     "n": 430,
+     "bias_mean": 5.666,
+     "bias_median": 3.675,
+     "sigma_robust": 7.78,
+     "q68_abs": 9.528,
+     "q95_abs": 26.383,
+     "rmse": 12.469,
+     "mae": 8.312,
+     "ci95_cluster_system": {
+      "bias_median": [
+       1.81,
+       5.21
+      ],
+      "q68_abs": [
+       6.973,
+       12.398
+      ],
+      "q95_abs": [
+       19.687,
+       34.976
+      ],
+      "rmse": [
+       9.825,
+       15.237
+      ],
+      "sigma_robust": [
+       5.653,
+       9.856
+      ]
+     }
+    },
+    "chem:pblock_anion": {
+     "n": 526,
+     "bias_mean": 5.329,
+     "bias_median": 1.69,
+     "sigma_robust": 9.005,
+     "q68_abs": 10.479,
+     "q95_abs": 30.851,
+     "rmse": 21.406,
+     "mae": 10.925,
+     "ci95_cluster_system": {
+      "bias_median": [
+       -0.188,
+       5.582
+      ],
+      "q68_abs": [
+       7.818,
+       13.46
+      ],
+      "q95_abs": [
+       22.693,
+       58.486
+      ],
+      "rmse": [
+       11.449,
+       33.524
+      ],
+      "sigma_robust": [
+       6.9,
+       11.817
+      ]
+     }
+    },
+    "match:on_hull_single": {
+     "n": 84,
+     "bias_mean": 4.125,
+     "bias_median": 2.607,
+     "sigma_robust": 7.365,
+     "q68_abs": 10.72,
+     "q95_abs": 23.917,
+     "rmse": 11.387,
+     "mae": 8.067,
+     "ci95_cluster_system": {
+      "bias_median": [
+       0.824,
+       5.48
+      ],
+      "q68_abs": [
+       5.407,
+       14.148
+      ],
+      "q95_abs": [
+       17.776,
+       29.229
+      ],
+      "rmse": [
+       8.898,
+       14.333
+      ],
+      "sigma_robust": [
+       4.274,
+       11.78
+      ]
+     }
+    },
+    "match:polymorph_ambiguous": {
+     "n": 851,
+     "bias_mean": 4.398,
+     "bias_median": 1.392,
+     "sigma_robust": 7.354,
+     "q68_abs": 8.419,
+     "q95_abs": 28.528,
+     "rmse": 17.985,
+     "mae": 9.121,
+     "ci95_cluster_system": {
+      "bias_median": [
+       0.399,
+       3.731
+      ],
+      "q68_abs": [
+       6.711,
+       10.394
+      ],
+      "q95_abs": [
+       21.381,
+       36.287
+      ],
+      "rmse": [
+       10.649,
+       26.352
+      ],
+      "sigma_robust": [
+       6.298,
+       9.135
+      ]
+     }
+    },
+    "match:above_hull": {
+     "n": 203,
+     "bias_mean": 5.914,
+     "bias_median": 4.564,
+     "sigma_robust": 7.665,
+     "q68_abs": 11.375,
+     "q95_abs": 25.19,
+     "rmse": 12.347,
+     "mae": 8.929,
+     "ci95_cluster_system": {
+      "bias_median": [
+       2.455,
+       6.287
+      ],
+      "q68_abs": [
+       7.128,
+       13.75
+      ],
+      "q95_abs": [
+       21.585,
+       27.651
+      ],
+      "rmse": [
+       9.954,
+       14.584
+      ],
+      "sigma_robust": [
+       5.145,
+       10.344
+      ]
+     }
+    }
+   }
+  }
+ },
+ "mlip_vs_dft": {
+  "chgnet-0.3.0": {
+   "mp": {
+    "n": 455,
+    "bias_mean": -3.973,
+    "bias_median": -3.741,
+    "sigma_robust": 4.366,
+    "q68_abs": 6.031,
+    "q95_abs": 12.671,
+    "rmse": 6.395,
+    "mae": 4.946,
+    "ci95_cluster_system": {
+     "bias_median": [
+      -4.439,
+      -2.967
+     ],
+     "q68_abs": [
+      5.526,
+      6.621
+     ],
+     "q95_abs": [
+      10.304,
+      14.244
+     ],
+     "rmse": [
+      5.749,
+      7.104
+     ],
+     "sigma_robust": [
+      3.868,
+      5.02
+     ]
+    }
+   },
+   "oqmd": {
+    "n": 455,
+    "bias_mean": -4.236,
+    "bias_median": -3.252,
+    "sigma_robust": 5.045,
+    "q68_abs": 6.562,
+    "q95_abs": 20.098,
+    "rmse": 8.797,
+    "mae": 6.253,
+    "ci95_cluster_system": {
+     "bias_median": [
+      -4.179,
+      -2.436
+     ],
+     "q68_abs": [
+      5.816,
+      7.733
+     ],
+     "q95_abs": [
+      16.471,
+      23.037
+     ],
+     "rmse": [
+      7.627,
+      9.994
+     ],
+     "sigma_robust": [
+      4.374,
+      5.95
+     ]
+    }
+   }
+  },
+  "grace-2l-omat": {
+   "mp": {
+    "n": 455,
+    "bias_mean": -0.762,
+    "bias_median": -0.658,
+    "sigma_robust": 1.518,
+    "q68_abs": 1.736,
+    "q95_abs": 4.706,
+    "rmse": 2.237,
+    "mae": 1.571,
+    "ci95_cluster_system": {
+     "bias_median": [
+      -0.881,
+      -0.429
+     ],
+     "q68_abs": [
+      1.569,
+      1.898
+     ],
+     "q95_abs": [
+      3.869,
+      5.185
+     ],
+     "rmse": [
+      1.91,
+      2.581
+     ],
+     "sigma_robust": [
+      1.33,
+      1.7
+     ]
+    }
+   },
+   "oqmd": {
+    "n": 455,
+    "bias_mean": -1.026,
+    "bias_median": 0.245,
+    "sigma_robust": 2.692,
+    "q68_abs": 3.571,
+    "q95_abs": 21.938,
+    "rmse": 8.15,
+    "mae": 4.621,
+    "ci95_cluster_system": {
+     "bias_median": [
+      -0.08,
+      0.575
+     ],
+     "q68_abs": [
+      2.699,
+      4.606
+     ],
+     "q95_abs": [
+      14.33,
+      25.52
+     ],
+     "rmse": [
+      6.562,
+      9.613
+     ],
+     "sigma_robust": [
+      2.206,
+      3.23
+     ]
+    }
+   }
+  },
+  "mace-mpa-0": {
+   "mp": {
+    "n": 455,
+    "bias_mean": -0.479,
+    "bias_median": -0.637,
+    "sigma_robust": 1.06,
+    "q68_abs": 1.34,
+    "q95_abs": 4.312,
+    "rmse": 2.093,
+    "mae": 1.31,
+    "ci95_cluster_system": {
+     "bias_median": [
+      -0.789,
+      -0.417
+     ],
+     "q68_abs": [
+      1.146,
+      1.561
+     ],
+     "q95_abs": [
+      2.904,
+      5.473
+     ],
+     "rmse": [
+      1.678,
+      2.56
+     ],
+     "sigma_robust": [
+      0.918,
+      1.207
+     ]
+    }
+   },
+   "oqmd": {
+    "n": 455,
+    "bias_mean": -0.742,
+    "bias_median": 0.095,
+    "sigma_robust": 2.282,
+    "q68_abs": 3.586,
+    "q95_abs": 22.689,
+    "rmse": 8.37,
+    "mae": 4.637,
+    "ci95_cluster_system": {
+     "bias_median": [
+      -0.179,
+      0.434
+     ],
+     "q68_abs": [
+      2.668,
+      4.962
+     ],
+     "q95_abs": [
+      15.97,
+      26.106
+     ],
+     "rmse": [
+      6.82,
+      9.952
+     ],
+     "sigma_robust": [
+      1.726,
+      3.171
+     ]
+    }
+   }
+  },
+  "mace-omat-0": {
+   "mp": {
+    "n": 455,
+    "bias_mean": -0.666,
+    "bias_median": -0.704,
+    "sigma_robust": 2.243,
+    "q68_abs": 2.508,
+    "q95_abs": 5.224,
+    "rmse": 2.706,
+    "mae": 2.042,
+    "ci95_cluster_system": {
+     "bias_median": [
+      -1.042,
+      -0.48
+     ],
+     "q68_abs": [
+      2.115,
+      2.7
+     ],
+     "q95_abs": [
+      4.876,
+      6.429
+     ],
+     "rmse": [
+      2.44,
+      2.956
+     ],
+     "sigma_robust": [
+      1.859,
+      2.526
+     ]
+    }
+   },
+   "oqmd": {
+    "n": 455,
+    "bias_mean": -0.929,
+    "bias_median": 0.094,
+    "sigma_robust": 3.782,
+    "q68_abs": 4.391,
+    "q95_abs": 23.414,
+    "rmse": 8.87,
+    "mae": 5.242,
+    "ci95_cluster_system": {
+     "bias_median": [
+      -0.264,
+      0.841
+     ],
+     "q68_abs": [
+      3.553,
+      5.39
+     ],
+     "q95_abs": [
+      15.445,
+      27.569
+     ],
+     "rmse": [
+      7.15,
+      10.562
+     ],
+     "sigma_robust": [
+      3.011,
+      4.453
+     ]
+    }
+   }
+  },
+  "mattersim-5m": {
+   "mp": {
+    "n": 455,
+    "bias_mean": -0.797,
+    "bias_median": -0.855,
+    "sigma_robust": 1.698,
+    "q68_abs": 2.056,
+    "q95_abs": 5.236,
+    "rmse": 4.907,
+    "mae": 2.075,
+    "ci95_cluster_system": {
+     "bias_median": [
+      -1.091,
+      -0.655
+     ],
+     "q68_abs": [
+      1.788,
+      2.349
+     ],
+     "q95_abs": [
+      4.422,
+      6.365
+     ],
+     "rmse": [
+      2.306,
+      7.511
+     ],
+     "sigma_robust": [
+      1.447,
+      1.962
+     ]
+    }
+   },
+   "oqmd": {
+    "n": 455,
+    "bias_mean": -1.061,
+    "bias_median": 0.032,
+    "sigma_robust": 2.847,
+    "q68_abs": 3.83,
+    "q95_abs": 24.682,
+    "rmse": 9.873,
+    "mae": 5.2,
+    "ci95_cluster_system": {
+     "bias_median": [
+      -0.373,
+      0.485
+     ],
+     "q68_abs": [
+      2.824,
+      4.749
+     ],
+     "q95_abs": [
+      16.462,
+      29.083
+     ],
+     "rmse": [
+      7.616,
+      11.853
+     ],
+     "sigma_robust": [
+      2.365,
+      3.634
+     ]
+    }
+   }
+  },
+  "orb-v3-mpa": {
+   "mp": {
+    "n": 455,
+    "bias_mean": -0.871,
+    "bias_median": -0.689,
+    "sigma_robust": 0.869,
+    "q68_abs": 1.211,
+    "q95_abs": 2.374,
+    "rmse": 2.282,
+    "mae": 1.117,
+    "ci95_cluster_system": {
+     "bias_median": [
+      -0.856,
+      -0.545
+     ],
+     "q68_abs": [
+      1.038,
+      1.369
+     ],
+     "q95_abs": [
+      2.108,
+      2.963
+     ],
+     "rmse": [
+      1.384,
+      3.273
+     ],
+     "sigma_robust": [
+      0.725,
+      0.977
+     ]
+    }
+   },
+   "oqmd": {
+    "n": 455,
+    "bias_mean": -1.134,
+    "bias_median": -0.206,
+    "sigma_robust": 2.265,
+    "q68_abs": 3.107,
+    "q95_abs": 20.853,
+    "rmse": 7.77,
+    "mae": 4.342,
+    "ci95_cluster_system": {
+     "bias_median": [
+      -0.494,
+      0.257
+     ],
+     "q68_abs": [
+      2.336,
+      4.43
+     ],
+     "q95_abs": [
+      15.116,
+      24.151
+     ],
+     "rmse": [
+      6.254,
+      9.204
+     ],
+     "sigma_robust": [
+      1.614,
+      3.082
+     ]
+    }
+   }
+  },
+  "orb-v3-omat": {
+   "mp": {
+    "n": 455,
+    "bias_mean": -0.525,
+    "bias_median": -0.524,
+    "sigma_robust": 1.296,
+    "q68_abs": 1.42,
+    "q95_abs": 2.751,
+    "rmse": 1.704,
+    "mae": 1.198,
+    "ci95_cluster_system": {
+     "bias_median": [
+      -0.693,
+      -0.328
+     ],
+     "q68_abs": [
+      1.322,
+      1.518
+     ],
+     "q95_abs": [
+      2.411,
+      3.161
+     ],
+     "rmse": [
+      1.368,
+      2.147
+     ],
+     "sigma_robust": [
+      1.144,
+      1.475
+     ]
+    }
+   },
+   "oqmd": {
+    "n": 455,
+    "bias_mean": -0.789,
+    "bias_median": 0.17,
+    "sigma_robust": 2.913,
+    "q68_abs": 3.42,
+    "q95_abs": 20.847,
+    "rmse": 8.028,
+    "mae": 4.59,
+    "ci95_cluster_system": {
+     "bias_median": [
+      -0.092,
+      0.702
+     ],
+     "q68_abs": [
+      2.725,
+      4.644
+     ],
+     "q95_abs": [
+      15.373,
+      24.888
+     ],
+     "rmse": [
+      6.522,
+      9.444
+     ],
+     "sigma_robust": [
+      2.334,
+      3.514
+     ]
+    }
+   }
+  },
+  "sevennet-omni": {
+   "mp": {
+    "n": 455,
+    "bias_mean": -0.635,
+    "bias_median": -0.601,
+    "sigma_robust": 0.904,
+    "q68_abs": 1.086,
+    "q95_abs": 2.474,
+    "rmse": 1.463,
+    "mae": 0.977,
+    "ci95_cluster_system": {
+     "bias_median": [
+      -0.726,
+      -0.505
+     ],
+     "q68_abs": [
+      0.976,
+      1.224
+     ],
+     "q95_abs": [
+      2.096,
+      3.046
+     ],
+     "rmse": [
+      1.157,
+      1.807
+     ],
+     "sigma_robust": [
+      0.761,
+      1.002
+     ]
+    }
+   },
+   "oqmd": {
+    "n": 455,
+    "bias_mean": -0.898,
+    "bias_median": 0.129,
+    "sigma_robust": 1.996,
+    "q68_abs": 3.413,
+    "q95_abs": 21.618,
+    "rmse": 8.181,
+    "mae": 4.485,
+    "ci95_cluster_system": {
+     "bias_median": [
+      -0.105,
+      0.416
+     ],
+     "q68_abs": [
+      2.388,
+      4.844
+     ],
+     "q95_abs": [
+      15.09,
+      24.744
+     ],
+     "rmse": [
+      6.509,
+      9.653
+     ],
+     "sigma_robust": [
+      1.554,
+      2.794
+     ]
+    }
+   }
+  }
+ },
+ "saturation": {
+  "chgnet-0.3.0": {
+   "delta_sigma_vs_mp": 0.931,
+   "delta_sigma_vs_mp_ci95_cluster_system": [
+    -0.426,
+    2.396
+   ],
+   "corr_residual_with_mp": 0.961
+  },
+  "grace-2l-omat": {
+   "delta_sigma_vs_mp": -0.19,
+   "delta_sigma_vs_mp_ci95_cluster_system": [
+    -0.923,
+    0.561
+   ],
+   "corr_residual_with_mp": 0.992
+  },
+  "mace-mpa-0": {
+   "delta_sigma_vs_mp": 0.092,
+   "delta_sigma_vs_mp_ci95_cluster_system": [
+    -0.65,
+    0.881
+   ],
+   "corr_residual_with_mp": 0.992
+  },
+  "mace-omat-0": {
+   "delta_sigma_vs_mp": 0.438,
+   "delta_sigma_vs_mp_ci95_cluster_system": [
+    -0.59,
+    1.103
+   ],
+   "corr_residual_with_mp": 0.987
+  },
+  "mattersim-5m": {
+   "delta_sigma_vs_mp": 0.052,
+   "delta_sigma_vs_mp_ci95_cluster_system": [
+    -0.659,
+    0.744
+   ],
+   "corr_residual_with_mp": 0.975
+  },
+  "orb-v3-mpa": {
+   "delta_sigma_vs_mp": -0.019,
+   "delta_sigma_vs_mp_ci95_cluster_system": [
+    -0.618,
+    0.422
+   ],
+   "corr_residual_with_mp": 0.995
+  },
+  "orb-v3-omat": {
+   "delta_sigma_vs_mp": -0.221,
+   "delta_sigma_vs_mp_ci95_cluster_system": [
+    -0.922,
+    0.429
+   ],
+   "corr_residual_with_mp": 0.996
+  },
+  "sevennet-omni": {
+   "delta_sigma_vs_mp": 0.073,
+   "delta_sigma_vs_mp_ci95_cluster_system": [
+    -0.473,
+    0.649
+   ],
+   "corr_residual_with_mp": 0.997
+  }
+ }
+}
