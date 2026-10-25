@@ -13,4 +13,9 @@ for f in tdb/reference_panel/CuZr-*.tdb; do
   b=$(basename "$f" .tdb)
   $PY scripts/score.py "$f" --label "ref_$b" -o "results/reference_panel/$b.json"
 done
+for f in tdb/CuZr-PhaseForge-MLIP-*.tdb; do
+  m=$(basename "$f" .tdb); m=${m#CuZr-PhaseForge-MLIP-}
+  $PY scripts/score.py "$f" --label "cuzr_$m" --names-as CuZr-94Zen-LB.tdb -o "results/mlips/cuzr_$m.json"
+done
 $PY scripts/compare.py
+$PY scripts/summarize_mlips.py

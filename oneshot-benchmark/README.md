@@ -22,9 +22,29 @@ field −0.30 [−0.43, −0.16], boundary −0.33 [−0.36, −0.30] (`results/
 liquid (recall 0.02: the compounds and (βZr) are far too stable relative to the liquid), and B2 CuZr and Cu8Zr3 are
 never stable. One system only: this tests the design of the track, it is not yet a benchmark.
 
-**Other MLIPs: pending.** MLIP-only TDBs for CHGNet, MatterSim, ORB-v3 (two), MACE (two) and SevenNet-Omni, built with
-the same protocol, are being computed (DGX Spark job); no scores are available yet, and none are reported here. When
-the TDBs exist, they are scored with the command below and added to `results/`.
+**Seven more MLIPs, same protocol (DGX Spark builds, 2026-10-24).** CHGNet 0.3.0, MatterSim 5M, ORB-v3 (OMat and MPA),
+MACE (MPA-0 and OMAT-0) and SevenNet-Omni, plus a rerun of GRACE-2L-OMAT on the Spark (CPU), each built by PhaseForge from
+that MLIP's energies alone (21 relaxations, 5 liquid MD runs; `tdb/CuZr-PhaseForge-MLIP-<model>.tdb`, scores in
+`results/mlips/`, table in `results/mlips_summary.md`):
+
+| model (MLIP-only, no fitting) | field S [95% CI] | P | F1 | boundary S [95% CI] | P | F1 |
+|---|---|---|---|---|---|---|
+| MACE-MPA-0 | 0.56 [0.42, 0.69] | 0.53 | 0.51 | 0.53 [0.50, 0.56] | 0.64 | 0.53 |
+| ORB-v3 MPA | 0.54 [0.40, 0.67] | 0.50 | 0.42 | 0.47 [0.44, 0.49] | 0.52 | 0.36 |
+| ORB-v3 OMat | 0.48 [0.36, 0.60] | 0.45 | 0.41 | 0.46 [0.43, 0.49] | 0.52 | 0.40 |
+| SevenNet-Omni | 0.46 [0.34, 0.59] | 0.41 | 0.40 | 0.42 [0.39, 0.44] | 0.57 | 0.44 |
+| MACE-OMAT-0 | 0.46 [0.32, 0.60] | 0.60 | 0.46 | 0.45 [0.42, 0.48] | 0.63 | 0.49 |
+| MatterSim 5M | 0.44 [0.31, 0.58] | 0.41 | 0.36 | 0.41 [0.39, 0.43] | 0.47 | 0.39 |
+| GRACE-2L-OMAT | 0.43 [0.30, 0.55] | 0.41 | 0.33 | 0.41 [0.38, 0.43] | 0.51 | 0.31 |
+| CHGNet 0.3.0 | 0.35 [0.22, 0.49] | 0.44 | 0.34 | 0.35 [0.31, 0.39] | 0.54 | 0.35 |
+| SGTE 94Zen (reference) | 0.72 [0.59, 0.84] | 0.65 | 0.66 | 0.73 [0.70, 0.76] | 0.72 | 0.71 |
+| PhaseForge+ final (in-sample) | 0.76 [0.64, 0.87] | 0.65 | 0.69 | 0.66 [0.62, 0.69] | 0.73 | 0.67 |
+
+Intervals are point bootstraps (boundary points are correlated; cluster intervals are in each JSON). The intervals of the
+eight MLIPs overlap broadly (field S 0.35-0.56), all lie below SGTE (0.72), and the ranking is not statistically
+resolved with 28 field points. The Spark GRACE rerun reproduces the Studio build exactly at the field points (0.426) and
+within 0.01 at the boundary points (0.410 against 0.401; 10 of 315 predicted assemblages differ, from MD sampling noise
+in the liquid energies). With one system and 28 field points this is still a test of the track's design, not a benchmark.
 
 ## Quick path: cached scores → figure; grid scoring (no pycalphad, about 30 s)
 
@@ -46,6 +66,7 @@ path below on that cached map: it reproduces the TDB scores (0.426 / 0.401).
 pip install -r requirements-full.txt              # pycalphad 0.11.2 and its pinned dependencies (CPython 3.12)
 python scripts/score.py my_model.tdb --label my_model [--names-as CuZr-94Zen-LB.tdb]
 python scripts/compare.py                         # paired bootstraps of the three reference models
+python scripts/summarize_mlips.py                 # table of the MLIP-only scores (results/mlips_summary.md)
 ```
 
 Phase names are mapped to ORCHID phase-registry ids through the registry's TDB names; a TDB the registry does not
