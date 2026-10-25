@@ -1,0 +1,900 @@
+{
+ "recorded": "2026-10-24",
+ "server": "/Users/raymundo.arroyave/projects/orchid-mcp/.venv/bin/orchid-mcp",
+ "env": {
+  "ORCHID_DATA_DIR": "/Users/raymundo.arroyave/projects/orchid-data",
+  "ORCHID_SITE_DATA_DIR": "/Users/raymundo.arroyave/projects/orchid-project.org/data",
+  "ORCHID_OFFLINE": "1"
+ },
+ "orchid_data_commit": "5dcca0091a4d86eb280680d402e2281937efb9f9",
+ "orchid_mcp_commit": "cb989777bb96b4c76ff289e7153c55c76b89e7c7",
+ "showcase": {
+  "id": "ORC-CC4MAVSJOT",
+  "system": "Cu-Zr",
+  "lookup": {
+   "tool": "get_invariant_reactions",
+   "arguments": {
+    "system": "Cu-Zr",
+    "source": "literature",
+    "limit": 5000,
+    "fields": "summary"
+   },
+   "position": 132
+  },
+  "criteria": "accepted eutectic with phases, printed phase compositions, evidence class, citation, page and verbatim quote or table locator"
+ },
+ "exchange": [
+  {
+   "request": {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "initialize",
+    "params": {
+     "protocolVersion": "2025-06-18",
+     "capabilities": {},
+     "clientInfo": {
+      "name": "orchid-paper-figure",
+      "version": "1"
+     }
+    }
+   },
+   "response": {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": {
+     "capabilities": {
+      "prompts": {
+       "listChanged": false
+      },
+      "resources": {
+       "listChanged": false,
+       "subscribe": false
+      },
+      "tools": {
+       "listChanged": false
+      }
+     },
+     "instructions": "ORCHID: CALPHAD thermodynamic data with provenance. Literature values (experimental | model | dft | unspecified, never mixed), calculated binary phase diagrams tied to TDB files by SHA-256, Materials Project and OQMD formation energies, the TDB catalog, the phase registry (every name of each binary phase, its TDB models, stability and crystal structure when certain), and the bibliography (every paper ORCHID knows, its roles, evidence and typed relations: cites, used_in_assessment, reassesses, ...). Every value carries its citation, DOI, page and quote; report them, and cite ORCHID plus the original sources (see the cite_orchid prompt).",
+     "protocolVersion": "2025-06-18",
+     "serverInfo": {
+      "name": "orchid",
+      "version": "0.1.0"
+     }
+    }
+   }
+  },
+  {
+   "request": {
+    "jsonrpc": "2.0",
+    "method": "notifications/initialized"
+   }
+  },
+  {
+   "request": {
+    "jsonrpc": "2.0",
+    "id": 2,
+    "method": "tools/list"
+   },
+   "response": {
+    "jsonrpc": "2.0",
+    "id": 2,
+    "result": {
+     "tools": [
+      {
+       "description": "Find chemical systems in ORCHID. elements: e.g. [\"Al\",\"Ni\"] (systems containing all of them; exact=true for\nexactly them). text: matches system names and titles/citations of reporting papers. Returns per-system counts\nby evidence class and the calculated assessments; fields=\"full\" adds property-group counts, assessment\ncitations/DOIs and viewer URLs. Paginate with offset; `total` is the number of matching systems.",
+       "inputSchema": {
+        "properties": {
+         "elements": {
+          "anyOf": [
+           {
+            "items": {
+             "type": "string"
+            },
+            "type": "array"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "Elements"
+         },
+         "text": {
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "Text"
+         },
+         "exact": {
+          "default": false,
+          "title": "Exact",
+          "type": "boolean"
+         },
+         "limit": {
+          "default": 50,
+          "title": "Limit",
+          "type": "integer"
+         },
+         "offset": {
+          "default": 0,
+          "title": "Offset",
+          "type": "integer"
+         },
+         "fields": {
+          "default": "summary",
+          "enum": [
+           "summary",
+           "full"
+          ],
+          "title": "Fields",
+          "type": "string"
+         }
+        },
+        "type": "object",
+        "title": "search_systemsArguments"
+       },
+       "name": "search_systems"
+      },
+      {
+       "description": "Literature values for a system (e.g. \"Al-Ni\"). Filters: property_group (invariant reaction, phase transition,\nphase equilibrium, formation, mixing / partial, heat capacity / entropy / enthalpy, activity / EMF / Gibbs\nenergy, crystal structure, model expression, other property), property code (HM_FORM, CPM, ...), evidence_class\n(experimental|model|dft|unspecified). Paginate with limit/offset (default 50); `total` counts all matches.\nfields: \"summary\" (default; id, property, value, unit, T, phases, evidence class, accepted, espei_ready, espei_certified, calphad_check, citation, DOI, page,\nquote <= 240 chars or table locator) or \"full\" (every field with expanded provenance: locator, origin, flags,\nuncertainty, conditions, cited sources, model link; compact=true then drops pipeline bookkeeping).",
+       "inputSchema": {
+        "properties": {
+         "system": {
+          "title": "System",
+          "type": "string"
+         },
+         "property_group": {
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "Property Group"
+         },
+         "evidence_class": {
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "Evidence Class"
+         },
+         "accepted_only": {
+          "default": true,
+          "title": "Accepted Only",
+          "type": "boolean"
+         },
+         "limit": {
+          "default": 50,
+          "title": "Limit",
+          "type": "integer"
+         },
+         "offset": {
+          "default": 0,
+          "title": "Offset",
+          "type": "integer"
+         },
+         "property": {
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "Property"
+         },
+         "fields": {
+          "default": "summary",
+          "enum": [
+           "summary",
+           "full"
+          ],
+          "title": "Fields",
+          "type": "string"
+         },
+         "compact": {
+          "default": false,
+          "title": "Compact",
+          "type": "boolean"
+         }
+        },
+        "required": [
+         "system"
+        ],
+        "type": "object",
+        "title": "get_system_dataArguments"
+       },
+       "name": "get_system_data"
+      },
+      {
+       "description": "Invariant reactions of a system: literature records (source=\"literature\"), invariants calculated from each\nSGTE assessment (source=\"calculated\"), or both side by side with phase-set matches and dT. Calculated\ninvariants are matched against all literature records; the literature list is paged with limit/offset\n(literature_total counts all).\nfields: \"summary\" (default; id, property, value, unit, T, phases, evidence class, accepted, espei_ready, espei_certified, calphad_check, citation, DOI, page,\nquote <= 240 chars or table locator) or \"full\" (complete provenance).",
+       "inputSchema": {
+        "properties": {
+         "system": {
+          "title": "System",
+          "type": "string"
+         },
+         "source": {
+          "default": "both",
+          "title": "Source",
+          "type": "string"
+         },
+         "assessment": {
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "Assessment"
+         },
+         "accepted_only": {
+          "default": true,
+          "title": "Accepted Only",
+          "type": "boolean"
+         },
+         "limit": {
+          "default": 50,
+          "title": "Limit",
+          "type": "integer"
+         },
+         "offset": {
+          "default": 0,
+          "title": "Offset",
+          "type": "integer"
+         },
+         "fields": {
+          "default": "summary",
+          "enum": [
+           "summary",
+           "full"
+          ],
+          "title": "Fields",
+          "type": "string"
+         }
+        },
+        "required": [
+         "system"
+        ],
+        "type": "object",
+        "title": "get_invariant_reactionsArguments"
+       },
+       "name": "get_invariant_reactions"
+      },
+      {
+       "description": "Formation enthalpy of a compound (e.g. \"Al3Ni\"): literature values in kJ/mol-atom with provenance,\nMaterials Project and OQMD DFT entries at that composition, and per-evidence-class / per-source summaries.\nfields: \"summary\" (default; id, property, value, unit, T, phases, evidence class, accepted, espei_ready, espei_certified, calphad_check, citation, DOI, page,\nquote <= 240 chars or table locator) or \"full\" (complete provenance).",
+       "inputSchema": {
+        "properties": {
+         "formula": {
+          "title": "Formula",
+          "type": "string"
+         },
+         "accepted_only": {
+          "default": true,
+          "title": "Accepted Only",
+          "type": "boolean"
+         },
+         "include_higher_order_systems": {
+          "default": true,
+          "title": "Include Higher Order Systems",
+          "type": "boolean"
+         },
+         "fields": {
+          "default": "summary",
+          "enum": [
+           "summary",
+           "full"
+          ],
+          "title": "Fields",
+          "type": "string"
+         }
+        },
+        "required": [
+         "formula"
+        ],
+        "type": "object",
+        "title": "get_formation_enthalpyArguments"
+       },
+       "name": "get_formation_enthalpy"
+      },
+      {
+       "description": "Calculated binary phase diagram(s): TDB file, SHA-256, assessment citation/DOI, phases, invariants, viewer\nURL. assessment: TDB name (e.g. \"AlNi-05Mie\") or DOI; omit for all. With x (mole fraction of the diagram's\nx_component) and T (K): the stable phases at the nearest stored grid node. fields=\"full\" adds the per-region\nboundary summary and grid metadata.",
+       "inputSchema": {
+        "properties": {
+         "system": {
+          "title": "System",
+          "type": "string"
+         },
+         "assessment": {
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "Assessment"
+         },
+         "x": {
+          "anyOf": [
+           {
+            "type": "number"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "X"
+         },
+         "T": {
+          "anyOf": [
+           {
+            "type": "number"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "T"
+         },
+         "fields": {
+          "default": "summary",
+          "enum": [
+           "summary",
+           "full"
+          ],
+          "title": "Fields",
+          "type": "string"
+         }
+        },
+        "required": [
+         "system"
+        ],
+        "type": "object",
+        "title": "get_phase_diagramArguments"
+       },
+       "name": "get_phase_diagram"
+      },
+      {
+       "description": "TDB catalog entries for systems containing all `elements` (exact=true: exactly them). tier: bundled |\nfetched | manual. Returns name, elements, tier, licence, licence status, source URL, SHA-256 and, for bundled\nfiles, the ORCHID download URL; fields=\"full\" returns the whole catalog entry. Paginate with offset.",
+       "inputSchema": {
+        "properties": {
+         "elements": {
+          "anyOf": [
+           {
+            "items": {
+             "type": "string"
+            },
+            "type": "array"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "Elements"
+         },
+         "exact": {
+          "default": false,
+          "title": "Exact",
+          "type": "boolean"
+         },
+         "tier": {
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "Tier"
+         },
+         "limit": {
+          "default": 50,
+          "title": "Limit",
+          "type": "integer"
+         },
+         "offset": {
+          "default": 0,
+          "title": "Offset",
+          "type": "integer"
+         },
+         "fields": {
+          "default": "summary",
+          "enum": [
+           "summary",
+           "full"
+          ],
+          "title": "Fields",
+          "type": "string"
+         }
+        },
+        "type": "object",
+        "title": "list_tdb_filesArguments"
+       },
+       "name": "list_tdb_files"
+      },
+      {
+       "description": "One TDB catalog entry (e.g. \"AlNi-05Mie.tdb\") with licence, SHA-256 and download URL. The file content is\nreturned only for bundled files with a confirmed redistributable licence; fetched/manual tiers are never served.",
+       "inputSchema": {
+        "properties": {
+         "file": {
+          "title": "File",
+          "type": "string"
+         },
+         "include_content": {
+          "default": true,
+          "title": "Include Content",
+          "type": "boolean"
+         }
+        },
+        "required": [
+         "file"
+        ],
+        "type": "object",
+        "title": "get_tdbArguments"
+       },
+       "name": "get_tdb"
+      },
+      {
+       "description": "Bibliographic record of a paper by DOI (or ORCHID id: \"doi:...\", \"nodoi:...\", literature \"ref:...\" ids, or a\nbibliography key \"p...\"): systems, number of values it reports, its experimental-context items (quotes, pages),\nand its ORCHID bibliography entry: roles (corpus_assessment_read, cited_original_source, tdb_source_assessment,\nhandbook_diagram_source, discovery_lead, ...), evidence summary (values by evidence class / property group,\ntables, passages, ESPEI datasets, phase-registry phases), Crossref metadata, open-access licence from Crossref,\nrelation counts. fields=\"full\" adds the complete bibliography record and every relation (edges with provenance).",
+       "inputSchema": {
+        "properties": {
+         "doi": {
+          "title": "Doi",
+          "type": "string"
+         },
+         "fields": {
+          "default": "summary",
+          "enum": [
+           "summary",
+           "full"
+          ],
+          "title": "Fields",
+          "type": "string"
+         }
+        },
+        "required": [
+         "doi"
+        ],
+        "type": "object",
+        "title": "get_paperArguments"
+       },
+       "name": "get_paper"
+      },
+      {
+       "description": "Search the ORCHID bibliography (every paper ORCHID knows about). system: exact chemical system (\"Al-Ni\");\nelements: papers with a system containing all of them. role: corpus_assessment_read | cited_original_source |\ntdb_source_assessment | tdb_compilation | handbook_diagram_source | discovery_lead | context_source |\nespei_reference. property: property code of values reported in / citing the paper (HM_FORM,\nINVARIANT_TEMPERATURE, ...). evidence_class: experimental | model | dft | unspecified. year_from / year_to;\ntext: substring of title, authors or DOI. Sorted by year, then id; paginate with offset (`total` counts all).",
+       "inputSchema": {
+        "properties": {
+         "system": {
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "System"
+         },
+         "elements": {
+          "anyOf": [
+           {
+            "items": {
+             "type": "string"
+            },
+            "type": "array"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "Elements"
+         },
+         "role": {
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "Role"
+         },
+         "property": {
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "Property"
+         },
+         "evidence_class": {
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "Evidence Class"
+         },
+         "year_from": {
+          "anyOf": [
+           {
+            "type": "integer"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "Year From"
+         },
+         "year_to": {
+          "anyOf": [
+           {
+            "type": "integer"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "Year To"
+         },
+         "text": {
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "Text"
+         },
+         "limit": {
+          "default": 50,
+          "title": "Limit",
+          "type": "integer"
+         },
+         "offset": {
+          "default": 0,
+          "title": "Offset",
+          "type": "integer"
+         }
+        },
+        "type": "object",
+        "title": "search_papersArguments"
+       },
+       "name": "search_papers"
+      },
+      {
+       "description": "Typed relations of one paper (DOI or bibliography id), each with provenance. relation: cites (paper -> works\nprinted as the source of its values; count = values) | used_in_assessment (data paper -> assessments that used\nit) | models_system_in_tdb (paper -> TDB file) | reassesses (later -> earlier assessment of the same exact\nsystem that it cites) | handbook_reproduces (handbook diagram -> original evaluation) | cited_by_crossref\n(publisher-deposited Crossref reference lists). direction: out | in | both. Examples: which original papers did\nthis assessment use -> relation=\"cites\", direction=\"out\"; which assessments used this paper ->\nrelation=\"used_in_assessment\", direction=\"out\"; reassessment chain -> relation=\"reassesses\".",
+       "inputSchema": {
+        "properties": {
+         "doi": {
+          "title": "Doi",
+          "type": "string"
+         },
+         "relation": {
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "Relation"
+         },
+         "direction": {
+          "default": "both",
+          "title": "Direction",
+          "type": "string"
+         },
+         "limit": {
+          "default": 100,
+          "title": "Limit",
+          "type": "integer"
+         },
+         "offset": {
+          "default": 0,
+          "title": "Offset",
+          "type": "integer"
+         }
+        },
+        "required": [
+         "doi"
+        ],
+        "type": "object",
+        "title": "get_paper_relationsArguments"
+       },
+       "name": "get_paper_relations"
+      },
+      {
+       "description": "Assessments of an exact chemical system (papers behind its TDB files or read by ORCHID) with the original\ndata papers each used (works printed as the source of the extracted values, with value counts and evidence\nclasses), the TDB files, reassessment links (citation+same-system) and paper counts by role. max_data_papers\ncaps the data-paper list per assessment (flag data_papers_truncated).",
+       "inputSchema": {
+        "properties": {
+         "system": {
+          "title": "System",
+          "type": "string"
+         },
+         "max_data_papers": {
+          "default": 25,
+          "title": "Max Data Papers",
+          "type": "integer"
+         }
+        },
+        "required": [
+         "system"
+        ],
+        "type": "object",
+        "title": "get_assessment_evidenceArguments"
+       },
+       "name": "get_assessment_evidence"
+      },
+      {
+       "description": "Literature formation enthalpies vs Materials Project vs OQMD for the compounds of a system, with residuals\n(DFT - literature), MAE over the default experimental subset, and the DFT hull vertices of both sources.\nfields: \"summary\" (default; per literature value: id, value, evidence class, accepted, phase, T, citation, DOI,\npage, quote <= 240 chars, table, residuals) or \"full\" (method, cited sources, flags, DFT point details).",
+       "inputSchema": {
+        "properties": {
+         "system": {
+          "title": "System",
+          "type": "string"
+         },
+         "default_subset_only": {
+          "default": false,
+          "title": "Default Subset Only",
+          "type": "boolean"
+         },
+         "fields": {
+          "default": "summary",
+          "enum": [
+           "summary",
+           "full"
+          ],
+          "title": "Fields",
+          "type": "string"
+         }
+        },
+        "required": [
+         "system"
+        ],
+        "type": "object",
+        "title": "compare_to_dftArguments"
+       },
+       "name": "compare_to_dft"
+      },
+      {
+       "description": "One phase of a binary system from the ORCHID phase registry. system: e.g. \"Al-Ni\". phase: a registry id\n(\"phase:al-ni:fcc-l12\"), any namespaced name (\"tdb:AlNi-01Dup-LB.tdb:L12_FCC\", \"paper:<doi>:<label>\",\n\"corpus:<id>\", \"mp:<id>\", \"oqmd:<id>\") or a plain label (\"L12_FCC\", \"NI3TI\", \"gamma'\"); several matches return\n{ambiguous: true, matches}. Summary: structure (tier A name / B DFT-supported / C assessor-stated, prototype,\nStrukturbericht, Pearson, space group), names by namespace, TDB models with their verbatim PHASE and CONSTITUENT\nstatements, stability per calculated diagram, literature counts, first 5 reference DOIs, viewer URL.\nfields=\"full\": the complete record (tdb_definition with TYPE_DEFINITIONs, parsed model and parameter counts,\nall example references with citations, candidates).",
+       "inputSchema": {
+        "properties": {
+         "system": {
+          "title": "System",
+          "type": "string"
+         },
+         "phase": {
+          "title": "Phase",
+          "type": "string"
+         },
+         "fields": {
+          "default": "summary",
+          "enum": [
+           "summary",
+           "full"
+          ],
+          "title": "Fields",
+          "type": "string"
+         }
+        },
+        "required": [
+         "system",
+         "phase"
+        ],
+        "type": "object",
+        "title": "get_phaseArguments"
+       },
+       "name": "get_phase"
+      },
+      {
+       "description": "Search the ORCHID phase registry (binary systems). elements: phases of systems containing all of them.\nname: substring of the phase name, TDB names, paper or corpus labels. prototype: prototype, Strukturbericht,\nPearson symbol or structure-type id (\"AuCu3\", \"L1_2\" = \"L12\", \"cP4\"). tier: A | B | C | liquid | gas | none.\nstatus: assigned | needs_review | unresolved_no_candidates. Paginate with offset; `total` counts all matches.",
+       "inputSchema": {
+        "properties": {
+         "elements": {
+          "anyOf": [
+           {
+            "items": {
+             "type": "string"
+            },
+            "type": "array"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "Elements"
+         },
+         "name": {
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "Name"
+         },
+         "prototype": {
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "Prototype"
+         },
+         "tier": {
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "Tier"
+         },
+         "status": {
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "default": null,
+          "title": "Status"
+         },
+         "limit": {
+          "default": 50,
+          "title": "Limit",
+          "type": "integer"
+         },
+         "offset": {
+          "default": 0,
+          "title": "Offset",
+          "type": "integer"
+         }
+        },
+        "type": "object",
+        "title": "search_phasesArguments"
+       },
+       "name": "search_phases"
+      },
+      {
+       "description": "Crystal-structure types of the phase registry by id, prototype, Strukturbericht, Pearson symbol or space\ngroup (\"AuCu3\", \"L1_2\", \"cP4\", \"Pm-3m\", \"221\"): prototype, Strukturbericht, Pearson, space group, sources\n(Hallstedt 2025 crystallographic table, standard tables), number of registry phases and example phase ids.",
+       "inputSchema": {
+        "properties": {
+         "query": {
+          "title": "Query",
+          "type": "string"
+         }
+        },
+        "required": [
+         "query"
+        ],
+        "type": "object",
+        "title": "get_structure_typeArguments"
+       },
+       "name": "get_structure_type"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "request": {
+    "jsonrpc": "2.0",
+    "id": 3,
+    "method": "tools/call",
+    "params": {
+     "name": "get_invariant_reactions",
+     "arguments": {
+      "system": "Cu-Zr",
+      "source": "literature",
+      "limit": 10,
+      "offset": 130,
+      "fields": "full"
+     }
+    }
+   },
+   "response": {
+    "jsonrpc": "2.0",
+    "id": 3,
+    "result": {
+     "content": [
+      {
+       "text": "{\"system\": \"CU-ZR\", \"source\": \"literature\", \"contexts\": {}, \"fields\": \"full\", \"literature_total\": 418, \"literature_offset\": 130, \"literature_truncated\": true, \"literature\": [{\"chemical_system\": \"CU-ZR\", \"cited_sources\": [{\"kind\": \"unknown\", \"label\": \"3\", \"status\": \"unresolved\"}], \"conditions\": {\"kind\": \"cited_source\", \"note\": \"conditions in the cited source\"}, \"evidence_class\": \"experimental\", \"flags\": {\"calphad_check\": \"not_available\", \"espei_certified\": false, \"espei_phase_rule\": {\"basis\": \"printed_labels\", \"result\": \"pass\"}, \"espei_ready\": true, \"extraction_accepted\": true, \"review_state\": \"extracted\", \"row_state\": \"settled\", \"state_fully_specified\": true}, \"fold_lpo\": 3, \"fold_lso\": 3, \"id\": \"ORC-RI3T672G4N\", \"locator\": {\"artifact\": \"table\", \"caption\": \"Coordinates of Invariant Equilibria in the Cu–Zr System\", \"label\": \"2\", \"page\": 5, \"ref\": \"doi:10.1007/s11106-008-9039-x/p5/tab-2\", \"row\": 1}, \"observation_type\": \"invariant_reaction\", \"origin\": {\"basis\": \"printed_source_experimental\", \"class\": \"experimental\", \"own_work_of_paper\": false}, \"paper\": \"doi:10.1007/s11106-008-9039-x\", \"paper_id\": \"doi:10.1007/s11106-008-9039-x\", \"phase_compositions\": [{\"basis\": \"mole_fraction\", \"composition\": {\"ZR\": 0.09}, \"composition_source\": \"printed\", \"phase\": \"L\"}, {\"basis\": \"mole_fraction\", \"composition\": {\"ZR\": 0.007}, \"composition_source\": \"printed\", \"phase\": \"(Cu)\"}, {\"basis\": \"mole_fraction\", \"composition\": {\"ZR\": 0.25}, \"composition_source\": \"printed\", \"phase\": \"Cu5Zr\"}], \"phases\": [{\"label\": \"L\", \"model_phase\": \"LIQUID\"}, {\"label\": \"(Cu)\", \"model_phase\": \"FCC_A1\", \"pearson_symbol\": \"cF4\", \"prototype\": \"Cu\", \"structure_basis\": \"mapped_model_phase\"}, {\"label\": \"Cu5Zr\", \"model_phase\": \"CU5ZR_C15B\", \"pearson_symbol\": \"cF24\", \"prototype\": \"AuBe5\", \"structure_basis\": \"mapped_model_phase\"}], \"pid\": \"doi:10.1007/s11106-008-9039-x/p5/tab-2/r01#invariant_reaction\", \"pressure_Pa\": 101325, \"pressure_basis\": \"assumed_default_1_atm_not_printed\", \"pressure_basis_stored\": \"stated_default_1_atm\", \"property\": \"INVARIANT_TEMPERATURE\", \"property_group\": \"invariant reaction\", \"reaction\": {\"printed\": \"L <=> (Cu) + Cu5Zr\"}, \"reader_agreement\": \"multi_reader\", \"reader_agreement_basis\": \"derived_from_readers\", \"reader_agreement_label\": \"confirmed (two or more readers)\", \"reader_tier\": \"preliminary_flash+claude\", \"readers\": [\"claude-opus-5.5\", \"gemini-3.8-flash\", \"text_layer\"], \"record_kind\": \"invariant_table\", \"source_system\": \"CU-ZR\", \"system\": \"CU-ZR\", \"temperature_K\": 1253.0, \"temperature_printed\": \"1253\", \"temperature_uncertainty\": {\"basis\": \"stated_default\", \"value\": 2.0}, \"tool_release\": \"v2.1.19n\", \"uncertainty_budget\": {\"calibration\": \"orchid-uncertainty-calibration 2026-10-24 (audit round 2) sha256 b29f39e1cb42\", \"quantities\": {\"composition\": {\"sigma_composition\": null, \"sigma_conversion\": null, \"sigma_effective\": 0.011, \"sigma_method\": {\"basis\": \"calibrated\", \"ci95\": [0.010484, 0.011532], \"class\": \"unknown\", \"entry\": \"value_types/X_PHASE/classes/unknown\", \"floor\": 0.011, \"floor_unit\": \"mole fraction\", \"n_pairs\": 3014, \"value\": 0.011}, \"sigma_printed\": null, \"sigma_reading\": {\"basis\": \"last_stored_digit\", \"value\": 0.0005}, \"sigma_scatter\": null, \"unit\": \"mole fraction\", \"value_type\": \"X_PHASE\"}, \"value\": {\"sigma_composition\": null, \"sigma_conversion\": null, \"sigma_effective\": 11.0, \"sigma_method\": {\"basis\": \"calibrated\", \"ci95\": [9.330373, 10.483565], \"class\": \"unknown\", \"entry\": \"value_types/T_INVARIANT/classes/unknown\", \"floor\": 11.0, \"floor_unit\": \"K\", \"n_pairs\": 4918, \"value\": 11.0}, \"sigma_printed\": null, \"sigma_reading\": {\"basis\": \"last_printed_digit\", \"value\": 0.05}, \"sigma_scatter\": null, \"unit\": \"K\", \"value_type\": \"T_INVARIANT\"}}, \"sigma_rule\": \"max(sqrt(max(printed, reading, method)^2 + composition^2 + conversion^2), scatter)\"}, \"unit\": \"K\", \"value\": 1253.0, \"elements\": [\"CU\", \"ZR\"], \"source\": {\"paper\": \"doi:10.1007/s11106-008-9039-x\", \"citation\": \"M. A. Turchanin, P. G. Agraval, A. R. Abdulov, Thermodynamic assessment of the Cu-Ti-Zr system. II. Cu-Zr and Ti-Zr systems, Powder Metall Met Ceram 47, 428-446 (2008).\", \"doi\": \"10.1007/s11106-008-9039-x\", \"doi_url\": \"https://doi.org/10.1007/s11106-008-9039-x\", \"year\": 2008, \"page\": 5, \"quote\": null, \"artifact\": \"2\", \"caption\": \"Coordinates of Invariant Equilibria in the Cu–Zr System\", \"row\": 1, \"quote_note\": \"table value: no sentence quote; verify with the table label/caption/page/row in `locator`\"}, \"report_issue_url\": \"https://github.com/orchid-calphad/orchid-data/issues/new?template=report-value-error.yml&title=%5Bvalue%5D%20ORC-RI3T672G4N%20%28CU-ZR%29&record_id=ORC-RI3T672G4N&system=CU-ZR&source=doi%3A10.1007%2Fs11106-008-9039-x%2C%20p.%205&value_shown=1253%20K\"}, {\"chemical_system\": \"CU-ZR\", \"conditions\": {\"kind\": \"not_applicable_own_calculation\"}, \"evidence_class\": \"model\", \"flags\": {\"calphad_check\": \"not_available\", \"espei_certified\": false, \"espei_ready\": false, \"extraction_accepted\": true, \"review_state\": \"extracted\", \"row_state\": \"settled\", \"state_fully_specified\": true}, \"fold_lpo\": 3, \"fold_lso\": 3, \"id\": \"ORC-ZLO5X7KFEE\", \"locator\": {\"artifact\": \"table\", \"caption\": \"Coordinates of Invariant Equilibria in the Cu–Zr System\", \"label\": \"2\", \"page\": 5, \"ref\": \"doi:10.1007/s11106-008-9039-x/p5/tab-2\", \"row\": 10}, \"model\": {\"key\": \"Mc0dcc940\", \"catalog_entry\": {\"license\": \"CC BY 4.0\", \"name\": \"CuZr-08Tur.tdb\", \"source_url\": \"https://doi.org/10.1016/j.calphad.2025.102833\", \"tier\": \"bundled\"}, \"link_basis\": \"reporting_paper_own_model\", \"model_citation\": \"Powder Met. Met. Ceram., 47, 428-46(2008).\", \"model_doi\": \"10.1007/s11106-008-9039-x\", \"reproduced_by_calculation\": true, \"tdb\": \"CuZr-08Tur.tdb\", \"tdb_path\": \"databases/sgte-binary/CuZr-08Tur.tdb\", \"tdb_sha256\": \"799997b40952ad1681f7d16b2caa00b3527482981d9d5f934b73468107a1b9c3\"}, \"observation_type\": \"invariant_reaction\", \"origin\": {\"basis\": \"this_work+paper_text_states_calculated\", \"class\": \"model_value\", \"measured_in\": \"doi:10.1007/s11106-008-9039-x\", \"own_work_of_paper\": true}, \"paper\": \"doi:10.1007/s11106-008-9039-x\", \"paper_id\": \"doi:10.1007/s11106-008-9039-x\", \"phase_compositions\": [{\"basis\": \"mole_fraction\", \"composition\": {\"ZR\": 0.082}, \"composition_source\": \"printed\", \"phase\": \"L\"}, {\"basis\": \"mole_fraction\", \"composition\": {\"ZR\": 0.0013}, \"composition_source\": \"printed\", \"phase\": \"(Cu)\"}, {\"basis\": \"mole_fraction\", \"composition\": {\"ZR\": 0.1667}, \"composition_source\": \"printed\", \"phase\": \"Cu5Zr\"}], \"phases\": [{\"label\": \"L\", \"model_phase\": \"LIQUID\"}, {\"label\": \"(Cu)\", \"model_phase\": \"FCC_A1\", \"pearson_symbol\": \"cF4\", \"prototype\": \"Cu\", \"structure_basis\": \"mapped_model_phase\"}, {\"label\": \"Cu5Zr\", \"model_phase\": \"CU5ZR_C15B\", \"pearson_symbol\": \"cF24\", \"prototype\": \"AuBe5\", \"structure_basis\": \"mapped_model_phase\"}], \"pid\": \"doi:10.1007/s11106-008-9039-x/p5/tab-2/r10#invariant_reaction\", \"pressure_Pa\": 101325, \"pressure_basis\": \"assumed_default_1_atm_not_printed\", \"pressure_basis_stored\": \"stated_default_1_atm\", \"property\": \"INVARIANT_TEMPERATURE\", \"property_group\": \"invariant reaction\", \"reaction\": {\"printed\": \"L <=> (Cu) + Cu5Zr\"}, \"reader_agreement\": \"multi_reader\", \"reader_agreement_basis\": \"derived_from_readers\", \"reader_agreement_label\": \"confirmed (two or more readers)\", \"reader_tier\": \"preliminary_flash+claude\", \"readers\": [\"claude-opus-5.5\", \"gemini-3.8-flash\", \"text_layer\"], \"record_kind\": \"invariant_table\", \"source_system\": \"CU-ZR\", \"system\": \"CU-ZR\", \"temperature_K\": 1253.0, \"temperature_printed\": \"1253\", \"temperature_uncertainty\": {\"basis\": \"stated_default\", \"value\": 2.0}, \"tool_release\": \"v2.1.19n\", \"uncertainty_budget\": {\"calibration\": \"orchid-uncertainty-calibration 2026-10-24 (audit round 2) sha256 b29f39e1cb42\", \"quantities\": {\"composition\": {\"sigma_composition\": null, \"sigma_conversion\": null, \"sigma_effective\": 0.005, \"sigma_method\": {\"basis\": \"calibrated\", \"ci95\": [0.004448, 0.004448], \"class\": \"model_calculated\", \"entry\": \"model/X_PHASE\", \"floor\": 0.005, \"floor_unit\": \"mole fraction\", \"n_pairs\": 16735, \"value\": 0.005}, \"sigma_printed\": null, \"sigma_reading\": {\"basis\": \"last_stored_digit\", \"value\": 5e-05}, \"sigma_scatter\": null, \"unit\": \"mole fraction\", \"value_type\": \"X_PHASE\"}, \"value\": {\"sigma_composition\": null, \"sigma_conversion\": null, \"sigma_effective\": 4.0, \"sigma_method\": {\"basis\": \"calibrated\", \"ci95\": [3.11346, 4.410735], \"class\": \"model_calculated\", \"entry\": \"model/T_INVARIANT\", \"floor\": 4.0, \"floor_unit\": \"K\", \"n_pairs\": 14170, \"value\": 4.0}, \"sigma_printed\": null, \"sigma_reading\": {\"basis\": \"last_printed_digit\", \"value\": 0.05}, \"sigma_scatter\": null, \"unit\": \"K\", \"value_type\": \"T_INVARIANT\"}}, \"sigma_rule\": \"max(sqrt(max(printed, reading, method)^2 + composition^2 + conversion^2), scatter)\"}, \"unit\": \"K\", \"value\": 1253.0, \"elements\": [\"CU\", \"ZR\"], \"source\": {\"paper\": \"doi:10.1007/s11106-008-9039-x\", \"citation\": \"M. A. Turchanin, P. G. Agraval, A. R. Abdulov, Thermodynamic assessment of the Cu-Ti-Zr system. II. Cu-Zr and Ti-Zr systems, Powder Metall Met Ceram 47, 428-446 (2008).\", \"doi\": \"10.1007/s11106-008-9039-x\", \"doi_url\": \"https://doi.org/10.1007/s11106-008-9039-x\", \"year\": 2008, \"page\": 5, \"quote\": null, \"artifact\": \"2\", \"caption\": \"Coordinates of Invariant Equilibria in the Cu–Zr System\", \"row\": 10, \"quote_note\": \"table value: no sentence quote; verify with the table label/caption/page/row in `locator`\"}, \"report_issue_url\": \"https://github.com/orchid-calphad/orchid-data/issues/new?template=report-value-error.yml&title=%5Bvalue%5D%20ORC-ZLO5X7KFEE%20%28CU-ZR%29&record_id=ORC-ZLO5X7KFEE&system=CU-ZR&source=doi%3A10.1007%2Fs11106-008-9039-x%2C%20p.%205&value_shown=1253%20K\"}, {\"chemical_system\": \"CU-ZR\", \"cited_sources\": [{\"first_author\": \"Pogodin\", \"kind\": \"unknown\", \"label\": \"43\", \"reference\": \"S.A. Pogodin, I.S. Shumova, and F.A. Kugucheva, Constitution and Properties of Copper-Zirconium Alloys, C. R. Acad. Sci. URSS, 1940, 27, p 670-672\", \"status\": \"resolved\", \"year\": \"1940\"}], \"conditions\": {\"kind\": \"cited_source\", \"note\": \"conditions in the cited source\"}, \"evidence_class\": \"experimental\", \"flags\": {\"calphad_check\": \"not_available\", \"espei_certified\": false, \"espei_phase_rule\": {\"basis\": \"printed_labels\", \"result\": \"pass\"}, \"espei_ready\": true, \"extraction_accepted\": true, \"review_state\": \"extracted\", \"row_state\": \"settled\", \"state_fully_specified\": true}, \"fold_lpo\": 3, \"fold_lso\": 3, \"id\": \"ORC-CC4MAVSJOT\", \"locator\": {\"artifact\": \"table\", \"caption\": \"Summary of the invariant equilibria in the Cu-Zr system\", \"label\": \"5\", \"page\": 9, \"ref\": \"doi:10.1007/s11669-017-0522-2/p9/tab-5\", \"row\": 22}, \"observation_type\": \"invariant_reaction\", \"origin\": {\"basis\": \"printed_source_experimental\", \"class\": \"experimental\", \"own_work_of_paper\": false}, \"paper\": \"doi:10.1007/s11669-017-0522-2\", \"paper_id\": \"doi:10.1007/s11669-017-0522-2\", \"phase_compositions\": [{\"basis\": \"mole_fraction (converted from atomic percent)\", \"composition\": {\"ZR\": 0.09}, \"composition_source\": \"printed\", \"phase\": \"L\"}, {\"basis\": \"mole_fraction (converted from atomic percent)\", \"composition\": {\"ZR\": 0.007}, \"composition_source\": \"printed\", \"phase\": \"(Cu)\"}, {\"basis\": \"mole_fraction (converted from atomic percent)\", \"composition\": {\"ZR\": 0.25}, \"composition_source\": \"printed\", \"phase\": \"Cu5Zr\"}], \"phases\": [{\"label\": \"L\", \"model_phase\": \"LIQUID\"}, {\"label\": \"(Cu)\", \"model_phase\": \"FCC_A1\", \"pearson_symbol\": \"cF4\", \"prototype\": \"Cu\", \"structure_basis\": \"mapped_model_phase\"}, {\"label\": \"Cu5Zr\", \"model_phase\": \"CU5ZR_C15B\", \"pearson_symbol\": \"cF24\", \"prototype\": \"AuBe5\", \"structure_basis\": \"mapped_model_phase\"}], \"pid\": \"doi:10.1007/s11669-017-0522-2/p9/tab-5/r22#invariant_reaction\", \"pressure_Pa\": 101325, \"pressure_basis\": \"assumed_default_1_atm_not_printed\", \"pressure_basis_stored\": \"stated_default_1_atm\", \"property\": \"INVARIANT_TEMPERATURE\", \"property_group\": \"invariant reaction\", \"reaction\": {\"printed\": \"Liquid <-> (Cu) + Cu5Zr\", \"type\": \"eutectic\"}, \"reader_agreement\": \"multi_reader\", \"reader_agreement_basis\": \"derived_from_readers\", \"reader_agreement_label\": \"confirmed (two or more readers)\", \"reader_tier\": \"preliminary_flash+claude\", \"readers\": [\"claude-opus-5.5\", \"gemini-3.8-flash\", \"text_layer\"], \"record_kind\": \"invariant_table\", \"source_system\": \"CU-ZR\", \"system\": \"CU-ZR\", \"temperature_K\": 1253.0, \"temperature_printed\": \"1253\", \"temperature_uncertainty\": {\"basis\": \"stated_default\", \"value\": 2.0}, \"tool_release\": \"v2.1.19n\", \"transition_kind\": \"eutectic\", \"transition_kind_printed\": \"Eutectic\", \"uncertainty_budget\": {\"calibration\": \"orchid-uncertainty-calibration 2026-10-24 (audit round 2) sha256 b29f39e1cb42\", \"quantities\": {\"composition\": {\"sigma_composition\": null, \"sigma_conversion\": null, \"sigma_effective\": 0.011, \"sigma_method\": {\"basis\": \"calibrated\", \"ci95\": [0.010484, 0.011532], \"class\": \"unknown\", \"entry\": \"value_types/X_PHASE/classes/unknown\", \"floor\": 0.011, \"floor_unit\": \"mole fraction\", \"n_pairs\": 3014, \"value\": 0.011}, \"sigma_printed\": null, \"sigma_reading\": {\"basis\": \"last_stored_digit\", \"value\": 0.0005}, \"sigma_scatter\": null, \"unit\": \"mole fraction\", \"value_type\": \"X_PHASE\"}, \"value\": {\"sigma_composition\": null, \"sigma_conversion\": null, \"sigma_effective\": 11.0, \"sigma_method\": {\"basis\": \"calibrated\", \"ci95\": [9.330373, 10.483565], \"class\": \"unknown\", \"entry\": \"value_types/T_INVARIANT/classes/unknown\", \"floor\": 11.0, \"floor_unit\": \"K\", \"n_pairs\": 4918, \"value\": 11.0}, \"sigma_printed\": null, \"sigma_reading\": {\"basis\": \"last_printed_digit\", \"value\": 0.05}, \"sigma_scatter\": null, \"unit\": \"K\", \"value_type\": \"T_INVARIANT\"}}, \"sigma_rule\": \"max(sqrt(max(printed, reading, method)^2 + composition^2 + conversion^2), scatter)\"}, \"unit\": \"K\", \"value\": 1253.0, \"elements\": [\"CU\", \"ZR\"], \"source\": {\"paper\": \"doi:10.1007/s11669-017-0522-2\", \"citation\": \"Yuling Liu, Shuhong Liu, Cong Zhang, Yong Du, Jiong Wang, Yiwei Li, Experimental Investigation and Thermodynamic Description of the Cu-Zr System, J. Phase Equilib. Diffus. 38, 121-134 (2017).\", \"doi\": \"10.1007/s11669-017-0522-2\", \"doi_url\": \"https://doi.org/10.1007/s11669-017-0522-2\", \"year\": 2017, \"page\": 9, \"quote\": null, \"artifact\": \"5\", \"caption\": \"Summary of the invariant equilibria in the Cu-Zr system\", \"row\": 22, \"quote_note\": \"table value: no sentence quote; verify with the table label/caption/page/row in `locator`\"}, \"report_issue_url\": \"https://github.com/orchid-calphad/orchid-data/issues/new?template=report-value-error.yml&title=%5Bvalue%5D%20ORC-CC4MAVSJOT%20%28CU-ZR%29&record_id=ORC-CC4MAVSJOT&system=CU-ZR&source=doi%3A10.1007%2Fs11669-017-0522-2%2C%20p.%209&value_shown=1253%20K\"}, {\"chemical_system\": \"CU-ZR\", \"cited_sources\": [{\"first_author\": \"Showak\", \"kind\": \"unknown\", \"label\": \"49\", \"reference\": \"W. Showak, The Solid Solubility of Zirconium in Copper, Trans. Am. Inst. Min. Metall Pet. Eng., 1962, 224, p 1297-1298\", \"status\": \"resolved\", \"year\": \"1962\"}], \"conditions\": {\"kind\": \"cited_source\", \"note\": \"conditions in the cited source\"}, \"evidence_class\": \"experimental\", \"flags\": {\"calphad_check\": \"not_available\", \"espei_certified\": false, \"espei_phase_rule\": {\"basis\": \"printed_labels\", \"result\": \"pass\"}, \"espei_ready\": true, \"extraction_accepted\": true, \"review_state\": \"extracted\", \"row_state\": \"settled\", \"state_fully_specified\": true}, \"fold_lpo\": 3, \"fold_lso\": 3, \"id\": \"ORC-Y5UCJ644SB\", \"locator\": {\"artifact\": \"table\", \"caption\": \"Summary of the invariant equilibria in the Cu-Zr system\", \"label\": \"5\", \"page\": 9, \"ref\": \"doi:10.1007/s11669-017-0522-2/p9/tab-5\", \"row\": 25}, \"observation_type\": \"invariant_reaction\", \"origin\": {\"basis\": \"printed_source_experimental\", \"class\": \"experimental\", \"own_work_of_paper\": false}, \"paper\": \"doi:10.1007/s11669-017-0522-2\", \"paper_id\": \"doi:10.1007/s11669-017-0522-2\", \"phase_compositions\": [{\"basis\": \"mole_fraction\", \"composition\": {\"CU\": 0.833333, \"ZR\": 0.166667}, \"composition_source\": \"stoichiometric_model_phase\", \"phase\": \"Cu5Zr\"}], \"phases\": [{\"label\": \"L\", \"model_phase\": \"LIQUID\"}, {\"label\": \"(Cu)\", \"model_phase\": \"FCC_A1\", \"pearson_symbol\": \"cF4\", \"prototype\": \"Cu\", \"structure_basis\": \"mapped_model_phase\"}, {\"label\": \"Cu5Zr\", \"model_phase\": \"CU5ZR_C15B\", \"pearson_symbol\": \"cF24\", \"prototype\": \"AuBe5\", \"structure_basis\": \"mapped_model_phase\"}], \"pid\": \"doi:10.1007/s11669-017-0522-2/p9/tab-5/r25#invariant_reaction\", \"pressure_Pa\": 101325, \"pressure_basis\": \"assumed_default_1_atm_not_printed\", \"pressure_basis_stored\": \"stated_default_1_atm\", \"property\": \"INVARIANT_TEMPERATURE\", \"property_group\": \"invariant reaction\", \"reaction\": {\"printed\": \"Liquid <-> (Cu) + Cu5Zr\", \"type\": \"eutectic\"}, \"reader_agreement\": \"multi_reader\", \"reader_agreement_basis\": \"derived_from_readers\", \"reader_agreement_label\": \"confirmed (two or more readers)\", \"reader_tier\": \"preliminary_flash+claude\", \"readers\": [\"claude-opus-5.5\", \"gemini-3.8-flash\", \"text_layer\"], \"record_kind\": \"invariant_table\", \"source_system\": \"CU-ZR\", \"system\": \"CU-ZR\", \"temperature_K\": 1253.0, \"temperature_printed\": \"1253\", \"temperature_uncertainty\": {\"basis\": \"stated_default\", \"value\": 2.0}, \"tool_release\": \"v2.1.19n\", \"transition_kind\": \"eutectic\", \"transition_kind_printed\": \"Eutectic\", \"uncertainty_budget\": {\"calibration\": \"orchid-uncertainty-calibration 2026-10-24 (audit round 2) sha256 b29f39e1cb42\", \"quantities\": {\"composition\": {\"sigma_composition\": null, \"sigma_conversion\": null, \"sigma_effective\": 0.011, \"sigma_method\": {\"basis\": \"calibrated\", \"ci95\": [0.010484, 0.011532], \"class\": \"unknown\", \"entry\": \"value_types/X_PHASE/classes/unknown\", \"floor\": 0.011, \"floor_unit\": \"mole fraction\", \"n_pairs\": 3014, \"value\": 0.011}, \"sigma_printed\": null, \"sigma_reading\": {\"basis\": \"last_stored_digit\", \"value\": 5e-07}, \"sigma_scatter\": null, \"unit\": \"mole fraction\", \"value_type\": \"X_PHASE\"}, \"value\": {\"sigma_composition\": null, \"sigma_conversion\": null, \"sigma_effective\": 11.0, \"sigma_method\": {\"basis\": \"calibrated\", \"ci95\": [9.330373, 10.483565], \"class\": \"unknown\", \"entry\": \"value_types/T_INVARIANT/classes/unknown\", \"floor\": 11.0, \"floor_unit\": \"K\", \"n_pairs\": 4918, \"value\": 11.0}, \"sigma_printed\": null, \"sigma_reading\": {\"basis\": \"last_printed_digit\", \"value\": 0.05}, \"sigma_scatter\": null, \"unit\": \"K\", \"value_type\": \"T_INVARIANT\"}}, \"sigma_rule\": \"max(sqrt(max(printed, reading, method)^2 + composition^2 + conversion^2), scatter)\"}, \"unit\": \"K\", \"value\": 1253.0, \"elements\": [\"CU\", \"ZR\"], \"source\": {\"paper\": \"doi:10.1007/s11669-017-0522-2\", \"citation\": \"Yuling Liu, Shuhong Liu, Cong Zhang, Yong Du, Jiong Wang, Yiwei Li, Experimental Investigation and Thermodynamic Description of the Cu-Zr System, J. Phase Equilib. Diffus. 38, 121-134 (2017).\", \"doi\": \"10.1007/s11669-017-0522-2\", \"doi_url\": \"https://doi.org/10.1007/s11669-017-0522-2\", \"year\": 2017, \"page\": 9, \"quote\": null, \"artifact\": \"5\", \"caption\": \"Summary of the invariant equilibria in the Cu-Zr system\", \"row\": 25, \"quote_note\": \"table value: no sentence quote; verify with the table label/caption/page/row in `locator`\"}, \"report_issue_url\": \"https://github.com/orchid-calphad/orchid-data/issues/new?template=report-value-error.yml&title=%5Bvalue%5D%20ORC-Y5UCJ644SB%20%28CU-ZR%29&record_id=ORC-Y5UCJ644SB&system=CU-ZR&source=doi%3A10.1007%2Fs11669-017-0522-2%2C%20p.%209&value_shown=1253%20K\"}, {\"chemical_system\": \"CU-ZR\", \"cited_sources\": [{\"first_author\": \"Braga\", \"kind\": \"unknown\", \"label\": \"27\", \"reference\": \"M.H. Braga, L.F. Malheiros, F. Castro, and D. Soares, Experimental Liquidus Points and Invariant Reactions in the Cu-Zr System, Z. Metallkd., 1998, 89(8), p 541-545\", \"status\": \"resolved\", \"year\": \"1998\"}], \"conditions\": {\"kind\": \"cited_source\", \"note\": \"conditions in the cited source\"}, \"evidence_class\": \"experimental\", \"flags\": {\"calphad_check\": \"not_available\", \"espei_certified\": false, \"espei_phase_rule\": {\"basis\": \"printed_labels\", \"result\": \"pass\"}, \"espei_ready\": true, \"extraction_accepted\": true, \"review_state\": \"extracted\", \"row_state\": \"settled\", \"state_fully_specified\": true}, \"fold_lpo\": 3, \"fold_lso\": 3, \"id\": \"ORC-SNSFOQTE7O\", \"locator\": {\"artifact\": \"table\", \"caption\": \"Summary of the invariant equilibria in the Cu-Zr system\", \"label\": \"5\", \"page\": 9, \"ref\": \"doi:10.1007/s11669-017-0522-2/p9/tab-5\", \"row\": 30}, \"observation_type\": \"invariant_reaction\", \"origin\": {\"basis\": \"printed_source_experimental\", \"class\": \"experimental\", \"own_work_of_paper\": false}, \"paper\": \"doi:10.1007/s11669-017-0522-2\", \"paper_id\": \"doi:10.1007/s11669-017-0522-2\", \"phase_compositions\": [{\"basis\": \"mole_fraction (converted from atomic percent)\", \"composition\": {\"ZR\": 0.094}, \"composition_source\": \"printed\", \"phase\": \"L\"}, {\"basis\": \"mole_fraction (converted from atomic percent)\", \"composition\": {\"CU\": 0.833333, \"ZR\": 0.166667}, \"composition_source\": \"stoichiometric_model_phase\", \"phase\": \"Cu5Zr\"}], \"phases\": [{\"label\": \"L\", \"model_phase\": \"LIQUID\"}, {\"label\": \"(Cu)\", \"model_phase\": \"FCC_A1\", \"pearson_symbol\": \"cF4\", \"prototype\": \"Cu\", \"structure_basis\": \"mapped_model_phase\"}, {\"label\": \"Cu5Zr\", \"model_phase\": \"CU5ZR_C15B\", \"pearson_symbol\": \"cF24\", \"prototype\": \"AuBe5\", \"structure_basis\": \"mapped_model_phase\"}], \"pid\": \"doi:10.1007/s11669-017-0522-2/p9/tab-5/r30#invariant_reaction\", \"pressure_Pa\": 101325, \"pressure_basis\": \"assumed_default_1_atm_not_printed\", \"pressure_basis_stored\": \"stated_default_1_atm\", \"property\": \"INVARIANT_TEMPERATURE\", \"property_group\": \"invariant reaction\", \"reaction\": {\"printed\": \"Liquid <-> (Cu) + Cu5Zr\", \"type\": \"eutectic\"}, \"reader_agreement\": \"multi_reader\", \"reader_agreement_basis\": \"derived_from_readers\", \"reader_agreement_label\": \"confirmed (two or more readers)\", \"reader_tier\": \"preliminary_flash+claude\", \"readers\": [\"claude-opus-5.5\", \"gemini-3.8-flash\", \"text_layer\"], \"record_kind\": \"invariant_table\", \"source_system\": \"CU-ZR\", \"system\": \"CU-ZR\", \"temperature_K\": 1253.0, \"temperature_printed\": \"1253\", \"temperature_uncertainty\": {\"basis\": \"stated_default\", \"value\": 2.0}, \"tool_release\": \"v2.1.19n\", \"transition_kind\": \"eutectic\", \"transition_kind_printed\": \"Eutectic\", \"uncertainty_budget\": {\"calibration\": \"orchid-uncertainty-calibration 2026-10-24 (audit round 2) sha256 b29f39e1cb42\", \"quantities\": {\"composition\": {\"sigma_composition\": null, \"sigma_conversion\": null, \"sigma_effective\": 0.011, \"sigma_method\": {\"basis\": \"calibrated\", \"ci95\": [0.010484, 0.011532], \"class\": \"unknown\", \"entry\": \"value_types/X_PHASE/classes/unknown\", \"floor\": 0.011, \"floor_unit\": \"mole fraction\", \"n_pairs\": 3014, \"value\": 0.011}, \"sigma_printed\": null, \"sigma_reading\": {\"basis\": \"last_stored_digit\", \"value\": 5e-07}, \"sigma_scatter\": null, \"unit\": \"mole fraction\", \"value_type\": \"X_PHASE\"}, \"value\": {\"sigma_composition\": null, \"sigma_conversion\": null, \"sigma_effective\": 11.0, \"sigma_method\": {\"basis\": \"calibrated\", \"ci95\": [9.330373, 10.483565], \"class\": \"unknown\", \"entry\": \"value_types/T_INVARIANT/classes/unknown\", \"floor\": 11.0, \"floor_unit\": \"K\", \"n_pairs\": 4918, \"value\": 11.0}, \"sigma_printed\": null, \"sigma_reading\": {\"basis\": \"last_printed_digit\", \"value\": 0.05}, \"sigma_scatter\": null, \"unit\": \"K\", \"value_type\": \"T_INVARIANT\"}}, \"sigma_rule\": \"max(sqrt(max(printed, reading, method)^2 + composition^2 + conversion^2), scatter)\"}, \"unit\": \"K\", \"value\": 1253.0, \"elements\": [\"CU\", \"ZR\"], \"source\": {\"paper\": \"doi:10.1007/s11669-017-0522-2\", \"citation\": \"Yuling Liu, Shuhong Liu, Cong Zhang, Yong Du, Jiong Wang, Yiwei Li, Experimental Investigation and Thermodynamic Description of the Cu-Zr System, J. Phase Equilib. Diffus. 38, 121-134 (2017).\", \"doi\": \"10.1007/s11669-017-0522-2\", \"doi_url\": \"https://doi.org/10.1007/s11669-017-0522-2\", \"year\": 2017, \"page\": 9, \"quote\": null, \"artifact\": \"5\", \"caption\": \"Summary of the invariant equilibria in the Cu-Zr system\", \"row\": 30, \"quote_note\": \"table value: no sentence quote; verify with the table label/caption/page/row in `locator`\"}, \"report_issue_url\": \"https://github.com/orchid-calphad/orchid-data/issues/new?template=report-value-error.yml&title=%5Bvalue%5D%20ORC-SNSFOQTE7O%20%28CU-ZR%29&record_id=ORC-SNSFOQTE7O&system=CU-ZR&source=doi%3A10.1007%2Fs11669-017-0522-2%2C%20p.%209&value_shown=1253%20K\"}, {\"chemical_system\": \"CU-ZR\", \"conditions\": {\"kind\": \"not_applicable_own_calculation\"}, \"evidence_class\": \"model\", \"flags\": {\"calphad_check\": \"agrees\", \"espei_certified\": false, \"espei_ready\": false, \"extraction_accepted\": true, \"plausibility\": {\"calculation\": \"pycalphad binary topology (computed invariant)\", \"dT_K\": -0.942, \"dx\": {\"Liquid\": -0.0004}, \"model\": \"CuZr-11Gie.tdb\", \"result\": \"pass\", \"tolerance\": {\"dT_K\": 25.0, \"dx\": 0.05}}, \"review_state\": \"extracted\", \"row_state\": \"settled\", \"state_fully_specified\": true}, \"fold_lpo\": 3, \"fold_lso\": 3, \"id\": \"ORC-RZTCG5SGYH\", \"locator\": {\"artifact\": \"table\", \"caption\": \"Invariant reactions in the binary Cu–Zr system.\", \"label\": \"3\", \"page\": 5, \"ref\": \"doi:10.1016/j.jallcom.2011.04.141/p5/tab-3\", \"row\": 34}, \"model\": {\"key\": \"Me2c616e3\", \"catalog_entry\": {\"license\": \"CC BY 4.0\", \"name\": \"CuZr-11Gie.tdb\", \"source_url\": \"https://doi.org/10.1016/j.calphad.2025.102833\", \"tier\": \"bundled\"}, \"link_basis\": \"reporting_paper_own_model\", \"model_citation\": \"W. Gierlotka, K.-C. Zhang, Y.-P. Chang, J. Alloys Compd., 509, 8313-18(2011).\", \"model_doi\": \"10.1016/j.jallcom.2011.04.141\", \"reproduced_by_calculation\": true, \"tdb\": \"CuZr-11Gie.tdb\", \"tdb_path\": \"databases/sgte-binary/CuZr-11Gie.tdb\", \"tdb_sha256\": \"01a7f13067505d6c4f48f9aab2d996c2a08ec4ecb82f1ecf2f807333a43a3cb4\"}, \"observation_type\": \"invariant_reaction\", \"origin\": {\"basis\": \"this_work+label_names_calculation\", \"class\": \"model_value\", \"measured_in\": \"doi:10.1016/j.jallcom.2011.04.141\", \"measured_in_basis\": \"reporting_paper_own_value\", \"own_work_of_paper\": true}, \"paper\": \"doi:10.1016/j.jallcom.2011.04.141\", \"paper_id\": \"doi:10.1016/j.jallcom.2011.04.141\", \"phase_compositions\": [{\"basis\": \"mole_fraction\", \"composition\": {\"ZR\": 0.354}, \"composition_source\": \"printed\", \"phase\": \"Liquid\"}, {\"basis\": \"mole_fraction\", \"composition\": {\"ZR\": 0.2727272727}, \"composition_source\": \"stoichiometry\", \"phase\": \"Cu8Zr3\"}, {\"basis\": \"mole_fraction\", \"composition\": {\"ZR\": 0.3333333333}, \"composition_source\": \"stoichiometry\", \"phase\": \"Cu2Zr\"}], \"phases\": [{\"label\": \"Liquid\", \"mapping_confidence\": \"confirmed\", \"model_phase\": \"LIQUID\"}, {\"label\": \"Cu8Zr3\", \"mapping_confidence\": \"confirmed\", \"model_phase\": \"CU8ZR3\", \"pearson_symbol\": \"oP44\", \"prototype\": \"Cu8Hf3\", \"structure_basis\": \"mapped_model_phase\"}, {\"label\": \"Cu2Zr\", \"mapping_confidence\": \"confirmed\", \"model_phase\": \"CU2ZR\", \"pearson_symbol\": \"?\", \"prototype\": \"(Cu2Zr)\", \"structure_basis\": \"mapped_model_phase\"}], \"pid\": \"doi:10.1016/j.jallcom.2011.04.141/p5/tab-3/r-unplaced-89c0eab8#invariant\", \"pressure_Pa\": 101325, \"pressure_basis\": \"assumed_default_1_atm_not_printed\", \"pressure_basis_stored\": \"stated_default_1_atm\", \"property\": \"INVARIANT_TEMPERATURE\", \"property_group\": \"invariant reaction\", \"reaction\": {\"printed\": \"Liquid + Cu8Zr3 = Cu2Zr\"}, \"reader_agreement\": \"multi_reader\", \"reader_agreement_basis\": \"derived_from_readers\", \"reader_agreement_label\": \"confirmed (two or more readers)\", \"reader_tier\": \"preliminary_flash+claude\", \"readers\": [\"claude-opus-5.5\", \"gemini-3.1-pro-preview\", \"gemini-3.8-flash\"], \"record_kind\": \"invariant_table\", \"source_system\": \"CU-ZR\", \"system\": \"CU-ZR\", \"temperature_K\": 1253, \"temperature_printed\": \"1253\", \"temperature_uncertainty\": {\"basis\": \"stated_default\", \"value\": 2.0}, \"tool_release\": \"v2.1.19n\", \"uncertainty_budget\": {\"calibration\": \"orchid-uncertainty-calibration 2026-10-24 (audit round 2) sha256 b29f39e1cb42\", \"quantities\": {\"composition\": {\"sigma_composition\": null, \"sigma_conversion\": null, \"sigma_effective\": 0.005, \"sigma_method\": {\"basis\": \"calibrated\", \"ci95\": [0.004448, 0.004448], \"class\": \"model_calculated\", \"entry\": \"model/X_PHASE\", \"floor\": 0.005, \"floor_unit\": \"mole fraction\", \"n_pairs\": 16735, \"value\": 0.005}, \"sigma_printed\": null, \"sigma_reading\": {\"basis\": \"last_stored_digit\", \"value\": 5e-11}, \"sigma_scatter\": null, \"unit\": \"mole fraction\", \"value_type\": \"X_PHASE\"}, \"value\": {\"sigma_composition\": null, \"sigma_conversion\": null, \"sigma_effective\": 4.0, \"sigma_method\": {\"basis\": \"calibrated\", \"ci95\": [3.11346, 4.410735], \"class\": \"model_calculated\", \"entry\": \"model/T_INVARIANT\", \"floor\": 4.0, \"floor_unit\": \"K\", \"n_pairs\": 14170, \"value\": 4.0}, \"sigma_printed\": null, \"sigma_reading\": {\"basis\": \"last_printed_digit\", \"value\": 0.5}, \"sigma_scatter\": null, \"unit\": \"K\", \"value_type\": \"T_INVARIANT\"}}, \"sigma_rule\": \"max(sqrt(max(printed, reading, method)^2 + composition^2 + conversion^2), scatter)\"}, \"unit\": \"K\", \"value\": 1253, \"elements\": [\"CU\", \"ZR\"], \"source\": {\"paper\": \"doi:10.1016/j.jallcom.2011.04.141\", \"citation\": \"Wojciech Gierlotka, Kai-Chien Zhang, Yuan-Pei Chang, Thermodynamic description of the binary Cu–Zr system, Journal of Alloys and Compounds 509, 8313-8318 (2011).\", \"doi\": \"10.1016/j.jallcom.2011.04.141\", \"doi_url\": \"https://doi.org/10.1016/j.jallcom.2011.04.141\", \"year\": 2011, \"page\": 5, \"quote\": null, \"artifact\": \"3\", \"caption\": \"Invariant reactions in the binary Cu–Zr system.\", \"row\": 34, \"quote_note\": \"table value: no sentence quote; verify with the table label/caption/page/row in `locator`\"}, \"report_issue_url\": \"https://github.com/orchid-calphad/orchid-data/issues/new?template=report-value-error.yml&title=%5Bvalue%5D%20ORC-RZTCG5SGYH%20%28CU-ZR%29&record_id=ORC-RZTCG5SGYH&system=CU-ZR&source=doi%3A10.1016%2Fj.jallcom.2011.04.141%2C%20p.%205&value_shown=1253%20K\"}, {\"chemical_system\": \"CU-ZR\", \"cited_sources\": [{\"doi\": \"10.1016/j.intermet.2009.12.013\", \"first_author\": \"Kang\", \"kind\": \"assessment\", \"label\": \"38\", \"paper\": \"doi:10.1016/j.intermet.2009.12.013\", \"reference\": \"D.H. Kang, I.H. Jung, Intermetallics 18 (2010) 815–833.\", \"status\": \"resolved\", \"year\": \"2010\"}], \"conditions\": {\"kind\": \"cited_source\", \"note\": \"conditions in the cited source\"}, \"evidence_class\": \"model\", \"flags\": {\"calphad_check\": \"agrees\", \"espei_certified\": false, \"espei_ready\": false, \"extraction_accepted\": true, \"plausibility\": {\"calculation\": \"pycalphad binary topology (computed invariant)\", \"dT_K\": 0.981, \"dx\": {\"Liquid\": -0.0022}, \"model\": \"CuZr-11Gie.tdb\", \"result\": \"pass\", \"tolerance\": {\"dT_K\": 25.0, \"dx\": 0.05}}, \"review_state\": \"extracted\", \"row_state\": \"settled\", \"state_fully_specified\": true}, \"fold_lpo\": 3, \"fold_lso\": 3, \"id\": \"ORC-KABMFOPDG7\", \"locator\": {\"artifact\": \"table\", \"caption\": \"Invariant reactions in the binary Cu–Zr system.\", \"label\": \"3\", \"page\": 5, \"ref\": \"doi:10.1016/j.jallcom.2011.04.141/p5/tab-3\", \"row\": 7}, \"model_unlinked_reason\": \"cited calculation whose model is not a corpus TDB\", \"observation_type\": \"invariant_reaction\", \"origin\": {\"basis\": \"printed_source_other_calculation\", \"class\": \"model_value\", \"measured_in\": \"doi:10.1016/j.intermet.2009.12.013\", \"measured_in_basis\": \"cited_work\", \"own_work_of_paper\": false}, \"paper\": \"doi:10.1016/j.jallcom.2011.04.141\", \"paper_id\": \"doi:10.1016/j.jallcom.2011.04.141\", \"phase_compositions\": [{\"basis\": \"mole_fraction\", \"composition\": {\"ZR\": 0.081}, \"composition_source\": \"printed\", \"phase\": \"Liquid\"}, {\"basis\": \"mole_fraction\", \"composition\": {\"ZR\": 0.1818181818}, \"composition_source\": \"stoichiometry\", \"phase\": \"Cu9Zr2\"}], \"phases\": [{\"label\": \"Liquid\", \"mapping_confidence\": \"confirmed\", \"model_phase\": \"LIQUID\"}, {\"label\": \"FCC_A1\", \"mapping_confidence\": \"confirmed\", \"model_phase\": \"FCC_A1\", \"pearson_symbol\": \"cF4\", \"prototype\": \"Cu\", \"structure_basis\": \"mapped_model_phase\"}, {\"label\": \"Cu9Zr2\", \"mapping_confidence\": \"confirmed\", \"model_phase\": \"CU9ZR2_C15B\", \"pearson_symbol\": \"cF24\", \"prototype\": \"AuBe5\", \"structure_basis\": \"mapped_model_phase\"}], \"pid\": \"doi:10.1016/j.jallcom.2011.04.141/p5/tab-3/r-unplaced-d7736247#invariant\", \"pressure_Pa\": 101325, \"pressure_basis\": \"assumed_default_1_atm_not_printed\", \"pressure_basis_stored\": \"stated_default_1_atm\", \"property\": \"INVARIANT_TEMPERATURE\", \"property_group\": \"invariant reaction\", \"reaction\": {\"printed\": \"Liquid = FCC_A1+Cu9Zr2\"}, \"reader_agreement\": \"multi_reader\", \"reader_agreement_basis\": \"derived_from_readers\", \"reader_agreement_label\": \"confirmed (two or more readers)\", \"reader_tier\": \"preliminary_flash+claude\", \"readers\": [\"claude-opus-5.5\", \"gemini-3.1-pro-preview\", \"gemini-3.8-flash\"], \"record_kind\": \"invariant_table\", \"source_system\": \"CU-ZR\", \"system\": \"CU-ZR\", \"temperature_K\": 1253, \"temperature_printed\": \"1253\", \"temperature_uncertainty\": {\"basis\": \"stated_default\", \"value\": 2.0}, \"tool_release\": \"v2.1.19n\", \"uncertainty_budget\": {\"calibration\": \"orchid-uncertainty-calibration 2026-10-24 (audit round 2) sha256 b29f39e1cb42\", \"quantities\": {\"composition\": {\"sigma_composition\": null, \"sigma_conversion\": null, \"sigma_effective\": 0.005, \"sigma_method\": {\"basis\": \"calibrated\", \"ci95\": [0.004448, 0.004448], \"class\": \"model_calculated\", \"entry\": \"model/X_PHASE\", \"floor\": 0.005, \"floor_unit\": \"mole fraction\", \"n_pairs\": 16735, \"value\": 0.005}, \"sigma_printed\": null, \"sigma_reading\": {\"basis\": \"last_stored_digit\", \"value\": 5e-11}, \"sigma_scatter\": null, \"unit\": \"mole fraction\", \"value_type\": \"X_PHASE\"}, \"value\": {\"sigma_composition\": null, \"sigma_conversion\": null, \"sigma_effective\": 4.0, \"sigma_method\": {\"basis\": \"calibrated\", \"ci95\": [3.11346, 4.410735], \"class\": \"model_calculated\", \"entry\": \"model/T_INVARIANT\", \"floor\": 4.0, \"floor_unit\": \"K\", \"n_pairs\": 14170, \"value\": 4.0}, \"sigma_printed\": null, \"sigma_reading\": {\"basis\": \"last_printed_digit\", \"value\": 0.5}, \"sigma_scatter\": null, \"unit\": \"K\", \"value_type\": \"T_INVARIANT\"}}, \"sigma_rule\": \"max(sqrt(max(printed, reading, method)^2 + composition^2 + conversion^2), scatter)\"}, \"unit\": \"K\", \"value\": 1253, \"elements\": [\"CU\", \"ZR\"], \"source\": {\"paper\": \"doi:10.1016/j.jallcom.2011.04.141\", \"citation\": \"Wojciech Gierlotka, Kai-Chien Zhang, Yuan-Pei Chang, Thermodynamic description of the binary Cu–Zr system, Journal of Alloys and Compounds 509, 8313-8318 (2011).\", \"doi\": \"10.1016/j.jallcom.2011.04.141\", \"doi_url\": \"https://doi.org/10.1016/j.jallcom.2011.04.141\", \"year\": 2011, \"page\": 5, \"quote\": null, \"artifact\": \"3\", \"caption\": \"Invariant reactions in the binary Cu–Zr system.\", \"row\": 7, \"quote_note\": \"table value: no sentence quote; verify with the table label/caption/page/row in `locator`\"}, \"report_issue_url\": \"https://github.com/orchid-calphad/orchid-data/issues/new?template=report-value-error.yml&title=%5Bvalue%5D%20ORC-KABMFOPDG7%20%28CU-ZR%29&record_id=ORC-KABMFOPDG7&system=CU-ZR&source=doi%3A10.1016%2Fj.jallcom.2011.04.141%2C%20p.%205&value_shown=1253%20K\"}, {\"chemical_system\": \"CU-ZR\", \"conditions\": {\"kind\": \"own_work_origin_unspecified\"}, \"corrections\": [{\"after\": \"model\", \"before\": \"unspecified\", \"evidence\": {\"printed\": null}, \"field\": \"evidence_class\", \"gate\": \"page\", \"rule\": \"evaluated_or_modelled_value_not_experimental\", \"visual_check\": {\"checked\": \"2026-10-24\", \"image_sha256\": \"0392437ffc391ea424597af05943bc62562678210fb8b965e0a7bf005c8fc890\", \"page\": 9, \"pdf_sha256_prefix\": \"664f945fea949860\", \"seen\": \"Table 7 'Invariant reactions in the Cu-Zr binary system' (Acta Mater 58 (2010) 2194), full table on this page: columns Modeling results (This work, [4 | value 1252 K matches page\", \"verdict\": \"corrected\"}}], \"evidence_class\": \"model\", \"evidence_class_before_gates\": \"unspecified\", \"flags\": {\"calphad_check\": \"agrees\", \"espei_certified\": false, \"espei_ready\": false, \"extraction_accepted\": true, \"plausibility\": {\"calculation\": \"pycalphad binary topology (computed invariant)\", \"dT_K\": -0.67, \"dx\": {\"L\": 0.0004, \"fcc\": -0.0004}, \"model\": \"CuZr-10Zho.tdb\", \"result\": \"pass\", \"tolerance\": {\"dT_K\": 25.0, \"dx\": 0.05}}, \"review_state\": \"extracted\", \"row_state\": \"settled\", \"source_disputed\": true, \"state_fully_specified\": true}, \"fold_lpo\": 4, \"fold_lso\": 3, \"id\": \"ORC-DAVE3QXZGB\", \"locator\": {\"artifact\": \"table\", \"caption\": \"Invariant reactions in the Cu–Zr binary system.\", \"label\": \"7\", \"page\": 9, \"ref\": \"doi:10.1016/j.actamat.2009.12.004/p9/tab-7\", \"row\": 30}, \"observation_type\": \"invariant_reaction\", \"origin\": {\"basis\": \"this_work_paper_text_says_both_kinds_in_table\", \"class\": \"unspecified\", \"class_gate\": \"assessed / modelled value\", \"measured_in\": \"doi:10.1016/j.actamat.2009.12.004\", \"measured_in_basis\": \"no_citation_printed\", \"own_work_of_paper\": true}, \"paper\": \"doi:10.1016/j.actamat.2009.12.004\", \"paper_id\": \"doi:10.1016/j.actamat.2009.12.004\", \"phase_compositions\": [{\"basis\": \"mole_fraction\", \"composition\": {\"ZR\": 0.072}, \"composition_source\": \"printed\", \"phase\": \"L\"}, {\"basis\": \"mole_fraction\", \"composition\": {\"ZR\": 0.001}, \"composition_source\": \"printed\", \"phase\": \"fcc\"}, {\"basis\": \"mole_fraction\", \"composition\": {\"ZR\": 0.166667}, \"composition_source\": \"stoichiometric_model_phase\", \"phase\": \"C15b\"}], \"phases\": [{\"label\": \"L\", \"mapping_confidence\": \"confirmed\", \"model_phase\": \"LIQUID\"}, {\"label\": \"fcc\", \"mapping_confidence\": \"confirmed\", \"model_phase\": \"FCC_A1\", \"pearson_symbol\": \"cF4\", \"prototype\": \"Cu\", \"structure_basis\": \"mapped_model_phase\"}, {\"label\": \"C15b\", \"mapping_confidence\": \"confirmed\", \"model_phase\": \"CU5ZR_C15B\", \"pearson_symbol\": \"cF24\", \"prototype\": \"AuBe5\", \"structure_basis\": \"mapped_model_phase\"}], \"pid\": \"doi:10.1016/j.actamat.2009.12.004/p9/tab-7/r-unplaced-3a175c3c#invariant\", \"pressure_Pa\": 101325, \"pressure_basis\": \"assumed_default_1_atm_not_printed\", \"pressure_basis_stored\": \"stated_default_1_atm\", \"property\": \"INVARIANT_TEMPERATURE\", \"property_group\": \"invariant reaction\", \"reaction\": {\"printed\": \"Liq -> fcc + C15b\", \"type\": \"eutectic\", \"type_basis\": \"derived_from_printed_reaction\"}, \"reader_agreement\": \"multi_reader\", \"reader_agreement_basis\": \"derived_from_readers\", \"reader_agreement_label\": \"confirmed (two or more readers)\", \"reader_tier\": \"preliminary_flash+claude\", \"readers\": [\"claude-opus-5.5\", \"gemini-3.8-flash\"], \"record_kind\": \"invariant_table\", \"source_system\": \"CU-ZR\", \"system\": \"CU-ZR\", \"temperature_K\": 1252, \"temperature_printed\": \"1252\", \"temperature_uncertainty\": {\"basis\": \"stated_default\", \"value\": 2.0}, \"tool_release\": \"v2.1.19n\", \"uncertainty_budget\": {\"calibration\": \"orchid-uncertainty-calibration 2026-10-24 (audit round 2) sha256 b29f39e1cb42\", \"quantities\": {\"composition\": {\"sigma_composition\": null, \"sigma_conversion\": null, \"sigma_effective\": 0.005, \"sigma_method\": {\"basis\": \"calibrated\", \"ci95\": [0.004448, 0.004448], \"class\": \"model_calculated\", \"entry\": \"model/X_PHASE\", \"floor\": 0.005, \"floor_unit\": \"mole fraction\", \"n_pairs\": 16735, \"value\": 0.005}, \"sigma_printed\": null, \"sigma_reading\": {\"basis\": \"last_stored_digit\", \"value\": 5e-07}, \"sigma_scatter\": null, \"unit\": \"mole fraction\", \"value_type\": \"X_PHASE\"}, \"value\": {\"sigma_composition\": null, \"sigma_conversion\": null, \"sigma_effective\": 4.0, \"sigma_method\": {\"basis\": \"calibrated\", \"ci95\": [3.11346, 4.410735], \"class\": \"model_calculated\", \"entry\": \"model/T_INVARIANT\", \"floor\": 4.0, \"floor_unit\": \"K\", \"n_pairs\": 14170, \"value\": 4.0}, \"sigma_printed\": null, \"sigma_reading\": {\"basis\": \"last_printed_digit\", \"value\": 0.5}, \"sigma_scatter\": null, \"unit\": \"K\", \"value_type\": \"T_INVARIANT\"}}, \"sigma_rule\": \"max(sqrt(max(printed, reading, method)^2 + composition^2 + conversion^2), scatter)\"}, \"unit\": \"K\", \"value\": 1252, \"elements\": [\"CU\", \"ZR\"], \"source\": {\"paper\": \"doi:10.1016/j.actamat.2009.12.004\", \"citation\": \"S.H. Zhou, R.E. Napolitano, Phase stability for the Cu–Zr system: First-principles, experiments and solution-based modeling, Acta Materialia 58, 2186-2196 (2010).\", \"doi\": \"10.1016/j.actamat.2009.12.004\", \"doi_url\": \"https://doi.org/10.1016/j.actamat.2009.12.004\", \"year\": 2010, \"page\": 9, \"quote\": null, \"artifact\": \"7\", \"caption\": \"Invariant reactions in the Cu–Zr binary system.\", \"row\": 30, \"quote_note\": \"table value: no sentence quote; verify with the table label/caption/page/row in `locator`\"}, \"report_issue_url\": \"https://github.com/orchid-calphad/orchid-data/issues/new?template=report-value-error.yml&title=%5Bvalue%5D%20ORC-DAVE3QXZGB%20%28CU-ZR%29&record_id=ORC-DAVE3QXZGB&system=CU-ZR&source=doi%3A10.1016%2Fj.actamat.2009.12.004%2C%20p.%209&value_shown=1252%20K\"}, {\"chemical_system\": \"CU-ZR\", \"conditions\": {\"kind\": \"not_applicable_own_calculation\"}, \"evidence_class\": \"model\", \"flags\": {\"calphad_check\": \"agrees\", \"espei_certified\": false, \"espei_ready\": false, \"extraction_accepted\": true, \"plausibility\": {\"calculation\": \"pycalphad binary topology (computed invariant)\", \"dT_K\": -1.019, \"dx\": {\"Liquid\": -0.0022}, \"model\": \"CuZr-11Gie.tdb\", \"result\": \"pass\", \"tolerance\": {\"dT_K\": 25.0, \"dx\": 0.05}}, \"review_state\": \"extracted\", \"row_state\": \"settled\", \"state_fully_specified\": true}, \"fold_lpo\": 3, \"fold_lso\": 3, \"id\": \"ORC-PTARX2XTW4\", \"locator\": {\"artifact\": \"table\", \"caption\": \"Invariant reactions in the binary Cu–Zr system.\", \"label\": \"3\", \"page\": 5, \"ref\": \"doi:10.1016/j.jallcom.2011.04.141/p5/tab-3\", \"row\": 1}, \"model\": {\"key\": \"Me2c616e3\", \"catalog_entry\": {\"license\": \"CC BY 4.0\", \"name\": \"CuZr-11Gie.tdb\", \"source_url\": \"https://doi.org/10.1016/j.calphad.2025.102833\", \"tier\": \"bundled\"}, \"link_basis\": \"reporting_paper_own_model\", \"model_citation\": \"W. Gierlotka, K.-C. Zhang, Y.-P. Chang, J. Alloys Compd., 509, 8313-18(2011).\", \"model_doi\": \"10.1016/j.jallcom.2011.04.141\", \"reproduced_by_calculation\": true, \"tdb\": \"CuZr-11Gie.tdb\", \"tdb_path\": \"databases/sgte-binary/CuZr-11Gie.tdb\", \"tdb_sha256\": \"01a7f13067505d6c4f48f9aab2d996c2a08ec4ecb82f1ecf2f807333a43a3cb4\"}, \"observation_type\": \"invariant_reaction\", \"origin\": {\"basis\": \"this_work+label_names_calculation\", \"class\": \"model_value\", \"measured_in\": \"doi:10.1016/j.jallcom.2011.04.141\", \"measured_in_basis\": \"reporting_paper_own_value\", \"own_work_of_paper\": true}, \"paper\": \"doi:10.1016/j.jallcom.2011.04.141\", \"paper_id\": \"doi:10.1016/j.jallcom.2011.04.141\", \"phase_compositions\": [{\"basis\": \"mole_fraction\", \"composition\": {\"ZR\": 0.081}, \"composition_source\": \"printed\", \"phase\": \"Liquid\"}, {\"basis\": \"mole_fraction\", \"composition\": {\"ZR\": 0.1818181818}, \"composition_source\": \"stoichiometry\", \"phase\": \"Cu9Zr2\"}], \"phases\": [{\"label\": \"Liquid\", \"mapping_confidence\": \"confirmed\", \"model_phase\": \"LIQUID\"}, {\"label\": \"FCC_A1\", \"mapping_confidence\": \"confirmed\", \"model_phase\": \"FCC_A1\", \"pearson_symbol\": \"cF4\", \"prototype\": \"Cu\", \"structure_basis\": \"mapped_model_phase\"}, {\"label\": \"Cu9Zr2\", \"mapping_confidence\": \"confirmed\", \"model_phase\": \"CU9ZR2_C15B\", \"pearson_symbol\": \"cF24\", \"prototype\": \"AuBe5\", \"structure_basis\": \"mapped_model_phase\"}], \"pid\": \"doi:10.1016/j.jallcom.2011.04.141/p5/tab-3/r-unplaced-af2cb8c0#invariant\", \"pressure_Pa\": 101325, \"pressure_basis\": \"assumed_default_1_atm_not_printed\", \"pressure_basis_stored\": \"stated_default_1_atm\", \"property\": \"INVARIANT_TEMPERATURE\", \"property_group\": \"invariant reaction\", \"reaction\": {\"printed\": \"Liquid = FCC_A1+Cu9Zr2\"}, \"reader_agreement\": \"multi_reader\", \"reader_agreement_basis\": \"derived_from_readers\", \"reader_agreement_label\": \"confirmed (two or more readers)\", \"reader_tier\": \"preliminary_flash+claude\", \"readers\": [\"claude-opus-5.5\", \"gemini-3.1-pro-preview\", \"gemini-3.8-flash\"], \"record_kind\": \"invariant_table\", \"source_system\": \"CU-ZR\", \"system\": \"CU-ZR\", \"temperature_K\": 1251, \"temperature_printed\": \"1251\", \"temperature_uncertainty\": {\"basis\": \"stated_default\", \"value\": 2.0}, \"tool_release\": \"v2.1.19n\", \"uncertainty_budget\": {\"calibration\": \"orchid-uncertainty-calibration 2026-10-24 (audit round 2) sha256 b29f39e1cb42\", \"quantities\": {\"composition\": {\"sigma_composition\": null, \"sigma_conversion\": null, \"sigma_effective\": 0.005, \"sigma_method\": {\"basis\": \"calibrated\", \"ci95\": [0.004448, 0.004448], \"class\": \"model_calculated\", \"entry\": \"model/X_PHASE\", \"floor\": 0.005, \"floor_unit\": \"mole fraction\", \"n_pairs\": 16735, \"value\": 0.005}, \"sigma_printed\": null, \"sigma_reading\": {\"basis\": \"last_stored_digit\", \"value\": 5e-11}, \"sigma_scatter\": null, \"unit\": \"mole fraction\", \"value_type\": \"X_PHASE\"}, \"value\": {\"sigma_composition\": null, \"sigma_conversion\": null, \"sigma_effective\": 4.0, \"sigma_method\": {\"basis\": \"calibrated\", \"ci95\": [3.11346, 4.410735], \"class\": \"model_calculated\", \"entry\": \"model/T_INVARIANT\", \"floor\": 4.0, \"floor_unit\": \"K\", \"n_pairs\": 14170, \"value\": 4.0}, \"sigma_printed\": null, \"sigma_reading\": {\"basis\": \"last_printed_digit\", \"value\": 0.5}, \"sigma_scatter\": null, \"unit\": \"K\", \"value_type\": \"T_INVARIANT\"}}, \"sigma_rule\": \"max(sqrt(max(printed, reading, method)^2 + composition^2 + conversion^2), scatter)\"}, \"unit\": \"K\", \"value\": 1251, \"elements\": [\"CU\", \"ZR\"], \"source\": {\"paper\": \"doi:10.1016/j.jallcom.2011.04.141\", \"citation\": \"Wojciech Gierlotka, Kai-Chien Zhang, Yuan-Pei Chang, Thermodynamic description of the binary Cu–Zr system, Journal of Alloys and Compounds 509, 8313-8318 (2011).\", \"doi\": \"10.1016/j.jallcom.2011.04.141\", \"doi_url\": \"https://doi.org/10.1016/j.jallcom.2011.04.141\", \"year\": 2011, \"page\": 5, \"quote\": null, \"artifact\": \"3\", \"caption\": \"Invariant reactions in the binary Cu–Zr system.\", \"row\": 1, \"quote_note\": \"table value: no sentence quote; verify with the table label/caption/page/row in `locator`\"}, \"report_issue_url\": \"https://github.com/orchid-calphad/orchid-data/issues/new?template=report-value-error.yml&title=%5Bvalue%5D%20ORC-PTARX2XTW4%20%28CU-ZR%29&record_id=ORC-PTARX2XTW4&system=CU-ZR&source=doi%3A10.1016%2Fj.jallcom.2011.04.141%2C%20p.%205&value_shown=1251%20K\"}, {\"chemical_system\": \"CU-ZR\", \"cited_sources\": [{\"first_author\": \"Raub\", \"kind\": \"unknown\", \"label\": \"29\", \"reference\": \"E. Raub and M. Engel, Z. Metallkd., 39, 172-177 (1948).\", \"status\": \"resolved\", \"year\": \"1948\"}], \"conditions\": {\"kind\": \"cited_source\", \"note\": \"conditions in the cited source\"}, \"evidence_class\": \"experimental\", \"flags\": {\"calphad_check\": \"not_available\", \"espei_certified\": false, \"espei_phase_rule\": {\"basis\": \"printed_labels\", \"result\": \"pass\"}, \"espei_ready\": true, \"extraction_accepted\": true, \"review_state\": \"extracted\", \"row_state\": \"settled\", \"state_fully_specified\": true}, \"fold_lpo\": 1, \"fold_lso\": 3, \"id\": \"ORC-37Y565CBDK\", \"locator\": {\"artifact\": \"table\", \"caption\": \"Comparison between the Measured, Assessed, and Calculated Temperatures of the Three-Phase Equilibria in the Cu-Zr System and the Compositions of the First Phase in the Equilibrium Reaction Formulas\", \"label\": \"5\", \"page\": 4, \"ref\": \"doi:10.1007/bf02647618/p4/tab-5\", \"row\": 2}, \"observation_type\": \"invariant_reaction\", \"origin\": {\"basis\": \"printed_source_experimental\", \"class\": \"experimental\", \"own_work_of_paper\": false}, \"paper\": \"doi:10.1007/bf02647618\", \"paper_id\": \"doi:10.1007/bf02647618\", \"phase_compositions\": [{\"basis\": \"mole_fraction (converted from atomic percent)\", \"composition\": {\"ZR\": 0.0995}, \"composition_source\": \"printed\", \"phase\": \"L\"}, {\"basis\": \"mole_fraction (converted from atomic percent)\", \"composition\": {\"CU\": 0.833333, \"ZR\": 0.166667}, \"composition_source\": \"stoichiometric_model_phase\", \"phase\": \"Cu5Zr\"}], \"phases\": [{\"label\": \"L\", \"model_phase\": \"LIQUID\"}, {\"label\": \"(Cu)\", \"model_phase\": \"FCC_A1\", \"pearson_symbol\": \"cF4\", \"prototype\": \"Cu\", \"structure_basis\": \"mapped_model_phase\"}, {\"label\": \"Cu5Zr\", \"model_phase\": \"CU5ZR_C15B\", \"pearson_symbol\": \"cF24\", \"prototype\": \"AuBe5\", \"structure_basis\": \"mapped_model_phase\"}], \"pid\": \"doi:10.1007/bf02647618/p4/tab-5/r02#invariant_reaction\", \"pressure_Pa\": 101325, \"pressure_basis\": \"assumed_default_1_atm_not_printed\", \"pressure_basis_stored\": \"stated_default_1_atm\", \"property\": \"INVARIANT_TEMPERATURE\", \"property_group\": \"invariant reaction\", \"reaction\": {\"printed\": \"L -> (Cu) + Cu5Zr\", \"type\": \"eutectic\", \"type_basis\": \"derived_from_printed_reaction\"}, \"reader_agreement\": \"multi_reader\", \"reader_agreement_basis\": \"derived_from_readers\", \"reader_agreement_label\": \"confirmed (two or more readers)\", \"reader_tier\": \"preliminary_flash+claude\", \"readers\": [\"claude-opus-5.5\", \"gemini-3.8-flash\", \"text_layer\"], \"record_kind\": \"invariant_table\", \"source_system\": \"CU-ZR\", \"system\": \"CU-ZR\", \"temperature_K\": 1250.0, \"temperature_printed\": \"1250\", \"temperature_uncertainty\": {\"basis\": \"stated_default\", \"value\": 2.0}, \"tool_release\": \"v2.1.19n\", \"uncertainty_budget\": {\"calibration\": \"orchid-uncertainty-calibration 2026-10-24 (audit round 2) sha256 b29f39e1cb42\", \"quantities\": {\"composition\": {\"sigma_composition\": null, \"sigma_conversion\": null, \"sigma_effective\": 0.011, \"sigma_method\": {\"basis\": \"calibrated\", \"ci95\": [0.010484, 0.011532], \"class\": \"unknown\", \"entry\": \"value_types/X_PHASE/classes/unknown\", \"floor\": 0.011, \"floor_unit\": \"mole fraction\", \"n_pairs\": 3014, \"value\": 0.011}, \"sigma_printed\": null, \"sigma_reading\": {\"basis\": \"last_stored_digit\", \"value\": 5e-07}, \"sigma_scatter\": null, \"unit\": \"mole fraction\", \"value_type\": \"X_PHASE\"}, \"value\": {\"sigma_composition\": null, \"sigma_conversion\": null, \"sigma_effective\": 11.0, \"sigma_method\": {\"basis\": \"calibrated\", \"ci95\": [9.330373, 10.483565], \"class\": \"unknown\", \"entry\": \"value_types/T_INVARIANT/classes/unknown\", \"floor\": 11.0, \"floor_unit\": \"K\", \"n_pairs\": 4918, \"value\": 11.0}, \"sigma_printed\": null, \"sigma_reading\": {\"basis\": \"last_printed_digit\", \"value\": 0.05}, \"sigma_scatter\": null, \"unit\": \"K\", \"value_type\": \"T_INVARIANT\"}}, \"sigma_rule\": \"max(sqrt(max(printed, reading, method)^2 + composition^2 + conversion^2), scatter)\"}, \"unit\": \"K\", \"value\": 1250.0, \"elements\": [\"CU\", \"ZR\"], \"source\": {\"paper\": \"doi:10.1007/bf02647618\", \"citation\": \"K. J. Zeng, M. Hämäläinen, H. L. Lukas, A new thermodynamic description of the Cu-Zr system, JPE 15, 577-586 (1994).\", \"doi\": \"10.1007/bf02647618\", \"doi_url\": \"https://doi.org/10.1007/bf02647618\", \"year\": 1994, \"page\": 4, \"quote\": null, \"artifact\": \"5\", \"caption\": \"Comparison between the Measured, Assessed, and Calculated Temperatures of the Three-Phase Equilibria in the Cu-Zr System and the Compositions of the First Phase in the Equilibrium Reaction Formulas\", \"row\": 2, \"quote_note\": \"table value: no sentence quote; verify with the table label/caption/page/row in `locator`\"}, \"report_issue_url\": \"https://github.com/orchid-calphad/orchid-data/issues/new?template=report-value-error.yml&title=%5Bvalue%5D%20ORC-37Y565CBDK%20%28CU-ZR%29&record_id=ORC-37Y565CBDK&system=CU-ZR&source=doi%3A10.1007%2Fbf02647618%2C%20p.%204&value_shown=1250%20K\"}], \"orchid\": {\"dataset\": \"ORCHID (Open Repository for CALPHAD Hypotheses, Intelligence, and Discovery)\", \"release\": \"orchid-literature 2026-10-23 (record store db-v2.1: invariant/general v2.1.19r, text+context fixup-20261022)\", \"licence\": {\"derived_data\": \"CC BY 4.0\", \"quotes\": \"short excerpts kept so that each value can be verified; publishers' copyright, not relicensed (LICENSES.md)\", \"source_papers\": \"not redistributed\"}, \"data_source\": \"/Users/raymundo.arroyave/projects/orchid-data\", \"how_to_cite\": \"Cite the ORCHID data release you used (see CITATION.cff / the Zenodo DOI of the release) AND the original source of every value: the paper in `source.citation` / `source.doi` (for values the paper cites from earlier work, also `cited_sources`), the TDB assessment (`model_citation` / `model_doi`) for calculated values, and Materials Project (Jain et al., APL Mater. 1, 011002 (2013), doi:10.1063/1.4812323) or OQMD for DFT values.\", \"notes\": [\"Evidence classes (experimental | model | dft | unspecified) are never mixed or averaged.\", \"uncertainty.basis 'stated_default' / 'reading_resolution' is an ORCHID placeholder, not a measurement.\", \"Every value carries uncertainty_budget: components kept separate (sigma_printed, sigma_reading, sigma_method = method-class floor calibrated from ORCHID duplicate measurements or a documented prior, sigma_composition, sigma_scatter, sigma_conversion) and sigma_effective = max(sqrt(max(printed, reading, method)^2 + composition^2 + conversion^2), scatter), the recommended sigma; printed values and printed uncertainties are unchanged (literature/UNCERTAINTY_CALIBRATION.md).\", \"report_issue_url: a pre-filled GitHub issue ('Report an error in a value') for this value, carrying only its id, system, DOI, page and value. Give it to the user when a value looks wrong; the user submits the form. The server never posts anything.\", \"Quotes are short excerpts kept so that each value can be verified; they remain under the publishers' copyright and are not relicensed; source papers are not redistributed.\"]}}",
+       "type": "text"
+      }
+     ],
+     "isError": false
+    }
+   }
+  },
+  {
+   "request": {
+    "jsonrpc": "2.0",
+    "id": 4,
+    "method": "tools/call",
+    "params": {
+     "name": "get_phase",
+     "arguments": {
+      "system": "Ni-Ti",
+      "phase": "Ni3Ti"
+     }
+    }
+   },
+   "response": {
+    "jsonrpc": "2.0",
+    "id": 4,
+    "result": {
+     "content": [
+      {
+       "text": "{\"query\": {\"system\": \"NI-TI\", \"phase\": \"Ni3Ti\"}, \"fields\": \"summary\", \"phase\": {\"id\": \"phase:ni-ti:ni3ti-d024\", \"system\": \"NI-TI\", \"preferred_name\": \"NI3TI_D024\", \"status\": \"assigned\", \"structure\": {\"structure_type\": \"st:d0-24-ni3ti-hp16\", \"basis\": \"standard_name\", \"tier\": \"A\", \"confidence\": \"high\", \"prototype\": \"Ni3Ti\", \"strukturbericht\": \"D0_24\", \"pearson\": \"hP16\", \"space_group\": {\"number\": 194, \"symbol\": \"P6_3/mmc\"}}, \"review_reasons\": [], \"n_candidates\": 0, \"stoichiometry\": null, \"names\": {\"corpus\": {\"n\": 1, \"names\": [\"corpus:phase:ni-ti:ni3ti-d024\"]}, \"paper\": {\"n\": 1, \"names\": [\"paper:10.1016/j.jallcom.2014.08.200:Ni3Ti\"]}, \"tdb\": {\"n\": 13, \"names\": [\"tdb:NiTi-04Tok.tdb:NI3TI_D024\", \"tdb:NiTi-09Key.tdb:NI3TI_D024\", \"tdb:NiTi-13Pov.tdb:NI3TI_D024\", \"tdb:NiTi-14Hu.tdb:NI3TI_D024\", \"tdb:NiTi-15San.tdb:NI3TI_D024\", \"tdb:NiTi-16Ber.tdb:NI3TI_D024\", \"tdb:NiTi-18Hua.tdb:NI3TI_D024\", \"tdb:NiTi-21Jin.tdb:NI3TI_D024\", \"tdb:NiTi-22Sun.tdb:NI3TI_D024\", \"tdb:NiTi-92Sau.tdb:NI3TI_D024\", \"tdb:NiTi-95Oh.tdb:NI3TI_D024\", \"tdb:NiTi-96Bel-LB.tdb:NI3TI_D024\", \"tdb:NiTi-99Tan.tdb:NI3TI_D024\"]}}, \"models\": [{\"tdb\": \"NiTi-04Tok.tdb\", \"phase_name\": \"NI3TI_D024\", \"type_code\": \"%\", \"sublattices\": \"0.75 (NI,TI) : 0.25 (NI,TI)\", \"phase_statement\": \"PHASE NI3TI_D024 % 2 0.75 0.25 !\", \"constituent_statement\": \"CONST NI3TI_D024 : NI% TI : NI TI% : !\", \"website_url\": \"https://orchid-project.org/data/databases/sgte-binary/NiTi-04Tok.tdb\"}, {\"tdb\": \"NiTi-09Key.tdb\", \"phase_name\": \"NI3TI_D024\", \"type_code\": \"%\", \"sublattices\": \"3.0 (NI,TI) : 1.0 (NI,TI)\", \"phase_statement\": \"PHASE NI3TI_D024 % 2 3 1 !\", \"constituent_statement\": \"CONST NI3TI_D024 : NI% TI : NI TI% : !\", \"website_url\": \"https://orchid-project.org/data/databases/sgte-binary/NiTi-09Key.tdb\"}, {\"tdb\": \"NiTi-13Pov.tdb\", \"phase_name\": \"NI3TI_D024\", \"type_code\": \"%\", \"sublattices\": \"3.0 (NI,TI) : 1.0 (NI,TI)\", \"phase_statement\": \"PHASE NI3TI_D024 % 2 3 1 !\", \"constituent_statement\": \"CONST NI3TI_D024 : NI% TI : NI TI% : !\", \"website_url\": \"https://orchid-project.org/data/databases/sgte-binary/NiTi-13Pov.tdb\"}, {\"tdb\": \"NiTi-14Hu.tdb\", \"phase_name\": \"NI3TI_D024\", \"type_code\": \"%\", \"sublattices\": \"3.0 (NI,TI) : 1.0 (NI,TI)\", \"phase_statement\": \"PHASE NI3TI_D024 % 2 3 1 !\", \"constituent_statement\": \"CONST NI3TI_D024 : NI% TI : NI TI% : !\", \"website_url\": \"https://orchid-project.org/data/databases/sgte-binary/NiTi-14Hu.tdb\"}, {\"tdb\": \"NiTi-15San.tdb\", \"phase_name\": \"NI3TI_D024\", \"type_code\": \"%\", \"sublattices\": \"3.0 (NI,TI) : 1.0 (NI,TI)\", \"phase_statement\": \"PHASE NI3TI_D024 % 2 3 1 !\", \"constituent_statement\": \"CONST NI3TI_D024 : NI% TI : NI TI% : !\", \"website_url\": \"https://orchid-project.org/data/databases/sgte-binary/NiTi-15San.tdb\"}, {\"tdb\": \"NiTi-16Ber.tdb\", \"phase_name\": \"NI3TI_D024\", \"type_code\": \"%\", \"sublattices\": \"0.75 (NI,TI) : 0.25 (NI,TI)\", \"phase_statement\": \"PHASE NI3TI_D024 % 2 0.75 0.25 !\", \"constituent_statement\": \"CONST NI3TI_D024 : NI% TI : NI TI% : !\", \"website_url\": \"https://orchid-project.org/data/databases/sgte-binary/NiTi-16Ber.tdb\"}, {\"tdb\": \"NiTi-18Hua.tdb\", \"phase_name\": \"NI3TI_D024\", \"type_code\": \"%\", \"sublattices\": \"3.0 (NI,TI) : 1.0 (NI,TI)\", \"phase_statement\": \"PHASE NI3TI_D024 % 2 3 1 !\", \"constituent_statement\": \"CONST NI3TI_D024 : NI% TI : NI TI% : !\", \"website_url\": \"https://orchid-project.org/data/databases/sgte-binary/NiTi-18Hua.tdb\"}, {\"tdb\": \"NiTi-21Jin.tdb\", \"phase_name\": \"NI3TI_D024\", \"type_code\": \"%\", \"sublattices\": \"3.0 (NI,TI) : 1.0 (NI,TI)\", \"phase_statement\": \"PHASE NI3TI_D024 % 2 3 1 !\", \"constituent_statement\": \"CONST NI3TI_D024 : NI% TI : NI TI% : !\", \"website_url\": \"https://orchid-project.org/data/databases/sgte-binary/NiTi-21Jin.tdb\"}, {\"tdb\": \"NiTi-22Sun.tdb\", \"phase_name\": \"NI3TI_D024\", \"type_code\": \"%\", \"sublattices\": \"3.0 (NI,TI) : 1.0 (NI,TI)\", \"phase_statement\": \"PHASE NI3TI_D024 % 2 3 1 !\", \"constituent_statement\": \"CONST NI3TI_D024 : NI% TI : NI TI% : !\", \"website_url\": \"https://orchid-project.org/data/databases/sgte-binary/NiTi-22Sun.tdb\"}, {\"tdb\": \"NiTi-92Sau.tdb\", \"phase_name\": \"NI3TI_D024\", \"type_code\": \"%\", \"sublattices\": \"3.0 (NI,TI) : 1.0 (NI,TI)\", \"phase_statement\": \"PHASE NI3TI_D024 % 2 3 1 !\", \"constituent_statement\": \"CONST NI3TI_D024 : NI% TI : NI TI% : !\", \"website_url\": \"https://orchid-project.org/data/databases/sgte-binary/NiTi-92Sau.tdb\"}, {\"tdb\": \"NiTi-95Oh.tdb\", \"phase_name\": \"NI3TI_D024\", \"type_code\": \"%\", \"sublattices\": \"0.75 (NI) : 0.25 (TI)\", \"phase_statement\": \"PHASE NI3TI_D024 % 2 0.75 0.25 !\", \"constituent_statement\": \"CONST NI3TI_D024 : NI : TI : !\", \"website_url\": \"https://orchid-project.org/data/databases/sgte-binary/NiTi-95Oh.tdb\"}, {\"tdb\": \"NiTi-96Bel-LB.tdb\", \"phase_name\": \"NI3TI_D024\", \"type_code\": \"%\", \"sublattices\": \"0.75 (NI) : 0.25 (NI,TI)\", \"phase_statement\": \"PHASE NI3TI_D024 % 2 0.75 0.25 !\", \"constituent_statement\": \"CONST NI3TI_D024 : NI% : NI TI% : !\", \"website_url\": \"https://orchid-project.org/data/databases/sgte-binary/NiTi-96Bel-LB.tdb\"}, {\"tdb\": \"NiTi-99Tan.tdb\", \"phase_name\": \"NI3TI_D024\", \"type_code\": \"%\", \"sublattices\": \"3.0 (NI,TI) : 1.0 (NI,TI)\", \"phase_statement\": \"PHASE NI3TI_D024 % 2 3 1 !\", \"constituent_statement\": \"CONST NI3TI_D024 : NI% TI : NI TI% : !\", \"website_url\": \"https://orchid-project.org/data/databases/sgte-binary/NiTi-99Tan.tdb\"}], \"n_models\": 13, \"stability\": [{\"tdb\": \"NiTi-04Tok.tdb\", \"stable\": true, \"T_min_K\": 300.0, \"T_max_K\": 1649.38, \"x_element\": \"TI\", \"x_min\": 0.20426, \"x_max\": 0.25002}, {\"tdb\": \"NiTi-09Key.tdb\", \"stable\": true, \"T_min_K\": 300.0, \"T_max_K\": 1657.55, \"x_element\": \"TI\", \"x_min\": 0.20835, \"x_max\": 0.25103}, {\"tdb\": \"NiTi-13Pov.tdb\", \"stable\": true, \"T_min_K\": 300.0, \"T_max_K\": 1648.9, \"x_element\": \"TI\", \"x_min\": 0.20528, \"x_max\": 0.25255}, {\"tdb\": \"NiTi-14Hu.tdb\", \"stable\": true, \"T_min_K\": 300.0, \"T_max_K\": 1657.58, \"x_element\": \"TI\", \"x_min\": 0.20835, \"x_max\": 0.25103}, {\"tdb\": \"NiTi-15San.tdb\", \"stable\": true, \"T_min_K\": 300.0, \"T_max_K\": 1652.1, \"x_element\": \"TI\", \"x_min\": 0.20681, \"x_max\": 0.25061}, {\"tdb\": \"NiTi-16Ber.tdb\", \"stable\": true, \"T_min_K\": 300.0, \"T_max_K\": 1649.38, \"x_element\": \"TI\", \"x_min\": 0.20426, \"x_max\": 0.25002}, {\"tdb\": \"NiTi-18Hua.tdb\", \"stable\": true, \"T_min_K\": 300.0, \"T_max_K\": 1659.21, \"x_element\": \"TI\", \"x_min\": 0.20505, \"x_max\": 0.25122}, {\"tdb\": \"NiTi-21Jin.tdb\", \"stable\": true, \"T_min_K\": 300.0, \"T_max_K\": 1653.97, \"x_element\": \"TI\", \"x_min\": 0.20618, \"x_max\": 0.25}, {\"tdb\": \"NiTi-22Sun.tdb\", \"stable\": true, \"T_min_K\": 300.0, \"T_max_K\": 1654.25, \"x_element\": \"TI\", \"x_min\": 0.20568, \"x_max\": 0.25127}, {\"tdb\": \"NiTi-92Sau.tdb\", \"stable\": true, \"T_min_K\": 300.0, \"T_max_K\": 1662.48, \"x_element\": \"TI\", \"x_min\": 0.20851, \"x_max\": 0.26186}, {\"tdb\": \"NiTi-95Oh.tdb\", \"stable\": true, \"T_min_K\": 300.0, \"T_max_K\": 1650.39, \"x_element\": \"TI\", \"x_min\": 0.25, \"x_max\": 0.25}, {\"tdb\": \"NiTi-96Bel-LB.tdb\", \"stable\": true, \"T_min_K\": 300.0, \"T_max_K\": 2500.0, \"x_element\": \"TI\", \"x_min\": 0.0776, \"x_max\": 0.25}, {\"tdb\": \"NiTi-99Tan.tdb\", \"stable\": true, \"T_min_K\": 300.0, \"T_max_K\": 1662.38, \"x_element\": \"TI\", \"x_min\": 0.20851, \"x_max\": 0.262}], \"literature\": {\"values\": 20, \"accepted_values\": 20, \"papers\": 1}, \"references\": [{\"doi\": \"10.1016/j.jallcom.2014.08.200\", \"roles\": [\"assessment that models this phase\", \"reports values for this phase\"]}, {\"doi\": \"10.1007/s11669-018-0650-3\", \"roles\": [\"assessment that models this phase\"]}, {\"doi\": \"10.1016/j.calphad.2013.02.004\", \"roles\": [\"assessment that models this phase\"]}, {\"doi\": \"10.1016/j.calphad.2016.06.002\", \"roles\": [\"assessment that models this phase\"]}, {\"doi\": \"10.1016/j.calphad.2021.102256\", \"roles\": [\"assessment that models this phase\"]}], \"total_papers\": 13, \"viewer_url\": \"https://orchid-project.org/phases/#phase:ni-ti:ni3ti-d024\", \"data_url\": \"https://data.orchid-project.org/phases/systems/NI-TI.json\", \"static_page_url\": \"https://data.orchid-project.org/phases/pages/NI-TI.html#phase-ni-ti-ni3ti-d024\"}, \"how_to_cite_phase_registry\": \"Cite the ORCHID phase registry (binary systems) of the release you used (phases/CITATION.cff; Zenodo record phase-registry), the original CALPHAD assessment of every TDB model you use (references with role 'assessment that models this phase'), B. Hallstedt, Calphad 89 (2025) 102833, doi:10.1016/j.calphad.2025.102833 for the SGTE TDB files and tier-C structures, and Materials Project / OQMD for tier-B (DFT-supported) structures.\", \"orchid\": {\"dataset\": \"ORCHID (Open Repository for CALPHAD Hypotheses, Intelligence, and Discovery)\", \"release\": \"orchid-literature 2026-10-23 (record store db-v2.1: invariant/general v2.1.19r, text+context fixup-20261022)\", \"licence\": {\"derived_data\": \"CC BY 4.0\", \"quotes\": \"short excerpts kept so that each value can be verified; publishers' copyright, not relicensed (LICENSES.md)\", \"source_papers\": \"not redistributed\"}, \"data_source\": \"/Users/raymundo.arroyave/projects/orchid-data\", \"how_to_cite\": \"Cite the ORCHID data release you used (see CITATION.cff / the Zenodo DOI of the release) AND the original source of every value: the paper in `source.citation` / `source.doi` (for values the paper cites from earlier work, also `cited_sources`), the TDB assessment (`model_citation` / `model_doi`) for calculated values, and Materials Project (Jain et al., APL Mater. 1, 011002 (2013), doi:10.1063/1.4812323) or OQMD for DFT values.\", \"notes\": [\"Evidence classes (experimental | model | dft | unspecified) are never mixed or averaged.\", \"uncertainty.basis 'stated_default' / 'reading_resolution' is an ORCHID placeholder, not a measurement.\", \"Every value carries uncertainty_budget: components kept separate (sigma_printed, sigma_reading, sigma_method = method-class floor calibrated from ORCHID duplicate measurements or a documented prior, sigma_composition, sigma_scatter, sigma_conversion) and sigma_effective = max(sqrt(max(printed, reading, method)^2 + composition^2 + conversion^2), scatter), the recommended sigma; printed values and printed uncertainties are unchanged (literature/UNCERTAINTY_CALIBRATION.md).\", \"report_issue_url: a pre-filled GitHub issue ('Report an error in a value') for this value, carrying only its id, system, DOI, page and value. Give it to the user when a value looks wrong; the user submits the form. The server never posts anything.\", \"Quotes are short excerpts kept so that each value can be verified; they remain under the publishers' copyright and are not relicensed; source papers are not redistributed.\"]}}",
+       "type": "text"
+      }
+     ],
+     "isError": false
+    }
+   }
+  }
+ ]
+}
