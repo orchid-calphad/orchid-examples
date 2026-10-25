@@ -46,11 +46,23 @@ paper's version uses Arial (`ORCHID_FIG_FONT=Arial`).
 
 ORCHID data: release commit **`778cc6bfa67db292e3f917f5ac6d691e0f37fc1a`** of
 [orchid-data](https://github.com/orchid-calphad/orchid-data) (2026-10-24, the release the final fit used). The
-current release head differs; numbers from another commit will differ. The full-path scripts read a local checkout:
+current release head differs; numbers from another commit will differ (the audit rounds after that release changed, among
+others, the Cu–Zr invariant brackets and the one-point-per-field assessed set). The full-path scripts read a local checkout:
 
 ```sh
 git clone https://github.com/orchid-calphad/orchid-data && git -C orchid-data checkout 778cc6bfa67db292e3f917f5ac6d691e0f37fc1a
 export ORCHID_DATA=$PWD/orchid-data
+```
+
+The 177 dense assessed-field points of the final fit are released from orchid-data commit
+**`e6b9b3f649e612ed8432f5487304c78910ab7604`** on (`espei/assessed/CU-ZR/CuZr-94Zen-LB.CU-ZR-p371.dense.json`, the
+`dense-field-grid/` records of `assessed-phase-assemblages`). `build_a4.py` reads that file from `ORCHID_DENSE_DATA`
+(a checkout of that commit; default `ORCHID_DATA` when it holds the file) and verifies its sha256
+(`62b78ff8…`):
+
+```sh
+git -C orchid-data fetch && git clone orchid-data orchid-data-dense && git -C orchid-data-dense checkout e6b9b3f649e612ed8432f5487304c78910ab7604
+export ORCHID_DENSE_DATA=$PWD/orchid-data-dense      # or point ORCHID_DATA at that commit to use one checkout for everything
 ```
 
 All outputs go under `work/` (git-ignored). Steps, in the source repository's order (`scripts/full/`, copied from
@@ -84,16 +96,21 @@ done; wait
 
 Checks done for this repository: with `ORCHID_DATA` at the pinned commit, `build_data.py` and `printed_invariants.py`
 reproduce the source repository's fit, hold-out and DFT-check datasets and printed-invariant table byte for byte, and
-`build_a4.py a4d` reproduces all 77 files of the final-fit data set except the dense assessed-field grid (next
-paragraph). The MLIP, fit and NUTS steps were not rerun here; their outputs are cached (`cached/final_fit/` holds the
+`build_a4.py a4d` reproduces all 77 files of the final-fit data set identically and, with the released dense grid, the
+78th: the same 177 points (temperatures bit for bit, compositions, phase sets, weight 1 × F); only the order of the two phases
+within a two-phase point differs from the source repository's file, and the file carries the release's extra metadata
+(`orchid`, `orchid_uncertainty_budget`). The MLIP, fit and NUTS steps were not rerun here; their outputs are cached (`cached/final_fit/` holds the
 selected start's result and optimizer trace, `cached/final_fit/all_starts.json` all five starts, `cached/hmc/` the NUTS
 summary).
 
-**Not distributed: the dense assessed-field grid.** The paper's final fit adds 177 ZPF points placed on a regular grid
-inside the fields of the assessed Cu–Zr diagram (Okamoto 2008). They were derived for the demonstration from the
-field map of the handbook diagram and are not part of the ORCHID release, so they are not included here (available on
-request; `ORCHID_DENSE_GRID=<file>` makes `build_a4.py` add them). Without them the fit runs on released data only and
-will not reproduce the 9/13 configuration exactly.
+**The dense assessed-field grid.** The paper's final fit adds 177 ZPF points placed on a regular grid inside the fields
+of the assessed Cu–Zr diagram (Okamoto 2008; handbook-class evidence, derived coordinates and phase assemblages only). They
+are released in ORCHID (assessed-phase-assemblages, `dense-field-grid/`, `point_method` = `dense_field_grid`, with their
+uncertainty budget, basis and citations; method in the dataset's README) and `build_a4.py` loads them from the release.
+As in the final fit every point has weight 1 (× the ZPF factor F); the release also records `field_weight_share`
+(1 / points in the field, so that a field counts as one observation) for fits that weight the points of one diagram as
+dependent. The other final-fit data come from the older pinned release above, not from the commit that holds the dense
+grid: rebuilding everything from the newer release gives a different data set (and would need a new fit).
 
 ## Files
 
