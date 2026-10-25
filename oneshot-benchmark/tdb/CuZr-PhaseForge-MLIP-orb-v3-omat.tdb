@@ -1,0 +1,172 @@
+$
+$ Cu-Zr PhaseForge MLIP-informed database (orb-v3-omat; SQS by m_scraps); orchid-bench-pd one-shot track
+$ Unary data and phase/sublattice definitions copied from CuZr-94Zen-LB.tdb (SGTE, B. Hallstedt):
+$
+$ K.-J. Zeng, M. Hamalainen, H.L. Lukas, J. Phase Equilib., 15, 577-83(1994).
+$
+$ Dataset created 2009.12.20 by Bengt Hallstedt.
+$ 2020.12.26: Modified for use with GES6.
+$
+$ ------------------------------------------------------------------------------
+ TEMP-LIM 298.15 6000.00 !
+$
+$ELEMENT NAME  REF. STATE               ATOMIC MASS H298-H0    S298    !
+$
+ ELEMENT VA   VACUUM                      0.0          0.0      0.0    ! 
+ ELEMENT CU   FCC_A1                     63.546     5004.      33.15   !
+ ELEMENT ZR   HCP_A3                     91.22      5566.27    39.1809 ! 
+$ ------------------------------------------------------------------------------
+$ Phase definitions
+$
+ PHASE LIQUID:L % 1 1 !
+ CONST LIQUID:L : CU ZR : !
+$
+$ Fcc (cF4, Fm-3m) and MeX (cF8, Fm-3m)
+$
+ PHASE FCC_A1 %A 2 1 1 !
+ CONST FCC_A1 : CU% ZR : VA : !
+$
+$ Bcc (cI2, Im-3m)
+$
+ PHASE BCC_A2 %B 2 1 3 !
+ CONST BCC_A2 : CU ZR% : VA : !
+$
+$ Hcp (hP2, P6_3/mmc) and Me2X (NiAs-type, hP4, P6_3/mmc, B8_1)
+$
+ PHASE HCP_A3 %A 2 1 0.5 !
+ CONST HCP_A3 : CU ZR% : VA : !
+$
+$ Prototype AuBe5 (cF24, F-43m)
+$
+ PHASE CU5ZR_C15B % 2 5 1 !
+ CONST CU5ZR_C15B : CU : ZR : !
+$
+$ Prototype Ag51Gd14 (hP68, P6/m)
+$
+ PHASE CU51ZR14 % 2 51 14 !
+ CONST CU51ZR14 : CU : ZR : !
+$
+$ Prototype Cu8Hf3 (oP44, Pnma)
+$
+ PHASE CU8ZR3 % 2 8 3 !
+ CONST CU8ZR3 : CU : ZR : !
+$
+$ Prototype Ni10Zr7 (oC68, Cmca)
+$
+ PHASE CU10ZR7 % 2 10 7 !
+ CONST CU10ZR7 : CU : ZR : !
+$
+$ Prototype CsCl (cP2, Pm-3m)
+$
+ PHASE CUZR_B2 % 2 1 1 !
+ CONST CUZR_B2 : CU : ZR : !
+$
+$ Prototype CuZr2 (tI6, I4/mmm)
+$
+ PHASE CUZR2 % 2 1 2 !
+ CONST CUZR2 : CU : ZR : !
+$ ------------------------------------------------------------------------------
+$ Defaults
+$
+ DEFINE-SYSTEM-DEFAULT ELEMENT 2 !
+ DEFAULT-COM DEFINE_SYSTEM_ELEMENT VA !
+ TYPE-DEFINITION % SEQ * !
+ TYPE_DEF A GES AMEND_PHASE_DESCRIPTION @ MAGNETIC -3 0.28 !
+ TYPE_DEF B GES AMEND_PHASE_DESCRIPTION @ MAGNETIC -1 0.4 !
+ FUNCTION ZERO      298.15  0;                                         6000 N !
+ FUNCTION UN_ASS    298.15  0;                                         6000 N !
+ FUNCTION R         298.15  +8.31451;                                  6000 N !
+$ ------------------------------------------------------------------------------
+$ Element data
+$ ------------------------------------------------------------------------------
+$ Cu
+$
+ PAR  G(FCC_A1,CU:VA),,                 +GHSERCU;                3200 N 91Din !
+ PAR  G(BCC_A2,CU:VA),,                 +GHSERCU+4017-1.255*T;   3200 N 91Din !
+ PAR  G(HCP_A3,CU:VA),,                 +GHSERCU+600+0.2*T;      3200 N 91Din !
+ PAR  G(LIQUID,CU),,                    +GLIQCU;                 3200 N 91Din !
+$
+ FUNCTION GHSERCU   298.15  -7770.458+130.485235*T-24.112392*T*LN(T)
+       -0.00265684*T**2+1.29223E-07*T**3+52478*T**(-1);
+      1357.77  Y  -13542.026+183.803828*T-31.38*T*LN(T)+3.64167E+29*T**(-9);
+      3200.00  N !
+ FUNCTION GLIQCU    298.15  +12964.735-9.511904*T+GHSERCU-5.8489E-21*T**7;
+      1357.77  Y  -46.545+173.881484*T-31.38*T*LN(T);
+      3200.00  N !
+$ ------------------------------------------------------------------------------
+$ Zr
+$
+$ CUB_A13, CBCC_A12, ORTHORHOMBIC_A20 and TETRAGONAL_U added in unary 4.1
+$
+ PAR  G(HCP_A3,ZR:VA)           130.00  +GHSERZR;,,                   N 91Din !
+ PAR  G(BCC_A2,ZR:VA)           130.00  +GBCCZR;,,                    N 91Din !
+$PAR  G(OMEGA,ZR)               130.00  +GOMEZR;,,                    N 91Din !
+ PAR  G(FCC_A1,ZR:VA)           130.00  +GHSERZR+7600-0.9*T;,,        N 91Din !
+$PAR  G(CBCC_A12,ZR:VA)         130.00  +GHSERZR+4602.2;,,            N 99SGUN !
+$PAR  G(CUB_A13,ZR:VA)          130.00  +GHSERZR+7531.2;,,            N 99SGUN !
+$PAR  G(ORTHORHOMBIC_A20,ZR)    130.00  +GBCCZR+5000;,,               N 99SGUN !
+$PAR  G(TETRAGONAL_U,ZR)        130.00  +GBCCZR+5000;,,               N 99SGUN !
+ PAR  G(LIQUID,ZR)              130.00  +GLIQZR;,,                    N 91Din !
+$
+ FUNCTION GHSERZR   130.00  -7827.595+125.64905*T-24.1618*T*LN(T)
+       -0.00437791*T**2+34971*T**(-1);
+      2128.00  Y  -26085.921+262.724183*T-42.144*T*LN(T)-1.342896E+31*T**(-9);
+      6000.00  N !
+ FUNCTION GBCCZR    130.00  -525.539+124.9457*T-25.607406*T*LN(T)
+       -3.40084E-04*T**2-9.729E-09*T**3+25233*T**(-1)-7.6143E-11*T**4;
+      2128.00  Y  -4620.034+1.55998*T+GHSERZR+1.4103476E+32*T**(-9);
+      6000.00  N !
+ FUNCTION GOMEZR    130.00  -8878.082+144.432234*T-26.8556*T*LN(T)
+       -0.002799446*T**2+38376*T**(-1);
+      2128.00  Y  -3414.603+2.566675*T+GHSERZR+8.517346E+31*T**(-9);
+      6000.00  N !
+ FUNCTION GLIQZR    130.00  +18147.69-9.080812*T+GHSERZR+1.6275E-22*T**7;
+      2128.00  Y  -8281.26+253.812609*T-42.144*T*LN(T);
+      6000.00  N !
+$ ------------------------------------------------------------------------------
+$ ------------------------------------------------------------------------------
+$ MLIP-informed binary parameters (VV symbols: PhaseForge/ESPEI convention)
+$
+FUNCTION VV0000 298.15 -44.375225; 6000 N !
+FUNCTION VV0001 298.15 0.000000; 6000 N !
+FUNCTION VV0002 298.15 -20.239361; 6000 N !
+FUNCTION VV0003 298.15 0.000000; 6000 N !
+FUNCTION VV0004 298.15 -18.277326; 6000 N !
+FUNCTION VV0005 298.15 0.000000; 6000 N !
+FUNCTION VV0006 298.15 -6.950242; 6000 N !
+FUNCTION VV0007 298.15 0.000000; 6000 N !
+FUNCTION VV0008 298.15 -37.640521; 6000 N !
+FUNCTION VV0009 298.15 0.000000; 6000 N !
+FUNCTION VV0010 298.15 -8.233800; 6000 N !
+FUNCTION VV0011 298.15 0.000000; 6000 N !
+FUNCTION VV0012 298.15 -12.918317; 6000 N !
+FUNCTION VV0013 298.15 0.000000; 6000 N !
+FUNCTION VV0014 298.15 -21.434723; 6000 N !
+FUNCTION VV0015 298.15 0.000000; 6000 N !
+FUNCTION VV0016 298.15 -79.240507; 6000 N !
+FUNCTION VV0017 298.15 -1131.479732; 6000 N !
+FUNCTION VV0018 298.15 -191.729741; 6000 N !
+FUNCTION VV0019 298.15 -287.847379; 6000 N !
+FUNCTION VV0020 298.15 -22.392728; 6000 N !
+FUNCTION VV0021 298.15 -40.376070; 6000 N !
+$
+ PAR  L(LIQUID,CU,ZR;0) 298.15 VV0000*1000+VV0001*T; 6000 N PFMLIP !
+ PAR  L(LIQUID,CU,ZR;1) 298.15 VV0002*1000+VV0003*T; 6000 N PFMLIP !
+ PAR  L(FCC_A1,CU,ZR:VA;0) 298.15 VV0004*1000+VV0005*T; 6000 N PFMLIP !
+ PAR  L(FCC_A1,CU,ZR:VA;1) 298.15 VV0006*1000+VV0007*T; 6000 N PFMLIP !
+ PAR  L(BCC_A2,CU,ZR:VA;0) 298.15 VV0008*1000+VV0009*T; 6000 N PFMLIP !
+ PAR  L(BCC_A2,CU,ZR:VA;1) 298.15 VV0010*1000+VV0011*T; 6000 N PFMLIP !
+ PAR  L(HCP_A3,CU,ZR:VA;0) 298.15 VV0012*1000+VV0013*T; 6000 N PFMLIP !
+ PAR  L(HCP_A3,CU,ZR:VA;1) 298.15 VV0014*1000+VV0015*T; 6000 N PFMLIP !
+ PAR  G(CU5ZR_C15B,CU:ZR) 298.15 5*GHSERCU+1*GHSERZR+VV0016*1000; 6000 N PFMLIP !
+ PAR  G(CU51ZR14,CU:ZR) 298.15 51*GHSERCU+14*GHSERZR+VV0017*1000; 6000 N PFMLIP !
+ PAR  G(CU8ZR3,CU:ZR) 298.15 8*GHSERCU+3*GHSERZR+VV0018*1000; 6000 N PFMLIP !
+ PAR  G(CU10ZR7,CU:ZR) 298.15 10*GHSERCU+7*GHSERZR+VV0019*1000; 6000 N PFMLIP !
+ PAR  G(CUZR_B2,CU:ZR) 298.15 1*GHSERCU+1*GHSERZR+VV0020*1000; 6000 N PFMLIP !
+ PAR  G(CUZR2,CU:ZR) 298.15 1*GHSERCU+2*GHSERZR+VV0021*1000; 6000 N PFMLIP !
+$
+ LIST-OF-REFERENCE
+ NUMBER  SOURCE
+  91Din  'A.T. Dinsdale, Calphad, 15, 317-425(1991).'
+  PFMLIP 'PhaseForge workflow (Zhu, Sariturk, Arroyave 2025), orb-v3-omat energies, m_scraps SQS; this work'
+  !
