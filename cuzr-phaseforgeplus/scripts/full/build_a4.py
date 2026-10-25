@@ -5,8 +5,8 @@
       (Zeng 1994 table re-listed), as orchid-espei-demo v3 de-duplication;
   (2) experimental HM_FORM sigma widened per compound to max(printed sigma, 3 kJ/mol-atom, SD of that compound's
       remaining fitted values) (weight = 500 J/mol / sigma);
-  (3) + the dense assessed-field ZPF grid of orchid-espei-demo Amendment 4 (derived from Okamoto's Cu-Zr field map,
-      NOT in the ORCHID release; weight reset to 1);
+  (3) + the dense assessed-field ZPF grid of orchid-espei-demo Amendment 4 (derived from Okamoto's Cu-Zr field map, released
+      in ORCHID assessed-phase-assemblages dense-field-grid; weight reset to 1, as in the final fit);
   (4) every ZPF weight (literature, brackets, assessed, liquid stability, dense) x F, F in {3, 10, 30}.
 MLIP constraint data (data/mlip_anchor) unchanged, added by the fit script. Writes data/a4_F<F>/ and data/a4_manifest.json."""
 import json, glob, collections
@@ -14,8 +14,8 @@ from pathlib import Path
 import numpy as np
 import sys as _sys, os as _os
 _sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
-from _paths import ROOT, SGTE_TDB, orchid, DENSE_GRID, PFP_SRC  # noqa: F401 (paths: _paths.py)
-DENSE = DENSE_GRID   # not distributed (see _paths.py); None -> no dense grid
+from _paths import ROOT, SGTE_TDB, orchid, dense_grid, PFP_SRC  # noqa: F401 (paths: _paths.py)
+DENSE = dense_grid()   # released dense assessed-field grid (orchid-data DENSE_RELEASE, sha256 verified)
 DUP = {"experimental__CU-ZR__CuZr-94Zen-LB.hmr-07-CU10ZR7.json", "experimental__CU-ZR__CuZr-94Zen-LB.hmr-07-CU51ZR14.json",
        "experimental__CU-ZR__CuZr-94Zen-LB.hmr-07-CUZR2.json", "experimental__CU-ZR__CuZr-94Zen-LB.hmr-07-CUZR_B2.json",
        "experimental__CU-ZR__CuZr-94Zen-LB.hmr-08-CUZR2.json", "experimental__CU-ZR__CuZr-94Zen-LB.hmr-08-CUZR_B2.json"}
@@ -32,10 +32,7 @@ man = {"removed_duplicates": sorted(DUP), "sigma_floor_J": FLOOR, "scatter_sd_J"
 for F in (3, 10, 30):
     out = ROOT / f"data/{PREFIX}_F{F}"; out.mkdir(parents=True, exist_ok=True)
     for f in out.glob("*.json"): f.unlink()
-    if DENSE is None:
-        print('WARNING: ORCHID_DENSE_GRID not set: the dense assessed-field grid (not in the ORCHID release) is left out; '
-              'this is not the configuration of the paper\'s final fit')
-    for f in files + ([str(DENSE)] if DENSE is not None else []):
+    for f in files + [str(DENSE)]:
         d = json.load(open(f))
         if f == str(DENSE): d["weight"] = 1.0
         if d["output"] == "HM_FORM":

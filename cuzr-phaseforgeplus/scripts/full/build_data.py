@@ -84,7 +84,7 @@ def is_holdout_src(d):
 cands = []
 for g in ('experimental', 'invariants', 'derived/invariant-brackets'):
     cands += sorted(glob.glob(f'{B}/{g}/CU-ZR/*.json'))
-cands += sorted(glob.glob(f'{B}/assessed/CU-ZR/{TARGET}.*.json')) + sorted(glob.glob(f'{B}/derived/liquid-stability/CU-ZR/{TARGET}.*.json'))
+cands += [f for f in sorted(glob.glob(f'{B}/assessed/CU-ZR/{TARGET}.*.json')) if not f.endswith('.dense.json')] + sorted(glob.glob(f'{B}/derived/liquid-stability/CU-ZR/{TARGET}.*.json'))
 cands += sorted(glob.glob(f'{B}/dft/literature/CU-ZR/{TARGET}.*.json'))
 man = {'bundle': B, 'tdb': {'path': TDB, 'sha256': sha(TDB)}, 'datasets': [], 'excluded': [], 'doc': __doc__}
 sel = []
