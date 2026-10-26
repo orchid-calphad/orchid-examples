@@ -11,7 +11,7 @@ from pathlib import Path
 import numpy as np
 import sys as _sys, os as _os
 _sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
-from _paths import ROOT, SGTE_TDB, orchid, DENSE_GRID, PFP_SRC  # noqa: F401 (paths: _paths.py)
+from _paths import ROOT, SGTE_TDB, orchid, PFP_SRC  # noqa: F401 (paths: _paths.py)
 F = json.load(open(ROOT / "tdb/mlip_fit.json"))
 S = json.load(open(ROOT / "results/sigma_mlip.json"))
 W = S["espei_weight"]

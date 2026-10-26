@@ -1,5 +1,7 @@
 # Cu–Zr with classic ESPEI MCMC: a documented negative example
 
+**For new fits:** see [Weighting revision for new fits](#weighting-revision-for-new-fits-2026-10-25). The results below retain their historical inputs.
+
 This example shows the classic ESPEI route with ORCHID data: load the released ESPEI datasets with
 `load_datasets`, choose evidence with `apply_tags`, and refine part of an existing assessment (the SGTE Cu–Zr
 description of Zeng et al. 1994) with ESPEI's MCMC. It is kept as a **negative example**: in the study behind the
@@ -80,3 +82,11 @@ J. Open Res. Softw. 5 (2017) 1, doi:10.5334/jors.140); the gradient variants v3/
 ESPEI branch (see `../cuzr-phaseforgeplus`). Starting model: K.-J. Zeng, M. Hämäläinen, H.L. Lukas, J. Phase Equilib.
 15 (1994) 577 (doi:10.1007/BF02647618), from B. Hallstedt, Calphad 89 (2025) 102833 (CC BY 4.0), unchanged in
 `tdb/CuZr-94Zen-LB.tdb`.
+
+## Weighting revision for new fits (2026-10-25)
+
+The current ORCHID bundle splits literature groups with unequal effective uncertainties into individual fitting records. Each exported weight is the ESPEI reference sigma divided by the observation's effective sigma (activities use chemical-potential sigma). Reported uncertainties, estimated components, source values, and calibrations are preserved. The superseded median-group policy and optional weight-floor fields are historical comparisons, not instructions for new fits.
+
+For a new fit, use a clean directory from the regenerated bundle and run `python espei/check_weights.py --bundle espei` before selection or user weight overrides. Retain the exported weights, avoid loading removed parent datasets alongside their children, and record the release/commit, input hashes, ESPEI version, selected evidence, and any tag or property weight overrides. `espei/UNCERTAINTY_SPLITS.json` maps the old files to their replacements. The shared source links remain available, but splitting does not establish independence or supply covariance between measurements.
+
+The results reported in this example use their archived input manifests and historical weighting choices. They have not been refitted under the revised export. The pinned example reproduces that historical analysis; using the current bundle constitutes a new run and requires a separate manifest and validation. In particular, the legacy `orchid-espei-demo/scripts/build_data.py` applies its historical HMR/SMR cap unless `--bundle-weights` is passed; preserve that behavior only when reproducing those archived runs.

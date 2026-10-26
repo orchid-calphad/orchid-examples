@@ -1,0 +1,722 @@
+{
+  "schema_version": "1.0.0",
+  "id": "orchid-cuzr-phaseforge-historical-v1",
+  "system": "CU-ZR",
+  "description": "Codified Cu-Zr workflow from the documented paper run. Commands are an adapted Python implementation of the PhaseForge protocol, not a claim that ATAT sqscal was executed.",
+  "data_release": "778cc6bfa67db292e3f917f5ac6d691e0f37fc1a",
+  "dense_release": "e6b9b3f649e612ed8432f5487304c78910ab7604",
+  "dense_path": "espei/assessed/CU-ZR/CuZr-94Zen-LB.CU-ZR-p371.dense.json",
+  "dense_sha256": "62b78ff8f2efcbced4c7c84f63fe93447ee5b38c3b2a94b824cd436bfad4f714",
+  "weighting_policy": "historical_F10b: per-type normalization, formation-enthalpy floors, ZPF x10; not the new individual-weight export",
+  "environments": {
+    "quick": "requirements.txt",
+    "mlip": "requirements-mlip.txt",
+    "fit": "requirements-fit.txt"
+  },
+  "seeds": {
+    "sqs": 2026,
+    "optimizer_starts": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "historical_liquid_md": null
+  },
+  "reproducibility_limits": [
+    "Historical liquid-MD random seed was not recorded; exact trajectory reproduction is not claimed.",
+    "Cached output hashes identify existing models, not proof of a rerun.",
+    "New full runs preserve all starts for review; historical start 3 was selected post hoc, not automatically accepted.",
+    "NUTS is a documented optional follow-on, outside this core generation-and-fit DAG."
+  ],
+  "potential_manifest": "tdb/model-provenance.json",
+  "input_sha256": {
+    "scripts/extract_zpf_points.py": "f8b4c960d6de9f546cb41e8889b5aa10f9dfd7cf5c9e10f0e2f7efac36c76ca9",
+    "scripts/pd_map.py": "bcefcd80e684268d6004d50349d71e750796084526da84d96bdb4306995c473c",
+    "scripts/workflow_helpers.py": "5d64a44ce5a4df7a0c90a2168fada75b273d9eb99a13a899475bf76dccbbfec9",
+    "scripts/model.py": "db4fdcf349e36bdb1c4a16c75f90e76016927a8d52317f903c1eb0b90b100ece",
+    "scripts/gate.py": "8b85d938078195a3252e2fc7914de8928e833379de6877ee67ea47848f68addf",
+    "scripts/fig_overlay.py": "b76a46de94d4d83556886129ce02bc0faad8d41d240282e4f09475305b9f8476",
+    "scripts/workflow.py": "c4dce39a9389b134c059524b88695fe0844d492ecce6750454dc8ccc0138e516",
+    "scripts/full/sqs_mscraps.py": "a66c02804a281fec222573222fc6db69719890a041859e728b43d0f317d6fa8a",
+    "scripts/full/validity.py": "2ec8059fe96d2dcae79a0d86a87ae526495c4e12ef8d14d54d5b94468ebec32f",
+    "scripts/full/_paths.py": "b6373d541d51760b1eccfba0a42200e2d3ce76abaaf3363cb64aa98478fc520c",
+    "scripts/full/hmc_refine.py": "20e09b411ed65ccd4454d39114fd9dccda868010313b969367fd6fdc8c5a8a54",
+    "scripts/full/make_anchor.py": "7b3d157e77f0938b0087edb6d581156a8e6901f62e014f045a92ab236cbc22da",
+    "scripts/full/fit_pr268.py": "a52c6f92ad73ec896c293eb16c30807545cd42002360463bf424bfcf112ee0a5",
+    "scripts/full/hmc_hessian.py": "3527524a24c1a5ac7aca6eb7f86cb884c2b390ff9b567c67f86d63bf8ddb581e",
+    "scripts/full/sigma_mlip.py": "2d563c5bb48123345a073eb10f640d987a9ca1b3925e52ca93885c7f0a05859e",
+    "scripts/full/hmc_nuts.py": "0ea48f32c5ed976c76815d88088ac2e3161142759a9a7597197fe114dfb9dba4",
+    "scripts/full/compounds.py": "102291c99359a64163bf01c69a28b94bf161b0850bbef015e1bf723ea40aed07",
+    "scripts/full/printed_invariants.py": "daa9e24a8d370fc73e07623a94c153fc2fe3ec3845b344df9c86c00d889cd565",
+    "scripts/full/mlip_relax.py": "17c59885ccd81821ce08b1dd917deeba9cbade87f70d0723eca81d8441d4cdd9",
+    "scripts/full/build_a4.py": "13ae49a8b7ad6f20f19f0268ad2f6c4c5bc861ae6649ebe10680402e473b00f5",
+    "scripts/full/build_mlip_tdb.py": "dc1d3e0cd60493163aa98c1f259fa3562b607b6ca420453e0d07355c7fad7f0b",
+    "scripts/full/evaluate.py": "643ec710045439931e07cc55ac3a48decf393cc081abe13536a3fad9d4946577",
+    "scripts/full/build_data.py": "571beb682a9eb982a8ea9b85a5ab1f1263becc865771a68c5c9e4b6d15c3b7fc",
+    "scripts/full/liquid_md.py": "227f907defcde35693dc8a53ba825a5ec68c587c5ae25394573aff0e685b71eb",
+    "scripts/full/validate_sqs.py": "ac0f0837c5dcc7d4dc661fe0a998bd5c4ea34c456ccadde15a5c0f8d448f7334",
+    "inputs/sigma_mlip.json": "deb9e596c03bc640163cf06e9d7b4b333bf0327fe2461d7f183a9303e0018375",
+    "inputs/zpf_points.json": "56de1d161ca02430da35204c87f87681fba4ef5d389f7580d37747ea3ce7ce4a",
+    "inputs/printed_invariants.json": "6e202ac7d87ab38698af29779535b35354119fd2bf1d0ca851f63e814ab581f2",
+    "inputs/unary_tables.npz": "ea6544f50cc8c3eae39410a1b0b98a171510bf82a3bfc601e5a11a10208d34cd",
+    "tdb/model-provenance.schema.json": "b6ea1398250ccb4bd0344f086f7da9a55b84e0427707f2bdb00e88f5ca032e0e",
+    "tdb/CuZr-94Zen-LB.tdb": "4cce85fd056a6fced1c8270faca7a1d811d2f8227b305f70e0a221925bd07f69",
+    "tdb/CuZr-PhaseForge-MLIP-B2b.tdb": "ce880a9dbefdcf5ff97781b03c9cf5712f848488e192026084fbbee563226ad4",
+    "tdb/model-provenance.json": "bb91526a3c8f6d7025fb1d860ac65be2b8d08873227eff052b8a6d1032afaf20",
+    "tdb/mlip_fit.json": "bb3368cfd42f318525c4f95c266c978341b1dc99fe45dc292b654923b40a4c0f",
+    "tdb/CuZr-PhaseForge-final.tdb": "b50b5f95cafe6dcfcb84dfcc9de7ec4b069929bbba940a403615040b325d6ad5",
+    "tdb/CuZr-PhaseForge-MLIP.tdb": "9a24be5b28949901d3297377745b65a88f545685dc24718676017b5d8602c2de",
+    "requirements.txt": "375fef1d0a3664ad4cf7d9cd204f5c48c4c16d0135beac6f79f66677e098bbd3",
+    "requirements-mlip.txt": "e5ab4c1b42ebc9f7d1f231ff452cb3707b79db954c7759acbf367f468b29c2be",
+    "requirements-fit.txt": "54e73ea2f2bdca43536b7f44d3f8fedb14d2627b001d93db9163bbc7bf825fdf",
+    "README.md": "a988a214ec4818b537334ccf01585ff638319521e7de1ba0817c4ac094e75d72",
+    "workflow/README.md": "1158ceb5059f19c6c792e4ad9bd6052aea1b5dd4722c2933009b79718f00ef2b",
+    "workflow/grace_2L_OMAT_files.sha256": "8b47bd5b126b41e2e0900f984fa53ab3cd8a49e714429a1405a44d9ce2bc3f15"
+  },
+  "stages": [
+    {
+      "id": "cached_gate",
+      "environment": "quick",
+      "commands": [
+        [
+          "{python}",
+          "{example}/scripts/gate.py",
+          "{run}/figures"
+        ]
+      ],
+      "depends_on": [],
+      "inputs": [],
+      "outputs": [
+        "{run}/figures/gate.json"
+      ],
+      "requires_orchid": false,
+      "requires_potential": false
+    },
+    {
+      "id": "cached_figures",
+      "environment": "quick",
+      "commands": [
+        [
+          "{python}",
+          "{example}/scripts/fig_overlay.py",
+          "{run}/figures"
+        ]
+      ],
+      "depends_on": [
+        "cached_gate"
+      ],
+      "inputs": [],
+      "outputs": [
+        "{run}/figures/fig_cuzr_overlay.pdf",
+        "{run}/figures/fig_cuzr_overlay.png"
+      ],
+      "requires_orchid": false,
+      "requires_potential": false
+    },
+    {
+      "id": "sqs",
+      "environment": "mlip",
+      "commands": [
+        [
+          "{python}",
+          "{example}/scripts/full/sqs_mscraps.py",
+          "{run}/runs/phaseforge"
+        ]
+      ],
+      "depends_on": [],
+      "inputs": [],
+      "outputs": [
+        "{run}/runs/phaseforge/*/sqs_*/POSCAR",
+        "{run}/runs/phaseforge/*/sqs_*/sqs_meta.json"
+      ],
+      "requires_orchid": false,
+      "requires_potential": true
+    },
+    {
+      "id": "compounds",
+      "environment": "mlip",
+      "commands": [
+        [
+          "{python}",
+          "{example}/scripts/full/compounds.py"
+        ]
+      ],
+      "depends_on": [],
+      "inputs": [],
+      "outputs": [
+        "{run}/structures/*.vasp",
+        "{run}/structures/compounds.json"
+      ],
+      "requires_orchid": false,
+      "requires_potential": false
+    },
+    {
+      "id": "prepare_compounds",
+      "environment": "quick",
+      "commands": [
+        [
+          "{python}",
+          "{example}/scripts/workflow_helpers.py",
+          "prepare-compounds"
+        ]
+      ],
+      "depends_on": [
+        "compounds"
+      ],
+      "inputs": [],
+      "outputs": [
+        "{run}/runs/phaseforge/COMPOUNDS/*/POSCAR"
+      ],
+      "requires_orchid": false,
+      "requires_potential": false
+    },
+    {
+      "id": "relax",
+      "environment": "mlip",
+      "commands": [
+        {
+          "foreach": [
+            "{run}/runs/phaseforge/FCC_A1/sqs_*",
+            "{run}/runs/phaseforge/BCC_A2/sqs_*",
+            "{run}/runs/phaseforge/HCP_A3/sqs_*",
+            "{run}/runs/phaseforge/COMPOUNDS/*"
+          ],
+          "argv": [
+            "{python}",
+            "{example}/scripts/full/mlip_relax.py",
+            "{item}"
+          ]
+        }
+      ],
+      "depends_on": [
+        "sqs",
+        "prepare_compounds"
+      ],
+      "inputs": [],
+      "outputs": [
+        "{run}/runs/phaseforge/FCC_A1/sqs_*/relax.json",
+        "{run}/runs/phaseforge/BCC_A2/sqs_*/relax.json",
+        "{run}/runs/phaseforge/HCP_A3/sqs_*/relax.json",
+        "{run}/runs/phaseforge/COMPOUNDS/*/relax.json",
+        "{run}/runs/phaseforge/FCC_A1/sqs_*/energy",
+        "{run}/runs/phaseforge/BCC_A2/sqs_*/energy",
+        "{run}/runs/phaseforge/HCP_A3/sqs_*/energy",
+        "{run}/runs/phaseforge/COMPOUNDS/*/energy",
+        "{run}/runs/phaseforge/FCC_A1/sqs_*/CONTCAR",
+        "{run}/runs/phaseforge/BCC_A2/sqs_*/CONTCAR",
+        "{run}/runs/phaseforge/HCP_A3/sqs_*/CONTCAR",
+        "{run}/runs/phaseforge/COMPOUNDS/*/CONTCAR"
+      ],
+      "requires_orchid": false,
+      "requires_potential": true
+    },
+    {
+      "id": "liquid_md",
+      "environment": "mlip",
+      "commands": [
+        {
+          "foreach": [
+            "{run}/runs/phaseforge/LIQUID/sqs_*"
+          ],
+          "argv": [
+            "{python}",
+            "{example}/scripts/full/liquid_md.py",
+            "{item}"
+          ]
+        }
+      ],
+      "depends_on": [
+        "sqs"
+      ],
+      "inputs": [],
+      "outputs": [
+        "{run}/runs/phaseforge/LIQUID/sqs_*/md.json",
+        "{run}/runs/phaseforge/LIQUID/sqs_*/energy",
+        "{run}/runs/phaseforge/LIQUID/sqs_*/CONTCAR"
+      ],
+      "requires_orchid": false,
+      "requires_potential": true
+    },
+    {
+      "id": "validate_sqs",
+      "environment": "mlip",
+      "commands": [
+        [
+          "{python}",
+          "{example}/scripts/full/validate_sqs.py"
+        ]
+      ],
+      "depends_on": [
+        "sqs"
+      ],
+      "inputs": [],
+      "outputs": [
+        "{run}/results/sqs_validation.json"
+      ],
+      "requires_orchid": false,
+      "requires_potential": false
+    },
+    {
+      "id": "assemble_mlip_tdb",
+      "environment": "mlip",
+      "commands": [
+        [
+          "{python}",
+          "{example}/scripts/full/build_mlip_tdb.py"
+        ]
+      ],
+      "depends_on": [
+        "relax",
+        "liquid_md",
+        "validate_sqs"
+      ],
+      "inputs": [],
+      "outputs": [
+        "{run}/tdb/CuZr-PhaseForge-MLIP.tdb",
+        "{run}/tdb/mlip_fit.json"
+      ],
+      "requires_orchid": false,
+      "requires_potential": false
+    },
+    {
+      "id": "b2_variant",
+      "environment": "quick",
+      "commands": [
+        [
+          "{python}",
+          "{example}/scripts/workflow_helpers.py",
+          "b2-variant"
+        ]
+      ],
+      "depends_on": [
+        "assemble_mlip_tdb"
+      ],
+      "inputs": [],
+      "outputs": [
+        "{run}/tdb/CuZr-PhaseForge-MLIP-B2b.tdb"
+      ],
+      "requires_orchid": false,
+      "requires_potential": false
+    },
+    {
+      "id": "fit_data",
+      "environment": "fit",
+      "commands": [
+        [
+          "{python}",
+          "{example}/scripts/full/build_data.py"
+        ],
+        [
+          "{python}",
+          "{example}/scripts/full/printed_invariants.py"
+        ]
+      ],
+      "depends_on": [],
+      "inputs": [],
+      "outputs": [
+        "{run}/data/manifest.json",
+        "{run}/results/printed_invariants.json",
+        "{run}/data/fit/*.json",
+        "{run}/data/holdout/*.json"
+      ],
+      "requires_orchid": true,
+      "requires_potential": false
+    },
+    {
+      "id": "sigma_mlip",
+      "environment": "fit",
+      "commands": [
+        [
+          "{python}",
+          "{example}/scripts/full/sigma_mlip.py"
+        ]
+      ],
+      "depends_on": [
+        "assemble_mlip_tdb"
+      ],
+      "inputs": [],
+      "outputs": [
+        "{run}/results/sigma_mlip.json"
+      ],
+      "requires_orchid": true,
+      "requires_potential": false
+    },
+    {
+      "id": "mlip_anchor",
+      "environment": "fit",
+      "commands": [
+        [
+          "{python}",
+          "{example}/scripts/full/make_anchor.py"
+        ]
+      ],
+      "depends_on": [
+        "sigma_mlip"
+      ],
+      "inputs": [],
+      "outputs": [
+        "{run}/data/mlip_anchor/*.json"
+      ],
+      "requires_orchid": false,
+      "requires_potential": false
+    },
+    {
+      "id": "final_fit_data",
+      "environment": "fit",
+      "commands": [
+        [
+          "{python}",
+          "{example}/scripts/full/build_a4.py",
+          "a4d"
+        ]
+      ],
+      "depends_on": [
+        "fit_data"
+      ],
+      "inputs": [],
+      "outputs": [
+        "{run}/data/a4d_F10/*.json",
+        "{run}/data/a4d_manifest.json"
+      ],
+      "requires_orchid": true,
+      "requires_potential": false
+    },
+    {
+      "id": "fit_s0",
+      "environment": "fit",
+      "commands": [
+        [
+          "{python}",
+          "{example}/scripts/full/fit_pr268.py",
+          "0",
+          "--data",
+          "data/a4d_F10",
+          "--tdb",
+          "tdb/CuZr-PhaseForge-MLIP-B2b.tdb",
+          "--out",
+          "runs/final2/F10b_s0",
+          "--wall",
+          "5400",
+          "--extra-meta",
+          "{\"VV0022\": \"CUZR_B2 b [J/mol formula/K]\"}"
+        ]
+      ],
+      "depends_on": [
+        "b2_variant",
+        "mlip_anchor",
+        "final_fit_data"
+      ],
+      "inputs": [],
+      "outputs": [
+        "{run}/runs/final2/F10b_s0/tuned.tdb",
+        "{run}/runs/final2/F10b_s0/result.json"
+      ],
+      "requires_orchid": false,
+      "requires_potential": false
+    },
+    {
+      "id": "evaluate_s0",
+      "environment": "fit",
+      "commands": [
+        [
+          "{python}",
+          "{example}/scripts/full/evaluate.py",
+          "{run}/runs/final2/F10b_s0/tuned.tdb",
+          "s0"
+        ],
+        [
+          "{python}",
+          "{example}/scripts/full/validity.py",
+          "{run}/runs/final2/F10b_s0/tuned.tdb"
+        ],
+        [
+          "{python}",
+          "{example}/scripts/workflow_helpers.py",
+          "gate-run",
+          "--start",
+          "0"
+        ]
+      ],
+      "depends_on": [
+        "fit_s0"
+      ],
+      "inputs": [],
+      "outputs": [
+        "{run}/results/eval_s0.json",
+        "{run}/results/gate_s0/gate.json"
+      ],
+      "requires_orchid": false,
+      "requires_potential": false
+    },
+    {
+      "id": "fit_s1",
+      "environment": "fit",
+      "commands": [
+        [
+          "{python}",
+          "{example}/scripts/full/fit_pr268.py",
+          "1",
+          "--data",
+          "data/a4d_F10",
+          "--tdb",
+          "tdb/CuZr-PhaseForge-MLIP-B2b.tdb",
+          "--out",
+          "runs/final2/F10b_s1",
+          "--wall",
+          "5400",
+          "--extra-meta",
+          "{\"VV0022\": \"CUZR_B2 b [J/mol formula/K]\"}"
+        ]
+      ],
+      "depends_on": [
+        "b2_variant",
+        "mlip_anchor",
+        "final_fit_data"
+      ],
+      "inputs": [],
+      "outputs": [
+        "{run}/runs/final2/F10b_s1/tuned.tdb",
+        "{run}/runs/final2/F10b_s1/result.json"
+      ],
+      "requires_orchid": false,
+      "requires_potential": false
+    },
+    {
+      "id": "evaluate_s1",
+      "environment": "fit",
+      "commands": [
+        [
+          "{python}",
+          "{example}/scripts/full/evaluate.py",
+          "{run}/runs/final2/F10b_s1/tuned.tdb",
+          "s1"
+        ],
+        [
+          "{python}",
+          "{example}/scripts/full/validity.py",
+          "{run}/runs/final2/F10b_s1/tuned.tdb"
+        ],
+        [
+          "{python}",
+          "{example}/scripts/workflow_helpers.py",
+          "gate-run",
+          "--start",
+          "1"
+        ]
+      ],
+      "depends_on": [
+        "fit_s1"
+      ],
+      "inputs": [],
+      "outputs": [
+        "{run}/results/eval_s1.json",
+        "{run}/results/gate_s1/gate.json"
+      ],
+      "requires_orchid": false,
+      "requires_potential": false
+    },
+    {
+      "id": "fit_s2",
+      "environment": "fit",
+      "commands": [
+        [
+          "{python}",
+          "{example}/scripts/full/fit_pr268.py",
+          "2",
+          "--data",
+          "data/a4d_F10",
+          "--tdb",
+          "tdb/CuZr-PhaseForge-MLIP-B2b.tdb",
+          "--out",
+          "runs/final2/F10b_s2",
+          "--wall",
+          "5400",
+          "--extra-meta",
+          "{\"VV0022\": \"CUZR_B2 b [J/mol formula/K]\"}"
+        ]
+      ],
+      "depends_on": [
+        "b2_variant",
+        "mlip_anchor",
+        "final_fit_data"
+      ],
+      "inputs": [],
+      "outputs": [
+        "{run}/runs/final2/F10b_s2/tuned.tdb",
+        "{run}/runs/final2/F10b_s2/result.json"
+      ],
+      "requires_orchid": false,
+      "requires_potential": false
+    },
+    {
+      "id": "evaluate_s2",
+      "environment": "fit",
+      "commands": [
+        [
+          "{python}",
+          "{example}/scripts/full/evaluate.py",
+          "{run}/runs/final2/F10b_s2/tuned.tdb",
+          "s2"
+        ],
+        [
+          "{python}",
+          "{example}/scripts/full/validity.py",
+          "{run}/runs/final2/F10b_s2/tuned.tdb"
+        ],
+        [
+          "{python}",
+          "{example}/scripts/workflow_helpers.py",
+          "gate-run",
+          "--start",
+          "2"
+        ]
+      ],
+      "depends_on": [
+        "fit_s2"
+      ],
+      "inputs": [],
+      "outputs": [
+        "{run}/results/eval_s2.json",
+        "{run}/results/gate_s2/gate.json"
+      ],
+      "requires_orchid": false,
+      "requires_potential": false
+    },
+    {
+      "id": "fit_s3",
+      "environment": "fit",
+      "commands": [
+        [
+          "{python}",
+          "{example}/scripts/full/fit_pr268.py",
+          "3",
+          "--data",
+          "data/a4d_F10",
+          "--tdb",
+          "tdb/CuZr-PhaseForge-MLIP-B2b.tdb",
+          "--out",
+          "runs/final2/F10b_s3",
+          "--wall",
+          "5400",
+          "--extra-meta",
+          "{\"VV0022\": \"CUZR_B2 b [J/mol formula/K]\"}"
+        ]
+      ],
+      "depends_on": [
+        "b2_variant",
+        "mlip_anchor",
+        "final_fit_data"
+      ],
+      "inputs": [],
+      "outputs": [
+        "{run}/runs/final2/F10b_s3/tuned.tdb",
+        "{run}/runs/final2/F10b_s3/result.json"
+      ],
+      "requires_orchid": false,
+      "requires_potential": false
+    },
+    {
+      "id": "evaluate_s3",
+      "environment": "fit",
+      "commands": [
+        [
+          "{python}",
+          "{example}/scripts/full/evaluate.py",
+          "{run}/runs/final2/F10b_s3/tuned.tdb",
+          "s3"
+        ],
+        [
+          "{python}",
+          "{example}/scripts/full/validity.py",
+          "{run}/runs/final2/F10b_s3/tuned.tdb"
+        ],
+        [
+          "{python}",
+          "{example}/scripts/workflow_helpers.py",
+          "gate-run",
+          "--start",
+          "3"
+        ]
+      ],
+      "depends_on": [
+        "fit_s3"
+      ],
+      "inputs": [],
+      "outputs": [
+        "{run}/results/eval_s3.json",
+        "{run}/results/gate_s3/gate.json"
+      ],
+      "requires_orchid": false,
+      "requires_potential": false
+    },
+    {
+      "id": "fit_s4",
+      "environment": "fit",
+      "commands": [
+        [
+          "{python}",
+          "{example}/scripts/full/fit_pr268.py",
+          "4",
+          "--data",
+          "data/a4d_F10",
+          "--tdb",
+          "tdb/CuZr-PhaseForge-MLIP-B2b.tdb",
+          "--out",
+          "runs/final2/F10b_s4",
+          "--wall",
+          "5400",
+          "--extra-meta",
+          "{\"VV0022\": \"CUZR_B2 b [J/mol formula/K]\"}"
+        ]
+      ],
+      "depends_on": [
+        "b2_variant",
+        "mlip_anchor",
+        "final_fit_data"
+      ],
+      "inputs": [],
+      "outputs": [
+        "{run}/runs/final2/F10b_s4/tuned.tdb",
+        "{run}/runs/final2/F10b_s4/result.json"
+      ],
+      "requires_orchid": false,
+      "requires_potential": false
+    },
+    {
+      "id": "evaluate_s4",
+      "environment": "fit",
+      "commands": [
+        [
+          "{python}",
+          "{example}/scripts/full/evaluate.py",
+          "{run}/runs/final2/F10b_s4/tuned.tdb",
+          "s4"
+        ],
+        [
+          "{python}",
+          "{example}/scripts/full/validity.py",
+          "{run}/runs/final2/F10b_s4/tuned.tdb"
+        ],
+        [
+          "{python}",
+          "{example}/scripts/workflow_helpers.py",
+          "gate-run",
+          "--start",
+          "4"
+        ]
+      ],
+      "depends_on": [
+        "fit_s4"
+      ],
+      "inputs": [],
+      "outputs": [
+        "{run}/results/eval_s4.json",
+        "{run}/results/gate_s4/gate.json"
+      ],
+      "requires_orchid": false,
+      "requires_potential": false
+    }
+  ]
+}

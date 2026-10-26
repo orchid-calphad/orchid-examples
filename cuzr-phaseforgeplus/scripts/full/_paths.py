@@ -19,7 +19,7 @@ import os, shutil, sys
 from pathlib import Path
 
 EXAMPLE = Path(__file__).resolve().parents[2]
-ROOT = EXAMPLE / "work"
+ROOT = Path(os.environ.get("ORCHID_WORK", str(EXAMPLE / "work"))).expanduser().resolve()
 SGTE_TDB = EXAMPLE / "tdb" / "CuZr-94Zen-LB.tdb"
 RELEASE = "778cc6bfa67db292e3f917f5ac6d691e0f37fc1a"
 DENSE_RELEASE = "e6b9b3f649e612ed8432f5487304c78910ab7604"
@@ -30,9 +30,9 @@ sys.path.insert(0, str(EXAMPLE / "scripts"))          # model.py, pd_map.py
 for sub in ("runs", "data", "results", "tdb", "structures"):
     (ROOT / sub).mkdir(parents=True, exist_ok=True)
 for f in ("CuZr-PhaseForge-MLIP.tdb", "CuZr-PhaseForge-MLIP-B2b.tdb", "CuZr-PhaseForge-final.tdb", "mlip_fit.json"):
-    if not (ROOT / "tdb" / f).exists():
+    if os.environ.get("ORCHID_SEED_CACHED", "1") == "1" and not (ROOT / "tdb" / f).exists():
         shutil.copy(EXAMPLE / "tdb" / f, ROOT / "tdb" / f)
-if not (ROOT / "results" / "sigma_mlip.json").exists():
+if os.environ.get("ORCHID_SEED_CACHED", "1") == "1" and not (ROOT / "results" / "sigma_mlip.json").exists():
     shutil.copy(EXAMPLE / "inputs" / "sigma_mlip.json", ROOT / "results" / "sigma_mlip.json")
 
 

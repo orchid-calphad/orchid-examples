@@ -13,7 +13,7 @@
  "m_scraps_commit_if_source_tree": "",
  "seed": 2026,
  "mpi_ranks": 4,
- "orchid_data": "/Users/raymundo.arroyave/projects/orchid-data",
+ "orchid_data": "${ORCHID_DATA_DIR}",
  "orchid_data_commit": "d91a44102d7ed8f9fccbf937cee004484cae5241",
  "volumes_A3_per_atom": {
   "Cu": 11.81,

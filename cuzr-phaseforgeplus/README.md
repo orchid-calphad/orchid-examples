@@ -25,6 +25,10 @@ has a narrow spurious (βZr) field near x(Zr) = 0.1 between 1220 and 1290 K. Out
 activities (RMSE 5.1 → 1.7 kJ/mol for MLIP-only → tuned; SGTE 2.6) and held-out phase-equilibrium driving force (1.7 → 0.11 kJ/mol, SGTE 0.12)
 (`cached/demo_results.json`, `metrics`). It is a demonstration of data reuse, not a new Cu–Zr assessment.
 
+## Structured provenance and workflow
+
+The [TDB provenance manifest](tdb/model-provenance.json) distinguishes PhaseForge from PhaseForge+ and identifies GRACE-2L-OMAT by its archived checkpoint hashes. The [workflow guide](workflow/README.md) provides the dependency graph, input verification, isolated execution, and stage receipts. The historical data commits and weighting choices below remain the basis of the reported results; new fits with ORCHID's individual-uncertainty weights require a new run manifest.
+
 ## Quick path: cached TDBs → gate table and figure (no GPU, about 3–4 min)
 
 ```sh

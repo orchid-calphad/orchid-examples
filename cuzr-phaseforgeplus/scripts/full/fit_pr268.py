@@ -18,7 +18,7 @@ from espei.error_functions.context import setup_context
 from espei.utils import database_symbols_to_fit, unpack_piecewise
 import sys as _sys, os as _os
 _sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
-from _paths import ROOT, SGTE_TDB, orchid, DENSE_GRID, PFP_SRC  # noqa: F401 (paths: _paths.py)
+from _paths import ROOT, SGTE_TDB, orchid, PFP_SRC  # noqa: F401 (paths: _paths.py)
 def arg(k, d):
     return sys.argv[sys.argv.index(k) + 1] if k in sys.argv else d
 sid = int(sys.argv[1]); WALL = float(arg("--wall", 2.5 * 3600))

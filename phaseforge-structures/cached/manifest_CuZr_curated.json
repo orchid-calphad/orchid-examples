@@ -13,7 +13,7 @@
  "m_scraps_commit_if_source_tree": "",
  "seed": 2026,
  "mpi_ranks": 4,
- "orchid_data": "/Users/raymundo.arroyave/projects/orchid-data",
+ "orchid_data": "${ORCHID_DATA_DIR}",
  "orchid_data_commit": "d91a44102d7ed8f9fccbf937cee004484cae5241",
  "volumes_A3_per_atom": {
   "Cu": 11.81,
@@ -129,7 +129,7 @@
  ],
  "compounds": [
   {
-   "source": "curated file /Users/raymundo.arroyave/projects/orchid-phaseforge-demo/structures/CU10ZR7.vasp",
+   "source": "curated file ${CURATED_STRUCTURES}/CU10ZR7.vasp",
    "phase": "CU10ZR7",
    "n_atoms": 34,
    "x_target": 0.411765,
@@ -140,7 +140,7 @@
    "seconds": 0.22
   },
   {
-   "source": "curated file /Users/raymundo.arroyave/projects/orchid-phaseforge-demo/structures/CU51ZR14.vasp",
+   "source": "curated file ${CURATED_STRUCTURES}/CU51ZR14.vasp",
    "phase": "CU51ZR14",
    "n_atoms": 65,
    "x_target": 0.215385,
@@ -151,7 +151,7 @@
    "seconds": 0.01
   },
   {
-   "source": "curated file /Users/raymundo.arroyave/projects/orchid-phaseforge-demo/structures/CU5ZR_C15B.vasp",
+   "source": "curated file ${CURATED_STRUCTURES}/CU5ZR_C15B.vasp",
    "phase": "CU5ZR_C15B",
    "n_atoms": 6,
    "x_target": 0.166667,
@@ -162,7 +162,7 @@
    "seconds": 0.0
   },
   {
-   "source": "curated file /Users/raymundo.arroyave/projects/orchid-phaseforge-demo/structures/CU8ZR3.vasp",
+   "source": "curated file ${CURATED_STRUCTURES}/CU8ZR3.vasp",
    "phase": "CU8ZR3",
    "n_atoms": 44,
    "x_target": 0.272727,
@@ -173,7 +173,7 @@
    "seconds": 0.01
   },
   {
-   "source": "curated file /Users/raymundo.arroyave/projects/orchid-phaseforge-demo/structures/CUZR_B2.vasp",
+   "source": "curated file ${CURATED_STRUCTURES}/CUZR_B2.vasp",
    "phase": "CUZR_B2",
    "n_atoms": 2,
    "x_target": 0.5,
@@ -184,7 +184,7 @@
    "seconds": 0.0
   },
   {
-   "source": "curated file /Users/raymundo.arroyave/projects/orchid-phaseforge-demo/structures/CUZR2.vasp",
+   "source": "curated file ${CURATED_STRUCTURES}/CUZR2.vasp",
    "phase": "CUZR2",
    "n_atoms": 3,
    "x_target": 0.666667,

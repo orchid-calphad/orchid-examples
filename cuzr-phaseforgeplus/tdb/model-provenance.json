@@ -1,0 +1,248 @@
+{
+  "schema_version": "1.0.0",
+  "scope": "Cu-Zr example; provenance registration does not add these review-only TDBs to the scientific database collection.",
+  "records": [
+    {
+      "id": "tdb:sha256:4cce85fd056a6fced1c8270faca7a1d811d2f8227b305f70e0a221925bd07f69",
+      "path": "tdb/CuZr-94Zen-LB.tdb",
+      "sha256": "4cce85fd056a6fced1c8270faca7a1d811d2f8227b305f70e0a221925bd07f69",
+      "system": "CU-ZR",
+      "generation_method": "conventional_assessment",
+      "workflow_history": [
+        "conventional_assessment"
+      ],
+      "tags": [
+        "conventional_assessment"
+      ],
+      "potential": null,
+      "variant": "literature_reference",
+      "parents": [],
+      "review_status": "literature_assessment",
+      "evidence": [
+        "README.md",
+        "tdb/CuZr-94Zen-LB.tdb"
+      ],
+      "workflow": null,
+      "fit": null
+    },
+    {
+      "id": "tdb:sha256:9a24be5b28949901d3297377745b65a88f545685dc24718676017b5d8602c2de",
+      "path": "tdb/CuZr-PhaseForge-MLIP.tdb",
+      "sha256": "9a24be5b28949901d3297377745b65a88f545685dc24718676017b5d8602c2de",
+      "system": "CU-ZR",
+      "generation_method": "phaseforge",
+      "workflow_history": [
+        "phaseforge"
+      ],
+      "tags": [
+        "phaseforge",
+        "potential:GRACE-2L-OMAT"
+      ],
+      "potential": {
+        "family": "GRACE",
+        "name": "GRACE-2L-OMAT",
+        "version": null,
+        "version_status": "No separate semantic version recorded; checkpoint files identify the model.",
+        "checkpoint": {
+          "format": "tensorflow_saved_model",
+          "files": [
+            {
+              "path": ".grace_origin.json",
+              "sha256": "7a2559b3cd56bafde9e1dbc91f49d2ef8d98558a909f27045fb86a218da20fb7"
+            },
+            {
+              "path": "fingerprint.pb",
+              "sha256": "62bea957be6f9af9f0de66b657c729e3c5c53c311e9478d5a874c98fdc327fca"
+            },
+            {
+              "path": "metadata.yaml",
+              "sha256": "4f5f4d3adf228da543fd58ea0a63441258526d3cf3d0c65e57fd844c1bd10336"
+            },
+            {
+              "path": "saved_model.pb",
+              "sha256": "920ee71483d29bef4940343dc3a2f90fc326ae433e12916a96b4f40a14781073"
+            },
+            {
+              "path": "variables/variables.data-00000-of-00001",
+              "sha256": "62c50ba3bdc3e93d7bfaa1b6b2c387929e6baa7c39c0c2e4bd3f76b7de69d078"
+            },
+            {
+              "path": "variables/variables.index",
+              "sha256": "b524d57d33f69f54dd892d42c48517d7e7915bd8e33091edaebccc940bee5d69"
+            }
+          ]
+        },
+        "source": "https://huggingface.co/AMS-ICAMS-RUB/grace-foundation-models/resolve/kk/models/GRACE-2L-OMAT-model.tar.gz",
+        "evidence": [
+          "workflow/grace_2L_OMAT_files.sha256",
+          "scripts/full/mlip_relax.py",
+          "scripts/full/liquid_md.py"
+        ]
+      },
+      "variant": "mlip_only",
+      "parents": [
+        {
+          "path": "tdb/CuZr-94Zen-LB.tdb",
+          "sha256": "4cce85fd056a6fced1c8270faca7a1d811d2f8227b305f70e0a221925bd07f69"
+        }
+      ],
+      "review_status": "demonstration_only",
+      "evidence": [
+        "README.md",
+        "tdb/CuZr-PhaseForge-MLIP.tdb"
+      ],
+      "workflow": "workflow/cuzr.json",
+      "fit": null
+    },
+    {
+      "id": "tdb:sha256:ce880a9dbefdcf5ff97781b03c9cf5712f848488e192026084fbbee563226ad4",
+      "path": "tdb/CuZr-PhaseForge-MLIP-B2b.tdb",
+      "sha256": "ce880a9dbefdcf5ff97781b03c9cf5712f848488e192026084fbbee563226ad4",
+      "system": "CU-ZR",
+      "generation_method": "phaseforge",
+      "workflow_history": [
+        "phaseforge"
+      ],
+      "tags": [
+        "phaseforge",
+        "potential:GRACE-2L-OMAT"
+      ],
+      "potential": {
+        "family": "GRACE",
+        "name": "GRACE-2L-OMAT",
+        "version": null,
+        "version_status": "No separate semantic version recorded; checkpoint files identify the model.",
+        "checkpoint": {
+          "format": "tensorflow_saved_model",
+          "files": [
+            {
+              "path": ".grace_origin.json",
+              "sha256": "7a2559b3cd56bafde9e1dbc91f49d2ef8d98558a909f27045fb86a218da20fb7"
+            },
+            {
+              "path": "fingerprint.pb",
+              "sha256": "62bea957be6f9af9f0de66b657c729e3c5c53c311e9478d5a874c98fdc327fca"
+            },
+            {
+              "path": "metadata.yaml",
+              "sha256": "4f5f4d3adf228da543fd58ea0a63441258526d3cf3d0c65e57fd844c1bd10336"
+            },
+            {
+              "path": "saved_model.pb",
+              "sha256": "920ee71483d29bef4940343dc3a2f90fc326ae433e12916a96b4f40a14781073"
+            },
+            {
+              "path": "variables/variables.data-00000-of-00001",
+              "sha256": "62c50ba3bdc3e93d7bfaa1b6b2c387929e6baa7c39c0c2e4bd3f76b7de69d078"
+            },
+            {
+              "path": "variables/variables.index",
+              "sha256": "b524d57d33f69f54dd892d42c48517d7e7915bd8e33091edaebccc940bee5d69"
+            }
+          ]
+        },
+        "source": "https://huggingface.co/AMS-ICAMS-RUB/grace-foundation-models/resolve/kk/models/GRACE-2L-OMAT-model.tar.gz",
+        "evidence": [
+          "workflow/grace_2L_OMAT_files.sha256",
+          "scripts/full/mlip_relax.py",
+          "scripts/full/liquid_md.py"
+        ]
+      },
+      "variant": "mlip_only_with_zero_B2_temperature_term",
+      "parents": [
+        {
+          "path": "tdb/CuZr-PhaseForge-MLIP.tdb",
+          "sha256": "9a24be5b28949901d3297377745b65a88f545685dc24718676017b5d8602c2de"
+        }
+      ],
+      "review_status": "demonstration_only",
+      "evidence": [
+        "README.md",
+        "tdb/CuZr-PhaseForge-MLIP-B2b.tdb"
+      ],
+      "workflow": "workflow/cuzr.json",
+      "fit": null
+    },
+    {
+      "id": "tdb:sha256:b50b5f95cafe6dcfcb84dfcc9de7ec4b069929bbba940a403615040b325d6ad5",
+      "path": "tdb/CuZr-PhaseForge-final.tdb",
+      "sha256": "b50b5f95cafe6dcfcb84dfcc9de7ec4b069929bbba940a403615040b325d6ad5",
+      "system": "CU-ZR",
+      "generation_method": "phaseforge_plus",
+      "workflow_history": [
+        "phaseforge",
+        "phaseforge_plus"
+      ],
+      "tags": [
+        "phaseforge_plus",
+        "potential:GRACE-2L-OMAT"
+      ],
+      "potential": {
+        "family": "GRACE",
+        "name": "GRACE-2L-OMAT",
+        "version": null,
+        "version_status": "No separate semantic version recorded; checkpoint files identify the model.",
+        "checkpoint": {
+          "format": "tensorflow_saved_model",
+          "files": [
+            {
+              "path": ".grace_origin.json",
+              "sha256": "7a2559b3cd56bafde9e1dbc91f49d2ef8d98558a909f27045fb86a218da20fb7"
+            },
+            {
+              "path": "fingerprint.pb",
+              "sha256": "62bea957be6f9af9f0de66b657c729e3c5c53c311e9478d5a874c98fdc327fca"
+            },
+            {
+              "path": "metadata.yaml",
+              "sha256": "4f5f4d3adf228da543fd58ea0a63441258526d3cf3d0c65e57fd844c1bd10336"
+            },
+            {
+              "path": "saved_model.pb",
+              "sha256": "920ee71483d29bef4940343dc3a2f90fc326ae433e12916a96b4f40a14781073"
+            },
+            {
+              "path": "variables/variables.data-00000-of-00001",
+              "sha256": "62c50ba3bdc3e93d7bfaa1b6b2c387929e6baa7c39c0c2e4bd3f76b7de69d078"
+            },
+            {
+              "path": "variables/variables.index",
+              "sha256": "b524d57d33f69f54dd892d42c48517d7e7915bd8e33091edaebccc940bee5d69"
+            }
+          ]
+        },
+        "source": "https://huggingface.co/AMS-ICAMS-RUB/grace-foundation-models/resolve/kk/models/GRACE-2L-OMAT-model.tar.gz",
+        "evidence": [
+          "workflow/grace_2L_OMAT_files.sha256",
+          "scripts/full/mlip_relax.py",
+          "scripts/full/liquid_md.py"
+        ]
+      },
+      "variant": "fitted_to_orchid",
+      "parents": [
+        {
+          "path": "tdb/CuZr-PhaseForge-MLIP-B2b.tdb",
+          "sha256": "ce880a9dbefdcf5ff97781b03c9cf5712f848488e192026084fbbee563226ad4"
+        }
+      ],
+      "review_status": "demonstration_only",
+      "evidence": [
+        "README.md",
+        "tdb/CuZr-PhaseForge-final.tdb"
+      ],
+      "workflow": "workflow/cuzr.json",
+      "fit": {
+        "source_run": "runs/final2/F10b_s3",
+        "data_commit": "778cc6bfa67db292e3f917f5ac6d691e0f37fc1a",
+        "dense_data_commit": "e6b9b3f649e612ed8432f5487304c78910ab7604",
+        "selection": "post_hoc",
+        "gate": "9/13 in-sample; not predictive validation",
+        "weighting_policy": "archived_F10b; not the individual-uncertainty revision of 2026-10-25"
+      }
+    }
+  ],
+  "artifact_root": {
+    "repository": "orchid-examples",
+    "path": "cuzr-phaseforgeplus"
+  }
+}
