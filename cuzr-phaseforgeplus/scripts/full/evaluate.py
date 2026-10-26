@@ -19,7 +19,7 @@ from espei.utils import database_symbols_to_fit, unpack_piecewise
 
 import sys as _sys, os as _os
 _sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
-from _paths import ROOT, SGTE_TDB, orchid, DENSE_GRID, PFP_SRC  # noqa: F401 (paths: _paths.py)
+from _paths import ROOT, SGTE_TDB, orchid, PFP_SRC  # noqa: F401 (paths: _paths.py)
 MAN = json.load(open(ROOT / "data/manifest.json"))
 TYPE = {Path(d["file"]).name: d["type"] for d in MAN["datasets"]}
 

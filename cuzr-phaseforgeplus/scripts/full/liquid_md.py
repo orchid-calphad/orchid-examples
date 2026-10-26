@@ -21,6 +21,15 @@ from ase.io import read
 from pymatgen.io.ase import AseAtomsAdaptor
 from materialsframework.calculators import GraceCalculator
 
+# New workflow runs record an explicit seed; absent means the historical unseeded behavior.
+seed = int(_os.environ["ORCHID_MD_SEED"]) if "ORCHID_MD_SEED" in _os.environ else None
+if seed is not None:
+    import random
+    import tensorflow as tf
+    random.seed(seed)
+    np.random.seed(seed)
+    tf.random.set_seed(seed)
+
 T, TMELT = 2178.0, 3500.0
 d = Path(sys.argv[1])
 steps = dict(melt=2000, npt=3000, nvt=10000)
@@ -54,7 +63,7 @@ info = {"T_K": T, "T_premelt_K": TMELT, "steps": steps, "n_atoms": n, "formula":
         "energy_eV_cell": E, "energy_eV_atom": E / n, "epot_eV_atom_last20": float(np.mean(epot[-last:]) / n),
         "se_eV_atom_blocks_last_half": se / n, "T_mean_last20": float(np.mean(temp[-last:])),
         "volume_A3_atom_npt_end": s_npt.volume / n, "msd_nvt_A2_estimate": msd, "seconds": round(time.time() - t0, 1),
-        "model": "GRACE-2L-OMAT"}
+        "model": "GRACE-2L-OMAT", "random_seed": seed}
 (d / "md.json").write_text(json.dumps(info, indent=1))
 if (d / "wait").exists(): (d / "wait").unlink()
 print(json.dumps(info))

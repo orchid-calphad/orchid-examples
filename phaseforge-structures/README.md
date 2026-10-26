@@ -21,7 +21,7 @@ python scripts/make_structures.py Cu-Zr --out out/CuZr \
 python scripts/make_structures.py Ni-Ti --out out/NiTi                               # any other binary of the registry
 ```
 
-Inputs: `--orchid-data` (a checkout of orchid-data, default `~/projects/orchid-data`) and `--mp-structures` (default the
+Inputs: `--orchid-data` (a checkout of orchid-data, set with `$ORCHID_DATA` or pass explicitly) and `--mp-structures` (default the
 Materials Project structures of `../mlip-formation-enthalpy/inputs/structures.json.gz`, which cover only the systems with
 experimental formation enthalpies; the hull files carry no coordinates). OQMD structures are not available offline.
 

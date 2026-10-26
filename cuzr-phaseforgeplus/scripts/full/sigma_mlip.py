@@ -13,7 +13,7 @@ from pathlib import Path
 import numpy as np
 import sys as _sys, os as _os
 _sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
-from _paths import ROOT, SGTE_TDB, orchid, DENSE_GRID, PFP_SRC  # noqa: F401 (paths: _paths.py)
+from _paths import ROOT, SGTE_TDB, orchid, PFP_SRC  # noqa: F401 (paths: _paths.py)
 CAL = json.load(open(orchid("espei/dft/CALIBRATION.json")))
 s_dft = CAL["sources"]["mp"]["strata"]["on_hull_single|metal"]["sigma_robust"]
 PAGES = {"CU5ZR_C15B": "Cu5Zr", "CU51ZR14": "Cu51Zr14", "CU8ZR3": "Cu8Zr3", "CU10ZR7": "Cu10Zr7", "CUZR_B2": "CuZr", "CUZR2": "CuZr2"}

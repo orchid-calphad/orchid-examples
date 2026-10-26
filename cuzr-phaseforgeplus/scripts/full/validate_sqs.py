@@ -21,7 +21,7 @@ from sqs_mscraps import prim, SETUP
 
 import sys as _sys, os as _os
 _sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
-from _paths import ROOT, SGTE_TDB, orchid, DENSE_GRID, PFP_SRC  # noqa: F401 (paths: _paths.py)
+from _paths import ROOT, SGTE_TDB, orchid, PFP_SRC  # noqa: F401 (paths: _paths.py)
 RUN = ROOT / "runs/phaseforge"
 ATAT_EX = (PFP_SRC / "example/PhaseForge") if PFP_SRC else None
 EXT = {"FCC_A1": 3.0, "BCC_A2": 2.6, "HCP_A3": 2.6, "LIQUID": 2.05}   # extended pair radius, units of NN distance

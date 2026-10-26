@@ -22,7 +22,7 @@ inputs/structures: <LAT>/sqs_lev=<l>_a_<A>=<..>,a_<B>=<..>/{POSCAR,str.out,lat.i
 COMPOUNDS/<PHASE>/POSCAR, relax_list.txt, plus manifest.json (timings, versions, provenance).
 
 Usage:
-  python make_structures.py Cu-Zr --out out/CuZr [--orchid-data ~/projects/orchid-data] [--curated DIR]
+  python make_structures.py Cu-Zr --out out/CuZr [--orchid-data $ORCHID_DATA] [--curated DIR]
 """
 import argparse, csv, gzip, json, os, platform, re, subprocess, sys, time
 from pathlib import Path

@@ -22,7 +22,7 @@ from pymatgen.core import Structure, Lattice
 
 import sys as _sys, os as _os
 _sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
-from _paths import ROOT, SGTE_TDB, orchid, DENSE_GRID, PFP_SRC  # noqa: F401 (paths: _paths.py)
+from _paths import ROOT, SGTE_TDB, orchid, PFP_SRC  # noqa: F401 (paths: _paths.py)
 q, t, h, tt = 0.25, 1 / 3, 0.5, 2 / 3
 DEF = {
     "CU5ZR_C15B": ("F-43m", Lattice.cubic(6.8700), [("Cu", (q, q, q)), ("Cu", (0.62427,) * 3), ("Zr", (0, 0, 0))], (5, 1)),

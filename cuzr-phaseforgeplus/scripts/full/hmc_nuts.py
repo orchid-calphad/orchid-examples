@@ -31,7 +31,7 @@ from littlemcmc.quadpotential import QuadPotentialDiagAdapt, QuadPotentialDiag
 
 import sys as _sys, os as _os
 _sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
-from _paths import ROOT, SGTE_TDB, orchid, DENSE_GRID, PFP_SRC  # noqa: F401 (paths: _paths.py)
+from _paths import ROOT, SGTE_TDB, orchid, PFP_SRC  # noqa: F401 (paths: _paths.py)
 def arg(k, d):
     return sys.argv[sys.argv.index(k) + 1] if k in sys.argv else d
 mode = sys.argv[1]
