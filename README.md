@@ -7,7 +7,7 @@ outputs, with its compute requirements, timings, pinned environment and pinned O
 ORCHID (Open Repository for CALPHAD Hypotheses, Intelligence, and Discovery): data at
 [orchid-calphad/orchid-data](https://github.com/orchid-calphad/orchid-data) / <https://data.orchid-project.org>,
 project site <https://orchid-project.org>. Paper: *TODO: arXiv / journal link*. Archive of this repository: Zenodo
-[doi:10.5281/zenodo.PENDING-orchid-examples](https://doi.org/10.5281/zenodo.PENDING-orchid-examples) (placeholder until the DOI is reserved). Values in the ORCHID release are **Version 1, machine-extracted**.
+[doi:10.5281/zenodo.23736043](https://doi.org/10.5281/zenodo.23736043) (placeholder until the DOI is reserved). Values in the ORCHID release are **Version 1, machine-extracted**.
 
 | example | what it shows | headline result | quick path |
 |---|---|---|---|
