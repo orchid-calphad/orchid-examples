@@ -23,6 +23,8 @@ import argparse, glob, hashlib, json, math, os, subprocess, sys
 from collections import Counter, defaultdict
 
 sys.dont_write_bytecode = True
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from inputs_io import read_inputs  # noqa: E402
 SITE_REPO = os.path.expanduser(os.environ.get("ORCHID_SITE_REPO", "orchid-project.org"))   # git checkout of orchid-calphad/orchid-project.org
 DATA = os.path.expanduser(os.environ.get("ORCHID_DATA_REPO", "orchid-data"))               # git checkout of orchid-calphad/orchid-data
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))   # example root
@@ -63,6 +65,7 @@ CUZR_INDIRECT = 9.7  # kJ/mol-atom, sigma_DFT (+) MLIP->DFT, Cu-Zr (GRACE-2L-OMA
 
 def sha(p):
     return hashlib.sha256(open(p, "rb").read()).hexdigest()
+
 
 
 def git(repo, *a):
@@ -175,7 +178,8 @@ def with_cluster(ps, label):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--results", nargs="+", required=True)
-    ap.add_argument("--inputs", nargs="+", default=[os.path.join(ROOT, "inputs/structures.json")])
+    ap.add_argument("--inputs", nargs="+", default=[os.path.join(ROOT, "inputs/structures.json")],
+                    help="structures file(s); a missing .json is read from the shipped .json.gz")
     ap.add_argument("--out", required=True)
     ap.add_argument("--site-rev", default="HEAD", help="orchid-project.org revision of the calibration code (use --site-rev=X)")
     ap.add_argument("--data-rev", default="HEAD", help="orchid-data revision of the reference data (use --data-rev=X)")
@@ -187,7 +191,7 @@ def main():
     # DFT pairs: exactly the DFT calibration's (default subset per point, strata, systems, sigma_exp)
     pairs_dft, dp = B.calibration_pairs(os.path.join(SITE, "data"), pub)
     R = dp["records"]
-    items = [it for f in a.inputs for it in json.load(open(f))["items"]]
+    items = [it for f in a.inputs for it in json.loads(read_inputs(f)[0])["items"]]
     itm = {i["id"]: i for i in items}
     E, meta = load_results(a.results)
     F = mlip_formation(E, items)
@@ -332,7 +336,7 @@ def main():
                    "chemistry_classes": B.CHEM_TEXT, "match_quality": B.MATCH_TEXT, "eV_to_kJ_per_mol": KJ,
                    "cuzr_indirect_sigma_kJ": CUZR_INDIRECT},
         "pairs_release": "dft_parity.json sha256 %s (literature sha256 %s); inputs sha256 %s" % (
-            sha(dpp), dp["inputs"]["literature"]["sha256"], ", ".join("%s %s" % (os.path.basename(f), sha(f)) for f in a.inputs)),
+            sha(dpp), dp["inputs"]["literature"]["sha256"], ", ".join("%s %s" % (read_inputs(f)[1], hashlib.sha256(read_inputs(f)[0]).hexdigest()) for f in a.inputs)),
         "code": {"orchid-project.org": {"commit": SITE_SHA, "build_espei_bundle.py sha256": sha(B.__file__)},
                  "orchid_mlip_benchmark": git(ROOT, "rev-parse", "HEAD"),
                  "orchid-data (reference data)": DATA_SHA},

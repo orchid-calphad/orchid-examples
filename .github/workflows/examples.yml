@@ -16,6 +16,8 @@ jobs:
         with:
           python-version: "3.12"
       - run: python tests/check_hygiene.py
+      - name: MLIP example reads the shipped inputs (BL-031)
+        run: python tests/check_inputs_gz.py
       - name: CITATION.cff is valid
         run: pip install cffconvert==2.0.0 && cffconvert --validate
   quick-path:
