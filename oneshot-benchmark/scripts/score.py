@@ -20,39 +20,63 @@ Metrics: phase_presence_metrics(truth, predicted) (PI's function, copied verbati
 Reported for field and boundary points separately, each for `all` points and for `representable` points (every
 reference class exists in the model's phase list).
 """
-import argparse, hashlib, json, os, sys, time, warnings
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+import time
+import warnings
+from pathlib import Path
+
 import numpy as np
+
+sys.path.insert(0, str(Path(__file__).absolute().parent))
+import phase_identity as pid  # noqa: E402
+from release import example_root, file_sha256, rel, release_commit  # noqa: E402
+from score_metrics import cluster_ci, metric_block, nboot, seed, source_key  # noqa: E402
+
 warnings.filterwarnings("ignore")
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import phase_identity as pid
-from release import RELEASE, rel  # noqa: E402
-from phase_metrics import phase_presence_metrics
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-NP_MIN = 1e-6
-PDENS = 500
-X_CLIP = 1e-6
-BOX_DT = (-10.0, -5.0, 0.0, 5.0, 10.0)
-BOX_DX = (-0.01, -0.005, 0.0, 0.005, 0.01)
-NBOOT, SEED = 2000, 0
-RETRY_DX = (1e-4, -1e-4, 1e-3, -1e-3)
-COMPS = ["CU", "ZR", "VA"]
-
-
-def sha(p):
-    return hashlib.sha256(open(p, "rb").read()).hexdigest()
+np_min = 1e-6  # phase fraction above which a phase counts as present
+pdens = 500  # pycalphad point density of the equilibrium calculation
+x_clip = 1e-6  # mole fraction at which the composition is clipped away from the pure end members
+pressure_pa = 101325  # Pa, 1 atm
+comps = ["CU", "ZR", "VA"]
+box_dt = (-10.0, -5.0, 0.0, 5.0, 10.0)  # K, offsets of the boundary tolerance band in T
+box_dx = (-0.01, -0.005, 0.0, 0.005, 0.01)  # mole fraction, offsets of the boundary tolerance band in x
+retry_dx = (1e-4, -1e-4, 1e-3, -1e-3)  # mole-fraction nudges tried for a cell the solver fails on
 
 
 class Model:
-    def __init__(self, tdb, names_as=None):
-        from pycalphad import Database
-        self.tdb, self.db = tdb, Database(tdb)
+    """Equilibrium model of one Cu-Zr TDB, with its phases mapped to benchmark classes.
+
+    Args:
+        tdb (str): Path of the TDB file.
+        names_as (str | None): Registry TDB whose phase names this TDB uses. Defaults to the TDB's own file name.
+    """
+
+    def __init__(self, tdb: str, names_as: str | None = None) -> None:
+        """Parse the TDB and index its order/disorder phases and registry ids."""
+        from pycalphad import Database  # noqa: PLC0415 (lazy: the cached quick path does not need pycalphad)
+
+        self.tdb = tdb
+        self.db = Database(tdb)
         hints = {n: p.model_hints for n, p in self.db.phases.items()}
-        self.dis_parts = {h["disordered_phase"] for n, h in hints.items() if h.get("ordered_phase") == n and h.get("disordered_phase") and h["disordered_phase"] != n}
-        self.ordered = {n for n, h in hints.items() if h.get("ordered_phase") == n and h.get("disordered_phase") and h["disordered_phase"] != n}
+        self.dis_parts = {
+            h["disordered_phase"]
+            for n, h in hints.items()
+            if h.get("ordered_phase") == n and h.get("disordered_phase") and h["disordered_phase"] != n
+        }
+        self.ordered = {
+            n
+            for n, h in hints.items()
+            if h.get("ordered_phase") == n and h.get("disordered_phase") and h["disordered_phase"] != n
+        }
         self.phases = sorted(p for p in self.db.phases if p not in self.dis_parts and p != "GAS")
         self.reg = pid.Registry()
-        self.names_as = names_as or os.path.basename(tdb)
+        self.names_as = names_as or Path(tdb).name
         self.ordered_dis_reg = {}
         for n in self.ordered:
             dis = hints[n]["disordered_phase"]
@@ -64,249 +88,417 @@ class Model:
             subl = [sorted(str(c) for c in cons) for cons in ph.constituents]
             self.ord_info[n] = [i for i, s in enumerate(subl) if s != ["VA"]]
 
-    def reg_id(self, name, disordered=False):
+    def reg_id(self, name: str, disordered: bool = False) -> str:
+        """Registry id of a model phase.
+
+        Args:
+            name (str): Phase name in the TDB.
+            disordered (bool): True for the disordered part of an order/disorder phase.
+
+        Returns:
+            str: Registry id, or "model:<name>" when the registry does not know the phase.
+        """
         if disordered:
             return self.ordered_dis_reg[name]
         return self.reg.tdb_name(self.names_as, name) or f"model:{name}"
 
-    def mapping_table(self):
+    def mapping_table(self) -> list[dict]:
+        """Phase-name mapping of every model phase, for the result file.
+
+        Returns:
+            list[dict]: One row per model phase with its registry id and benchmark classes in both modes, plus the
+            order/disorder details of ordered phases and rows for the excluded disordered parts.
+        """
         rows = []
         for n in self.phases:
-            r = {"model_phase": n, "registry_id": self.reg_id(n), "class_physical": pid.bench_class(self.reg_id(n)),
-                 "class_strict": pid.bench_class(self.reg_id(n), "strict"), "names_as": self.names_as}
+            r = {
+                "model_phase": n,
+                "registry_id": self.reg_id(n),
+                "class_physical": pid.bench_class(self.reg_id(n)),
+                "class_strict": pid.bench_class(self.reg_id(n), "strict"),
+                "names_as": self.names_as,
+            }
             if n in self.ordered:
-                r["order_disorder"] = {"disordered_part": self.db.phases[n].model_hints["disordered_phase"],
-                                       "if_disordered_registry_id": self.ordered_dis_reg[n], "order_tol": pid.ORDER_TOL}
+                r["order_disorder"] = {
+                    "disordered_part": self.db.phases[n].model_hints["disordered_phase"],
+                    "if_disordered_registry_id": self.ordered_dis_reg[n],
+                    "order_tol": pid.order_tol,
+                }
             rows.append(r)
         for n in sorted(self.dis_parts):
             rows.append({"model_phase": n, "excluded": "disordered part of an order/disorder model (not a separate phase)"})
         return rows
 
-    def equilibrium_drop_one(self, T, x):
-        """Fallback for a cell where the full solve returns NaN: solve with each phase left out in turn and keep the
-        lowest-GM successful solution. Exact when the stable assemblage has fewer phases than the model (always, in a
-        binary interior cell): any subset that keeps the stable phases has the same minimum."""
+    def equilibrium_drop_one(self, temp: float, x: float) -> list:
+        """Assemblage of one cell by solving with each phase left out in turn.
+
+        Fallback for a cell where the full solve returns NaN. Exact when the stable assemblage has fewer phases than
+        the model (always, in a binary interior cell): any subset that keeps the stable phases has the same minimum.
+
+        Args:
+            temp (float): Temperature in K.
+            x (float): Mole fraction of Zr.
+
+        Returns:
+            list: Assemblage as a sorted list of (phase, disordered_flag) pairs; empty when every solve fails.
+        """
         best, bestg = [], np.inf
         for drop in self.phases:
-            a, g = self.equilibrium([T], [x], phases=[p for p in self.phases if p != drop], return_gm=True)
+            a, g = self.equilibrium([temp], [x], phases=[p for p in self.phases if p != drop], return_gm=True)
             if a[0, 0] and np.isfinite(g[0, 0]) and g[0, 0] < bestg - 1e-6:
                 best, bestg = a[0, 0], g[0, 0]
         return best
 
-    def equilibrium(self, Ts, xs, phases=None, return_gm=False):
-        """Assemblages (lists of (phase, disordered_flag)) on the grid Ts x xs."""
-        from pycalphad import equilibrium, variables as v
-        xs = np.clip(np.asarray(xs, float), X_CLIP, 1 - X_CLIP)
-        r = equilibrium(self.db, COMPS, phases or self.phases, {v.T: list(map(float, Ts)), v.P: 101325, v.N: 1, v.X("ZR"): list(xs)},
-                        calc_opts={"pdens": PDENS})
-        GM = r.GM.values.squeeze(axis=(0, 1))
-        Ph = r.Phase.values.squeeze(axis=(0, 1))   # N, P squeezed -> (T, X, vertex)
-        NP = r.NP.values.squeeze(axis=(0, 1))
-        Y = r.Y.values.squeeze(axis=(0, 1))
-        out = np.empty(Ph.shape[:2], dtype=object)
-        for i in range(Ph.shape[0]):
-            for j in range(Ph.shape[1]):
+    def equilibrium(
+        self, temps: list[float], xs: list[float], phases: list[str] | None = None, return_gm: bool = False
+    ) -> np.ndarray | tuple[np.ndarray, np.ndarray]:
+        """Assemblages on the grid of temperatures and compositions.
+
+        Args:
+            temps (list[float]): Temperatures in K.
+            xs (list[float]): Mole fractions of Zr, clipped to [x_clip, 1 - x_clip].
+            phases (list[str] | None): Phases allowed in the equilibrium; defaults to all model phases.
+            return_gm (bool): Also return the molar Gibbs energy grid, in J/mol of atoms.
+
+        Returns:
+            np.ndarray | tuple[np.ndarray, np.ndarray]: Object array (temperature, composition) of sorted lists of
+            (phase, disordered_flag) pairs; with return_gm, also the Gibbs energy grid.
+        """
+        from pycalphad import equilibrium  # noqa: PLC0415 (lazy, see Model.__init__)
+        from pycalphad import variables as v  # noqa: PLC0415 (lazy, see Model.__init__)
+
+        xs = np.clip(np.asarray(xs, float), x_clip, 1 - x_clip)
+        r = equilibrium(
+            self.db,
+            comps,
+            phases or self.phases,
+            {v.T: list(map(float, temps)), v.P: pressure_pa, v.N: 1, v.X("ZR"): list(xs)},
+            calc_opts={"pdens": pdens},
+        )
+        gm = r.GM.values.squeeze(axis=(0, 1))
+        phase_arr = r.Phase.values.squeeze(axis=(0, 1))  # N, P squeezed -> (T, X, vertex)
+        np_arr = r.NP.values.squeeze(axis=(0, 1))
+        site_frac = r.Y.values.squeeze(axis=(0, 1))
+        out = np.empty(phase_arr.shape[:2], dtype=object)
+        for i in range(phase_arr.shape[0]):
+            for j in range(phase_arr.shape[1]):
                 s = set()
-                for k in range(Ph.shape[2]):
-                    name = str(Ph[i, j, k])
-                    if not name or not np.isfinite(NP[i, j, k]) or NP[i, j, k] <= NP_MIN:
+                for k in range(phase_arr.shape[2]):
+                    name = str(phase_arr[i, j, k])
+                    if not name or not np.isfinite(np_arr[i, j, k]) or np_arr[i, j, k] <= np_min:
                         continue
                     dis = False
                     if name in self.ordered:
-                        y = Y[i, j, k]
+                        y = site_frac[i, j, k]
                         # site fractions laid out by sublattice in the phase's constituent order
                         ph = self.db.phases[name]
                         off, ys = 0, []
                         for cons in ph.constituents:
                             cs = sorted(str(c) for c in cons)
-                            ys.append(dict(zip(cs, y[off:off + len(cs)]))); off += len(cs)
+                            ys.append(dict(zip(cs, y[off : off + len(cs)], strict=True)))
+                            off += len(cs)
                         a, b = self.ord_info[name][:2]
-                        dis = abs(ys[a].get("ZR", 0) - ys[b].get("ZR", 0)) < pid.ORDER_TOL
+                        dis = abs(ys[a].get("ZR", 0) - ys[b].get("ZR", 0)) < pid.order_tol
                     s.add((name, dis))
                 out[i, j] = sorted(s)
-        return (out, GM) if return_gm else out
+        return (out, gm) if return_gm else out
 
 
-def predict(model, points):
-    """Raw model assemblages per point: field -> one equilibrium; boundary -> union over the tolerance box."""
+def predict(model: Model, points: list[dict]) -> tuple[list[tuple[list, int]], int]:
+    """Raw model assemblages per evidence point.
+
+    A field point takes one equilibrium at the point. A boundary point takes the union of the assemblages over the
+    tolerance box. Cells where the solver returns no phase are retried in three steps, and the retry counts are
+    recorded on the model.
+
+    Args:
+        model (Model): Model to evaluate.
+        points (list[dict]): Evidence points with "kind", "T_K" (K) and "x_Zr".
+
+    Returns:
+        tuple[list[tuple[list, int]], int]: Per point, the sorted (phase, disordered_flag) assemblage and the number of
+        failed cells in its box; and the total number of failed cells after retry.
+    """
     # gather all (T, x) requests, grouped by T
     req = {}
-    for n, p in enumerate(points):
-        Ts = [p["T_K"]] if p["kind"] == "field" else [p["T_K"] + d for d in BOX_DT]
-        xs = [p["x_Zr"]] if p["kind"] == "field" else [p["x_Zr"] + d for d in BOX_DX]
-        for T in Ts:
-            req.setdefault(round(T, 6), set()).update(round(float(np.clip(x, X_CLIP, 1 - X_CLIP)), 9) for x in xs)
+    for p in points:
+        temps = [p["T_K"]] if p["kind"] == "field" else [p["T_K"] + d for d in box_dt]
+        xs = [p["x_Zr"]] if p["kind"] == "field" else [p["x_Zr"] + d for d in box_dx]
+        for temp in temps:
+            req.setdefault(round(temp, 6), set()).update(round(float(np.clip(x, x_clip, 1 - x_clip)), 9) for x in xs)
     res = {}
-    for T, xs in req.items():
-        xs = sorted(xs)
-        a = model.equilibrium([T], xs)
+    for temp, xs_set in req.items():
+        xs = sorted(xs_set)
+        a = model.equilibrium([temp], xs)
         for j, x in enumerate(xs):
-            res[(T, x)] = a[0, j]
-    # retry cells where the solver returned no phase (NaN): alone; then drop-one-phase minimum; then x nudged (recorded)
-    model.retries = {"cells_failed_first_pass": 0, "recovered_alone": 0, "recovered_drop_one_min_gm": 0,
-                     "recovered_nudged": 0, "still_failed": 0}
-    for (T, x), c in list(res.items()):
-        if c:
-            continue
-        model.retries["cells_failed_first_pass"] += 1
-        c = model.equilibrium([T], [x])[0, 0]
-        if c:
-            model.retries["recovered_alone"] += 1
-        else:
-            c = model.equilibrium_drop_one(T, x)
-            if c:
-                model.retries["recovered_drop_one_min_gm"] += 1
-        if not c:
-            for dx in RETRY_DX:
-                c = model.equilibrium([T], [x + dx])[0, 0]
-                if c:
-                    model.retries["recovered_nudged"] += 1
-                    break
-            else:
-                model.retries["still_failed"] += 1
-        res[(T, x)] = c
+            res[(temp, x)] = a[0, j]
+    _refill_failed_cells(model, res)
     preds, fails = [], 0
     for p in points:
-        Ts = [p["T_K"]] if p["kind"] == "field" else [p["T_K"] + d for d in BOX_DT]
-        xs = [p["x_Zr"]] if p["kind"] == "field" else [p["x_Zr"] + d for d in BOX_DX]
+        temps = [p["T_K"]] if p["kind"] == "field" else [p["T_K"] + d for d in box_dt]
+        xs = [p["x_Zr"]] if p["kind"] == "field" else [p["x_Zr"] + d for d in box_dx]
         s, nf = set(), 0
-        for T in Ts:
+        for temp in temps:
             for x in xs:
-                c = res[(round(T, 6), round(float(np.clip(x, X_CLIP, 1 - X_CLIP)), 9))]
-                if not c:
+                cell = res[(round(temp, 6), round(float(np.clip(x, x_clip, 1 - x_clip)), 9))]
+                if not cell:
                     nf += 1
-                s.update(c)
+                s.update(cell)
         fails += nf
         preds.append((sorted(s), nf))
     return preds, fails
 
 
-def classes(model, raw, mode):
+def _refill_failed_cells(model: Model, res: dict) -> None:
+    """Re-solve the cells the first pass left without a phase, in three steps, recording each outcome.
+
+    Steps: the cell alone; then with each phase left out in turn, keeping the lowest-GM solution; then with x nudged.
+
+    Args:
+        model (Model): Model that solves the cells; its retry counters are set on it here.
+        res (dict): (T, x) -> assemblage of every cell, updated in place.
+    """
+    model.retries = {
+        "cells_failed_first_pass": 0,
+        "recovered_alone": 0,
+        "recovered_drop_one_min_gm": 0,
+        "recovered_nudged": 0,
+        "still_failed": 0,
+    }
+    for (temp, x), first in list(res.items()):
+        if first:
+            continue
+        model.retries["cells_failed_first_pass"] += 1
+        filled = model.equilibrium([temp], [x])[0, 0]
+        if filled:
+            model.retries["recovered_alone"] += 1
+        else:
+            filled = model.equilibrium_drop_one(temp, x)
+            if filled:
+                model.retries["recovered_drop_one_min_gm"] += 1
+        if not filled:
+            for dx in retry_dx:
+                filled = model.equilibrium([temp], [x + dx])[0, 0]
+                if filled:
+                    model.retries["recovered_nudged"] += 1
+                    break
+            else:
+                model.retries["still_failed"] += 1
+        res[(temp, x)] = filled
+
+
+def classes(model: Model, raw: list, mode: str) -> list[str]:
+    """Benchmark classes of a raw assemblage.
+
+    Args:
+        model (Model): Model that produced the assemblage.
+        raw (list): (phase, disordered_flag) pairs.
+        mode (str): "physical" or "strict" class mode.
+
+    Returns:
+        list[str]: Sorted, de-duplicated benchmark classes.
+    """
     return sorted({pid.bench_class(model.reg_id(n, d), mode) for n, d in raw})
 
 
-def metric_block(truth, pred, rng):
-    if not truth:
-        return None
-    m = phase_presence_metrics(truth, pred)
-    exact = np.array([set(t) == set(q) for t, q in zip(truth, pred)], float)
-    n = len(truth)
-    boots = {k: [] for k in ("recall", "precision", "f1", "accuracy", "exact")}
-    for _ in range(NBOOT):
-        idx = rng.integers(0, n, n)
-        mb = phase_presence_metrics([truth[i] for i in idx], [pred[i] for i in idx])
-        for k in ("recall", "precision", "f1", "accuracy"):
-            boots[k].append(mb["weighted"][k])
-        boots["exact"].append(exact[idx].mean())
-    ci = {k: [float(np.percentile(v, 2.5)), float(np.percentile(v, 97.5))] for k, v in boots.items()}
-    return {"n_points": n, "weighted": m["weighted"], "macro_ground_truth_phases": m["macro_ground_truth_phases"],
-            "exact_assemblage_accuracy": float(exact.mean()), "ci95": ci, "per_phase": m["per_phase"]}
+def _model_classes(model: Model) -> dict[str, set[str]]:
+    """Benchmark classes of the model's phases in both modes.
+
+    Args:
+        model (Model): Scored model.
+
+    Returns:
+        dict[str, set[str]]: Classes per mode ("physical", "strict"), including the disordered parts of ordered phases.
+    """
+    return {
+        m: {pid.bench_class(model.reg_id(n), m) for n in model.phases}
+        | {pid.bench_class(model.ordered_dis_reg[n], m) for n in model.ordered}
+        for m in ("physical", "strict")
+    }
 
 
-def source_key(p):
-    """Cluster key of a literature point's original source, from the reference string: '<surname> <year>' (so that
-    '1953, C.E. Lundin, ...' and '1953, Lundin CE, ...' agree, and 'Liu 2017, doi:...' rows with or without a
-    measured_in field agree); a reference that is only a DOI keys by that DOI. Years are taken as printed."""
-    import re
-    ref = (p.get("provenance", {}).get("reference") or "").strip()
-    if ref.lower().startswith("doi:"):
-        return ref.split()[0].lower().rstrip(",")
-    yr = re.search(r"(18|19|20)\d\d", ref)
-    names = re.findall(r"[A-Z][a-z]{2,}", ref)
-    return f"{names[0].lower() if names else ref[:20]} {yr.group(0) if yr else ''}".strip()
+def _metrics(model: Model, pts: list[dict], raw: list, model_cls: dict[str, set[str]]) -> dict:
+    """Metric blocks for every mode, kind and subset, plus the split by the final TDB's fit set.
 
+    The bootstrap generator is re-seeded per mode and the blocks are computed in a fixed order, so the intervals are
+    reproducible.
 
-def cluster_ci(truth, pred, clusters, rng, nboot=NBOOT):
-    """Percentile CI of weighted recall and exact accuracy with whole clusters resampled (cluster bootstrap)."""
-    keys = sorted(set(clusters)); idx_of = {k: [i for i, c in enumerate(clusters) if c == k] for k in keys}
-    rec, ex = [], []
-    for _ in range(nboot):
-        pick = rng.integers(0, len(keys), len(keys))
-        idx = [i for k in pick for i in idx_of[keys[k]]]
-        rec.append(phase_presence_metrics([truth[i] for i in idx], [pred[i] for i in idx])["weighted"]["recall"])
-        ex.append(np.mean([set(truth[i]) == set(pred[i]) for i in idx]))
-    return {"n_clusters": len(keys), "recall": [float(np.percentile(rec, 2.5)), float(np.percentile(rec, 97.5))],
-            "exact": [float(np.percentile(ex, 2.5)), float(np.percentile(ex, 97.5))]}
+    Args:
+        model (Model): Scored model.
+        pts (list[dict]): Evidence points.
+        raw (list): Per-point predictions from predict().
+        model_cls (dict[str, set[str]]): Model classes per mode, from _model_classes().
 
-
-def main():
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("tdb")
-    ap.add_argument("--evidence", default=os.path.join(ROOT, "inputs", "evidence.json"))
-    ap.add_argument("--label", default=None)
-    ap.add_argument("--names-as", default=None, help="registry TDB file whose phase names this TDB uses")
-    ap.add_argument("--in-sample-note", default=None)
-    ap.add_argument("-o", default=None)
-    a = ap.parse_args()
-    label = a.label or os.path.splitext(os.path.basename(a.tdb))[0]
-    out = a.o or os.path.join(ROOT, "results", f"{label}.json")
-    import pycalphad
-    ev = json.load(open(a.evidence))
-    pts = ev["points"]
-    t0 = time.time()
-    model = Model(a.tdb, a.names_as)
-    raw, fails = predict(model, pts)
-    wall = time.time() - t0
-    model_cls = {m: {pid.bench_class(model.reg_id(n), m) for n in model.phases} |
-                 ({pid.bench_class(model.ordered_dis_reg[n], m) for n in model.ordered}) for m in ("physical", "strict")}
-    per_point, metrics = [], {}
+    Returns:
+        dict: Metric blocks keyed by mode, then kind ("field", "boundary"), then subset ("all", "representable"), and
+        "by_final_fit_split" blocks per mode.
+    """
+    metrics = {}
     for mode in ("physical", "strict"):
-        rng = np.random.default_rng(SEED)
+        rng = np.random.default_rng(seed)
         for kind in ("field", "boundary"):
             for subset in ("all", "representable"):
-                sel = [i for i, p in enumerate(pts) if p["kind"] == kind and
-                       (subset == "all" or set(p[f"truth_{mode}"]) <= model_cls[mode])]
+                sel = [
+                    i
+                    for i, p in enumerate(pts)
+                    if p["kind"] == kind and (subset == "all" or set(p[f"truth_{mode}"]) <= model_cls[mode])
+                ]
                 truth = [pts[i][f"truth_{mode}"] for i in sel]
                 pred = [classes(model, raw[i][0], mode) for i in sel]
                 mb = metric_block(truth, pred, rng)
                 if mb and kind == "boundary":
-                    mb["ci95_cluster_equilibrium"] = cluster_ci(truth, pred, [pts[i]["provenance"]["observation_id"] for i in sel], rng)
+                    mb["ci95_cluster_equilibrium"] = cluster_ci(
+                        truth, pred, [pts[i]["provenance"]["observation_id"] for i in sel], rng
+                    )
                     mb["ci95_cluster_source"] = cluster_ci(truth, pred, [source_key(pts[i]) for i in sel], rng)
                 metrics.setdefault(mode, {}).setdefault(kind, {})[subset] = mb
         # in/out of the final TDB's fit set (relevant for the tuned model only; reported for every model)
         for split in ("fit", "out_of_fit"):
             for kind in ("field", "boundary"):
-                sel = [i for i, p in enumerate(pts) if p["kind"] == kind and
-                       (p["final_tdb_split"].startswith("fit") == (split == "fit"))]
+                sel = [
+                    i
+                    for i, p in enumerate(pts)
+                    if p["kind"] == kind and (p["final_tdb_split"].startswith("fit") == (split == "fit"))
+                ]
                 metrics[mode].setdefault("by_final_fit_split", {}).setdefault(split, {})[kind] = metric_block(
-                    [pts[i][f"truth_{mode}"] for i in sel], [classes(model, raw[i][0], mode) for i in sel], rng)
-    for p, (r, nf) in zip(pts, raw):
+                    [pts[i][f"truth_{mode}"] for i in sel], [classes(model, raw[i][0], mode) for i in sel], rng
+                )
+    return metrics
+
+
+def _per_point(model: Model, pts: list[dict], raw: list) -> list[dict]:
+    """Per-point records of the result file.
+
+    Args:
+        model (Model): Scored model.
+        pts (list[dict]): Evidence points.
+        raw (list): Per-point predictions from predict().
+
+    Returns:
+        list[dict]: One record per point with the truth and the prediction in both modes, the per-point recall and
+        the number of failed cells.
+    """
+    per_point = []
+    for p, (r, nf) in zip(pts, raw, strict=True):
         tp, pp = set(p["truth_physical"]), set(classes(model, r, "physical"))
-        per_point.append({"id": p["id"], "kind": p["kind"], "T_K": p["T_K"], "x_Zr": p["x_Zr"],
-                          "truth_physical": sorted(tp), "pred_physical": sorted(pp),
-                          "truth_strict": p["truth_strict"], "pred_strict": classes(model, r, "strict"),
-                          "pred_model_phases": [n + ("(disordered)" if d else "") for n, d in r],
-                          "recall_point": len(tp & pp) / len(tp), "exact": tp == pp, "failed_cells": nf,
-                          "final_tdb_split": p["final_tdb_split"]})
-    res = {
-        "label": label, "tdb": rel(a.tdb), "tdb_sha256": sha(a.tdb), "names_as": model.names_as,
-        "in_sample_note": a.in_sample_note,
-        "evidence": {"orchid_data_release": RELEASE, "path": rel(a.evidence), "sha256": sha(a.evidence), "counts": ev["counts"]},
-        "settings": {"software": {"pycalphad": pycalphad.__version__, "numpy": np.__version__, "python": sys.version.split()[0]},
-                     "solver": "pycalphad.equilibrium default Solver", "calc_opts": {"pdens": PDENS},
-                     "components": COMPS, "phases": model.phases, "P_Pa": 101325, "N": 1, "np_min": NP_MIN,
-                     "x_clip": X_CLIP, "boundary_box": {"dT_K": BOX_DT, "dx": BOX_DX, "rule": "union of assemblages"},
-                     "bootstrap": {"B": NBOOT, "seed": SEED, "unit": "point", "interval": "percentile 2.5-97.5",
-                                   "boundary_cluster_bootstraps": "ci95_cluster_equilibrium (whole tie-line/invariant, ORCHID observation id) and ci95_cluster_source (original measuring study, source_key())"},
-                     "metric_function": "phase_metrics.phase_presence_metrics (PI, verbatim copy)",
-                     "primary_metric": "prevalence-weighted recall (weighted.recall)"},
-        "phase_mapping_model": model.mapping_table(),
-        "model_classes": {k: sorted(v) for k, v in model_cls.items()},
-        "equilibrium_failed_cells_after_retry": fails, "equilibrium_retries": model.retries,
-        "retry_rule": f"cells with no phase are re-solved alone; then with each phase left out in turn, keeping the lowest-GM solution (exact for <= n-1 stable phases); then at x + {RETRY_DX}", "wall_s": wall,
-        "metrics": metrics, "points": per_point,
-    }
-    os.makedirs(os.path.dirname(out), exist_ok=True)
-    json.dump(res, open(out, "w"), indent=1, ensure_ascii=False)
+        per_point.append(
+            {
+                "id": p["id"],
+                "kind": p["kind"],
+                "T_K": p["T_K"],
+                "x_Zr": p["x_Zr"],
+                "truth_physical": sorted(tp),
+                "pred_physical": sorted(pp),
+                "truth_strict": p["truth_strict"],
+                "pred_strict": classes(model, r, "strict"),
+                "pred_model_phases": [n + ("(disordered)" if d else "") for n, d in r],
+                "recall_point": len(tp & pp) / len(tp),
+                "exact": tp == pp,
+                "failed_cells": nf,
+                "final_tdb_split": p["final_tdb_split"],
+            }
+        )
+    return per_point
+
+
+def _print_summary(label: str, metrics: dict, out: str, *, wall: float, retries: dict, fails: int) -> None:
+    """Print the physical-mode summary line of each kind.
+
+    Args:
+        label (str): Model label.
+        metrics (dict): Metric blocks from _metrics().
+        out (str): Path of the written result file.
+        wall (float): Wall time of the prediction in seconds.
+        retries (dict): Retry counters of the prediction.
+        fails (int): Failed cells after retry.
+    """
     m = metrics["physical"]
     for kind in ("field", "boundary"):
         b = m[kind]["all"]
         w, c = b["weighted"], b["ci95"]
-        cl = "" if kind == "field" else (f" | eq-cluster [{b['ci95_cluster_equilibrium']['recall'][0]:.3f},{b['ci95_cluster_equilibrium']['recall'][1]:.3f}]"
-                                         f" source-cluster(n={b['ci95_cluster_source']['n_clusters']}) [{b['ci95_cluster_source']['recall'][0]:.3f},{b['ci95_cluster_source']['recall'][1]:.3f}]")
-        print(f"{label:22s} {kind:8s} n={b['n_points']:3d} recall {w['recall']:.3f} [{c['recall'][0]:.3f},{c['recall'][1]:.3f}]{cl} "
-              f"prec {w['precision']:.3f} F1 {w['f1']:.3f} acc {w['accuracy']:.3f} exact {b['exact_assemblage_accuracy']:.3f}")
-    print(f"  -> {out}  ({wall:.0f} s, retries {model.retries}, failed cells {fails})")
+        cl = ""
+        if kind == "boundary":
+            eq, src = b["ci95_cluster_equilibrium"], b["ci95_cluster_source"]
+            cl = (
+                f" | eq-cluster [{eq['recall'][0]:.3f},{eq['recall'][1]:.3f}]"
+                f" source-cluster(n={src['n_clusters']}) [{src['recall'][0]:.3f},{src['recall'][1]:.3f}]"
+            )
+        print(
+            f"{label:22s} {kind:8s} n={b['n_points']:3d} recall {w['recall']:.3f} [{c['recall'][0]:.3f},{c['recall'][1]:.3f}]{cl} "
+            f"prec {w['precision']:.3f} F1 {w['f1']:.3f} acc {w['accuracy']:.3f} exact {b['exact_assemblage_accuracy']:.3f}"
+        )
+    print(f"  -> {out}  ({wall:.0f} s, retries {retries}, failed cells {fails})")
+
+
+def main() -> None:
+    """Score one TDB against the evidence file and write its result JSON."""
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("tdb")
+    ap.add_argument("--evidence", default=str(example_root / "inputs" / "evidence.json"))
+    ap.add_argument("--label", default=None)
+    ap.add_argument("--names-as", default=None, help="registry TDB file whose phase names this TDB uses")
+    ap.add_argument("--in-sample-note", default=None)
+    ap.add_argument("-o", default=None)
+    a = ap.parse_args()
+    label = a.label or Path(a.tdb).stem
+    out = a.o or str(example_root / "results" / f"{label}.json")
+    import pycalphad  # noqa: PLC0415 (lazy, see Model.__init__)
+
+    ev = json.loads(Path(a.evidence).read_text())
+    pts = ev["points"]
+    t0 = time.time()
+    model = Model(a.tdb, a.names_as)
+    raw, fails = predict(model, pts)
+    wall = time.time() - t0
+    model_cls = _model_classes(model)
+    metrics = _metrics(model, pts, raw, model_cls)
+    per_point = _per_point(model, pts, raw)
+    res = {
+        "label": label,
+        "tdb": rel(a.tdb),
+        "tdb_sha256": file_sha256(a.tdb),
+        "names_as": model.names_as,
+        "in_sample_note": a.in_sample_note,
+        "evidence": {
+            "orchid_data_release": release_commit,
+            "path": rel(a.evidence),
+            "sha256": file_sha256(a.evidence),
+            "counts": ev["counts"],
+        },
+        "settings": {
+            "software": {"pycalphad": pycalphad.__version__, "numpy": np.__version__, "python": sys.version.split()[0]},
+            "solver": "pycalphad.equilibrium default Solver",
+            "calc_opts": {"pdens": pdens},
+            "components": comps,
+            "phases": model.phases,
+            "P_Pa": pressure_pa,
+            "N": 1,
+            "np_min": np_min,
+            "x_clip": x_clip,
+            "boundary_box": {"dT_K": box_dt, "dx": box_dx, "rule": "union of assemblages"},
+            "bootstrap": {
+                "B": nboot,
+                "seed": seed,
+                "unit": "point",
+                "interval": "percentile 2.5-97.5",
+                "boundary_cluster_bootstraps": "ci95_cluster_equilibrium (whole tie-line/invariant, ORCHID observation id) and ci95_cluster_source (original measuring study, source_key())",
+            },
+            "metric_function": "phase_metrics.phase_presence_metrics (PI, verbatim copy)",
+            "primary_metric": "prevalence-weighted recall (weighted.recall)",
+        },
+        "phase_mapping_model": model.mapping_table(),
+        "model_classes": {k: sorted(v) for k, v in model_cls.items()},
+        "equilibrium_failed_cells_after_retry": fails,
+        "equilibrium_retries": model.retries,
+        "retry_rule": f"cells with no phase are re-solved alone; then with each phase left out in turn, keeping the lowest-GM solution (exact for <= n-1 stable phases); then at x + {retry_dx}",
+        "wall_s": wall,
+        "metrics": metrics,
+        "points": per_point,
+    }
+    Path(out).parent.mkdir(parents=True, exist_ok=True)
+    with Path(out).open("w") as f:
+        json.dump(res, f, indent=1, ensure_ascii=False)
+    _print_summary(label, metrics, out, wall=wall, retries=model.retries, fails=fails)
 
 
 if __name__ == "__main__":
