@@ -1,9 +1,34 @@
-"""Write quickstart.ipynb (unexecuted). Execute it with:  python scripts/run_notebook.py"""
+"""Write quickstart.ipynb (unexecuted).
+
+Execute it with: python scripts/run_notebook.py
+"""
+
+from __future__ import annotations
+
 import nbformat as nbf
+
 nb = nbf.v4.new_notebook()
-C = []
-md = lambda s: C.append(nbf.v4.new_markdown_cell(s))
-code = lambda s: C.append(nbf.v4.new_code_cell(s))
+cells = []
+
+
+def md(s: str) -> None:
+    """Append a markdown cell to the notebook being built.
+
+    Args:
+        s (str): Markdown source of the cell.
+    """
+    cells.append(nbf.v4.new_markdown_cell(s))
+
+
+def code(s: str) -> None:
+    """Append a code cell to the notebook being built.
+
+    Args:
+        s (str): Python source of the cell.
+    """
+    cells.append(nbf.v4.new_code_cell(s))
+
+
 md("""# ORCHID quickstart: one system, from the release to ESPEI
 
 This notebook queries the Cu–Zr system in the ORCHID release, filters the values (accepted, evidence class,
@@ -50,17 +75,17 @@ Each experimental formation enthalpy is paired with the matched Materials Projec
 a model in the source.""")
 code("""dp = pd.read_parquet(orchid_data.path("parquet/dft_parity.parquet", RELEASE))
 d = dp[(dp["system"] == SYSTEM) & dp["accepted"]]
-fig, ax = plt.subplots(figsize=(89 * S.MM, 80 * S.MM), constrained_layout=True)
+fig, ax = plt.subplots(figsize=(89 * S.mm, 80 * S.mm), constrained_layout=True)
 lo, hi = -30, 2
-ax.plot([lo, hi], [lo, hi], color=S.GREY_M, lw=0.5, zorder=0)
+ax.plot([lo, hi], [lo, hi], color=S.grey_m, lw=0.5, zorder=0)
 for src in ("mp", "oqmd"):
     for ev, filled in (("experimental", True), ("model", False)):
         q = d[(d["dft_source"] == src) & (d["evidence_class"] == ev)]
         ax.scatter(q["lit_kJ_per_mol_atom"], q["dft_kJ_per_mol_atom"], s=12, marker="o" if src == "mp" else "s",
-                   facecolors=S.SRC[src] if filled else "none", edgecolors=S.SRC[src], linewidths=0.6,
-                   label=f"{S.SRCL[src]} vs {ev} ({len(q)})")
+                   facecolors=S.src[src] if filled else "none", edgecolors=S.src[src], linewidths=0.6,
+                   label=f"{S.src_label[src]} vs {ev} ({len(q)})")
 ax.set_xlim(lo, hi); ax.set_ylim(lo, hi)
-ax.set_xlabel("Literature $\\\\Delta H_f$ (" + S.UNIT_KJA + ")"); ax.set_ylabel("DFT $\\\\Delta H_f$ (" + S.UNIT_KJA + ")")
+ax.set_xlabel("Literature $\\\\Delta H_f$ (" + S.unit_kja + ")"); ax.set_ylabel("DFT $\\\\Delta H_f$ (" + S.unit_kja + ")")
 ax.legend(fontsize=5, loc="upper left")
 ax.set_title("Cu–Zr: literature vs DFT formation enthalpies", fontsize=7)
 png, pdf = S.save(fig, OUT / "cuzr_exp_vs_dft")
@@ -98,7 +123,7 @@ md("""## Citing
 Cite the ORCHID data release (`CITATION.cff` of orchid-data; DOIs on Zenodo) and the original source of every value
 (`paper_citation`, `paper_doi`; for ESPEI datasets `reference` and `bibtex`). ORCHID data: CC BY 4.0; Materials
 Project and OQMD data: CC BY 4.0.""")
-nb["cells"] = C
+nb["cells"] = cells
 nb["metadata"]["kernelspec"] = {"name": "python3", "display_name": "Python 3", "language": "python"}
 nbf.write(nb, "quickstart.ipynb")
 print("wrote quickstart.ipynb")
