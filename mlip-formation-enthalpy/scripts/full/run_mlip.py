@@ -58,7 +58,7 @@ def build_calc(name: str, device: str | None, fmax: float, steps: int) -> tuple[
     Returns:
         Tuple (calculator, model spec from models.json).
     """
-    spec = json.loads((here / "models.json").read_text())[name]
+    spec = json.loads((here / "models.json").read_text(encoding="utf-8"))[name]
     # lazy on purpose: the MLIP environment is needed only when there is work to do (a finished shard returns early)
     calculators = importlib.import_module("materialsframework.calculators")
     cls = getattr(calculators, spec["class"])
@@ -125,7 +125,7 @@ def _done_ids(outp: Path) -> set:
     """
     done = set()
     if outp.exists():
-        with outp.open() as f:
+        with outp.open(encoding="utf-8") as f:
             for line in f:
                 try:
                     done.add(json.loads(line)["id"])
@@ -201,11 +201,11 @@ def main() -> int:
     ap.add_argument("--fmax", type=float, default=0.02)
     ap.add_argument("--steps", type=int, default=1000)
     a = ap.parse_args()
-    items = json.loads(Path(a.inputs).read_text())["items"]
+    items = json.loads(Path(a.inputs).read_text(encoding="utf-8"))["items"]
     # sorted by id, then split by index modulo nshards: a fixed, reproducible partition of the items
     items.sort(key=lambda it: it["id"])
     if a.ids_file:
-        with Path(a.ids_file).open() as f:
+        with Path(a.ids_file).open(encoding="utf-8") as f:
             keep = {line.strip() for line in f if line.strip()}
         items = [it for it in items if it["id"] in keep]
     items = [it for i, it in enumerate(items) if i % a.nshards == a.shard]
@@ -229,7 +229,7 @@ def main() -> int:
         "inputs_sha256": hashlib.sha256(Path(a.inputs).read_bytes()).hexdigest(),
         "t_load_s": None,
     }
-    with outp.open("a") as fh:
+    with outp.open("a", encoding="utf-8") as fh:
         for k, it in enumerate(todo):
             rec = _evaluate_item(calc, it, a.model)
             if k == 0:
@@ -241,7 +241,7 @@ def main() -> int:
             if k % 20 == 0:
                 print(f"{a.model} {k + 1}/{len(todo)} {time.time() - t0:.1f}s {rec.get('status')}", flush=True)
     print(f"done {a.model} shard {a.shard} in {time.time() - t0:.1f}s", flush=True)
-    outp.with_name(outp.name + ".done").write_text(f"{len(items)} items\n")
+    outp.with_name(outp.name + ".done").write_text(f"{len(items)} items\n", encoding="utf-8")
     return 0
 
 

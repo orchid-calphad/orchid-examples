@@ -444,7 +444,7 @@ def main() -> None:
     out = a.o or str(example_root / "results" / f"{label}.json")
     import pycalphad  # noqa: PLC0415 (lazy, see Model.__init__)
 
-    ev = json.loads(Path(a.evidence).read_text())
+    ev = json.loads(Path(a.evidence).read_text(encoding="utf-8"))
     pts = ev["points"]
     t0 = time.time()
     model = Model(a.tdb, a.names_as)
@@ -496,7 +496,7 @@ def main() -> None:
         "points": per_point,
     }
     Path(out).parent.mkdir(parents=True, exist_ok=True)
-    with Path(out).open("w") as f:
+    with Path(out).open("w", encoding="utf-8") as f:
         json.dump(res, f, indent=1, ensure_ascii=False)
     _print_summary(label, metrics, out, wall=wall, retries=model.retries, fails=fails)
 

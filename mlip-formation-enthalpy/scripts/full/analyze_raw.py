@@ -466,12 +466,12 @@ def _write_csvs(out_dir: Path, rows: list[dict], models: list[str], formation: d
     mcols = []
     for m in models:
         mcols += [m] + [f"{m}|{v}" for v in ("relax_raw", "relax_corr", "sp_raw", "sp_corr")]
-    with (out_dir / "pairs_identical_set.csv").open("w", newline="") as fh:
+    with (out_dir / "pairs_identical_set.csv").open("w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=cols + mcols, extrasaction="ignore")
         w.writeheader()
         for r in rows:
             w.writerow(r)
-    with (out_dir / "mlip_by_compound.csv").open("w", newline="") as fh:
+    with (out_dir / "mlip_by_compound.csv").open("w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
         w.writerow(
             [
@@ -533,7 +533,7 @@ def _load_items(paths: list[str]) -> list[dict]:
     """
     items = []
     for f in paths:
-        with Path(f).open() as fh:
+        with Path(f).open(encoding="utf-8") as fh:
             items.extend(json.load(fh)["items"])
     return items
 
@@ -642,7 +642,7 @@ def main() -> None:
         },
     }
     out = bundle.round_floats(out)
-    with (out_dir / "CALIBRATION_MLIP.json").open("w") as fh:
+    with (out_dir / "CALIBRATION_MLIP.json").open("w", encoding="utf-8") as fh:
         json.dump(out, fh, indent=1, sort_keys=True)
     _write_csvs(out_dir, rows, models, formation, itm)
     print(

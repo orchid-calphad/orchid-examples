@@ -45,7 +45,7 @@ def main() -> None:
     """Write results/mlips_summary.md, sorted by field recall, with the two references at the bottom."""
     rows = []
     for f in _mlip_files():
-        d = json.loads(f.read_text())
+        d = json.loads(f.read_text(encoding="utf-8"))
         rows.append((d["metrics"]["physical"]["field"]["all"]["weighted"]["recall"], model_names[d["label"][5:]], d))
     rows.sort(key=lambda r: -r[0])
     ref = [
@@ -56,10 +56,10 @@ def main() -> None:
         "| model (MLIP-only, no fitting) | field S [95% CI] | P | F1 | boundary S [95% CI] | P | F1 |",
         "|---|---|---|---|---|---|---|",
     ]
-    for _, n, d in rows + [(0, a, json.loads((example_root / p).read_text())) for a, p in ref]:
+    for _, n, d in rows + [(0, a, json.loads((example_root / p).read_text(encoding="utf-8"))) for a, p in ref]:
         out.append("| " + " | ".join([n, *cell(d, "field"), *cell(d, "boundary")]) + " |")
     s = "\n".join(out)
-    (example_root / "results" / "mlips_summary.md").write_text(s + "\n")
+    (example_root / "results" / "mlips_summary.md").write_text(s + "\n", encoding="utf-8")
     print(s)
 
 

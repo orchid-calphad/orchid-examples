@@ -110,7 +110,7 @@ def listdir(reldir: str, commit: str, suffix: str = ".json") -> list[str]:
         return sorted(f"{reldir}/{q.name}" for q in (root / reldir).glob("*" + suffix))
     if not reldir.startswith("espei/"):
         raise RuntimeError("remote listing is only available for espei/ folders; set ORCHID_DATA")
-    rows = csv.DictReader(io.StringIO(path("espei/index.csv", commit).read_text()))
+    rows = csv.DictReader(io.StringIO(path("espei/index.csv", commit).read_text(encoding="utf-8")))
     sub = reldir[len("espei/") :]
     return sorted("espei/" + r["path"] for r in rows if r["path"].rsplit("/", 1)[0] == sub and r["path"].endswith(suffix))
 

@@ -19,8 +19,8 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _paths import root
 
-mlip_fit = json.loads((root / "tdb/mlip_fit.json").read_text())
-sigma = json.loads((root / "results/sigma_mlip.json").read_text())
+mlip_fit = json.loads((root / "tdb/mlip_fit.json").read_text(encoding="utf-8"))
+sigma = json.loads((root / "results/sigma_mlip.json").read_text(encoding="utf-8"))
 weight = sigma["espei_weight"]
 comp = {"CU5ZR_C15B": (5, 1), "CU51ZR14": (51, 14), "CU8ZR3": (8, 3), "CU10ZR7": (10, 7), "CUZR_B2": (1, 1), "CUZR2": (1, 2)}
 xs = [round(x, 2) for x in np.arange(0.1, 0.91, 0.1)]
@@ -47,7 +47,7 @@ for lat, f in mlip_fit["lattices"].items():
         "weight": weight,
         "comment": f"sigma_MLIP = {sigma['sigma_MLIP_kJ']:.2f} kJ/mol-atom; J/mol-atom",
     }
-    (out_dir / f"mlip_HM_MIX_{lat}.json").write_text(json.dumps(d, indent=1))
+    (out_dir / f"mlip_HM_MIX_{lat}.json").write_text(json.dumps(d, indent=1), encoding="utf-8")
 for ph, c in mlip_fit["compounds"].items():
     a, b = comp[ph]
     d = {
@@ -61,5 +61,5 @@ for ph, c in mlip_fit["compounds"].items():
         "weight": weight,
         "comment": f"sigma_MLIP = {sigma['sigma_MLIP_kJ']:.2f} kJ/mol-atom",
     }
-    (out_dir / f"mlip_HM_FORM_{ph}.json").write_text(json.dumps(d, indent=1))
+    (out_dir / f"mlip_HM_FORM_{ph}.json").write_text(json.dumps(d, indent=1), encoding="utf-8")
 print(weight, sorted(p.name for p in out_dir.glob("*.json")))

@@ -56,9 +56,9 @@ def run(d, calc) -> None:
     r = calc.relax(s)
     fs = r["final_structure"]
     e = float(r["energy"])
-    (d / "energy").write_text(f"{e:.8f}\n")
+    (d / "energy").write_text(f"{e:.8f}\n", encoding="utf-8")
     fs.to(filename=str(d / "CONTCAR"), fmt="poscar")
-    with (d / "str_relax.out").open("w") as f:
+    with (d / "str_relax.out").open("w", encoding="utf-8") as f:
         for row in fs.lattice.matrix:
             f.write(f"{row[0]:.8f} {row[1]:.8f} {row[2]:.8f}\n")
         f.write("1 0 0\n0 1 0\n0 0 1\n")
@@ -86,7 +86,7 @@ def run(d, calc) -> None:
         "fmax": calc.fmax,
         "steps_max": calc.steps,
     }
-    (d / "relax.json").write_text(json.dumps(info, indent=1))
+    (d / "relax.json").write_text(json.dumps(info, indent=1), encoding="utf-8")
     if (d / "wait").exists():
         (d / "wait").unlink()
     print(

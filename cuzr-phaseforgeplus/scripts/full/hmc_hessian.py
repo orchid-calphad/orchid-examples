@@ -67,5 +67,5 @@ for c in (1e-3, 3e-3):
     out["steps"][str(c)] = rec
 out["n_eval"] = nuts.n[0]
 out["wall_s"] = time.time() - nuts.t0
-(nuts.root / "runs/hmc/hessian/hessian.json").write_text(json.dumps(out, indent=1))
+(nuts.root / "runs/hmc/hessian/hessian.json").write_text(json.dumps(out, indent=1), encoding="utf-8")
 print("done", {c: (r["pd"], min(r["eig"]), max(r["eig"]), r["asym_rel"]) for c, r in out["steps"].items()})

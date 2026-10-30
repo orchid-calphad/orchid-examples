@@ -1,0 +1,12 @@
+# Text files are LF in the repository and in every checkout.
+* text=auto eol=lf
+
+# Checksummed or binary assets: never normalised (figures/SHA256SUMS stays text).
+*.tdb -text
+*.TDB -text
+*.npz -text
+*.png -text
+*.pdf -text
+
+# Written by csv.writer (CRLF line terminator); kept byte-identical to what the scripts produce.
+*.csv -text

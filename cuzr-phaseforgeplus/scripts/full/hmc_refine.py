@@ -41,7 +41,7 @@ nuts = _load_hmc_nuts(run)
 t_scale = 5.0  # J/mol/K: L-BFGS-B scale of the temperature terms
 g_scale = 10.0  # kJ/mol: L-BFGS-B scale of the constants (times atoms per formula unit for formula constants)
 
-s = json.loads((nuts.root / f"runs/hmc/{run}/summary.json").read_text())
+s = json.loads((nuts.root / f"runs/hmc/{run}/summary.json").read_text(encoding="utf-8"))
 xs = np.array(s["final_best_x"], float)
 natom = {"CU5ZR_C15B": 6, "CU51ZR14": 65, "CU8ZR3": 11, "CU10ZR7": 17, "CUZR_B2": 2, "CUZR2": 3}
 scale = np.array(
@@ -87,5 +87,5 @@ out = {
     "best_lnL": nuts.best[0],
     "best_x": nuts.best[1].tolist(),
 }
-(nuts.root / f"runs/hmc/{run}/refine.json").write_text(json.dumps(out, indent=1))
+(nuts.root / f"runs/hmc/{run}/refine.json").write_text(json.dumps(out, indent=1), encoding="utf-8")
 print("done", run, st, out["start_lnL"], out["best_lnL"], out["n_eval"])

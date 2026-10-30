@@ -90,12 +90,12 @@ def main() -> None:
     ap.add_argument("--trace")
     ap.add_argument("-o")
     a = ap.parse_args()
-    printed = json.loads((root / "inputs/printed_invariants.json").read_text())
+    printed = json.loads((root / "inputs/printed_invariants.json").read_text(encoding="utf-8"))
     base = m.Params.from_tdb(root / "tdb/CuZr-94Zen-LB.tdb")
-    syms = [p["symbol"] for p in json.loads((root / "tdb/params.json").read_text())]
+    syms = [p["symbol"] for p in json.loads((root / "tdb/params.json").read_text(encoding="utf-8"))]
     models = {"SGTE start": base}
     if a.tdb:
-        txt = Path(a.tdb).read_text()
+        txt = Path(a.tdb).read_text(encoding="utf-8")
         v = {s: float(x) for s, x in re.findall(r"FUNCTION\s+(VV\d+)\s+[\d.]+\s+([-+.\dEe]+)\s*;", txt)}
         models["ESPEI result (TDB)"] = with_values(base, v)
     if a.trace:
@@ -113,7 +113,7 @@ def main() -> None:
             mark = "ok" if r["pass"] else "x"
             print(f"   {r['reaction']:36s} {tk:>6s} K  printed {r['printed_fit_K'][:4]}  {mark}")
     if a.o:
-        with Path(a.o).open("w") as fh:
+        with Path(a.o).open("w", encoding="utf-8") as fh:
             json.dump(out, fh, indent=1)
 
 

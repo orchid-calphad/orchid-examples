@@ -43,7 +43,7 @@ class TestLocalRelease(TestCase):
         """A release file under ORCHID_DATA resolves to that file."""
         with tempfile.TemporaryDirectory() as d, mock.patch.dict(os.environ, {"ORCHID_DATA": d}):
             (Path(d) / "espei").mkdir()
-            (Path(d) / "espei" / "index.csv").write_text("a\n")
+            (Path(d) / "espei" / "index.csv").write_text("a\n", encoding="utf-8")
             assert orchid_data.path("espei/index.csv", "0" * 40) == Path(d) / "espei" / "index.csv"
 
     def test_path_raises_for_a_missing_file(self):
@@ -61,7 +61,7 @@ class TestLocalRelease(TestCase):
             folder = Path(d) / "espei" / "x"
             folder.mkdir(parents=True)
             for name in ("b.json", "a.json", "c.csv"):
-                (folder / name).write_text("{}")
+                (folder / name).write_text("{}", encoding="utf-8")
             assert orchid_data.listdir("espei/x", "0" * 40) == ["espei/x/a.json", "espei/x/b.json"]
 
     def test_local_root_is_none_when_unset(self):

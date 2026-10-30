@@ -33,11 +33,11 @@ def main(src: Path) -> None:
         df = pd.read_parquet(src / "parquet" / f"{t}.parquet")
         df = df[df["system"] == system_id].drop(columns=[c for c in df.columns if c == "quote"]).reset_index(drop=True)
         df.to_parquet(out / "parquet" / f"{t}.parquet", index=False, compression="zstd")
-    with (src / "espei" / "index.csv").open() as f:
+    with (src / "espei" / "index.csv").open(encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
     keep = [r for r in rows if r["system"] == system_id]
     (out / "espei").mkdir(parents=True, exist_ok=True)
-    with (out / "espei" / "index.csv").open("w", newline="") as f:
+    with (out / "espei" / "index.csv").open("w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
         w.writeheader()
         w.writerows(keep)

@@ -103,7 +103,7 @@ def main(out: str | Path) -> float:
         The largest absolute difference (kJ/mol-atom) from the source benchmark's reference numbers.
     """
     out_dir = Path(out)
-    with (root / "inputs" / "pairs_identical_set.csv").open() as f:
+    with (root / "inputs" / "pairs_identical_set.csv").open(encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
     for r in rows:
         for k in ["exp", "mp", "oqmd", *models]:
@@ -169,7 +169,7 @@ def main(out: str | Path) -> float:
         "saturation": sat,
     }
     out_dir.mkdir(parents=True, exist_ok=True)
-    with (out_dir / "summary.json").open("w") as f:
+    with (out_dir / "summary.json").open("w", encoding="utf-8") as f:
         json.dump(res, f, indent=1)
     print(
         f"identical set: {len(rows)} records, {len(comps)} compounds, {len(systems)} systems; kJ/mol-atom; 95% system-cluster CIs"
@@ -208,7 +208,7 @@ def _reference_difference(same: dict, sat: dict, vs_dft: dict, models: list[str]
     Returns:
         The largest difference in sigma, MAE, cluster CIs, strata, saturation and MLIP-vs-DFT sigma, in kJ/mol-atom.
     """
-    with (root / "cached" / "CALIBRATION_MLIP_reference.json").open() as f:
+    with (root / "cached" / "CALIBRATION_MLIP_reference.json").open(encoding="utf-8") as f:
         ref = json.load(f)
     worst = 0.0
     for key in same:

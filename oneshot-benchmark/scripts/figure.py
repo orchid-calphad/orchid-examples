@@ -246,8 +246,8 @@ def main() -> None:
     ap.add_argument("--sgte", default=str(example_root / "results" / "cuzr_sgte_94Zen.json"))
     ap.add_argument("--out", default=str(example_root / "figures"))
     a = ap.parse_args()
-    grace = json.loads(Path(a.grace).read_text())
-    sgte = json.loads(Path(a.sgte).read_text())
+    grace = json.loads(Path(a.grace).read_text(encoding="utf-8"))
+    sgte = json.loads(Path(a.sgte).read_text(encoding="utf-8"))
     temps, xs, lab = phase_map(
         str(example_root / grace["tdb"]), grace["names_as"], example_root / "results" / "map_cuzr_grace.npz"
     )

@@ -96,7 +96,7 @@ def rescale(atoms, lat: str, x: float):
 res = []
 for lat in ("FCC_A1", "BCC_A2", "HCP_A3", "LIQUID"):
     for d in sorted((run_dir / lat).glob("sqs_lev=[12]_*")):
-        m = json.loads((d / "sqs_meta.json").read_text())
+        m = json.loads((d / "sqs_meta.json").read_text(encoding="utf-8"))
         a = rescale(read(d / "POSCAR", format="vasp"), lat, m["x_Zr"])
         r = check(a, lat, m["x_Zr"])
         r.update(source="m_scraps", lattice=lat, x_Zr=m["x_Zr"], n_atoms=len(a), dir=d.name)
@@ -105,7 +105,7 @@ for lat in ("FCC_A1", "BCC_A2", "HCP_A3", "LIQUID"):
         for d in (
             sorted((atat_ex / lat).glob("sqs_lev=[12]_*")) if atat_ex else []
         ):  # optional ATAT comparison (PHASEFORGEPLUS_SRC)
-            s = Mcsqs.structure_from_str((d / "str.out").read_text())
+            s = Mcsqs.structure_from_str((d / "str.out").read_text(encoding="utf-8"))
             s.replace_species({"Pt": "Cu", "W": "Zr"})
             a = AseAtomsAdaptor.get_atoms(s)
             x = float(sum(1 for z in a.get_chemical_symbols() if z == "Zr")) / len(a)
@@ -114,7 +114,7 @@ for lat in ("FCC_A1", "BCC_A2", "HCP_A3", "LIQUID"):
             r.update(source="ATAT sqsdb (PhaseForgePlus Pt-W example)", lattice=lat, x_Zr=x, n_atoms=len(a), dir=d.name)
             res.append(r)
 (root / "results").mkdir(exist_ok=True)
-(root / "results/sqs_validation.json").write_text(json.dumps(res, indent=1))
+(root / "results/sqs_validation.json").write_text(json.dumps(res, indent=1), encoding="utf-8")
 
 
 def fmt_value(v) -> str:

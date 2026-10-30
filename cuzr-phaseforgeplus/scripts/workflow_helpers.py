@@ -28,7 +28,7 @@ def prepare_compounds(root) -> None:
         d = root / "runs/phaseforge/COMPOUNDS" / p.stem
         d.mkdir(parents=True, exist_ok=True)
         shutil.copy2(p, d / "POSCAR")
-        (d / "wait").write_text("")
+        (d / "wait").write_text("", encoding="utf-8")
 
 
 def b2_variant(root) -> None:
@@ -42,14 +42,14 @@ def b2_variant(root) -> None:
     """
     root = Path(root)
     p = root / "tdb/CuZr-PhaseForge-MLIP.tdb"
-    s = p.read_text()
+    s = p.read_text(encoding="utf-8")
     old = "1*GHSERCU+1*GHSERZR+VV0020*1000;"
     if s.count(old) != 1 or "FUNCTION VV0022" in s:
         raise ValueError("Unexpected MLIP TDB layout")
     s = s.replace("FUNCTION VV0021", "FUNCTION VV0022 298.15 0.000000; 6000 N !\nFUNCTION VV0021", 1)
     s = s.replace(old, "1*GHSERCU+1*GHSERZR+VV0020*1000+VV0022*T;")
     header = "$ MLIP-only TDB + linear T term (VV0022, start 0) for CUZR_B2 (Amendment 4 variant)\n"
-    (root / "tdb/CuZr-PhaseForge-MLIP-B2b.tdb").write_text(header + s)
+    (root / "tdb/CuZr-PhaseForge-MLIP-B2b.tdb").write_text(header + s, encoding="utf-8")
 
 
 def gate_run(root, start) -> None:

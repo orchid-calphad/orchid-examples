@@ -74,7 +74,7 @@ def sha(p: str | Path) -> str:
     return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 
 
-reg = json.loads(Path(reg_path).read_text())
+reg = json.loads(Path(reg_path).read_text(encoding="utf-8"))
 pid = collections.defaultdict(dict)  # stem -> phase_name -> registry id
 for p in reg["phases"]:
     for m in p.get("models") or []:
@@ -174,8 +174,8 @@ cands += sorted(str(p) for p in Path(bundle, "dft", "literature", "CU-ZR").glob(
 man = {"bundle": bundle, "tdb": {"path": tdb, "sha256": sha(tdb)}, "datasets": [], "excluded": [], "doc": _doc_text}
 sel = []
 for f in cands:
-    rel = os.path.relpath(f, bundle)
-    d = json.loads(Path(f).read_text())
+    rel = Path(os.path.relpath(f, bundle)).as_posix()
+    d = json.loads(Path(f).read_text(encoding="utf-8"))
     if rel in exclude:
         man["excluded"].append({"source": rel, "reason": exclude[rel]})
         continue
@@ -192,7 +192,7 @@ for f in cands:
                 {"source": rel, "reason": "bracket source dataset no longer in the bundle (removed in the cleanup)"}
             )
             continue
-        src = json.loads(Path(bundle, d["orchid"]["derived_from"]).read_text())
+        src = json.loads(Path(bundle, d["orchid"]["derived_from"]).read_text(encoding="utf-8"))
         if not compatible(src, st):
             man["excluded"].append(
                 {
@@ -209,7 +209,7 @@ for f in cands:
     if k == "DFT_HM_FORM":
         part = "dft_check"
     if k == "ZPF_bracket":
-        src = json.loads(Path(bundle, d["orchid"]["derived_from"]).read_text())
+        src = json.loads(Path(bundle, d["orchid"]["derived_from"]).read_text(encoding="utf-8"))
         if is_holdout_src(src):
             part = "holdout"
     if k == "ACR" and float(d["conditions"]["T"]) in hold_acr_t:
@@ -243,10 +243,10 @@ for rel, k, part, w in sel:
         w["weight"] = base * wt.get(k, 1.0)
     w["orchid_demo_type_weight"] = wt.get(k, 1.0)
     out = f"{root}/data/{part}/" + rel.replace("/", "__")
-    Path(out).write_text(json.dumps(w, indent=1))
+    Path(out).write_text(json.dumps(w, indent=1), encoding="utf-8")
     man["datasets"].append(
         {
-            "file": os.path.relpath(out, root),
+            "file": Path(os.path.relpath(out, root)).as_posix(),
             "source": rel,
             "source_sha256": sha(Path(bundle, rel)),
             "split": part,
@@ -264,7 +264,7 @@ man["type_weight_rule"] = (
     f"w_t = 1 (bundle weights); v2 rule sqrt(Nbar/N_t) recorded in type_weights_v2_not_used, Nbar = {nbar:.2f}"
 )
 man["type_weights_v2_not_used"] = wt_v2
-Path(root, "data", "manifest.json").write_text(json.dumps(man, indent=1))
+Path(root, "data", "manifest.json").write_text(json.dumps(man, indent=1), encoding="utf-8")
 c = collections.Counter((x["split"], x["type"]) for x in man["datasets"])
 n = collections.Counter()
 for x in man["datasets"]:

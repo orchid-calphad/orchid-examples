@@ -44,7 +44,7 @@ prefix = sys.argv[1] if len(sys.argv) > 1 else "a4"
 files = [f for f in sorted(str(p) for p in (root / "data/fit").glob("*.json")) if Path(f).name not in duplicates]
 vals = collections.defaultdict(list)
 for f in files:
-    d = json.loads(Path(f).read_text())
+    d = json.loads(Path(f).read_text(encoding="utf-8"))
     if d["output"] == "HM_FORM":
         vals[d["phases"][0]] += list(np.ravel(d["values"]))
 sd = {k: float(np.std(v, ddof=1)) if len(v) > 1 else 0.0 for k, v in vals.items()}
@@ -61,7 +61,7 @@ for factor in (3, 10, 30):
     for f in out.glob("*.json"):
         f.unlink()
     for f in files + [str(dense)]:
-        d = json.loads(Path(f).read_text())
+        d = json.loads(Path(f).read_text(encoding="utf-8"))
         if f == str(dense):
             d["weight"] = 1.0
         if d["output"] == "HM_FORM":
@@ -73,6 +73,6 @@ for factor in (3, 10, 30):
         if d["output"] == "ZPF":
             w = d.get("weight", 1.0)
             d["weight"] = [x * factor for x in w] if isinstance(w, list) else w * factor
-        (out / Path(f).name).write_text(json.dumps(d))
-(root / f"data/{prefix}_manifest.json").write_text(json.dumps(man, indent=1))
+        (out / Path(f).name).write_text(json.dumps(d), encoding="utf-8")
+(root / f"data/{prefix}_manifest.json").write_text(json.dumps(man, indent=1), encoding="utf-8")
 print(len(files), {k: round(v) for k, v in sd.items()}, sorted({round(v) for v in man["sigma_eff"].values()}))

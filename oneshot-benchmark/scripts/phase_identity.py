@@ -94,7 +94,7 @@ class Registry:
     def __init__(self, path: str | Path | None = None) -> None:
         """Load the registry and index its TDB and paper names."""
         path = path or orchid_data.path(reg_rel, release_commit)
-        d = json.loads(Path(path).read_text())
+        d = json.loads(Path(path).read_text(encoding="utf-8"))
         self.phases = {p["id"]: p for p in d["phases"]}
         self.by_tdb, self.by_label = {}, {}
         for p in d["phases"]:

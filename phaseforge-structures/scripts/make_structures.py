@@ -61,7 +61,7 @@ def registry_rows(odata: str | Path, sysid: str) -> list[dict]:
     Returns:
         List of registry rows (dicts keyed by the CSV header).
     """
-    with (Path(odata) / "phases/registry.csv").open(newline="") as f:
+    with (Path(odata) / "phases/registry.csv").open(newline="", encoding="utf-8") as f:
         return [r for r in csv.DictReader(f) if r["system"] == sysid]
 
 
@@ -122,7 +122,7 @@ def load_mp(path: str | Path) -> list[dict]:
     Returns:
         List of entries (each with id, comp, structure and optional energy fields).
     """
-    with gzip.open(path, "rt") if str(path).endswith(".gz") else Path(path).open("rt") as f:
+    with gzip.open(path, "rt", encoding="utf-8") if str(path).endswith(".gz") else Path(path).open("rt", encoding="utf-8") as f:
         d = json.load(f)
     return d["items"] if isinstance(d, dict) else d
 
@@ -141,7 +141,7 @@ def hull_vertices(odata: str | Path, el_a: str, el_b: str) -> dict:
     p = Path(odata) / "hulls/dft-mp" / el_a.upper() / f"{el_a.upper()}-{el_b.upper()}.json"
     if not p.exists():
         return {}
-    h = json.loads(p.read_text())
+    h = json.loads(p.read_text(encoding="utf-8"))
     v = {}
     for iso in h["isotherms"][:1]:  # the 0 K hull
         for iv in iso["intervals"]:
@@ -460,7 +460,7 @@ def main() -> None:
         for s in skipped:
             print(f"SKIPPED  {s['phase']:<12} {s['reason']}")
     rl = _relax_list(mk, lats, made, args.no_sqs)
-    (out / "relax_list.txt").write_text("\n".join(rl) + "\n")
+    (out / "relax_list.txt").write_text("\n".join(rl) + "\n", encoding="utf-8")
     total = time.time() - t_start
     try:
         mscommit = subprocess.run(
@@ -497,7 +497,7 @@ def main() -> None:
         "compounds": made,
         "skipped": skipped,
     }
-    (out / "manifest.json").write_text(json.dumps(manifest, indent=1))
+    (out / "manifest.json").write_text(json.dumps(manifest, indent=1), encoding="utf-8")
     print(f"total {total:.1f} s on {os.cpu_count()} CPUs; {len(rl)} relaxations listed; manifest.json written")
 
 

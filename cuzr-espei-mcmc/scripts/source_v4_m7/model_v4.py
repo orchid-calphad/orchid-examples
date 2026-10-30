@@ -62,7 +62,7 @@ def write(path: str | Path, values: dict[str, float], label: str) -> None:
     m3.write(path, values, label)
     if model_kind != "m6":
         path = Path(path)
-        txt = path.read_text()
+        txt = path.read_text(encoding="utf-8")
         old = "PAR  L(LIQUID,CU,ZR;1),,               VV0002+VV0003*T;,,         N 94Zen !\n"
         assert txt.count(old) == 1
         txt = txt.replace(old, old + " PAR  L(LIQUID,CU,ZR;2),,               VV0006;,,         N demo !\n")
@@ -71,7 +71,7 @@ def write(path: str | Path, values: dict[str, float], label: str) -> None:
             f"$ VV0006: L2(LIQUID) a (added term, model-adequacy test)\n FUNCTION VV0006    298.15 {values['VV0006']:+.6f}; 6000 N !\n TEMP-LIM",
             1,
         )
-        path.write_text(txt)
+        path.write_text(txt, encoding="utf-8")
 
 
 if __name__ == "__main__":

@@ -71,7 +71,7 @@ def vendor_site(site_rev: str, data_rev: str) -> tuple[Path, str, str]:
             check=True,
         ).stdout
         subprocess.run(["tar", "-x", "-C", str(d / "data")], input=ar, check=True)
-        (d / "ok").write_text(s1 + " " + s2)
+        (d / "ok").write_text(s1 + " " + s2, encoding="utf-8")
     return d, s1, s2
 
 

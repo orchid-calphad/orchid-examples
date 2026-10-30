@@ -50,7 +50,7 @@ def load_grid(path: str | Path, names_as: str | None) -> tuple[np.ndarray, np.nd
     """
     reg = pid.Registry() if names_as else None
     temps, xs, assemblages = [], [], []
-    with Path(path).open() as f:
+    with Path(path).open(encoding="utf-8") as f:
         for r in csv.DictReader(f):
             names = [n.strip() for n in r["phases"].replace("+", ";").split(";") if n.strip()]
             cls = set()
@@ -105,7 +105,7 @@ def main() -> None:
     ap.add_argument("-o", default=None)
     a = ap.parse_args()
     label = a.label or Path(a.grid).stem
-    ev = json.loads(Path(a.evidence).read_text())
+    ev = json.loads(Path(a.evidence).read_text(encoding="utf-8"))
     pts = ev["points"]
     temps, xs, assemblages = load_grid(a.grid, a.names_as)
     preds, empty = predict(temps, xs, assemblages, pts)
@@ -152,7 +152,7 @@ def main() -> None:
         ],
     }
     Path(out).parent.mkdir(parents=True, exist_ok=True)
-    with Path(out).open("w") as f:
+    with Path(out).open("w", encoding="utf-8") as f:
         json.dump(res, f, indent=1, ensure_ascii=False)
     for kind in ("field", "boundary"):
         b = metrics[kind]["all"]

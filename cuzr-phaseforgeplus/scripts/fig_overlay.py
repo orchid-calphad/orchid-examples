@@ -98,7 +98,7 @@ def geometry(p, key):
     h = hashlib.sha1(repr((sorted(p.L.items()), sorted(p.G.items()), t_lo, t_hi)).encode()).hexdigest()[:12]
     c = work_dir / f"pdgeo_{key}_{h}.json"
     if c.exists():
-        d = json.loads(c.read_text())
+        d = json.loads(c.read_text(encoding="utf-8"))
         tracks = [
             {
                 "kind": t["kind"],
@@ -127,7 +127,8 @@ def geometry(p, key):
                 ],
                 "comps": {k: [float(a) for a in v] for k, v in comps.items()},
             }
-        )
+        ),
+        encoding="utf-8",
     )
     return tracks, comps
 
@@ -363,7 +364,7 @@ def zpf_points():
     Returns:
         list[tuple[float, float, str, str]]: (x_Zr, T in K, split, kind) per point.
     """
-    d = json.loads((root / "inputs/zpf_points.json").read_text())
+    d = json.loads((root / "inputs/zpf_points.json").read_text(encoding="utf-8"))
     return [(p["x_Zr"], p["T_K"], p["split"], p["kind"]) for p in d["points"]]
 
 
@@ -499,7 +500,7 @@ def main() -> None:
     """Write the overlay figure and the three-panel figure as PNG and PDF into the output directory."""
     out = Path(sys.argv[1]) if len(sys.argv) > 1 else root / "figures"
     gate_path = out / "gate.json" if (out / "gate.json").exists() else root / "cached/gate.json"
-    gate_counts = json.loads(gate_path.read_text())["gate_counts"]
+    gate_counts = json.loads(gate_path.read_text(encoding="utf-8"))["gate_counts"]
     params = {
         "SGTE": m.Params.from_tdb(root / "tdb/CuZr-94Zen-LB.tdb"),
         "MLIP-only": m.Params.from_tdb(root / "tdb/CuZr-PhaseForge-MLIP.tdb"),

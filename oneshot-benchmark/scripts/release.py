@@ -27,7 +27,7 @@ def rel(p: str | Path) -> str:
     """
     full = Path(os.path.normpath(Path(p).absolute()))
     if full.is_relative_to(example_root):
-        return str(full.relative_to(example_root))
+        return full.relative_to(example_root).as_posix()
     return full.name
 
 

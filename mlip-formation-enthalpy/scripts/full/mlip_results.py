@@ -12,7 +12,7 @@ from pathlib import Path
 
 here = Path(__file__).resolve().parent
 kj_per_ev = 96.485  # kJ/mol per eV/atom, as build_dft_parity.KJ_PER_EV
-_models_spec = json.loads((here / "models.json").read_text())
+_models_spec = json.loads((here / "models.json").read_text(encoding="utf-8"))
 _molecular = {"H", "N", "O", "F", "Cl", "Br", "I"}  # molecular-crystal elements: no-vdW MLIPs expand them freely
 
 
@@ -30,7 +30,7 @@ def load_results(dirs: list[str]) -> tuple[dict, dict]:
     meta = {}
     for d in dirs:
         for f in sorted(Path(d).glob("*.jsonl"), key=str):
-            with f.open() as fh:
+            with f.open(encoding="utf-8") as fh:
                 for line in fh:
                     try:
                         r = json.loads(line)

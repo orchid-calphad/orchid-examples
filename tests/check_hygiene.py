@@ -23,7 +23,7 @@ max_file_bytes = 50 * mib  # a single tracked file may not exceed 50 MB
 max_total_bytes = 100 * mib  # all tracked files together may not exceed 100 MB
 text_suffixes = (".py", ".sh", ".md", ".json", ".yml", ".yaml", ".txt", ".csv", ".cff", ".ipynb", ".tdb", ".TDB")
 image_suffixes = (".jpg", ".jpeg", ".tif", ".tiff", ".djvu", ".epub")
-local_path_pattern = re.compile(r"(/Users/[A-Za-z]|/home/[a-z]|/private/tmp/|C:\\\\Users|~/projects/|\.venvs/)")
+local_path_pattern = re.compile(r"(/Users/[A-Za-z]|/home/[a-z]|/private/tmp/|C:\\{1,2}Users|~/projects/|\.venvs/)")
 
 
 def tracked_files(root: Path = ROOT) -> list[str]:

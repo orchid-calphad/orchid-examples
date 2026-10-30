@@ -114,7 +114,7 @@ class Params:
         Returns:
             Params: Liquid and compound coefficients, each as (a, b) with the T-independent and T-linear parts.
         """
-        txt = Path(path).read_text()
+        txt = Path(path).read_text(encoding="utf-8")
         sym = {m.group(1): float(m.group(2)) for m in re.finditer(r"FUNCTION\s+(VV\d+)\s+298\.15\s+([-+.\dEe]+);", txt)}
         if values:
             sym.update(values)
