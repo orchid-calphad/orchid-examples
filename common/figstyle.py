@@ -19,7 +19,6 @@ mpl.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
 mm = 1 / 25.4  # inches per millimetre
-w1 = 89 * mm  # single-column figure width, inches
 w2 = 183 * mm  # double-column figure width, inches
 hmax = 170 * mm  # maximum figure height, inches
 
@@ -29,7 +28,6 @@ c_mp = "#009E73"  # DFT, Materials Project
 c_oqmd = "#56B4E9"  # DFT, OQMD
 c_litdft = "#CC79A7"  # DFT printed in the literature
 c_assessed = "#E69F00"  # assessed phase diagram (handbook)
-c_unspec = "#999999"  # unspecified source
 accent = "#7B3FA0"  # ORCHID accent: tuned / refined model
 ink = "#000000"
 ink2 = "#4D4D4D"
