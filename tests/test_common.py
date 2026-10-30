@@ -71,6 +71,86 @@ class TestLocalRelease(TestCase):
             assert orchid_data.local_root() is None
 
 
+COMMIT = "a" * 40  # any orchid-data commit: the offline tests never reach GitHub
+
+
+def _offline(cache: str, url: str | None = None):
+    """Return a patch of os.environ with a private cache, no local checkout and an optional download template.
+
+    Args:
+        cache (str): Directory used as ORCHID_CACHE.
+        url (str | None): ORCHID_DATA_URL template; None keeps the variable unset.
+
+    Returns:
+        mock._patch: Context manager that patches os.environ.
+    """
+    env = {k: v for k, v in os.environ.items() if k not in ("ORCHID_DATA", "ORCHID_DATA_URL", "ORCHID_CACHE")}
+    env["ORCHID_CACHE"] = cache
+    if url is not None:
+        env["ORCHID_DATA_URL"] = url
+    return mock.patch.dict(os.environ, env, clear=True)
+
+
+class TestRemoteRelease(TestCase):
+    """Tests for release-file lookup without ORCHID_DATA: cache hits, downloads and the espei index (offline)."""
+
+    def test_cache_dir_honours_orchid_cache(self):
+        """ORCHID_CACHE selects the download cache directory."""
+        with tempfile.TemporaryDirectory() as d, _offline(d):
+            assert orchid_data.cache_dir() == Path(d)
+
+    def test_cached_file_is_returned_without_download(self):
+        """A file already in the cache for the commit is returned and the download URL is never used."""
+        with tempfile.TemporaryDirectory() as d, _offline(d, url="file:///nonexistent-orchid/{commit}/{path}"):
+            target = Path(d) / COMMIT / "espei" / "index.csv"
+            target.parent.mkdir(parents=True)
+            target.write_text("path\n", encoding="utf-8")
+            assert orchid_data.path("espei/index.csv", COMMIT) == target
+
+    def test_download_is_written_to_the_cache_once(self):
+        """A downloaded file is stored under <cache>/<commit>/<relpath> with no .part leftover, and reused afterwards."""
+        with tempfile.TemporaryDirectory() as src, tempfile.TemporaryDirectory() as cache:
+            (Path(src) / "espei").mkdir()
+            source = Path(src) / "espei" / "index.csv"
+            source.write_bytes(b"path\nx.json\n")
+            url = Path(src).as_uri() + "/{path}"
+            with _offline(cache, url=url):
+                got = orchid_data.path("espei/index.csv", COMMIT)
+                assert got == Path(cache) / COMMIT / "espei" / "index.csv"
+                assert got.read_bytes() == b"path\nx.json\n"
+                assert not got.with_suffix(".csv.part").exists()
+                source.unlink()
+                assert orchid_data.path("espei/index.csv", COMMIT) == got
+
+    def test_failed_download_names_the_remedy(self):
+        """A download that fails raises RuntimeError that names the commit and the ORCHID_DATA remedy."""
+        with tempfile.TemporaryDirectory() as d, tempfile.TemporaryDirectory() as empty:
+            url = Path(empty).as_uri() + "/missing/{commit}/{path}"
+            with _offline(d, url=url), self.assertRaises(RuntimeError) as ctx:
+                orchid_data.path("espei/index.csv", COMMIT)
+            assert "ORCHID_DATA" in str(ctx.exception)
+            assert COMMIT in str(ctx.exception)
+
+    def test_remote_listdir_reads_the_espei_index(self):
+        """Without a local checkout, listdir of an espei/ folder is answered from the commit's espei/index.csv."""
+        with tempfile.TemporaryDirectory() as d, _offline(d):
+            index = Path(d) / COMMIT / "espei" / "index.csv"
+            index.parent.mkdir(parents=True)
+            index.write_text(
+                "path\nexperimental/CU-ZR/a.json\nexperimental/CU-ZR/b.csv\nexperimental/CU-ZR/c.json\ninvariants/d.json\n",
+                encoding="utf-8",
+            )
+            assert orchid_data.listdir("espei/experimental/CU-ZR", COMMIT) == [
+                "espei/experimental/CU-ZR/a.json",
+                "espei/experimental/CU-ZR/c.json",
+            ]
+
+    def test_remote_listdir_rejects_folders_outside_espei(self):
+        """A remote listing outside espei/ is refused with a RuntimeError that asks for ORCHID_DATA."""
+        with tempfile.TemporaryDirectory() as d, _offline(d), self.assertRaisesRegex(RuntimeError, "ORCHID_DATA"):
+            orchid_data.listdir("cuzr/other", COMMIT)
+
+
 class TestFigstyleSave(TestCase):
     """Tests for figstyle.save, which must write byte-identical files on repeated calls."""
 
