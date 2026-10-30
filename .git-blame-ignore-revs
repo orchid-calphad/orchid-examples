@@ -1,0 +1,15 @@
+# Mechanical refactor commits (moves, renames, formatting, autofixes). Use: git config blame.ignoreRevsFile .git-blame-ignore-revs
+# Add ruff configuration (style guide section 1)
+1dd8a6a4b4ba368d69526f12519a007edaf43c45
+# Restyle shared helpers and repository checks; add unit tests
+d9644ff2d445dc4dff18855607e3bf4649e10e26
+# cuzr-phaseforgeplus: restyle top-level scripts and their test
+cb78d8a3e051933d1bb665369b25a4fca05a9641
+# cuzr-phaseforgeplus: restyle full-path scripts
+ce1d59978cfed6abde6b9388639a3961ccdcc5e7
+# cuzr-espei-mcmc: restyle scripts
+deae59b76c781f11e84b84680f38a3cbb27c4494
+# oneshot-benchmark: restyle scripts; split score metrics out of score.py
+fbe85fc5b63435eb772253c678f426a256549013
+# mlip, phaseforge-structures, quickstart: restyle scripts; split two long modules
+516e50f88d31c08248adb188ab1f8d6f855ad255
