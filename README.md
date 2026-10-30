@@ -26,6 +26,11 @@ pip install -r requirements.txt          # quick path: exact versions
 sh run_quick.sh                           # regenerates figures/ (and the cached tables) from cached outputs
 ```
 
+**Windows.** The `sh` commands and `. .venv/bin/activate` above are POSIX. Run the quick path from Git Bash or WSL
+(`run_quick.sh` and `tests/check_quick_paths.py` call `sh`), with the environment created there. In PowerShell,
+activate a virtual environment with `.venv\Scripts\Activate.ps1` and run the Python scripts with `python` directly.
+If `python3.12` is not on PATH, use `py -3.12 -m venv .venv`.
+
 `python tests/check_quick_paths.py [example ...]` runs quick paths into a temporary directory and checks that every
 output regenerates byte-identically (sha256) against the committed files; `python tests/check_hygiene.py` checks
 the repository rules (no absolute local paths, no file over 50 MB, under 100 MB in total). The CI workflow
