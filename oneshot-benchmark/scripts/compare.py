@@ -42,7 +42,7 @@ def _load_path(path: str | Path) -> dict:
     Returns:
         dict: Parsed result file.
     """
-    return json.loads(Path(path).read_text())
+    return json.loads(Path(path).read_text(encoding="utf-8"))
 
 
 def _weighted_recall(truth: list, pred: list) -> float:
@@ -194,7 +194,7 @@ def _recall_cell(m: dict, kind: str) -> str:
 def main() -> None:
     """Write results/comparison.json and print the comparisons and the markdown tables."""
     out = _print_comparisons()
-    with (example_root / "results" / "comparison.json").open("w") as f:
+    with (example_root / "results" / "comparison.json").open("w", encoding="utf-8") as f:
         json.dump(out, f, indent=1)
     for k, v in out.items():
         print(k, {kk: (round(vv["delta_weighted_recall"], 3), [round(x, 3) for x in vv["ci95"]]) for kk, vv in v.items()})

@@ -62,7 +62,7 @@ def arg(k: str, d):
 
 mode = sys.argv[1]
 model_dir = root / arg("--model", "runs/final/F10b_s1")
-res = json.loads((model_dir / "result.json").read_text())
+res = json.loads((model_dir / "result.json").read_text(encoding="utf-8"))
 out_dir = root / arg(
     "--out", "runs/hmc/" + mode + ("_" + sys.argv[2] if len(sys.argv) > 2 and not sys.argv[2].startswith("--") else "")
 )
@@ -73,7 +73,7 @@ db = Database(str(tdb_path))
 syms = database_symbols_to_fit(db)
 assert syms == res["symbols"], (syms, res["symbols"])
 xm = np.array([unpack_piecewise(db.symbols[s]) for s in syms], float)
-meta = {d["symbol"]: d["parameter"] for d in json.loads((root / "tdb/mlip_fit.json").read_text())["symbols"]}
+meta = {d["symbol"]: d["parameter"] for d in json.loads((root / "tdb/mlip_fit.json").read_text(encoding="utf-8"))["symbols"]}
 meta.setdefault("VV0022", "G(CUZR_B2) b [J/mol/K]")
 is_t = np.array(["b [" in meta[s] for s in syms])
 files = sorted(str(p) for p in data_dir.glob("*.json")) + sorted(str(p) for p in (root / "data/mlip_anchor").glob("*.json"))
@@ -84,7 +84,7 @@ t0 = time.time()
 n = [0]
 best = [-np.inf, None]
 wall = float(arg("--wall", 1e9))
-ev = (out_dir / "evals.jsonl").open("a")
+ev = (out_dir / "evals.jsonl").open("a", encoding="utf-8")
 
 
 class WallBudgetError(Exception):
@@ -127,7 +127,7 @@ def logp_dlogp(x):
     return (lik, grad) if ok else (-np.inf, np.zeros(n_par))
 
 
-it_log = (out_dir / "iters.jsonl").open("a")
+it_log = (out_dir / "iters.jsonl").open("a", encoding="utf-8")
 
 
 def callback(trace=None, draw=None):
@@ -181,7 +181,9 @@ def init_diag():
     """
     if arg("--init-var", "identity") == "identity":
         return np.ones(n_par)
-    h = json.loads((root / arg("--hessian", "runs/hmc/hessian/hessian.json")).read_text())["steps"][arg("--hstep", "0.003")]
+    h = json.loads((root / arg("--hessian", "runs/hmc/hessian/hessian.json")).read_text(encoding="utf-8"))["steps"][
+        arg("--hstep", "0.003")
+    ]
     return np.clip(np.array(h["sd_diag_only"]) ** 2, 1e-8, None)
 
 
@@ -255,7 +257,7 @@ def start_point(sid):
 
 summary = {
     "mode": mode,
-    "model": str(model_dir.relative_to(root)),
+    "model": model_dir.relative_to(root).as_posix(),
     "tdb": str(tdb_path),
     "data": str(data_dir),
     "symbols": syms,
@@ -273,7 +275,9 @@ summary = {
 if mode == "explore":
     sid = int(sys.argv[2])
     sf = arg("--start-from", None)  # a run directory: start at its L-BFGS-B optimum instead of fit start SID
-    x0 = np.array(json.loads((root / sf / "result.json").read_text())["x_best"], float) if sf else start_point(sid)
+    x0 = (
+        np.array(json.loads((root / sf / "result.json").read_text(encoding="utf-8"))["x_best"], float) if sf else start_point(sid)
+    )
     step = nuts_step(x0)
     status = run(step, x0, tune=100000, draws=0, seed=1000 + sid)
     n_nuts, t_nuts = n[0], time.time() - t0
@@ -290,7 +294,7 @@ if mode == "explore":
             "nuts_best_x": xb.tolist(),
         }
     )
-    (out_dir / "summary.json").write_text(json.dumps(summary, indent=1))
+    (out_dir / "summary.json").write_text(json.dumps(summary, indent=1), encoding="utf-8")
     wall = t_nuts + float(arg("--bfgs-wall", 3600))
 
     # BFGS with the wall check inside the objective (single evaluation per call)
@@ -328,7 +332,8 @@ if mode == "explore":
     )
 elif mode in ("tune", "test"):
     x0 = np.array(
-        json.loads((root / arg("--x0", str(model_dir.relative_to(root)) + "/result.json")).read_text())["x_best"], float
+        json.loads((root / arg("--x0", str(model_dir.relative_to(root)) + "/result.json")).read_text(encoding="utf-8"))["x_best"],
+        float,
     )
     n_tune = int(arg("--tune", 200))
     n_draws = int(arg("--draws", 0 if mode == "tune" else 100))
@@ -351,7 +356,7 @@ elif mode in ("tune", "test"):
     )
 elif mode == "sample":
     seed = int(sys.argv[2])
-    tj = json.loads((root / arg("--tuned", "runs/hmc/tune/summary.json")).read_text())
+    tj = json.loads((root / arg("--tuned", "runs/hmc/tune/summary.json")).read_text(encoding="utf-8"))
     fac = float(arg("--step-factor", 0.5))
     eps = tj["step_size_bar"] * fac
     x0 = np.array(tj["x0"] if "--from-opt" in sys.argv else tj["last_q"], float)
@@ -370,9 +375,9 @@ elif mode == "sample":
         }
     )
 if mode in ("tune", "test"):
-    with (out_dir / "iters.jsonl").open() as fh:
+    with (out_dir / "iters.jsonl").open(encoding="utf-8") as fh:
         its = [json.loads(line) for line in fh]
     summary["last_q"] = its[-1]["q"]
 if mode in ("explore", "tune", "test", "sample"):
-    (out_dir / "summary.json").write_text(json.dumps(summary, indent=1, default=float))
+    (out_dir / "summary.json").write_text(json.dumps(summary, indent=1, default=float), encoding="utf-8")
     print("done", mode, json.dumps({k: v for k, v in summary.items() if not isinstance(v, list)}, default=float)[:1500])

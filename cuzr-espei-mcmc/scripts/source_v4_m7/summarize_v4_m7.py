@@ -75,7 +75,7 @@ def _first_trace_line(path: str) -> dict:
     Returns:
         dict: The parsed first record.
     """
-    with Path(path).open() as fh:
+    with Path(path).open(encoding="utf-8") as fh:
         return json.loads(fh.readline())
 
 
@@ -152,10 +152,10 @@ def main() -> None:
     inv0 = analyze.inv_job(mst.start)
     _ok0, _, det0 = analyze.gate([inv0])
     run_files = sorted(Path(f"runs/{tag}").glob("*/result.json"), key=lambda p: p.as_posix())
-    runs = [json.loads(p.read_text()) for p in run_files]
+    runs = [json.loads(p.read_text(encoding="utf-8")) for p in run_files]
     best = max(runs, key=lambda r: r["lnL_opt"])
     th = np.array(best["theta_opt"])
-    with Path(f"runs/{tag}/{best['name']}/trace.jsonl").open() as fh:
+    with Path(f"runs/{tag}/{best['name']}/trace.jsonl").open(encoding="utf-8") as fh:
         tr = [json.loads(line) for line in fh]
     bt = max((t for t in tr if t["lnL"] is not None), key=lambda t: t["lnL"])
     inv = analyze.inv_job(th)
@@ -205,7 +205,7 @@ def main() -> None:
         "gate_reactions": len(det[0]),
         "gate_detail": det[0],
     }
-    with Path("results/v4/summary_v4.json").open() as fh:
+    with Path("results/v4/summary_v4.json").open(encoding="utf-8") as fh:
         v4 = json.load(fh)
     m6 = [v for v in v4["variants"] if v["zpf_factor"] == 30][0]
     act_fit = row["rmse"]["fit/ACR"]["optimum"] < row["rmse"]["fit/ACR"]["start"]
@@ -231,7 +231,7 @@ def main() -> None:
         },
     }
     Path(f"results/{tag}").mkdir(parents=True, exist_ok=True)
-    with Path(f"results/{tag}/summary_v4_m7.json").open("w") as fh:
+    with Path(f"results/{tag}/summary_v4_m7.json").open("w", encoding="utf-8") as fh:
         json.dump(out, fh, indent=1, default=float)
     mst.write(
         f"tdb/v4/CuZr-94Zen-LB_ORCHID-{tag}_REVIEW-ONLY.tdb",
@@ -241,7 +241,8 @@ def main() -> None:
     lines = _table(row, m6, out)
     printed_k0, printed_k1 = out["printed"][key_reactions[0]], out["printed"][key_reactions[1]]
     Path(f"results/{tag}/summary_v4_m7.md").write_text(
-        "\n".join(lines) + f"\n\nPrinted (fit): CuZr congruent {printed_k0} K; Cu10Zr7 congruent {printed_k1} K.\n"
+        "\n".join(lines) + f"\n\nPrinted (fit): CuZr congruent {printed_k0} K; Cu10Zr7 congruent {printed_k1} K.\n",
+        encoding="utf-8",
     )
     print("\n".join(lines))
 

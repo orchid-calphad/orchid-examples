@@ -90,7 +90,7 @@ def write_str_out(atoms, path) -> None:
         atoms (ase.Atoms): Structure to write (cell and positions in A).
         path (str | Path): Output file.
     """
-    with Path(path).open("w") as f:
+    with Path(path).open("w", encoding="utf-8") as f:
         for r in np.eye(3):
             f.write(f"{r[0]:.6f} {r[1]:.6f} {r[2]:.6f}\n")
         for r in atoms.cell:
@@ -186,11 +186,11 @@ def make(lat: str, x: float, outdir, seed: int = 2026) -> Path:
             )
     a.pbc = True
     write_str_out(a, d / "str.out")
-    (d / "lat.in").write_text(lat_in(lat))
+    (d / "lat.in").write_text(lat_in(lat), encoding="utf-8")
     a.write(d / "POSCAR", format="vasp", direct=True, sort=True)
-    (d / "wait").write_text("")
+    (d / "wait").write_text("", encoding="utf-8")
     meta["seconds"] = round(time.time() - t0, 1)
-    (d / "sqs_meta.json").write_text(json.dumps(meta, indent=1))
+    (d / "sqs_meta.json").write_text(json.dumps(meta, indent=1), encoding="utf-8")
     print(lat, name, meta.get("n_atoms"), meta.get("final_fitness"), meta["seconds"], "s", flush=True)
     return d
 

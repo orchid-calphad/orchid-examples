@@ -192,12 +192,12 @@ def main() -> None:
     """Read summary.json, draw the three-panel figure and write it as PNG and PDF."""
     out_dir = sys.argv[1] if len(sys.argv) > 1 else None
     res_dir = Path(out_dir) if out_dir else root / "results"
-    with (res_dir / "summary.json").open() as f:
+    with (res_dir / "summary.json").open(encoding="utf-8") as f:
         cal = json.load(f)
     same = cal["same_set"]
     models = sorted([m for m in same if m not in ("mp", "oqmd")], key=lambda m: same[m]["all"]["sigma_robust"])
     srcs = ["mp", "oqmd", *models]
-    with (root / "inputs" / "pairs_identical_set.csv").open() as f:
+    with (root / "inputs" / "pairs_identical_set.csv").open(encoding="utf-8") as f:
         full = sorted(csv.DictReader(f), key=lambda r: r["rid"])
     exp = np.array([float(r["exp"]) for r in full])
 

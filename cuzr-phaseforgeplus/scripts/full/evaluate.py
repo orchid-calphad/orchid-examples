@@ -34,7 +34,7 @@ from _paths import root
 # pycalphad/espei can now reach stderr; no written output is affected.
 warnings.filterwarnings("ignore")
 
-manifest = json.loads((root / "data/manifest.json").read_text())
+manifest = json.loads((root / "data/manifest.json").read_text(encoding="utf-8"))
 dataset_type = {Path(d["file"]).name: d["type"] for d in manifest["datasets"]}
 
 
@@ -48,7 +48,7 @@ def load_db(tdb: str, values: dict | None = None) -> Database:
     Returns:
         The pycalphad Database.
     """
-    txt = Path(tdb).read_text()
+    txt = Path(tdb).read_text(encoding="utf-8")
     if not re.search(r"FUNCTION\s+VV\d+", txt):
         txt = txt.replace(
             "$ Binary system",
@@ -75,7 +75,7 @@ def group_files() -> collections.defaultdict:
         for f in sorted(str(p) for p in (root / f"data/{split}").glob("*.json")):
             g[(split, dataset_type.get(Path(f).name, "?"))].append(f)
     for f in sorted(str(p) for p in (root / "data/mlip_anchor").glob("*.json")):
-        d = json.loads(Path(f).read_text())
+        d = json.loads(Path(f).read_text(encoding="utf-8"))
         g[("mlip_anchor", d["output"] + ":" + d["phases"][0])].append(f)
     return g
 
@@ -141,9 +141,9 @@ def evaluate(dbspec: tuple, only: set | None = None) -> dict:
 
 if __name__ == "__main__":
     tdb, label = sys.argv[1], sys.argv[2]
-    vals = json.loads(Path(sys.argv[4]).read_text()) if len(sys.argv) > 4 and sys.argv[3] == "--values" else None
+    vals = json.loads(Path(sys.argv[4]).read_text(encoding="utf-8")) if len(sys.argv) > 4 and sys.argv[3] == "--values" else None
     out = {"tdb": str(tdb), "values": vals, "groups": evaluate((tdb, vals))}
-    (root / f"results/eval_{label}.json").write_text(json.dumps(out, indent=1))
+    (root / f"results/eval_{label}.json").write_text(json.dumps(out, indent=1), encoding="utf-8")
     for k, v in sorted(out["groups"].items()):
         rmse_text = f"{v['rmse']:.1f}" if v["rmse"] is not None else "-"
         print(f"{k:<34} n={v['n']:4d} nonfinite={v['n_nonfinite']:d} rmse={rmse_text} {v['nonfinite_files'][:3]}")

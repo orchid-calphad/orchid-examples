@@ -19,7 +19,7 @@ class TestLocalPathPattern(TestCase):
 
     def test_flags_home_and_users_paths(self):
         """Paths under a user home (macOS, Linux, Windows) are matched."""
-        for line in ("/Users/alice/x", "/home/bob/x", "C:\\\\Users\\carol\\x", "~/projects/y"):
+        for line in ("/Users/alice/x", "/home/bob/x", "C:\\\\Users\\carol\\x", "C:\\Users\\dave\\x", "~/projects/y"):
             assert hygiene.local_path_pattern.search(line), line
 
     def test_ignores_repository_relative_paths(self):

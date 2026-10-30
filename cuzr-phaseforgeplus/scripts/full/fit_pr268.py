@@ -62,7 +62,7 @@ data_dir = root / arg("--data", "data/fit")
 db = Database(str(tdb_path))
 syms = database_symbols_to_fit(db)
 xm = np.array([unpack_piecewise(db.symbols[s]) for s in syms], float)
-meta = {d["symbol"]: d["parameter"] for d in json.loads((root / "tdb/mlip_fit.json").read_text())["symbols"]}
+meta = {d["symbol"]: d["parameter"] for d in json.loads((root / "tdb/mlip_fit.json").read_text(encoding="utf-8"))["symbols"]}
 meta.update(json.loads(arg("--extra-meta", "{}")))
 is_t = np.array(["b [" in meta[s] for s in syms])
 x0 = xm.copy()
@@ -81,7 +81,7 @@ scale = np.array(
         for i, s in enumerate(syms)
     ]
 )
-tr = (out_dir / "trace.jsonl").open("w")
+tr = (out_dir / "trace.jsonl").open("w", encoding="utf-8")
 t0 = time.time()
 n = [0]
 best = [np.inf, x0.copy()]
@@ -177,10 +177,12 @@ try:
     final = "converged: " + log[-1]["message"] if conv else "not converged after 5 L-BFGS-B restarts"
 except WallBudgetError:
     final = "wall-time budget reached"
-txt = tdb_path.read_text()
+txt = tdb_path.read_text(encoding="utf-8")
 for s, v in zip(syms, best[1], strict=True):
     txt = re.sub(rf"(FUNCTION\s+{s}\s+298\.15\s+)[-+.\dEe]+;", rf"\g<1>{v:.6f};", txt)
-(out_dir / "tuned.tdb").write_text(f"$ PhaseForge+ rerun with ESPEI PR #268 9039ea2 (start {sid}); demonstration only\n" + txt)
+(out_dir / "tuned.tdb").write_text(
+    f"$ PhaseForge+ rerun with ESPEI PR #268 9039ea2 (start {sid}); demonstration only\n" + txt, encoding="utf-8"
+)
 lik, grad, per = lnl_grad(best[1])
 (out_dir / "result.json").write_text(
     json.dumps(
@@ -201,6 +203,7 @@ lik, grad, per = lnl_grad(best[1])
             "wall_s": time.time() - t0,
         },
         indent=1,
-    )
+    ),
+    encoding="utf-8",
 )
 print("done", sid, final, lik, n[0], time.time() - t0)

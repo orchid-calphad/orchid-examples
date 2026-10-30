@@ -103,7 +103,7 @@ def verify(manifest: dict, root=example, potential_dir=None) -> list[str]:
         p = root / rel
         if not p.is_file() or sha(p) != digest:
             errors.append("Input changed or missing: " + rel)
-    provenance = json.loads((root / manifest["potential_manifest"]).read_text())
+    provenance = json.loads((root / manifest["potential_manifest"]).read_text(encoding="utf-8"))
     seen = set()
     for rec in provenance["records"]:
         if rec["id"] != "tdb:sha256:" + rec["sha256"]:
@@ -173,7 +173,7 @@ for d in m.distributions():
 print(json.dumps({'python':sys.version,'platform':platform.platform(),'packages':out}))"""
     info = json.loads(subprocess.check_output([python, "-c", code], text=True))
     errors = []
-    for raw in requirements.read_text().splitlines():
+    for raw in requirements.read_text(encoding="utf-8").splitlines():
         spec = raw.split(" #", 1)[0].strip()
         if not spec or spec.startswith("#"):
             continue
@@ -343,7 +343,7 @@ def _check_mlip_results(stage: dict, outputs: dict[str, str]) -> None:
     for path in outputs:
         if not path.endswith(("relax.json", "md.json")):
             continue
-        result = json.loads(Path(path).read_text())
+        result = json.loads(Path(path).read_text(encoding="utf-8"))
         if not math.isfinite(result["energy_eV_atom"]):
             raise ValueError("Non-finite MLIP energy: " + path)
         if stage["id"] == "relax" and not result["converged"]:
@@ -367,7 +367,7 @@ def _write_provenance(stage: dict, generated: list[Path], run: Path, m: dict, a:
     Returns:
         Path: Written provenance file under the run directory.
     """
-    templates = json.loads((example / m["potential_manifest"]).read_text())["records"]
+    templates = json.loads((example / m["potential_manifest"]).read_text(encoding="utf-8"))["records"]
     template = next(r for r in templates if r["generation_method"] == "phaseforge")
     records = []
     for tdb in generated:
@@ -412,7 +412,8 @@ def _write_provenance(stage: dict, generated: list[Path], run: Path, m: dict, a:
             },
             indent=2,
         )
-        + "\n"
+        + "\n",
+        encoding="utf-8",
     )
     return provenance
 
@@ -433,13 +434,13 @@ def _run_stage(stage: dict, m: dict, a: argparse.Namespace, run: Path) -> None:
     context = {"example": example, "run": run, "python": getattr(a, stage["environment"] + "_python")}
     inputs = snapshot(stage["inputs"], context)
     for dep in stage["depends_on"]:
-        prior = json.loads((run / "receipts" / (dep + ".json")).read_text())
+        prior = json.loads((run / "receipts" / (dep + ".json")).read_text(encoding="utf-8"))
         inputs.update(prior["outputs"])
     for path, digest in inputs.items():
         if not Path(path).is_file() or sha(path) != digest:
             raise ValueError("Dependency changed: " + path)
     if receipt.exists():
-        saved = json.loads(receipt.read_text())
+        saved = json.loads(receipt.read_text(encoding="utf-8"))
         if saved["inputs"] != inputs or any(not Path(p).is_file() or sha(p) != v for p, v in saved["outputs"].items()):
             raise ValueError("Stage inputs/outputs changed; use a new run directory")
         return
@@ -451,7 +452,7 @@ def _run_stage(stage: dict, m: dict, a: argparse.Namespace, run: Path) -> None:
     started = datetime.now(timezone.utc).isoformat()
     for i, argv in enumerate(commands):
         env["ORCHID_MD_SEED"] = str(a.md_seed + i)
-        with (run / "logs" / f"{stage['id']}-{i}.log").open("w") as log:
+        with (run / "logs" / f"{stage['id']}-{i}.log").open("w", encoding="utf-8") as log:
             subprocess.run(argv, cwd=example, env=env, stdout=log, stderr=subprocess.STDOUT, check=True)
     outputs = snapshot(stage["outputs"], context)
     if stage["requires_potential"]:
@@ -472,7 +473,7 @@ def _run_stage(stage: dict, m: dict, a: argparse.Namespace, run: Path) -> None:
         "started": started,
         "finished": datetime.now(timezone.utc).isoformat(),
     }
-    receipt.write_text(json.dumps(data, indent=2) + "\n")
+    receipt.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
     print("Completed " + stage["id"], flush=True)
 
 
@@ -487,7 +488,7 @@ def main() -> int:
     """
     ap = _build_parser()
     a = ap.parse_args()
-    m = json.loads(a.manifest.read_text())
+    m = json.loads(a.manifest.read_text(encoding="utf-8"))
     targets = a.stage or ["cached_gate"]
     stages = order(m, targets)
     if a.action == "plan":
@@ -511,12 +512,12 @@ def main() -> int:
     run = _resolve_run_dir(a.run_dir, a.resume)
     header = _run_header(m, a, stages)
     if a.resume:
-        previous = json.loads((run / "workflow-run.json").read_text())
+        previous = json.loads((run / "workflow-run.json").read_text(encoding="utf-8"))
         if previous != header:
             raise ValueError("Run manifest/environment changed; use a new run directory")
     else:
         run.mkdir(parents=True)
-        (run / "workflow-run.json").write_text(json.dumps(header, indent=2) + "\n")
+        (run / "workflow-run.json").write_text(json.dumps(header, indent=2) + "\n", encoding="utf-8")
     (run / "receipts").mkdir(exist_ok=True)
     (run / "logs").mkdir(exist_ok=True)
     for stage in stages:

@@ -53,13 +53,13 @@ def lattice_points(lat: str) -> list[dict]:
         e = d / "energy"
         if not e.exists():
             raise SystemExit(f"missing energy in {d}")
-        meta = json.loads((d / "sqs_meta.json").read_text())
-        info = json.loads((d / ("md.json" if lat == "LIQUID" else "relax.json")).read_text())
+        meta = json.loads((d / "sqs_meta.json").read_text(encoding="utf-8"))
+        info = json.loads((d / ("md.json" if lat == "LIQUID" else "relax.json")).read_text(encoding="utf-8"))
         n = info["n_atoms"]
         pts.append(
             {
                 "x": meta["x_Zr"],
-                "E": float(e.read_text()) / n,
+                "E": float(e.read_text(encoding="utf-8")) / n,
                 "n": n,
                 "name": d.name,
                 "se": info.get("se_eV_atom_blocks_last_half"),
@@ -111,7 +111,7 @@ def main() -> None:
         f = fit_rk(pts)
         f["points"] = pts
         out["lattices"][lat] = f
-        with (run / lat / "fit_energy.out").open("w") as fo:
+        with (run / lat / "fit_energy.out").open("w", encoding="utf-8") as fo:
             for p, dm, df in zip(pts, f["dH_mix"], f["dH_fit"], strict=True):
                 fo.write(f"{1 - p['x']:g}\t{p['x']:g}\t\t{dm / ev:.5f}\t{df / ev:.5f}\t{(dm - df) / ev:.5f}\t\t{p['name']}\n")
     ecu = out["lattices"]["FCC_A1"]["E_endmembers_eV"][0]
@@ -124,7 +124,7 @@ def main() -> None:
         ls[lat] = {"Cu": (e0 - ecu) * ev, "Zr": (e1 - ezr) * ev}
     out["mlip_lattice_stabilities_J_mol"] = ls
     for ph, (a, b) in compounds.items():
-        info = json.loads((run / "COMPOUNDS" / ph / "relax.json").read_text())
+        info = json.loads((run / "COMPOUNDS" / ph / "relax.json").read_text(encoding="utf-8"))
         n = info["n_atoms"]
         k = n // (a + b)
         e = info["energy_eV_cell"] / k  # eV per formula unit
@@ -138,7 +138,7 @@ def main() -> None:
             "volume_A3_atom": info["volume_A3_atom"],
         }
     # ---- write the TDB -------------------------------------------------------------------------------------------
-    src = sgte.read_text()
+    src = sgte.read_text(encoding="utf-8")
     head = src.split("$ Binary system")[0]
     head = head.replace(
         "$ Database for Cu-Zr from K.-J. Zeng 1994 et al. (Included in LB Vol. 3)",
@@ -188,9 +188,9 @@ def main() -> None:
         + "  PFMLIP 'PhaseForge workflow (Zhu, Sariturk, Arroyave 2025), GRACE-2L-OMAT energies, m_scraps SQS; this work'\n  !\n"
     )
     (root / "tdb").mkdir(exist_ok=True)
-    (root / "tdb/CuZr-PhaseForge-MLIP.tdb").write_text(tdb)
+    (root / "tdb/CuZr-PhaseForge-MLIP.tdb").write_text(tdb, encoding="utf-8")
     out["symbols"] = syms
-    (root / "tdb/mlip_fit.json").write_text(json.dumps(out, indent=1))
+    (root / "tdb/mlip_fit.json").write_text(json.dumps(out, indent=1), encoding="utf-8")
     for lat in lats:
         f = out["lattices"][lat]
         print(f"{lat:<7} L0 {f['L0']:9.0f}  L1 {f['L1']:9.0f} J/mol  rms resid {f['rms_resid']:.0f} J/mol")

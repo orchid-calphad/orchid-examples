@@ -127,4 +127,4 @@ for name, (sg, lat, sites, (na, nb)) in definitions.items():
         "sg_detected": prim.get_space_group_info(symprec=0.05),
     }
     print(name, out[name])
-(root / "structures/compounds.json").write_text(json.dumps(out, indent=1))
+(root / "structures/compounds.json").write_text(json.dumps(out, indent=1), encoding="utf-8")

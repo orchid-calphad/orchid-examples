@@ -28,8 +28,8 @@ class TestProvenance(TestCase):
 
     def test_provenance_schema_and_exact_tdb_hashes(self):
         """Provenance validates against its schema and every recorded TDB digest matches its file."""
-        data = json.loads((root / "tdb/model-provenance.json").read_text())
-        schema = json.loads((root / "tdb/model-provenance.schema.json").read_text())
+        data = json.loads((root / "tdb/model-provenance.json").read_text(encoding="utf-8"))
+        schema = json.loads((root / "tdb/model-provenance.schema.json").read_text(encoding="utf-8"))
         jsonschema.Draft202012Validator(schema).validate(data)
         for r in data["records"]:
             self.assertEqual(workflow_mod.sha(root / r["path"]), r["sha256"])
@@ -41,9 +41,9 @@ class TestProvenance(TestCase):
 
     def test_schema_rejects_malformed_digest(self):
         """The schema rejects a record whose sha256 is not a valid digest."""
-        data = json.loads((root / "tdb/model-provenance.json").read_text())
+        data = json.loads((root / "tdb/model-provenance.json").read_text(encoding="utf-8"))
         data["records"][0]["sha256"] = "made-up"
-        schema = json.loads((root / "tdb/model-provenance.schema.json").read_text())
+        schema = json.loads((root / "tdb/model-provenance.schema.json").read_text(encoding="utf-8"))
         with self.assertRaises(jsonschema.ValidationError):
             jsonschema.validate(data, schema)
 
@@ -53,7 +53,7 @@ class TestLockedInputs(TestCase):
 
     def test_all_workflow_inputs_are_locked(self):
         """Every locked input verifies, and changing one recorded digest makes verification fail."""
-        manifest = json.loads((root / "workflow/cuzr.json").read_text())
+        manifest = json.loads((root / "workflow/cuzr.json").read_text(encoding="utf-8"))
         self.assertEqual(workflow_mod.verify(manifest), [])
         changed = copy.deepcopy(manifest)
         changed["input_sha256"]["tdb/CuZr-PhaseForge-final.tdb"] = "0" * 64
@@ -65,7 +65,7 @@ class TestStageOrder(TestCase):
 
     def test_dependencies_precede_dependents(self):
         """Every stage in an evaluation plan appears after all of its dependencies."""
-        manifest = json.loads((root / "workflow/cuzr.json").read_text())
+        manifest = json.loads((root / "workflow/cuzr.json").read_text(encoding="utf-8"))
         stages = workflow_mod.order(manifest, ["evaluate_s3"])
         positions = {s["id"]: i for i, s in enumerate(stages)}
         for s in stages:
@@ -74,7 +74,7 @@ class TestStageOrder(TestCase):
 
     def test_cyclic_dependency_is_rejected(self):
         """A stage that depends on itself raises a cycle error."""
-        manifest = json.loads((root / "workflow/cuzr.json").read_text())
+        manifest = json.loads((root / "workflow/cuzr.json").read_text(encoding="utf-8"))
         manifest["stages"][0]["depends_on"] = [manifest["stages"][0]["id"]]
         with self.assertRaisesRegex(ValueError, "Cyclic"):
             workflow_mod.order(manifest, ["cached_gate"])
@@ -85,7 +85,7 @@ class TestFullScriptImports(TestCase):
 
     def test_full_scripts_import_only_existing_path_symbols(self):
         """Every name imported from _paths is defined in _paths.py."""
-        tree = ast.parse((root / "scripts/full/_paths.py").read_text())
+        tree = ast.parse((root / "scripts/full/_paths.py").read_text(encoding="utf-8"))
         names = set()
         for node in ast.walk(tree):
             if isinstance(node, (ast.FunctionDef, ast.ClassDef)):
@@ -93,7 +93,7 @@ class TestFullScriptImports(TestCase):
             if isinstance(node, ast.Name) and isinstance(node.ctx, ast.Store):
                 names.add(node.id)
         for p in (root / "scripts/full").glob("*.py"):
-            for node in ast.walk(ast.parse(p.read_text())):
+            for node in ast.walk(ast.parse(p.read_text(encoding="utf-8"))):
                 if isinstance(node, ast.ImportFrom) and node.module == "_paths":
                     self.assertLessEqual({a.name for a in node.names}, names, p)
 
@@ -140,9 +140,9 @@ class TestRunner(TestCase):
         source = self.tmp_path / "source"
         source.mkdir()
         out = self.tmp_path / "run"
-        (source / "requirements.txt").write_text("")
+        (source / "requirements.txt").write_text("", encoding="utf-8")
         script = source / "write.py"
-        script.write_text("import pathlib,sys;pathlib.Path(sys.argv[1]).write_text('ok')")
+        script.write_text("import pathlib,sys;pathlib.Path(sys.argv[1]).write_text('ok')", encoding="utf-8")
         m = {
             "id": "test",
             "input_sha256": {},
@@ -162,7 +162,7 @@ class TestRunner(TestCase):
             ],
         }
         manifest = source / "manifest.json"
-        manifest.write_text(json.dumps(m))
+        manifest.write_text(json.dumps(m), encoding="utf-8")
         argv = ["workflow", "run", "--manifest", str(manifest), "--stage", "test", "--run-dir", str(out)]
         with (
             mock.patch.object(workflow_mod, "example", source),
@@ -170,11 +170,11 @@ class TestRunner(TestCase):
         ):
             with mock.patch.object(sys, "argv", argv):
                 self.assertEqual(workflow_mod.main(), 0)
-            receipt = json.loads((out / "receipts/test.json").read_text())
+            receipt = json.loads((out / "receipts/test.json").read_text(encoding="utf-8"))
             self.assertEqual(receipt["outputs"][str(out / "result.txt")], workflow_mod.sha(out / "result.txt"))
             with mock.patch.object(sys, "argv", [*argv, "--resume"]):
                 self.assertEqual(workflow_mod.main(), 0)
-            (out / "result.txt").write_text("changed")
+            (out / "result.txt").write_text("changed", encoding="utf-8")
             with (
                 mock.patch.object(sys, "argv", [*argv, "--resume"]),
                 self.assertRaisesRegex(ValueError, "Stage inputs/outputs changed"),

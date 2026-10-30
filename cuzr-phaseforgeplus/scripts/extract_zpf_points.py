@@ -28,7 +28,7 @@ def main(data) -> None:
         files = [p for p in Path(data, split).glob("*.json") if not p.name.startswith(".")]  # glob.glob skips dotfiles
         for path in sorted(files, key=str):
             f = str(path)
-            d = json.loads(path.read_text())
+            d = json.loads(path.read_text(encoding="utf-8"))
             if d.get("output") != "ZPF" or "liquid-stability" in f:
                 continue
             kind = "assessed" if "assessed__" in f else ("bracket" if "brackets" in f else "exp")
@@ -52,7 +52,7 @@ def main(data) -> None:
         "as read from the PhaseForge+ fit data; derived coordinates only",
         "points": pts,
     }
-    (root / "inputs/zpf_points.json").write_text(json.dumps(out, indent=0))
+    (root / "inputs/zpf_points.json").write_text(json.dumps(out, indent=0), encoding="utf-8")
     print(len(pts), "points ->", root / "inputs/zpf_points.json")
 
 

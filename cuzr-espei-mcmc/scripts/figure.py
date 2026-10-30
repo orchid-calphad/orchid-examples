@@ -148,8 +148,8 @@ def main(out: str) -> None:
     Args:
         out (str): Output directory; the stem fig_espei_negative is written inside it.
     """
-    d = json.loads((root / "cached" / "espei_demo_summary.json").read_text())
-    printed = json.loads((root / "inputs" / "printed_invariants.json").read_text())
+    d = json.loads((root / "cached" / "espei_demo_summary.json").read_text(encoding="utf-8"))
+    printed = json.loads((root / "inputs" / "printed_invariants.json").read_text(encoding="utf-8"))
     fig = plt.figure(figsize=(style.w2, fig_height), constrained_layout=True)
     gs = fig.add_gridspec(1, 3, width_ratios=[1.25, 1.0, 1.1])
     _panel_gate(fig, gs[0], d)

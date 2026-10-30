@@ -132,7 +132,7 @@ def _field_points(reg: pid.Registry, mapping: dict, split: _FitSplit) -> list[di
     """
     points = []
     aspa = str(orchid_data.path(aspa_rel, release_commit))
-    with gzip.open(aspa, "rt") as f:
+    with gzip.open(aspa, "rt", encoding="utf-8") as f:
         for line in f:
             r = json.loads(line)
             if r["system"] != "CU-ZR":
@@ -236,7 +236,7 @@ def _literature_points(reg: pid.Registry, mapping: dict, split: _FitSplit) -> tu
     seen, files = {}, [(r, str(orchid_data.path(r, release_commit))) for r in rels]
     stoich_cache, dup = {}, 0
     for frel, f in files:
-        d = json.loads(Path(f).read_text())
+        d = json.loads(Path(f).read_text(encoding="utf-8"))
         if d.get("output") != "ZPF":
             continue
         tdbname = Path(f).name.split(".")[0] + ".tdb"
@@ -300,7 +300,7 @@ def main() -> None:
     ap.add_argument("-o", default=str(example_root / "inputs" / "evidence.json"))
     a = ap.parse_args()
     reg = pid.Registry()
-    split = _FitSplit(json.loads(Path(split_path).read_text()))
+    split = _FitSplit(json.loads(Path(split_path).read_text(encoding="utf-8")))
     mapping = {}
     field = _field_points(reg, mapping, split)
     literature, dup = _literature_points(reg, mapping, split)
@@ -329,7 +329,7 @@ def main() -> None:
         "phase_mapping_evidence": mt,
         "points": points,
     }
-    with Path(a.o).open("w") as f:
+    with Path(a.o).open("w", encoding="utf-8") as f:
         json.dump(out, f, indent=1, ensure_ascii=False)
     print(a.o, out["counts"], "dups skipped", dup)
     for m in mt:

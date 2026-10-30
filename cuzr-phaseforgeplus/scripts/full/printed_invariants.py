@@ -21,7 +21,7 @@ import model as iv
 
 default_u_k = 5.0  # K: temperature uncertainty used when the publication prints none
 pub = {}
-with gzip.open(orchid("literature/orchid-literature.jsonl.gz"), "rt") as fh:
+with gzip.open(orchid("literature/orchid-literature.jsonl.gz"), "rt", encoding="utf-8") as fh:
     for line in fh:
         r = json.loads(line)
         if r.get("system") == "CU-ZR":
@@ -32,7 +32,7 @@ for split in ("fit", "holdout"):
         b = Path(f).name
         if not (b.startswith("experimental__") or b.startswith("invariants__")):
             continue
-        d = json.loads(Path(f).read_text())
+        d = json.loads(Path(f).read_text(encoding="utf-8"))
         if d["output"] != "ZPF":
             continue
         temps = d["conditions"]["T"] if isinstance(d["conditions"]["T"], list) else [d["conditions"]["T"]] * len(d["values"])
@@ -60,7 +60,7 @@ for split in ("fit", "holdout"):
                 }
             )
 (root / "results").mkdir(parents=True, exist_ok=True)
-(root / "results" / "printed_invariants.json").write_text(json.dumps(rows, indent=1))
+(root / "results" / "printed_invariants.json").write_text(json.dumps(rows, indent=1), encoding="utf-8")
 c = collections.defaultdict(list)
 for r in rows:
     c[(r["reaction"], r["split"])].append(r["T_K"])

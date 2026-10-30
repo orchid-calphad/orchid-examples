@@ -52,7 +52,7 @@ def main(out_dir) -> None:
     Args:
         out_dir (str | Path): Directory that receives gate.json (created if missing).
     """
-    printed = json.loads((root / "inputs/printed_invariants.json").read_text())
+    printed = json.loads((root / "inputs/printed_invariants.json").read_text(encoding="utf-8"))
     params = {k: m.Params.from_tdb(v) for k, v in tdbs.items()}
     guess = {}
     for r in printed:
@@ -86,7 +86,7 @@ def main(out_dir) -> None:
         "invariants": rows,
     }
     Path(out_dir).mkdir(parents=True, exist_ok=True)
-    (Path(out_dir) / "gate.json").write_text(json.dumps(out, indent=1))
+    (Path(out_dir) / "gate.json").write_text(json.dumps(out, indent=1), encoding="utf-8")
     w = max(len(r["reaction"]) for r in rows)
     print(f"{'reaction':{w}s}  printed fit (K)            SGTE   MLIP-only  tuned")
     for r in rows:

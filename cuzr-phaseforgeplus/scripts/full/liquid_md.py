@@ -68,7 +68,7 @@ e_cell = float(np.mean(etot[-last:]))
 half = etot[len(etot) // 2 :]
 blocks = np.array_split(half, n_blocks)
 se = float(np.std([b.mean() for b in blocks], ddof=1) / np.sqrt(len(blocks)))
-(d / "energy").write_text(f"{e_cell:.8f}\n")
+(d / "energy").write_text(f"{e_cell:.8f}\n", encoding="utf-8")
 r["final_structure"].to(filename=str(d / "CONTCAR"), fmt="poscar")
 # diffusion check on the NVT segment: unwrapped displacement estimate from velocities (sum v dt)
 vel = np.asarray(r["velocities"])  # (steps, n, 3) in ASE units (A / (A*sqrt(u/eV)))
@@ -91,7 +91,7 @@ info = {
     "model": "GRACE-2L-OMAT",
     "random_seed": seed,
 }
-(d / "md.json").write_text(json.dumps(info, indent=1))
+(d / "md.json").write_text(json.dumps(info, indent=1), encoding="utf-8")
 if (d / "wait").exists():
     (d / "wait").unlink()
 print(json.dumps(info))

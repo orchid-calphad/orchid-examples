@@ -52,7 +52,7 @@ def registry_map() -> dict[str, dict[str, str]]:
     Returns:
         dict[str, dict[str, str]]: TDB stem to {TDB phase name: registry phase id}.
     """
-    reg = json.loads(orchid_data.path("phases/systems/CU-ZR.json", release).read_text())
+    reg = json.loads(orchid_data.path("phases/systems/CU-ZR.json", release).read_text(encoding="utf-8"))
     pid: dict[str, dict[str, str]] = collections.defaultdict(dict)
     for p in reg["phases"]:
         for m in p.get("models") or []:
@@ -73,7 +73,7 @@ def _espei_yaml_lines(args: argparse.Namespace, tags: dict, prior: list[dict]) -
     """
     yml = [
         "system:",
-        f"  phase_models: {os.path.relpath(root / 'inputs' / 'phases.json', args.work)}",
+        f"  phase_models: {Path(os.path.relpath(root / 'inputs' / 'phases.json', args.work)).as_posix()}",
         "  datasets: datasets",
         "  tags:",
     ]
@@ -86,7 +86,7 @@ def _espei_yaml_lines(args: argparse.Namespace, tags: dict, prior: list[dict]) -
         "  probfile: lnprob.npy",
         "mcmc:",
         f"  iterations: {args.iterations}",
-        f"  input_db: {os.path.relpath(root / 'tdb' / 'CuZr-94Zen-LB_param.tdb', args.work)}",
+        f"  input_db: {Path(os.path.relpath(root / 'tdb' / 'CuZr-94Zen-LB_param.tdb', args.work)).as_posix()}",
         "  save_interval: 1",
         f"  scheduler: {'dask' if args.scheduler == 'dask' else 'null'}",
     ]
@@ -123,7 +123,7 @@ def main() -> None:
             if folder in only_target and stem != target:
                 skipped["other TDB (folder used for the target TDB only)"] += 1
                 continue
-            d = json.loads(orchid_data.path(rel, release).read_text())
+            d = json.loads(orchid_data.path(rel, release).read_text(encoding="utf-8"))
             ok = all(pid.get(stem, {}).get(ph) is not None and pid[stem][ph] == pid[target].get(ph) for ph in d["phases"])
             if not ok:
                 skipped["phase not in CuZr-94Zen-LB (registry)"] += 1
@@ -146,9 +146,9 @@ def main() -> None:
     print(f"release {release[:10]}: {len(keep)} datasets kept from {len(folders)} folders, skipped {dict(skipped)}")
     print(f"after apply_tags({tags}): {len(on)} enabled datasets; by output: {dict(sorted(by.items()))}")
 
-    params = json.loads((root / "tdb" / "params.json").read_text())
+    params = json.loads((root / "tdb" / "params.json").read_text(encoding="utf-8"))
     prior = [{"name": "normal", "loc_absolute": p["start"], "scale_absolute": abs(p["start"])} for p in params]
-    (Path(a.work) / "espei-in.yaml").write_text("\n".join(_espei_yaml_lines(a, tags, prior)) + "\n")
+    (Path(a.work) / "espei-in.yaml").write_text("\n".join(_espei_yaml_lines(a, tags, prior)) + "\n", encoding="utf-8")
     selection = {
         "orchid_data_release": release,
         "evidence": a.evidence,
@@ -157,8 +157,8 @@ def main() -> None:
         "skipped": dict(skipped),
         "enabled_by_output": dict(by),
     }
-    (Path(a.work) / "selection.json").write_text(json.dumps(selection, indent=1))
-    work_rel = os.path.relpath(a.work, root)
+    (Path(a.work) / "selection.json").write_text(json.dumps(selection, indent=1), encoding="utf-8")
+    work_rel = Path(os.path.relpath(a.work, root)).as_posix()
     print(f"wrote {work_rel}/espei-in.yaml; run:  cd {work_rel} && espei --input espei-in.yaml")
 
 

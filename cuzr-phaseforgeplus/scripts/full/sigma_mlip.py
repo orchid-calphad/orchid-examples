@@ -24,7 +24,7 @@ from _paths import orchid, root
 
 j_per_kj = 1000  # J/kJ
 weight_scale = 500.0  # J/mol: ESPEI weight = weight_scale / sigma
-calibration = json.loads(orchid("espei/dft/CALIBRATION.json").read_text())
+calibration = json.loads(orchid("espei/dft/CALIBRATION.json").read_text(encoding="utf-8"))
 s_dft = calibration["sources"]["mp"]["strata"]["on_hull_single|metal"]["sigma_robust"]
 pages = {
     "CU5ZR_C15B": "Cu5Zr",
@@ -42,10 +42,10 @@ space_groups = {
     "CUZR_B2": ["Pm-3m"],
     "CUZR2": ["I4/mmm"],
 }
-mlip_fit = json.loads((root / "tdb/mlip_fit.json").read_text())
+mlip_fit = json.loads((root / "tdb/mlip_fit.json").read_text(encoding="utf-8"))
 rows, diffs = [], []
 for ph, page in pages.items():
-    md = orchid(f"compounds/{page}.md").read_text()
+    md = orchid(f"compounds/{page}.md").read_text(encoding="utf-8")
     mlip = mlip_fit["compounds"][ph]["dHf_J_mol_atom"] / j_per_kj
     for m in re.finditer(r"^\| (Materials Project|OQMD) \| (\S+) \| ([-\d.]+) \| [-\d.]+ \| (\S+) \| ([-\d.]+) \|", md, re.M):
         src, eid, v, sg, ehull = m.group(1), m.group(2), float(m.group(3)), m.group(4), float(m.group(5))
@@ -77,7 +77,7 @@ out = {
     "espei_weight": weight_scale / (s_mlip * j_per_kj),
     "pairs": rows,
 }
-(root / "results/sigma_mlip.json").write_text(json.dumps(out, indent=1))
+(root / "results/sigma_mlip.json").write_text(json.dumps(out, indent=1), encoding="utf-8")
 for r in rows:
     used_text = "used" if r["used"] else "not used (structure differs)"
     print(
