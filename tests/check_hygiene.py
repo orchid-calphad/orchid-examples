@@ -1,40 +1,121 @@
-"""Repository hygiene: no absolute local paths, no file > 50 MB, total tracked size < 100 MB, PDFs only as generated
-figures, no publisher/handbook material by file type, valid CITATION.cff / .zenodo.json basics.
-  python tests/check_hygiene.py      (checks the files git tracks, or all files when not in a git checkout)"""
-import json, os, re, subprocess, sys
+"""Repository hygiene checks for the examples repository.
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-try:
-    files = subprocess.run(["git", "-C", ROOT, "ls-files"], capture_output=True, text=True, check=True).stdout.split()
-except Exception:
-    files = []
-if not files:
-    files = [os.path.relpath(os.path.join(d, f), ROOT) for d, _, fs in os.walk(ROOT) if "/.git" not in d + "/" for f in fs]
-bad = []
-pat = re.compile(r"(/Users/[A-Za-z]|/home/[a-z]|/private/tmp/|C:\\\\Users|~/projects/|\.venvs/)")
-total = 0
-for f in files:
-    p = os.path.join(ROOT, f)
-    if not os.path.isfile(p):
-        continue
-    n = os.path.getsize(p); total += n
-    if n > 50 * 2**20:
-        bad.append(f"{f}: {n / 2**20:.1f} MB > 50 MB")
-    if f.lower().endswith((".pdf",)) and "/figures/" not in "/" + f:
-        bad.append(f"{f}: PDF outside a figures/ folder")
-    if f.lower().endswith((".jpg", ".jpeg", ".tif", ".tiff", ".djvu", ".epub")):
-        bad.append(f"{f}: image/document type not expected")
-    if f.endswith((".py", ".sh", ".md", ".json", ".yml", ".yaml", ".txt", ".csv", ".cff", ".ipynb", ".tdb", ".TDB")) and f != "tests/check_hygiene.py":
-        for i, line in enumerate(open(p, encoding="utf-8", errors="replace"), 1):
-            if pat.search(line):
-                bad.append(f"{f}:{i}: local absolute path: {line.strip()[:120]}")
-if total > 100 * 2**20:
-    bad.append(f"repository {total / 2**20:.1f} MB > 100 MB")
-z = json.load(open(os.path.join(ROOT, ".zenodo.json")))
-if "grants" in z:
-    bad.append(".zenodo.json has 'grants'")
-if re.search(r"^funding:", open(os.path.join(ROOT, "CITATION.cff")).read(), re.M):
-    bad.append("CITATION.cff has a 'funding' key")
-print(f"{len(files)} files, {total / 2**20:.1f} MB")
-print("\n".join(bad) if bad else "hygiene ok")
-sys.exit(1 if bad else 0)
+Checks the files that git tracks (or every file outside a git checkout) for: no absolute local paths, no file over
+50 MB, a total size under 100 MB, PDFs only inside a ``figures/`` folder, no image or document types, and the basic
+rules of ``.zenodo.json`` and ``CITATION.cff``.
+
+Usage::
+
+    python tests/check_hygiene.py
+"""
+
+from __future__ import annotations
+
+import json
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+mib = 2**20  # bytes per mebibyte, used for the size limits and the report
+max_file_bytes = 50 * mib  # a single tracked file may not exceed 50 MB
+max_total_bytes = 100 * mib  # all tracked files together may not exceed 100 MB
+text_suffixes = (".py", ".sh", ".md", ".json", ".yml", ".yaml", ".txt", ".csv", ".cff", ".ipynb", ".tdb", ".TDB")
+image_suffixes = (".jpg", ".jpeg", ".tif", ".tiff", ".djvu", ".epub")
+local_path_pattern = re.compile(r"(/Users/[A-Za-z]|/home/[a-z]|/private/tmp/|C:\\\\Users|~/projects/|\.venvs/)")
+
+
+def tracked_files(root: Path = ROOT) -> list[str]:
+    """List the repository files to check.
+
+    Args:
+        root (Path): Repository root.
+
+    Returns:
+        list[str]: Posix paths relative to ``root``, from ``git ls-files``, or from a directory walk when the
+        directory is not a git checkout.
+    """
+    try:
+        out = subprocess.run(["git", "-C", str(root), "ls-files"], capture_output=True, text=True, check=True)
+        files = out.stdout.split()
+    except (OSError, subprocess.CalledProcessError):
+        files = []
+    if not files:
+        files = [p.relative_to(root).as_posix() for p in root.rglob("*") if p.is_file() and ".git" not in p.parts]
+    return files
+
+
+def file_problems(rel: str, root: Path = ROOT) -> list[str]:
+    """Check one file's name, size and, for text types, its contents for local absolute paths.
+
+    Args:
+        rel (str): Posix path relative to ``root``.
+        root (Path): Repository root.
+
+    Returns:
+        list[str]: One message per problem found; empty when the file passes.
+    """
+    path = root / rel
+    size = path.stat().st_size
+    problems = []
+    if size > max_file_bytes:
+        problems.append(f"{rel}: {size / mib:.1f} MB > 50 MB")
+    if rel.lower().endswith(".pdf") and "/figures/" not in "/" + rel:
+        problems.append(f"{rel}: PDF outside a figures/ folder")
+    if rel.lower().endswith(image_suffixes):
+        problems.append(f"{rel}: image/document type not expected")
+    if rel.endswith(text_suffixes) and rel != "tests/check_hygiene.py":
+        with path.open(encoding="utf-8", errors="replace") as fh:
+            for i, line in enumerate(fh, 1):
+                if local_path_pattern.search(line):
+                    problems.append(f"{rel}:{i}: local absolute path: {line.strip()[:120]}")
+    return problems
+
+
+def metadata_problems(root: Path = ROOT) -> list[str]:
+    """Check the ``.zenodo.json`` and ``CITATION.cff`` rules (no grants, no funding key).
+
+    Args:
+        root (Path): Repository root.
+
+    Returns:
+        list[str]: One message per violated rule.
+    """
+    problems = []
+    zenodo = json.loads((root / ".zenodo.json").read_text(encoding="utf-8"))
+    if "grants" in zenodo:
+        problems.append(".zenodo.json has 'grants'")
+    if re.search(r"^funding:", (root / "CITATION.cff").read_text(encoding="utf-8"), re.M):
+        problems.append("CITATION.cff has a 'funding' key")
+    return problems
+
+
+def run(root: Path = ROOT) -> int:
+    """Run every check, print the summary and return the exit status.
+
+    Args:
+        root (Path): Repository root.
+
+    Returns:
+        int: 0 when every check passes, 1 otherwise.
+    """
+    files = tracked_files(root)
+    problems: list[str] = []
+    total = 0
+    for rel in files:
+        path = root / rel
+        if not path.is_file():
+            continue
+        total += path.stat().st_size
+        problems.extend(file_problems(rel, root))
+    if total > max_total_bytes:
+        problems.append(f"repository {total / mib:.1f} MB > 100 MB")
+    problems.extend(metadata_problems(root))
+    print(f"{len(files)} files, {total / mib:.1f} MB")
+    print("\n".join(problems) if problems else "hygiene ok")
+    return 1 if problems else 0
+
+
+if __name__ == "__main__":
+    sys.exit(run())
