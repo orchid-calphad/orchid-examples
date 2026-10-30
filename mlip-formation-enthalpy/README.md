@@ -51,7 +51,7 @@ experimental values and DFT pairs), with the calibration code of orchid-project.
    Materials Project 2026.04.13 GGA/GGA+U structures, `inputs/structures.json.gz`, CC BY 4.0; 5 structure-matched
    polymorphs in `inputs/structures_addendum_r2.json`):
    `python scripts/full/run_mlip.py --model <key> --inputs inputs/structures.json --out results/raw [--device cuda]`
-   (`gunzip -k inputs/structures.json.gz` first). Protocol: FIRE + FrechetCellFilter, fmax 0.02 eV/Å, ≤ 1000 steps,
+   (the scripts read the shipped `inputs/structures.json.gz` directly when `structures.json` is absent; hashes are of the decompressed JSON). Protocol: FIRE + FrechetCellFilter, fmax 0.02 eV/Å, ≤ 1000 steps,
    plus single points on the DFT structures; models and licences in `scripts/full/models.json`. Environments: one per
    family because of dependency conflicts, pinned in `env/` (`requirements-{grace-cpu,torch,mace,uma}.txt` with
    `constraints-*.txt`; MaterialsFramework @ 0ec8168, GPL-3.0). Measured: 30–48 min wall per machine on three NVIDIA

@@ -15,6 +15,9 @@ than 1 eV/atom below the single point), symmetry change (spglib space group befo
 import argparse, hashlib, json, os, platform, sys, time, traceback
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+from inputs_io import read_inputs  # noqa: E402
+
 
 
 def _js(o):
@@ -71,7 +74,8 @@ def main():
     a = ap.parse_args()
     import numpy as np
     from pymatgen.core import Structure
-    items = json.load(open(a.inputs))["items"]
+    inputs_bytes = read_inputs(a.inputs)[0]
+    items = json.loads(inputs_bytes)["items"]
     # largest first within the shard order is irrelevant; shard by stable hash so shards are balanced and fixed
     items.sort(key=lambda it: it["id"])
     if a.ids_file:
@@ -95,7 +99,7 @@ def main():
     t0 = time.time()
     calc, spec = build_calc(a.model, a.device, a.fmax, a.steps)
     meta = {"meta": True, "model": a.model, "spec": spec, "fmax": a.fmax, "steps": a.steps, "env": env_info(),
-            "inputs_sha256": hashlib.sha256(open(a.inputs, "rb").read()).hexdigest(), "t_load_s": None}
+            "inputs_sha256": hashlib.sha256(inputs_bytes).hexdigest(), "t_load_s": None}
     fh = open(outp, "a")
     for k, it in enumerate(todo):
         rec = {"id": it["id"], "src": it["src"], "kind": it["kind"], "nsites": it["nsites"], "model": a.model}
