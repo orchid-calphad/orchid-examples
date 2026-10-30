@@ -22,6 +22,7 @@ mib = 2**20  # bytes per mebibyte, used for the size limits and the report
 max_file_bytes = 50 * mib  # a single tracked file may not exceed 50 MB
 max_total_bytes = 100 * mib  # all tracked files together may not exceed 100 MB
 text_suffixes = (".py", ".sh", ".md", ".json", ".yml", ".yaml", ".txt", ".csv", ".cff", ".ipynb", ".tdb", ".TDB")
+scan_exempt = {"tests/check_hygiene.py", "tests/test_repo_checks.py"}  # files that contain fake paths on purpose
 image_suffixes = (".jpg", ".jpeg", ".tif", ".tiff", ".djvu", ".epub")
 local_path_pattern = re.compile(r"(/Users/[A-Za-z]|/home/[a-z]|/private/tmp/|C:\\{1,2}Users|~/projects/|\.venvs/)")
 
@@ -65,7 +66,7 @@ def file_problems(rel: str, root: Path = ROOT) -> list[str]:
         problems.append(f"{rel}: PDF outside a figures/ folder")
     if rel.lower().endswith(image_suffixes):
         problems.append(f"{rel}: image/document type not expected")
-    if rel.endswith(text_suffixes) and rel != "tests/check_hygiene.py":
+    if rel.endswith(text_suffixes) and rel not in scan_exempt:
         with path.open(encoding="utf-8", errors="replace") as fh:
             for i, line in enumerate(fh, 1):
                 if local_path_pattern.search(line):
