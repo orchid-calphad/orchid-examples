@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Relax (positions + cell) and single-point every input structure with one MLIP; append one JSON line per item.
 
-  python scripts/run_mlip.py --model mace-mpa-0 --inputs data/inputs/structures.json --out results/raw \
+  python scripts/full/run_mlip.py --model mace-mpa-0 --inputs inputs/structures.json --out results/raw \
       [--shard 0 --nshards 8] [--ids-file ids.txt] [--device cuda] [--fmax 0.02 --steps 1000]
 
 Protocol (identical for every model): FIRE + FrechetCellFilter (MaterialsFramework BaseCalculator.relax), fmax
