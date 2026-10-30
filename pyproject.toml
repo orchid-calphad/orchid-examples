@@ -1,3 +1,22 @@
+[project]
+name = "orchid-examples"
+version = "0"
+description = "Runnable ORCHID CALPHAD examples. Each example keeps its own pinned requirements.txt; this project only holds the repository tooling."
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.uv]
+package = false  # not an installable package: the examples are scripts with their own environments
+
+[dependency-groups]
+# Repository checks only, pinned to the versions the CI workflow installs (.github/workflows/examples.yml).
+dev = [
+    "matplotlib==3.10.7",
+    "numpy==2.3.2",
+    "pytest==9.1.1",
+    "ruff==0.16.8",
+]
+
 [tool.ruff]
 line-length = 130
 force-exclude = true

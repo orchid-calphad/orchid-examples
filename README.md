@@ -26,6 +26,26 @@ pip install -r requirements.txt          # quick path: exact versions
 sh run_quick.sh                           # regenerates figures/ (and the cached tables) from cached outputs
 ```
 
+**Development with uv.** [uv](https://docs.astral.sh/uv/) can create the same environments. Each example keeps its own
+`requirements.txt` as the source of truth; `uv pip install` installs exactly those pins:
+
+```sh
+cd orchid-examples/<example>
+uv venv --python 3.12 .venv && . .venv/bin/activate
+uv pip install -r requirements.txt       # same exact versions as pip
+sh run_quick.sh
+```
+
+The repository tooling (ruff, pytest, numpy, matplotlib at the CI versions) is a locked dev group in the root
+`pyproject.toml` and `uv.lock`, from the repository root:
+
+```sh
+uv sync                                  # creates .venv with the dev group
+uv run pytest tests                      # unit tests of the shared helpers and the repository checks
+uv run ruff check . && uv run ruff format --check .
+uv run python tests/check_hygiene.py
+```
+
 **Windows.** The `sh` commands and `. .venv/bin/activate` above are POSIX. Run the quick path from Git Bash or WSL
 (`run_quick.sh` and `tests/check_quick_paths.py` call `sh`), with the environment created there. In PowerShell,
 activate a virtual environment with `.venv\Scripts\Activate.ps1` and run the Python scripts with `python` directly.
