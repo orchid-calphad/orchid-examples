@@ -52,7 +52,7 @@ half = etot[len(etot) // 2:]
 blocks = np.array_split(half, 10)
 se = float(np.std([b.mean() for b in blocks], ddof=1) / np.sqrt(len(blocks)))
 pos = np.array([np.asarray(v) for v in []])
-(d / "energy").write_text("%.8f\n" % E)
+(d / "energy").write_text("%.8f\n" % E, newline="\n")
 r["final_structure"].to(filename=str(d / "CONTCAR"), fmt="poscar")
 # diffusion check on the NVT segment: unwrapped displacement estimate from velocities (sum v dt)
 vel = np.asarray(r["velocities"])           # (steps, n, 3) in ASE units (A / (A*sqrt(u/eV)))
@@ -64,6 +64,6 @@ info = {"T_K": T, "T_premelt_K": TMELT, "steps": steps, "n_atoms": n, "formula":
         "se_eV_atom_blocks_last_half": se / n, "T_mean_last20": float(np.mean(temp[-last:])),
         "volume_A3_atom_npt_end": s_npt.volume / n, "msd_nvt_A2_estimate": msd, "seconds": round(time.time() - t0, 1),
         "model": "GRACE-2L-OMAT", "random_seed": seed}
-(d / "md.json").write_text(json.dumps(info, indent=1))
+(d / "md.json").write_text(json.dumps(info, indent=1), newline="\n")
 if (d / "wait").exists(): (d / "wait").unlink()
 print(json.dumps(info))

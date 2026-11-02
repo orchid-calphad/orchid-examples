@@ -18,7 +18,7 @@ for t in ("literature_values", "dft_parity"):
 rows = list(csv.DictReader(open(os.path.join(SRC, "espei", "index.csv"))))
 keep = [r for r in rows if r["system"] == SYS]
 with open(os.path.join(OUT, "espei", "index.csv") if os.makedirs(os.path.join(OUT, "espei"), exist_ok=True) is None else "", "w", newline="") as f:
-    w = csv.DictWriter(f, fieldnames=list(rows[0].keys())); w.writeheader(); w.writerows(keep)
+    w = csv.DictWriter(f, fieldnames=list(rows[0].keys()), lineterminator="\n"); w.writeheader(); w.writerows(keep)
 for r in keep:
     dst = os.path.join(OUT, "espei", r["path"]); os.makedirs(os.path.dirname(dst), exist_ok=True)
     shutil.copy(os.path.join(SRC, "espei", r["path"]), dst)

@@ -124,16 +124,16 @@ class SQSMaker:
                             rng_seed=self.seed, final_fitness=a.info.get("scraps_final_fitness"))
         a.pbc = True
         write_str_out(a, d / "str.out")
-        (d / "lat.in").write_text(self.lat_in(lat))
+        (d / "lat.in").write_text(self.lat_in(lat), newline="\n")
         a.write(d / "POSCAR", format="vasp", direct=True, sort=True)
-        (d / "wait").write_text("")
+        (d / "wait").write_text("", newline="\n")
         meta["seconds"] = round(time.time() - t0, 2)
-        (d / "sqs_meta.json").write_text(json.dumps(meta, indent=1))
+        (d / "sqs_meta.json").write_text(json.dumps(meta, indent=1), newline="\n")
         return d, meta
 
 
 def write_str_out(atoms, path):
-    with open(path, "w") as f:
+    with open(path, "w", newline="\n") as f:
         for r in np.eye(3):
             f.write("%.6f %.6f %.6f\n" % tuple(r))
         for r in atoms.cell:
@@ -363,7 +363,7 @@ def main():
     rl += ["%s/%s" % (l, mk.name(0, x)) for l in solids for x in (0.0, 1.0)] if not args.no_sqs else []
     rl += ["COMPOUNDS/%s" % m["phase"] for m in sorted(made, key=lambda m: m["phase"])]
     rl += ["%s/%s" % (l, mk.name(lev, x)) for l in solids for lev in (1, 2) for x in LEVELS[lev]] if not args.no_sqs else []
-    (out / "relax_list.txt").write_text("\n".join(rl) + "\n")
+    (out / "relax_list.txt").write_text("\n".join(rl) + "\n", newline="\n")
     total = time.time() - T0
     try:
         mscommit = subprocess.run(["git", "-C", str(Path(m_scraps.__file__).resolve().parents[2]), "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
@@ -376,7 +376,7 @@ def main():
                 "volumes_A3_per_atom": {A: elem_volume(A), B: elem_volume(B)},
                 "n_relaxations": len(rl), "n_liquid": len(LEVELS[0]) + len(LEVELS[1]) + len(LEVELS[2]) if "LIQUID" in lats else 0,
                 "timings": timings, "compounds": made, "skipped": skipped}
-    (out / "manifest.json").write_text(json.dumps(manifest, indent=1))
+    (out / "manifest.json").write_text(json.dumps(manifest, indent=1), newline="\n")
     print("total %.1f s on %d CPUs; %d relaxations listed; manifest.json written" % (total, os.cpu_count(), len(rl)))
 
 

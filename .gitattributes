@@ -1,0 +1,4 @@
+* text=auto eol=lf
+# Release data files stored with CRLF: keep their bytes (checksummed data, not source).
+mlip-formation-enthalpy/inputs/pairs_identical_set.csv -text
+quickstart/sample-release/espei/index.csv -text

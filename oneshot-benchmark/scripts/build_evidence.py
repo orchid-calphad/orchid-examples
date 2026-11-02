@@ -182,7 +182,7 @@ def main():
         "phase_mapping_evidence": mt,
         "points": points,
     }
-    json.dump(out, open(a.o, "w"), indent=1, ensure_ascii=False)
+    json.dump(out, open(a.o, "w", newline="\n"), indent=1, ensure_ascii=False)
     print(a.o, out["counts"], "dups skipped", dup)
     for m in mt:
         print(f"{m['source']:28s} {m['name']:14s} {str(m['registry_id']):28s} {m['class_physical']:12s} {m['basis']} n={m['n_points']}")

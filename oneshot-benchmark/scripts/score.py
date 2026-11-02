@@ -297,7 +297,7 @@ def main():
         "metrics": metrics, "points": per_point,
     }
     os.makedirs(os.path.dirname(out), exist_ok=True)
-    json.dump(res, open(out, "w"), indent=1, ensure_ascii=False)
+    json.dump(res, open(out, "w", newline="\n"), indent=1, ensure_ascii=False)
     m = metrics["physical"]
     for kind in ("field", "boundary"):
         b = m[kind]["all"]

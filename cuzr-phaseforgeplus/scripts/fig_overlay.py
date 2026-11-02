@@ -55,7 +55,7 @@ def geometry(p, key):
     tracks, comps = pm.track(p, TS), pm.compound_ranges(p, TS)
     WORK.mkdir(exist_ok=True)
     json.dump({"tracks": [{"kind": t["kind"], "phases": list(t["phases"]), "T": t["T"].tolist(), "xl": t["xl"].tolist(), "xr": t["xr"].tolist()} for t in tracks],
-               "comps": {k: [float(a) for a in v] for k, v in comps.items()}}, open(c, "w"))
+               "comps": {k: [float(a) for a in v] for k, v in comps.items()}}, open(c, "w", newline="\n"))
     return tracks, comps
 
 

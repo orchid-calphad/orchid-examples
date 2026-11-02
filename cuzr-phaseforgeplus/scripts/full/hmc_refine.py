@@ -30,5 +30,5 @@ except H.Stop:
     st = "wall-time budget reached"
 out = {"run": run, "start_lnL": s["final_best_lnL"], "status": st, "n_eval": H.n[0], "wall_s": time.time() - H.t0,
        "best_lnL": H.best[0], "best_x": H.best[1].tolist()}
-json.dump(out, open(H.ROOT / f"runs/hmc/{run}/refine.json", "w"), indent=1)
+json.dump(out, open(H.ROOT / f"runs/hmc/{run}/refine.json", "w", newline="\n"), indent=1)
 print("done", run, st, out["start_lnL"], out["best_lnL"], out["n_eval"])

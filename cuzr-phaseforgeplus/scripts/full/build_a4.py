@@ -41,6 +41,6 @@ for F in (3, 10, 30):
             d["weight"] = 500.0 / s; man["sigma_eff"][Path(f).name] = s
         if d["output"] == "ZPF":
             w = d.get("weight", 1.0); d["weight"] = [x * F for x in w] if isinstance(w, list) else w * F
-        json.dump(d, open(out / Path(f).name, "w"))
-json.dump(man, open(ROOT / f"data/{PREFIX}_manifest.json", "w"), indent=1)
+        json.dump(d, open(out / Path(f).name, "w", newline="\n"))
+json.dump(man, open(ROOT / f"data/{PREFIX}_manifest.json", "w", newline="\n"), indent=1)
 print(len(files), {k: round(v) for k, v in sd.items()}, sorted(set(round(v) for v in man["sigma_eff"].values())))

@@ -49,7 +49,7 @@ def main(out_dir):
            "in_sample_note": "the tuned TDB was fitted to the fit-set phase data: its gate count is in-sample",
            "gate_counts": counts, "invariants": rows}
     Path(out_dir).mkdir(parents=True, exist_ok=True)
-    json.dump(out, open(Path(out_dir) / "gate.json", "w"), indent=1)
+    json.dump(out, open(Path(out_dir) / "gate.json", "w", newline="\n"), indent=1)
     w = max(len(r["reaction"]) for r in rows)
     print(f"{'reaction':{w}s}  printed fit (K)            SGTE   MLIP-only  tuned")
     for r in rows:

@@ -58,7 +58,7 @@ SETUP = {
 
 def write_str_out(atoms, path):
     """ATAT str.out with a Cartesian (identity) coordinate system, as extract_MLIP writes str_relax.out."""
-    with open(path, "w") as f:
+    with open(path, "w", newline="\n") as f:
         for r in np.eye(3):
             f.write("%.6f %.6f %.6f\n" % tuple(r))
         for r in atoms.cell:
@@ -110,11 +110,11 @@ def make(lat, x, outdir, seed=2026):
                         final_fitness=a.info.get("scraps_final_fitness"))
     a.pbc = True
     write_str_out(a, d / "str.out")
-    (d / "lat.in").write_text(lat_in(lat))
+    (d / "lat.in").write_text(lat_in(lat), newline="\n")
     a.write(d / "POSCAR", format="vasp", direct=True, sort=True)
-    (d / "wait").write_text("")
+    (d / "wait").write_text("", newline="\n")
     meta["seconds"] = round(time.time() - t0, 1)
-    (d / "sqs_meta.json").write_text(json.dumps(meta, indent=1))
+    (d / "sqs_meta.json").write_text(json.dumps(meta, indent=1), newline="\n")
     print(lat, name, meta.get("n_atoms"), meta.get("final_fitness"), meta["seconds"], "s", flush=True)
     return d
 

@@ -35,9 +35,9 @@ def run(d, calc):
     r = calc.relax(s)
     fs = r["final_structure"]
     e = float(r["energy"])
-    (d / "energy").write_text("%.8f\n" % e)
+    (d / "energy").write_text("%.8f\n" % e, newline="\n")
     fs.to(filename=str(d / "CONTCAR"), fmt="poscar")
-    with open(d / "str_relax.out", "w") as f:
+    with open(d / "str_relax.out", "w", newline="\n") as f:
         for row in fs.lattice.matrix: f.write("%.8f %.8f %.8f\n" % tuple(row))
         f.write("1 0 0\n0 1 0\n0 0 1\n")
         for site in fs: f.write("%.8f %.8f %.8f %s\n" % (*site.frac_coords, site.species_string))
@@ -51,7 +51,7 @@ def run(d, calc):
             "relax_strain": strain_measure(s.lattice.matrix, fs.lattice.matrix), "converged": bool(calc.converged),
             "max_force": float(np.abs(np.asarray(r["forces"])).max()), "seconds": round(time.time() - t0, 1),
             "sg_relaxed": fs.get_space_group_info(symprec=0.05), "model": MODEL, "fmax": calc.fmax, "steps_max": calc.steps}
-    (d / "relax.json").write_text(json.dumps(info, indent=1))
+    (d / "relax.json").write_text(json.dumps(info, indent=1), newline="\n")
     if (d / "wait").exists(): (d / "wait").unlink()
     print(d, "%.5f eV/atom" % info["energy_eV_atom"], "conv", info["converged"], "strain %.3f" % info["relax_strain"], info["sg_relaxed"], info["seconds"], "s", flush=True)
 

@@ -36,7 +36,7 @@ def main(data):
                         break
     out = {"note": "ORCHID phase-equilibrium points (fit / held out) and assessed phase-assemblage points (Dataset 6), "
                    "as read from the PhaseForge+ fit data; derived coordinates only", "points": pts}
-    json.dump(out, open(ROOT / "inputs/zpf_points.json", "w"), indent=0)
+    json.dump(out, open(ROOT / "inputs/zpf_points.json", "w", newline="\n"), indent=0)
     print(len(pts), "points ->", ROOT / "inputs/zpf_points.json")
 
 

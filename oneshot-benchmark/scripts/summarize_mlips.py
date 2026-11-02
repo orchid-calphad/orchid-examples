@@ -20,5 +20,5 @@ out = ["| model (MLIP-only, no fitting) | field S [95% CI] | P | F1 | boundary S
 for _, n, d in rows + [(0, a, json.load(open(os.path.join(ROOT, p)))) for a, p in ref]:
     out.append("| " + " | ".join([n, *cell(d, "field"), *cell(d, "boundary")]) + " |")
 s = "\n".join(out)
-open(os.path.join(ROOT, "results/mlips_summary.md"), "w").write(s + "\n")
+open(os.path.join(ROOT, "results/mlips_summary.md"), "w", newline="\n").write(s + "\n")
 print(s)

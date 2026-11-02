@@ -30,5 +30,5 @@ for c in (1e-3, 3e-3):
     rec["sd_diag_only"] = (1 / np.sqrt(np.abs(np.diag(Hs)))).tolist()
     out["steps"][str(c)] = rec
 out["n_eval"] = H.n[0]; out["wall_s"] = time.time() - H.t0
-json.dump(out, open(H.ROOT / "runs/hmc/hessian/hessian.json", "w"), indent=1)
+json.dump(out, open(H.ROOT / "runs/hmc/hessian/hessian.json", "w", newline="\n"), indent=1)
 print("done", {c: (r["pd"], min(r["eig"]), max(r["eig"]), r["asym_rel"]) for c, r in out["steps"].items()})

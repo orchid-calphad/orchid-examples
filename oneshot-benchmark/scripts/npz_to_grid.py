@@ -6,7 +6,7 @@ import numpy as np
 
 z = np.load(sys.argv[1], allow_pickle=False)
 with open(sys.argv[2], "w", newline="") as f:
-    w = csv.writer(f); w.writerow(["T_K", "x_Zr", "phases"])
+    w = csv.writer(f, lineterminator="\n"); w.writerow(["T_K", "x_Zr", "phases"])
     for i, T in enumerate(z["T"]):
         for j, x in enumerate(z["x"]):
             w.writerow([f"{T:.1f}", f"{x:.4f}", str(z["lab"][i, j]).replace("+", ";")])

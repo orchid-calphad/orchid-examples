@@ -11,7 +11,7 @@ def prepare_compounds(root):
     if len(files) != 6:raise ValueError('Expected six compound structures')
     for p in files:
         d=root/'runs/phaseforge/COMPOUNDS'/p.stem;d.mkdir(parents=True,exist_ok=True)
-        shutil.copy2(p,d/'POSCAR');(d/'wait').write_text('')
+        shutil.copy2(p,d/'POSCAR');(d/'wait').write_text('', newline="\n")
 
 
 def b2_variant(root):
@@ -21,7 +21,7 @@ def b2_variant(root):
     s=s.replace('FUNCTION VV0021','FUNCTION VV0022 298.15 0.000000; 6000 N !\nFUNCTION VV0021',1)
     s=s.replace(old,'1*GHSERCU+1*GHSERZR+VV0020*1000+VV0022*T;')
     header='$ MLIP-only TDB + linear T term (VV0022, start 0) for CUZR_B2 (Amendment 4 variant)\n'
-    (root/'tdb/CuZr-PhaseForge-MLIP-B2b.tdb').write_text(header+s)
+    (root/'tdb/CuZr-PhaseForge-MLIP-B2b.tdb').write_text(header+s, newline="\n")
 
 
 def gate_run(root, start):

@@ -55,7 +55,7 @@ out = {'status': 'POST-HOC (Amendment 4 fallback m7), model-adequacy test, not a
                           'PASS': bool(act_fit and act_ho and row['gate_pass'])},
        'printed': {k: sorted(r['T_K'] for r in A.PRINTED if r['reaction'] == k and r['split'] == 'fit') for k in KEY}}
 os.makedirs(f'results/{TAG}', exist_ok=True)
-json.dump(out, open(f'results/{TAG}/summary_v4_m7.json', 'w'), indent=1, default=float)
+json.dump(out, open(f'results/{TAG}/summary_v4_m7.json', 'w', newline="\n"), indent=1, default=float)
 mst.write(f'tdb/v4/CuZr-94Zen-LB_ORCHID-{TAG}_REVIEW-ONLY.tdb', dict(zip(mst.SYMS, th)),
           'v4 m7 (model-adequacy test, post-hoc) best optimum, ZPF x30. REVIEW ONLY: demonstration, not an assessment.')
 L = ['| model | ACR RMSE fit (kJ/mol) | ACR RMSE held-out | ZPF held-out RMSE (J/mol) | CuZr congruent (K) | Cu10Zr7 congruent (K) | invariant MAE fit / held-out (K) | gate reactions passing | gate |',
@@ -73,5 +73,5 @@ L.append('\nm7 best start %s; L2(LIQUID) a = %.0f J/mol; at bound: %s. Pass crit
     best['name'], th[6], row['at_bound'] or 'none', 'PASS' if out['pass_criterion']['PASS'] else 'FAIL'))
 L.append('Failing gate reactions (m7): ' + '; '.join('%s %.0f K vs %.0f K (u %.0f)' % (k, v['model_K'], v['nearest_printed_K'], v['u_K']) if v['model_K'] is not None else '%s absent' % k
                                              for k, v in det[0].items() if not v['pass']))
-open(f'results/{TAG}/summary_v4_m7.md', 'w').write('\n'.join(L) + '\n\nPrinted (fit): CuZr congruent %s K; Cu10Zr7 congruent %s K.\n' % (out['printed'][KEY[0]], out['printed'][KEY[1]]))
+open(f'results/{TAG}/summary_v4_m7.md', 'w', newline="\n").write('\n'.join(L) + '\n\nPrinted (fit): CuZr congruent %s K; Cu10Zr7 congruent %s K.\n' % (out['printed'][KEY[0]], out['printed'][KEY[1]]))
 print('\n'.join(L))

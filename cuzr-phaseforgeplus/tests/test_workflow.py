@@ -67,17 +67,17 @@ def test_missing_outputs_fail_and_arguments_are_not_shell_expanded(tmp_path):
 def test_execute_receipt_resume_and_detect_modified_output(tmp_path,monkeypatch):
     import sys
     source=tmp_path/'source';source.mkdir();out=tmp_path/'run'
-    (source/'requirements.txt').write_text('')
-    script=source/'write.py';script.write_text("import pathlib,sys;pathlib.Path(sys.argv[1]).write_text('ok')")
+    (source/'requirements.txt').write_text('', newline="\n")
+    script=source/'write.py';script.write_text("import pathlib,sys;pathlib.Path(sys.argv[1]).write_text('ok')", newline="\n")
     m={'id':'test','input_sha256':{},'potential_manifest':'unused','environments':{'quick':'requirements.txt'},
        'stages':[{'id':'test','environment':'quick','depends_on':[],'inputs':[],
                   'outputs':['{run}/result.txt'],'requires_potential':False,'requires_orchid':False,
                   'commands':[['{python}','{example}/write.py','{run}/result.txt']]}]}
-    manifest=source/'manifest.json';manifest.write_text(json.dumps(m))
+    manifest=source/'manifest.json';manifest.write_text(json.dumps(m), newline="\n")
     monkeypatch.setattr(W,'EXAMPLE',source);monkeypatch.setattr(W,'verify',lambda *a,**k:[])
     argv=['workflow','run','--manifest',str(manifest),'--stage','test','--run-dir',str(out)]
     monkeypatch.setattr(sys,'argv',argv);assert W.main()==0
     receipt=json.loads((out/'receipts/test.json').read_text());assert receipt['outputs'][str(out/'result.txt')]==W.sha(out/'result.txt')
     monkeypatch.setattr(sys,'argv',argv+['--resume']);assert W.main()==0
-    (out/'result.txt').write_text('changed')
+    (out/'result.txt').write_text('changed', newline="\n")
     with pytest.raises(ValueError,match='Stage inputs/outputs changed'):W.main()

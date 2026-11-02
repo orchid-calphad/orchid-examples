@@ -49,7 +49,7 @@ ctx = setup_context(db, load_datasets(files), syms); objs = ctx["residual_objs"]
 N = len(syms)
 t0 = time.time(); n = [0]; best = [-np.inf, None]
 WALL = float(arg("--wall", 1e9))
-ev = open(OUT / "evals.jsonl", "a")
+ev = open(OUT / "evals.jsonl", "a", newline="\n")
 
 
 class Stop(Exception): pass
@@ -69,7 +69,7 @@ def logp_dlogp(x):
     return (L, G) if ok else (-np.inf, np.zeros(N))
 
 
-it_log = open(OUT / "iters.jsonl", "a")
+it_log = open(OUT / "iters.jsonl", "a", newline="\n")
 def callback(trace=None, draw=None):
     st = draw.stats[-1] if draw.stats else {}
     rec = {"iter": int(draw.draw_idx), "tuning": bool(draw.tuning), "t_s": round(time.time() - t0, 2), "n_eval": n[0],
@@ -126,7 +126,7 @@ if mode == "explore":
     n_nuts, t_nuts = n[0], time.time() - t0; xb, Lb = best[1].copy(), best[0]
     summary.update({"start": sid, "start_from": sf, "x_start": x0.tolist(), "nuts_status": status, "nuts_n_eval": n_nuts, "nuts_wall_s": t_nuts,
                     "nuts_best_lnL": Lb, "nuts_best_x": xb.tolist()})
-    json.dump(summary, open(OUT / "summary.json", "w"), indent=1)
+    json.dump(summary, open(OUT / "summary.json", "w", newline="\n"), indent=1)
     WALL = t_nuts + float(arg("--bfgs-wall", 3600))
     # BFGS with the wall check inside the objective (single evaluation per call)
     def f(z):
@@ -158,5 +158,5 @@ if mode in ("tune", "test"):
     its = [json.loads(l) for l in open(OUT / "iters.jsonl")]
     summary["last_q"] = its[-1]["q"]
 if mode in ("explore", "tune", "test", "sample"):
-    json.dump(summary, open(OUT / "summary.json", "w"), indent=1, default=float)
+    json.dump(summary, open(OUT / "summary.json", "w", newline="\n"), indent=1, default=float)
     print("done", mode, json.dumps({k: v for k, v in summary.items() if not isinstance(v, list)}, default=float)[:1500])

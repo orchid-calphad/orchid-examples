@@ -31,7 +31,7 @@ def write(path, values, label):
         assert txt.count(old) == 1
         txt = txt.replace(old, old + ' PAR  L(LIQUID,CU,ZR;2),,               VV0006;,,         N demo !\n')
         txt = txt.replace(' TEMP-LIM', f'$ VV0006: L2(LIQUID) a (added term, model-adequacy test)\n FUNCTION VV0006    298.15 {values["VV0006"]:+.6f}; 6000 N !\n TEMP-LIM', 1)
-        open(path, 'w').write(txt)
+        open(path, 'w', newline="\n").write(txt)
 
 
 if __name__ == '__main__':

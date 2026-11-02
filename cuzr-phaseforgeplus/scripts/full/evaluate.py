@@ -82,6 +82,6 @@ if __name__ == "__main__":
     tdb, label = sys.argv[1], sys.argv[2]
     vals = json.load(open(sys.argv[4])) if len(sys.argv) > 4 and sys.argv[3] == "--values" else None
     out = {"tdb": str(tdb), "values": vals, "groups": evaluate((tdb, vals))}
-    json.dump(out, open(ROOT / f"results/eval_{label}.json", "w"), indent=1)
+    json.dump(out, open(ROOT / f"results/eval_{label}.json", "w", newline="\n"), indent=1)
     for k, v in sorted(out["groups"].items()):
         print("%-34s n=%4d nonfinite=%d rmse=%s %s" % (k, v["n"], v["n_nonfinite"], "%.1f" % v["rmse"] if v["rmse"] is not None else "-", v["nonfinite_files"][:3]))

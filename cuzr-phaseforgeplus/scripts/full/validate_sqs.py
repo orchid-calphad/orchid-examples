@@ -78,7 +78,7 @@ for lat in ("FCC_A1", "BCC_A2", "HCP_A3", "LIQUID"):
             r = check(a, lat, x); r.update(source="ATAT sqsdb (PhaseForgePlus Pt-W example)", lattice=lat, x_Zr=x, n_atoms=len(a), dir=d.name)
             res.append(r)
 (ROOT / "results").mkdir(exist_ok=True)
-json.dump(res, open(ROOT / "results/sqs_validation.json", "w"), indent=1)
+json.dump(res, open(ROOT / "results/sqs_validation.json", "w", newline="\n"), indent=1)
 print("%-7s %-5s %-9s %4s %9s %9s %9s %9s" % ("lat", "x_Zr", "source", "N", "pairs", "trip", "quad", "pairs_ext"))
 for r in res:
     f = lambda v: "-" if v is None else "%.4f" % v

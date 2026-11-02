@@ -100,7 +100,7 @@ def main():
     calc, spec = build_calc(a.model, a.device, a.fmax, a.steps)
     meta = {"meta": True, "model": a.model, "spec": spec, "fmax": a.fmax, "steps": a.steps, "env": env_info(),
             "inputs_sha256": hashlib.sha256(inputs_bytes).hexdigest(), "t_load_s": None}
-    fh = open(outp, "a")
+    fh = open(outp, "a", newline="\n")
     for k, it in enumerate(todo):
         rec = {"id": it["id"], "src": it["src"], "kind": it["kind"], "nsites": it["nsites"], "model": a.model}
         try:
@@ -139,7 +139,7 @@ def main():
         if k % 20 == 0:
             print("%s %d/%d %.1fs %s" % (a.model, k + 1, len(todo), time.time() - t0, rec.get("status")), flush=True)
     print("done %s shard %d in %.1fs" % (a.model, a.shard, time.time() - t0), flush=True)
-    open(outp + ".done", "w").write("%d items\n" % len(items))
+    open(outp + ".done", "w", newline="\n").write("%d items\n" % len(items))
     return 0
 
 

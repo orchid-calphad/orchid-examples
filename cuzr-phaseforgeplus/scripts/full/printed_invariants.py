@@ -30,7 +30,7 @@ for split in ('fit', 'holdout'):
                          'split': split, 'id': ob['id'], 'also_reported_as': [a.get('id') for a in ob.get('also_reported_as', [])],
                          'printed': (r.get('reaction') or {}).get('printed'), 'reference': d.get('reference'), 'file': b})
 os.makedirs(f'{ROOT}/results', exist_ok=True)
-json.dump(rows, open(f'{ROOT}/results/printed_invariants.json', 'w'), indent=1)
+json.dump(rows, open(f'{ROOT}/results/printed_invariants.json', 'w', newline="\n"), indent=1)
 c = collections.defaultdict(list)
 for r in rows: c[(r['reaction'], r['split'])].append(r['T_K'])
 for k in sorted(c, key=str): print(k, sorted(c[k]))
