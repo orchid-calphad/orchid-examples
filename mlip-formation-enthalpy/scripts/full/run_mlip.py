@@ -28,6 +28,7 @@ import traceback
 from pathlib import Path
 
 import numpy as np
+from inputs_io import read_inputs
 from pymatgen.core import Structure
 from pymatgen.symmetry.analyzer import SpacegroupAnalyzer
 
@@ -201,7 +202,8 @@ def main() -> int:
     ap.add_argument("--fmax", type=float, default=0.02)
     ap.add_argument("--steps", type=int, default=1000)
     a = ap.parse_args()
-    items = json.loads(Path(a.inputs).read_text(encoding="utf-8"))["items"]
+    inputs_bytes = read_inputs(a.inputs)[0]
+    items = json.loads(inputs_bytes)["items"]
     # sorted by id, then split by index modulo nshards: a fixed, reproducible partition of the items
     items.sort(key=lambda it: it["id"])
     if a.ids_file:
@@ -226,7 +228,7 @@ def main() -> int:
         "fmax": a.fmax,
         "steps": a.steps,
         "env": env_info(),
-        "inputs_sha256": hashlib.sha256(Path(a.inputs).read_bytes()).hexdigest(),
+        "inputs_sha256": hashlib.sha256(inputs_bytes).hexdigest(),
         "t_load_s": None,
     }
     with outp.open("a", encoding="utf-8") as fh:

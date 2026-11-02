@@ -34,6 +34,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from inputs_io import read_inputs
 from mlip_results import kj_per_ev, load_results, mlip_formation, ref_bad, to_kj
 from orchid_vendor import bundle, data_sha, git, root, sha, site, site_sha
 
@@ -533,8 +534,7 @@ def _load_items(paths: list[str]) -> list[dict]:
     """
     items = []
     for f in paths:
-        with Path(f).open(encoding="utf-8") as fh:
-            items.extend(json.load(fh)["items"])
+        items.extend(json.loads(read_inputs(f)[0])["items"])
     return items
 
 
@@ -546,7 +546,12 @@ def _parse_args() -> argparse.Namespace:
     """
     ap = argparse.ArgumentParser()
     ap.add_argument("--results", nargs="+", required=True)
-    ap.add_argument("--inputs", nargs="+", default=[str(root / "inputs" / "structures.json")])
+    ap.add_argument(
+        "--inputs",
+        nargs="+",
+        default=[str(root / "inputs" / "structures.json")],
+        help="structures file(s); a missing .json is read from the shipped .json.gz",
+    )
     ap.add_argument("--out", required=True)
     ap.add_argument("--site-rev", default="HEAD", help="orchid-project.org revision of the calibration code (use --site-rev=X)")
     ap.add_argument("--data-rev", default="HEAD", help="orchid-data revision of the reference data (use --data-rev=X)")
@@ -582,7 +587,7 @@ def main() -> None:
     sat = _saturation(rows, models, same)
     health = _health(formation, results, items, dropped, models)
     tol_mev = bundle.HULL_TOL_MEV if hasattr(bundle, "HULL_TOL_MEV") else 0.0
-    inputs_hash = ", ".join(f"{Path(f).name} {sha(f)}" for f in a.inputs)
+    inputs_hash = ", ".join(f"{read_inputs(f)[1]} {hashlib.sha256(read_inputs(f)[0]).hexdigest()}" for f in a.inputs)
     out = {
         "schema": "orchid-mlip-calibration-v2 (layout of orchid-data espei/dft/CALIBRATION.json: method, pairs_release, "
         "sources{source: {all, strata}}, lso; plus same_set, mlip_vs_dft, per_compound_median, variants, "
