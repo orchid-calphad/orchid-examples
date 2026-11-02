@@ -34,6 +34,6 @@ s_mlip = float(np.hypot(s_dft, s_md))
 out = {"sigma_DFT_kJ": s_dft, "sigma_DFT_source": "CALIBRATION.json sources.mp.strata['on_hull_single|metal'].sigma_robust",
        "sigma_MLIP_to_DFT_kJ": s_md, "n_pairs": len(diffs), "mean_MLIP_minus_DFT_kJ": float(np.mean(diffs)),
        "sigma_MLIP_kJ": s_mlip, "espei_weight": 500.0 / (s_mlip * 1000), "pairs": rows}
-json.dump(out, open(ROOT / "results/sigma_mlip.json", "w"), indent=1)
+json.dump(out, open(ROOT / "results/sigma_mlip.json", "w", newline="\n"), indent=1)
 for r in rows: print("%-11s %-17s %-12s %-7s %7.2f MLIP %7.2f diff %6.2f %s" % (r["phase"], r["source"], r["entry"], r["space_group"], r["dft_kJ"], r["mlip_kJ"], r["diff_kJ"], "used" if r["used"] else "not used (structure differs)"))
 print({k: v for k, v in out.items() if k != "pairs"})

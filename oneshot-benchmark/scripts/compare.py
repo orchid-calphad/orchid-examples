@@ -28,7 +28,7 @@ out = {}
 for a, b in (("cuzr_grace", "cuzr_sgte_94Zen"), ("cuzr_phaseforgeplus_final", "cuzr_sgte_94Zen"), ("cuzr_phaseforgeplus_final", "cuzr_grace")):
     A, B = R(a), R(b)
     out[f"{a}-{b}"] = {k: paired(A, B, k) for k in ("field", "boundary")}
-json.dump(out, open(os.path.join(ROOT, "results/comparison.json"), "w"), indent=1)
+json.dump(out, open(os.path.join(ROOT, "results/comparison.json"), "w", newline="\n"), indent=1)
 for k, v in out.items():
     print(k, {kk: (round(vv["delta_weighted_recall"], 3), [round(x, 3) for x in vv["ci95"]]) for kk, vv in v.items()})
 

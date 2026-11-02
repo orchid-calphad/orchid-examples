@@ -68,4 +68,4 @@ for name, (sg, lat, sites, (na, nb)) in DEF.items():
                  "formula_units_primitive": len(prim) // (na + nb), "min_distance_A": float(dm.min()),
                  "sg_detected": prim.get_space_group_info(symprec=0.05)}
     print(name, out[name])
-json.dump(out, open(ROOT / "structures/compounds.json", "w"), indent=1)
+json.dump(out, open(ROOT / "structures/compounds.json", "w", newline="\n"), indent=1)

@@ -86,7 +86,7 @@ def main(out):
     res = {"n_records": len(rows), "n_compounds": len(comps), "n_systems": len(systems), "units": "kJ/mol-atom",
            "residual": "computed - experiment", "same_set": same, "mlip_vs_dft": vs_dft, "saturation": sat}
     os.makedirs(out, exist_ok=True)
-    json.dump(res, open(os.path.join(out, "summary.json"), "w"), indent=1)
+    json.dump(res, open(os.path.join(out, "summary.json"), "w", newline="\n"), indent=1)
     print(f"identical set: {len(rows)} records, {len(comps)} compounds, {len(systems)} systems; kJ/mol-atom; 95% system-cluster CIs")
     print(f"{'source':28s} {'MAE':>5s} {'bias':>6s} {'robust sigma [95% CI]':>24s} {'d_sigma vs MP [95% CI]':>24s} {'r(res, MP res)':>14s}")
     for key in sorted(MODELS + ["mp", "oqmd"], key=lambda k: same[k]["all"]["sigma_robust"]):

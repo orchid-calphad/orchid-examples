@@ -69,7 +69,7 @@ def main():
         for r in rows:
             print(f"   {r['reaction']:36s} {('-' if r['T_K'] is None else format(r['T_K'], '.0f')):>6s} K  printed {r['printed_fit_K'][:4]}  {'ok' if r['pass'] else 'x'}")
     if a.o:
-        json.dump(out, open(a.o, "w"), indent=1)
+        json.dump(out, open(a.o, "w", newline="\n"), indent=1)
 
 
 if __name__ == "__main__":

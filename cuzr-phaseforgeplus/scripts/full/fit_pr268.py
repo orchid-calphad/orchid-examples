@@ -38,7 +38,7 @@ files = sorted(glob.glob(str(DATA / "*.json"))) + sorted(glob.glob(str(ROOT / "d
 ctx = setup_context(db, load_datasets(files), syms); objs = ctx["residual_objs"]
 natom = {"CU5ZR_C15B": 6, "CU51ZR14": 65, "CU8ZR3": 11, "CU10ZR7": 17, "CUZR_B2": 2, "CUZR2": 3}
 scale = np.array([5.0 if isT[i] else (10.0 * natom[meta[s].split("(")[1].split(")")[0]] if "formula" in meta[s] else 10.0) for i, s in enumerate(syms)])
-tr = open(OUT / "trace.jsonl", "w"); t0 = time.time(); n = [0]; best = [np.inf, x0.copy()]; stage = ["CG"]
+tr = open(OUT / "trace.jsonl", "w", newline="\n"); t0 = time.time(); n = [0]; best = [np.inf, x0.copy()]; stage = ["CG"]
 
 
 class Stop(Exception): pass
@@ -83,9 +83,9 @@ except Stop:
 txt = TDB.read_text()
 for s, v in zip(syms, best[1]):
     txt = re.sub(r"(FUNCTION\s+%s\s+298\.15\s+)[-+.\dEe]+;" % s, lambda mm: mm.group(1) + "%.6f;" % v, txt)
-(OUT / "tuned.tdb").write_text(f"$ PhaseForge+ rerun with ESPEI PR #268 9039ea2 (start {sid}); demonstration only\n" + txt)
+(OUT / "tuned.tdb").write_text(f"$ PhaseForge+ rerun with ESPEI PR #268 9039ea2 (start {sid}); demonstration only\n" + txt, newline="\n")
 L, G, per = lnl_grad(best[1])
 json.dump({"start": sid, "data": str(DATA), "tdb_start": str(TDB), "symbols": syms, "x_start": x0.tolist(), "x_best": best[1].tolist(), "lnL_start": None, "lnL_best": L, "per_residual": per,
            "grad_norm_best": float(np.linalg.norm(G)), "stages": log, "final": final, "n_eval": n[0], "wall_s": time.time() - t0},
-          open(OUT / "result.json", "w"), indent=1)
+          open(OUT / "result.json", "w", newline="\n"), indent=1)
 print("done", sid, final, L, n[0], time.time() - t0)

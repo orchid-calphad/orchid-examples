@@ -29,7 +29,7 @@ for lat, f in F["lattices"].items():
          "conditions": {"P": 101325, "T": 298.15}, "output": "HM_MIX", "values": [[vals]],
          "reference": "PhaseForge MLIP-only model (GRACE-2L-OMAT; this work)", "weight": W,
          "comment": "sigma_MLIP = %.2f kJ/mol-atom; J/mol-atom" % S["sigma_MLIP_kJ"]}
-    json.dump(d, open(out / f"mlip_HM_MIX_{lat}.json", "w"), indent=1)
+    json.dump(d, open(out / f"mlip_HM_MIX_{lat}.json", "w", newline="\n"), indent=1)
 for ph, c in F["compounds"].items():
     a, b = COMP[ph]
     d = {"components": ["CU", "ZR"], "phases": [ph],
@@ -37,5 +37,5 @@ for ph, c in F["compounds"].items():
          "conditions": {"P": 101325, "T": 298.15}, "output": "HM_FORM", "values": [[[c["dHf_J_mol_atom"]]]],
          "reference": "PhaseForge MLIP (GRACE-2L-OMAT; this work)", "weight": W,
          "comment": "sigma_MLIP = %.2f kJ/mol-atom" % S["sigma_MLIP_kJ"]}
-    json.dump(d, open(out / f"mlip_HM_FORM_{ph}.json", "w"), indent=1)
+    json.dump(d, open(out / f"mlip_HM_FORM_{ph}.json", "w", newline="\n"), indent=1)
 print(W, sorted(p.name for p in out.glob("*.json")))

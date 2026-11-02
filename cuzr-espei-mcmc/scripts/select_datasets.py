@@ -90,9 +90,9 @@ def main():
            [f"  cores: {a.cores}"] if a.scheduler == "dask" else []) + [
            "  chains_per_parameter: 2", "  chain_std_deviation: 0.05", "  deterministic: true", "  prior:"] + sum(
            ([f"  - name: normal", f"    loc_absolute: {p['loc_absolute']}", f"    scale_absolute: {p['scale_absolute']}"] for p in prior), [])
-    open(os.path.join(a.work, "espei-in.yaml"), "w").write("\n".join(yml) + "\n")
+    open(os.path.join(a.work, "espei-in.yaml"), "w", newline="\n").write("\n".join(yml) + "\n")
     json.dump({"orchid_data_release": RELEASE, "evidence": a.evidence, "tags": tags, "kept": keep, "skipped": dict(skipped),
-               "enabled_by_output": dict(by)}, open(os.path.join(a.work, "selection.json"), "w"), indent=1)
+               "enabled_by_output": dict(by)}, open(os.path.join(a.work, "selection.json"), "w", newline="\n"), indent=1)
     print(f"wrote {os.path.relpath(a.work, ROOT)}/espei-in.yaml; run:  cd {os.path.relpath(a.work, ROOT)} && espei --input espei-in.yaml")
 
 

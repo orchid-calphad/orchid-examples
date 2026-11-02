@@ -138,7 +138,7 @@ def main():
         previous=json.loads((run/'workflow-run.json').read_text())
         if previous!=header:raise ValueError('Run manifest/environment changed; use a new run directory')
     else:
-        run.mkdir(parents=True);(run/'workflow-run.json').write_text(json.dumps(header,indent=2)+'\n')
+        run.mkdir(parents=True);(run/'workflow-run.json').write_text(json.dumps(header,indent=2)+'\n', newline="\n")
     (run/'receipts').mkdir(exist_ok=True);(run/'logs').mkdir(exist_ok=True)
     for stage in stages:
         receipt=run/'receipts'/(stage['id']+'.json');context={'example':EXAMPLE,'run':run,'python':getattr(a,stage['environment']+'_python')}
@@ -162,7 +162,7 @@ def main():
         started=datetime.now(timezone.utc).isoformat()
         for i,argv in enumerate(commands):
             env['ORCHID_MD_SEED']=str(a.md_seed+i)
-            with (run/'logs'/f"{stage['id']}-{i}.log").open('w') as log:
+            with (run/'logs'/f"{stage['id']}-{i}.log").open('w', newline="\n") as log:
                 subprocess.run(argv,cwd=EXAMPLE,env=env,stdout=log,stderr=subprocess.STDOUT,check=True)
         outputs=snapshot(stage['outputs'],context)
         if stage['requires_potential']:
@@ -198,10 +198,10 @@ def main():
                     record['parents']=[{'path':str(parent),'sha256':sha(parent)}]
                 records.append(record)
             provenance=run/'provenance'/(stage['id']+'.json');provenance.parent.mkdir(exist_ok=True)
-            provenance.write_text(json.dumps({'schema_version':'1.0.0','scope':'New workflow run; demonstration models pending review.','artifact_root':{'repository':None,'path':str(run)},'records':records},indent=2)+'\n')
+            provenance.write_text(json.dumps({'schema_version':'1.0.0','scope':'New workflow run; demonstration models pending review.','artifact_root':{'repository':None,'path':str(run)},'records':records},indent=2)+'\n', newline="\n")
             outputs[str(provenance)]=sha(provenance)
         data={'stage':stage['id'],'commands':commands,'inputs':inputs,'outputs':outputs,'started':started,'finished':datetime.now(timezone.utc).isoformat()}
-        receipt.write_text(json.dumps(data,indent=2)+'\n');print('Completed '+stage['id'],flush=True)
+        receipt.write_text(json.dumps(data,indent=2)+'\n', newline="\n");print('Completed '+stage['id'],flush=True)
     return 0
 
 

@@ -92,7 +92,7 @@ def main():
                        "pred_physical": q, "recall_point": len(set(p["truth_physical"]) & set(q)) / len(p["truth_physical"])}
                       for p, q in zip(pts, preds)]}
     os.makedirs(os.path.dirname(out) or ".", exist_ok=True)
-    json.dump(res, open(out, "w"), indent=1, ensure_ascii=False)
+    json.dump(res, open(out, "w", newline="\n"), indent=1, ensure_ascii=False)
     for kind in ("field", "boundary"):
         b = metrics[kind]["all"]; w, c = b["weighted"], b["ci95"]
         print(f"{label:22s} {kind:8s} n={b['n_points']:3d} recall {w['recall']:.3f} [{c['recall'][0]:.3f},{c['recall'][1]:.3f}] "

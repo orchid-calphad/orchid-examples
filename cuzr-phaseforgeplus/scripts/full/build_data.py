@@ -136,7 +136,7 @@ for rel, k, part, w in sel:
         w['weight'] = base * WT.get(k, 1.0)
     w['orchid_demo_type_weight'] = WT.get(k, 1.0)
     out = f'{ROOT}/data/{part}/' + rel.replace('/', '__')
-    json.dump(w, open(out, 'w'), indent=1)
+    json.dump(w, open(out, 'w', newline="\n"), indent=1)
     man['datasets'].append({'file': os.path.relpath(out, ROOT), 'source': rel, 'source_sha256': sha(os.path.join(B, rel)),
                             'split': part, 'type': k, 'n_residuals': nres(w), 'reference': w.get('reference'),
                             'bundle_weight': base, 'type_weight': WT.get(k, 1.0), 'tags': w.get('tags')})
@@ -144,7 +144,7 @@ man['type_counts_fit'] = dict(N)
 man['type_weights'] = WT
 man['type_weight_rule'] = 'w_t = 1 (bundle weights); v2 rule sqrt(Nbar/N_t) recorded in type_weights_v2_not_used, Nbar = %.2f' % Nbar
 man['type_weights_v2_not_used'] = WT_V2
-json.dump(man, open(f'{ROOT}/data/manifest.json', 'w'), indent=1)
+json.dump(man, open(f'{ROOT}/data/manifest.json', 'w', newline="\n"), indent=1)
 c = collections.Counter((x['split'], x['type']) for x in man['datasets'])
 n = collections.Counter()
 for x in man['datasets']: n[(x['split'], x['type'])] += x['n_residuals']

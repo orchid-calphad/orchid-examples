@@ -65,7 +65,7 @@ def main():
         f = fit_rk(pts)
         f["points"] = pts
         out["lattices"][lat] = f
-        with open(RUN / lat / "fit_energy.out", "w") as fo:
+        with open(RUN / lat / "fit_energy.out", "w", newline="\n") as fo:
             for p, dm, df in zip(pts, f["dH_mix"], f["dH_fit"]):
                 fo.write("%g\t%g\t\t%.5f\t%.5f\t%.5f\t\t%s\n" % (1 - p["x"], p["x"], dm / EV, df / EV, (dm - df) / EV, p["name"]))
     ecu = out["lattices"]["FCC_A1"]["E_endmembers_eV"][0]
@@ -113,9 +113,9 @@ def main():
         "\n".join(vv) + "\n$\n" + "\n".join(lines) + "\n$\n LIST-OF-REFERENCE\n NUMBER  SOURCE\n  91Din  'A.T. Dinsdale, Calphad, 15, 317-425(1991).'\n" + \
         "  PFMLIP 'PhaseForge workflow (Zhu, Sariturk, Arroyave 2025), GRACE-2L-OMAT energies, m_scraps SQS; this work'\n  !\n"
     (ROOT / "tdb").mkdir(exist_ok=True)
-    (ROOT / "tdb/CuZr-PhaseForge-MLIP.tdb").write_text(tdb)
+    (ROOT / "tdb/CuZr-PhaseForge-MLIP.tdb").write_text(tdb, newline="\n")
     out["symbols"] = syms
-    json.dump(out, open(ROOT / "tdb/mlip_fit.json", "w"), indent=1)
+    json.dump(out, open(ROOT / "tdb/mlip_fit.json", "w", newline="\n"), indent=1)
     for lat in LATS:
         f = out["lattices"][lat]; print("%-7s L0 %9.0f  L1 %9.0f J/mol  rms resid %.0f J/mol" % (lat, f["L0"], f["L1"], f["rms_resid"]))
     for ph, c in out["compounds"].items(): print("%-11s dHf %7.2f kJ/mol-atom" % (ph, c["dHf_J_mol_atom"] / 1000))

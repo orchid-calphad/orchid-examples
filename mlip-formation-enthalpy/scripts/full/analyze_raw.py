@@ -48,7 +48,7 @@ def vendor_site(site_rev, data_rev):
                              "literature/orchid-literature.jsonl.gz", "literature/papers.json", "literature/index.json"], capture_output=True,
                             check=True).stdout
         subprocess.run(["tar", "-x", "-C", os.path.join(d, "data")], input=ar, check=True)
-        open(os.path.join(d, "ok"), "w").write(s1 + " " + s2)
+        open(os.path.join(d, "ok"), "w", newline="\n").write(s1 + " " + s2)
     return d, s1, s2
 
 
@@ -347,7 +347,7 @@ def main():
                        "fmax": (meta.get(m) or {}).get("fmax"), "steps": (meta.get(m) or {}).get("steps")} for m in models},
     }
     out = B.round_floats(out)
-    json.dump(out, open(os.path.join(a.out, "CALIBRATION_MLIP.json"), "w"), indent=1, sort_keys=True)
+    json.dump(out, open(os.path.join(a.out, "CALIBRATION_MLIP.json"), "w", newline="\n"), indent=1, sort_keys=True)
     import csv
     cols = ["rid", "formula", "system", "chem", "exp", "mp", "oqmd", "mp_mid", "oqmd_mid", "mp_smatch", "mp_match",
             "oqmd_match", "mp_ehull", "mp_npoly", "paper", "method"]
@@ -355,12 +355,12 @@ def main():
     for m in models:
         mcols += [m] + ["%s|%s" % (m, v) for v in ("relax_raw", "relax_corr", "sp_raw", "sp_corr")]
     with open(os.path.join(a.out, "pairs_identical_set.csv"), "w", newline="") as fh:
-        w = csv.DictWriter(fh, fieldnames=cols + mcols, extrasaction="ignore")
+        w = csv.DictWriter(fh, fieldnames=cols + mcols, extrasaction="ignore", lineterminator="\n")
         w.writeheader()
         for r in rows:
             w.writerow(r)
     with open(os.path.join(a.out, "mlip_by_compound.csv"), "w", newline="") as fh:
-        w = csv.writer(fh)
+        w = csv.writer(fh, lineterminator="\n")
         w.writerow(["model", "id", "src", "formula", "dft_ef_kJ", "ef_relax_corr_kJ", "ef_relax_raw_kJ", "ef_sp_corr_kJ",
                     "ef_sp_raw_kJ", "status", "converged", "exploded", "refs_flag", "nsteps", "vol_ratio", "sg_in",
                     "sg_out", "time_s"])

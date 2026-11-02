@@ -25,9 +25,9 @@ def write(path, values, label):
     hdr = (f'$ REVIEW ONLY - NOT AN ASSESSMENT. {label}\n$ Derived from {os.path.basename(SRC)} (sha256 '
            f'{hashlib.sha256(open(SRC,"rb").read()).hexdigest()}) by orchid-examples cuzr-espei-mcmc/scripts/make_param_tdb.py.\n')
     txt = txt.replace(' TEMP-LIM', hdr + funcs + ' TEMP-LIM', 1)
-    open(path, 'w').write(txt)
+    open(path, 'w', newline="\n").write(txt)
 if __name__ == '__main__':
     os.makedirs('tdb', exist_ok=True)
     start = {s: v for s, _, _, _, v in PARAMS}
     write('tdb/CuZr-94Zen-LB_param.tdb', start, 'Starting model: SGTE values, fitted coefficients as VV symbols.')
-    json.dump([{'symbol': s, 'parameter': d, 'start': v} for s, d, _, _, v in PARAMS], open('tdb/params.json', 'w'), indent=1)
+    json.dump([{'symbol': s, 'parameter': d, 'start': v} for s, d, _, _, v in PARAMS], open('tdb/params.json', 'w', newline="\n"), indent=1)
