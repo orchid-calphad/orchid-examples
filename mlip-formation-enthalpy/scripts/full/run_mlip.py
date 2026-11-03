@@ -231,7 +231,7 @@ def main() -> int:
         "inputs_sha256": hashlib.sha256(inputs_bytes).hexdigest(),
         "t_load_s": None,
     }
-    with outp.open("a", encoding="utf-8") as fh:
+    with outp.open("a", encoding="utf-8", newline="\n") as fh:
         for k, it in enumerate(todo):
             rec = _evaluate_item(calc, it, a.model)
             if k == 0:
@@ -243,7 +243,7 @@ def main() -> int:
             if k % 20 == 0:
                 print(f"{a.model} {k + 1}/{len(todo)} {time.time() - t0:.1f}s {rec.get('status')}", flush=True)
     print(f"done {a.model} shard {a.shard} in {time.time() - t0:.1f}s", flush=True)
-    outp.with_name(outp.name + ".done").write_text(f"{len(items)} items\n", encoding="utf-8")
+    outp.with_name(outp.name + ".done").write_text(f"{len(items)} items\n", encoding="utf-8", newline="\n")
     return 0
 
 

@@ -129,6 +129,7 @@ def geometry(p, key):
             }
         ),
         encoding="utf-8",
+        newline="\n",
     )
     return tracks, comps
 

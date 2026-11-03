@@ -169,7 +169,7 @@ def main(out: str | Path) -> float:
         "saturation": sat,
     }
     out_dir.mkdir(parents=True, exist_ok=True)
-    with (out_dir / "summary.json").open("w", encoding="utf-8") as f:
+    with (out_dir / "summary.json").open("w", encoding="utf-8", newline="\n") as f:
         json.dump(res, f, indent=1)
     print(
         f"identical set: {len(rows)} records, {len(comps)} compounds, {len(systems)} systems; kJ/mol-atom; 95% system-cluster CIs"

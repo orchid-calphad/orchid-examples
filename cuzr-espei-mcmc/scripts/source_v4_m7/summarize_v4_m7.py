@@ -231,7 +231,7 @@ def main() -> None:
         },
     }
     Path(f"results/{tag}").mkdir(parents=True, exist_ok=True)
-    with Path(f"results/{tag}/summary_v4_m7.json").open("w", encoding="utf-8") as fh:
+    with Path(f"results/{tag}/summary_v4_m7.json").open("w", encoding="utf-8", newline="\n") as fh:
         json.dump(out, fh, indent=1, default=float)
     mst.write(
         f"tdb/v4/CuZr-94Zen-LB_ORCHID-{tag}_REVIEW-ONLY.tdb",
@@ -243,6 +243,7 @@ def main() -> None:
     Path(f"results/{tag}/summary_v4_m7.md").write_text(
         "\n".join(lines) + f"\n\nPrinted (fit): CuZr congruent {printed_k0} K; Cu10Zr7 congruent {printed_k1} K.\n",
         encoding="utf-8",
+        newline="\n",
     )
     print("\n".join(lines))
 

@@ -71,7 +71,7 @@ def write(path: str | Path, values: dict[str, float], label: str) -> None:
             f"$ VV0006: L2(LIQUID) a (added term, model-adequacy test)\n FUNCTION VV0006    298.15 {values['VV0006']:+.6f}; 6000 N !\n TEMP-LIM",
             1,
         )
-        path.write_text(txt, encoding="utf-8")
+        path.write_text(txt, encoding="utf-8", newline="\n")
 
 
 if __name__ == "__main__":

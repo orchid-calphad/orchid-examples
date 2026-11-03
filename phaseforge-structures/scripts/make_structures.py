@@ -460,7 +460,7 @@ def main() -> None:
         for s in skipped:
             print(f"SKIPPED  {s['phase']:<12} {s['reason']}")
     rl = _relax_list(mk, lats, made, args.no_sqs)
-    (out / "relax_list.txt").write_text("\n".join(rl) + "\n", encoding="utf-8")
+    (out / "relax_list.txt").write_text("\n".join(rl) + "\n", encoding="utf-8", newline="\n")
     total = time.time() - t_start
     try:
         mscommit = subprocess.run(
@@ -497,7 +497,7 @@ def main() -> None:
         "compounds": made,
         "skipped": skipped,
     }
-    (out / "manifest.json").write_text(json.dumps(manifest, indent=1), encoding="utf-8")
+    (out / "manifest.json").write_text(json.dumps(manifest, indent=1), encoding="utf-8", newline="\n")
     print(f"total {total:.1f} s on {os.cpu_count()} CPUs; {len(rl)} relaxations listed; manifest.json written")
 
 

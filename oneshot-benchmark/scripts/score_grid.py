@@ -152,7 +152,7 @@ def main() -> None:
         ],
     }
     Path(out).parent.mkdir(parents=True, exist_ok=True)
-    with Path(out).open("w", encoding="utf-8") as f:
+    with Path(out).open("w", encoding="utf-8", newline="\n") as f:
         json.dump(res, f, indent=1, ensure_ascii=False)
     for kind in ("field", "boundary"):
         b = metrics[kind]["all"]

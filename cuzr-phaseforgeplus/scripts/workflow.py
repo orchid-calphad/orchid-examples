@@ -414,6 +414,7 @@ def _write_provenance(stage: dict, generated: list[Path], run: Path, m: dict, a:
         )
         + "\n",
         encoding="utf-8",
+        newline="\n",
     )
     return provenance
 
@@ -452,7 +453,7 @@ def _run_stage(stage: dict, m: dict, a: argparse.Namespace, run: Path) -> None:
     started = datetime.now(UTC).isoformat()
     for i, argv in enumerate(commands):
         env["ORCHID_MD_SEED"] = str(a.md_seed + i)
-        with (run / "logs" / f"{stage['id']}-{i}.log").open("w", encoding="utf-8") as log:
+        with (run / "logs" / f"{stage['id']}-{i}.log").open("w", encoding="utf-8", newline="\n") as log:
             subprocess.run(argv, cwd=example, env=env, stdout=log, stderr=subprocess.STDOUT, check=True)
     outputs = snapshot(stage["outputs"], context)
     if stage["requires_potential"]:
@@ -473,7 +474,7 @@ def _run_stage(stage: dict, m: dict, a: argparse.Namespace, run: Path) -> None:
         "started": started,
         "finished": datetime.now(UTC).isoformat(),
     }
-    receipt.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+    receipt.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8", newline="\n")
     print("Completed " + stage["id"], flush=True)
 
 
@@ -517,7 +518,7 @@ def main() -> int:
             raise ValueError("Run manifest/environment changed; use a new run directory")
     else:
         run.mkdir(parents=True)
-        (run / "workflow-run.json").write_text(json.dumps(header, indent=2) + "\n", encoding="utf-8")
+        (run / "workflow-run.json").write_text(json.dumps(header, indent=2) + "\n", encoding="utf-8", newline="\n")
     (run / "receipts").mkdir(exist_ok=True)
     (run / "logs").mkdir(exist_ok=True)
     for stage in stages:

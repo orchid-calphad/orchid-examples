@@ -47,7 +47,7 @@ for lat, f in mlip_fit["lattices"].items():
         "weight": weight,
         "comment": f"sigma_MLIP = {sigma['sigma_MLIP_kJ']:.2f} kJ/mol-atom; J/mol-atom",
     }
-    (out_dir / f"mlip_HM_MIX_{lat}.json").write_text(json.dumps(d, indent=1), encoding="utf-8")
+    (out_dir / f"mlip_HM_MIX_{lat}.json").write_text(json.dumps(d, indent=1), encoding="utf-8", newline="\n")
 for ph, c in mlip_fit["compounds"].items():
     a, b = comp[ph]
     d = {
@@ -61,5 +61,5 @@ for ph, c in mlip_fit["compounds"].items():
         "weight": weight,
         "comment": f"sigma_MLIP = {sigma['sigma_MLIP_kJ']:.2f} kJ/mol-atom",
     }
-    (out_dir / f"mlip_HM_FORM_{ph}.json").write_text(json.dumps(d, indent=1), encoding="utf-8")
+    (out_dir / f"mlip_HM_FORM_{ph}.json").write_text(json.dumps(d, indent=1), encoding="utf-8", newline="\n")
 print(weight, sorted(p.name for p in out_dir.glob("*.json")))

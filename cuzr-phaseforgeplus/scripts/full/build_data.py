@@ -243,7 +243,7 @@ for rel, k, part, w in sel:
         w["weight"] = base * wt.get(k, 1.0)
     w["orchid_demo_type_weight"] = wt.get(k, 1.0)
     out = f"{root}/data/{part}/" + rel.replace("/", "__")
-    Path(out).write_text(json.dumps(w, indent=1), encoding="utf-8")
+    Path(out).write_text(json.dumps(w, indent=1), encoding="utf-8", newline="\n")
     man["datasets"].append(
         {
             "file": Path(os.path.relpath(out, root)).as_posix(),
@@ -264,7 +264,7 @@ man["type_weight_rule"] = (
     f"w_t = 1 (bundle weights); v2 rule sqrt(Nbar/N_t) recorded in type_weights_v2_not_used, Nbar = {nbar:.2f}"
 )
 man["type_weights_v2_not_used"] = wt_v2
-Path(root, "data", "manifest.json").write_text(json.dumps(man, indent=1), encoding="utf-8")
+Path(root, "data", "manifest.json").write_text(json.dumps(man, indent=1), encoding="utf-8", newline="\n")
 c = collections.Counter((x["split"], x["type"]) for x in man["datasets"])
 n = collections.Counter()
 for x in man["datasets"]:

@@ -148,7 +148,9 @@ def main() -> None:
 
     params = json.loads((root / "tdb" / "params.json").read_text(encoding="utf-8"))
     prior = [{"name": "normal", "loc_absolute": p["start"], "scale_absolute": abs(p["start"])} for p in params]
-    (Path(a.work) / "espei-in.yaml").write_text("\n".join(_espei_yaml_lines(a, tags, prior)) + "\n", encoding="utf-8")
+    (Path(a.work) / "espei-in.yaml").write_text(
+        "\n".join(_espei_yaml_lines(a, tags, prior)) + "\n", encoding="utf-8", newline="\n"
+    )
     selection = {
         "orchid_data_release": release,
         "evidence": a.evidence,
@@ -157,7 +159,7 @@ def main() -> None:
         "skipped": dict(skipped),
         "enabled_by_output": dict(by),
     }
-    (Path(a.work) / "selection.json").write_text(json.dumps(selection, indent=1), encoding="utf-8")
+    (Path(a.work) / "selection.json").write_text(json.dumps(selection, indent=1), encoding="utf-8", newline="\n")
     work_rel = Path(os.path.relpath(a.work, root)).as_posix()
     print(f"wrote {work_rel}/espei-in.yaml; run:  cd {work_rel} && espei --input espei-in.yaml")
 

@@ -84,7 +84,7 @@ t0 = time.time()
 n = [0]
 best = [-np.inf, None]
 wall = float(arg("--wall", 1e9))
-ev = (out_dir / "evals.jsonl").open("a", encoding="utf-8")
+ev = (out_dir / "evals.jsonl").open("a", encoding="utf-8", newline="\n")
 
 
 class WallBudgetError(Exception):
@@ -127,7 +127,7 @@ def logp_dlogp(x):
     return (lik, grad) if ok else (-np.inf, np.zeros(n_par))
 
 
-it_log = (out_dir / "iters.jsonl").open("a", encoding="utf-8")
+it_log = (out_dir / "iters.jsonl").open("a", encoding="utf-8", newline="\n")
 
 
 def callback(trace=None, draw=None):
@@ -294,7 +294,7 @@ if mode == "explore":
             "nuts_best_x": xb.tolist(),
         }
     )
-    (out_dir / "summary.json").write_text(json.dumps(summary, indent=1), encoding="utf-8")
+    (out_dir / "summary.json").write_text(json.dumps(summary, indent=1), encoding="utf-8", newline="\n")
     wall = t_nuts + float(arg("--bfgs-wall", 3600))
 
     # BFGS with the wall check inside the objective (single evaluation per call)
@@ -379,5 +379,5 @@ if mode in ("tune", "test"):
         its = [json.loads(line) for line in fh]
     summary["last_q"] = its[-1]["q"]
 if mode in ("explore", "tune", "test", "sample"):
-    (out_dir / "summary.json").write_text(json.dumps(summary, indent=1, default=float), encoding="utf-8")
+    (out_dir / "summary.json").write_text(json.dumps(summary, indent=1, default=float), encoding="utf-8", newline="\n")
     print("done", mode, json.dumps({k: v for k, v in summary.items() if not isinstance(v, list)}, default=float)[:1500])

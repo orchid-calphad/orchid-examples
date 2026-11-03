@@ -43,7 +43,7 @@ class TestLocalRelease(TestCase):
         """A release file under ORCHID_DATA resolves to that file."""
         with tempfile.TemporaryDirectory() as d, mock.patch.dict(os.environ, {"ORCHID_DATA": d}):
             (Path(d) / "espei").mkdir()
-            (Path(d) / "espei" / "index.csv").write_text("a\n", encoding="utf-8")
+            (Path(d) / "espei" / "index.csv").write_text("a\n", encoding="utf-8", newline="\n")
             assert orchid_data.path("espei/index.csv", "0" * 40) == Path(d) / "espei" / "index.csv"
 
     def test_path_raises_for_a_missing_file(self):
@@ -61,7 +61,7 @@ class TestLocalRelease(TestCase):
             folder = Path(d) / "espei" / "x"
             folder.mkdir(parents=True)
             for name in ("b.json", "a.json", "c.csv"):
-                (folder / name).write_text("{}", encoding="utf-8")
+                (folder / name).write_text("{}", encoding="utf-8", newline="\n")
             assert orchid_data.listdir("espei/x", "0" * 40) == ["espei/x/a.json", "espei/x/b.json"]
 
     def test_local_root_is_none_when_unset(self):
@@ -104,7 +104,7 @@ class TestRemoteRelease(TestCase):
         with tempfile.TemporaryDirectory() as d, _offline(d, url="file:///nonexistent-orchid/{commit}/{path}"):
             target = Path(d) / COMMIT / "espei" / "index.csv"
             target.parent.mkdir(parents=True)
-            target.write_text("path\n", encoding="utf-8")
+            target.write_text("path\n", encoding="utf-8", newline="\n")
             assert orchid_data.path("espei/index.csv", COMMIT) == target
 
     def test_download_is_written_to_the_cache_once(self):
@@ -139,6 +139,7 @@ class TestRemoteRelease(TestCase):
             index.write_text(
                 "path\nexperimental/CU-ZR/a.json\nexperimental/CU-ZR/b.csv\nexperimental/CU-ZR/c.json\ninvariants/d.json\n",
                 encoding="utf-8",
+                newline="\n",
             )
             assert orchid_data.listdir("espei/experimental/CU-ZR", COMMIT) == [
                 "espei/experimental/CU-ZR/a.json",

@@ -52,7 +52,7 @@ def main(data) -> None:
         "as read from the PhaseForge+ fit data; derived coordinates only",
         "points": pts,
     }
-    (root / "inputs/zpf_points.json").write_text(json.dumps(out, indent=0), encoding="utf-8")
+    (root / "inputs/zpf_points.json").write_text(json.dumps(out, indent=0), encoding="utf-8", newline="\n")
     print(len(pts), "points ->", root / "inputs/zpf_points.json")
 
 

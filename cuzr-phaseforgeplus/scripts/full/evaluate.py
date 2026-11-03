@@ -143,7 +143,7 @@ if __name__ == "__main__":
     tdb, label = sys.argv[1], sys.argv[2]
     vals = json.loads(Path(sys.argv[4]).read_text(encoding="utf-8")) if len(sys.argv) > 4 and sys.argv[3] == "--values" else None
     out = {"tdb": str(tdb), "values": vals, "groups": evaluate((tdb, vals))}
-    (root / f"results/eval_{label}.json").write_text(json.dumps(out, indent=1), encoding="utf-8")
+    (root / f"results/eval_{label}.json").write_text(json.dumps(out, indent=1), encoding="utf-8", newline="\n")
     for k, v in sorted(out["groups"].items()):
         rmse_text = f"{v['rmse']:.1f}" if v["rmse"] is not None else "-"
         print(f"{k:<34} n={v['n']:4d} nonfinite={v['n_nonfinite']:d} rmse={rmse_text} {v['nonfinite_files'][:3]}")

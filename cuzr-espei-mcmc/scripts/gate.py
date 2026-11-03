@@ -113,7 +113,7 @@ def main() -> None:
             mark = "ok" if r["pass"] else "x"
             print(f"   {r['reaction']:36s} {tk:>6s} K  printed {r['printed_fit_K'][:4]}  {mark}")
     if a.o:
-        with Path(a.o).open("w", encoding="utf-8") as fh:
+        with Path(a.o).open("w", encoding="utf-8", newline="\n") as fh:
             json.dump(out, fh, indent=1)
 
 

@@ -38,7 +38,7 @@ def main(src: Path) -> None:
     keep = [r for r in rows if r["system"] == system_id]
     (out / "espei").mkdir(parents=True, exist_ok=True)
     with (out / "espei" / "index.csv").open("w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
+        w = csv.DictWriter(f, fieldnames=list(rows[0].keys()), lineterminator="\n")
         w.writeheader()
         w.writerows(keep)
     for r in keep:

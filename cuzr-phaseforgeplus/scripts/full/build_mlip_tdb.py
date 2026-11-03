@@ -111,7 +111,7 @@ def main() -> None:
         f = fit_rk(pts)
         f["points"] = pts
         out["lattices"][lat] = f
-        with (run / lat / "fit_energy.out").open("w", encoding="utf-8") as fo:
+        with (run / lat / "fit_energy.out").open("w", encoding="utf-8", newline="\n") as fo:
             for p, dm, df in zip(pts, f["dH_mix"], f["dH_fit"], strict=True):
                 fo.write(f"{1 - p['x']:g}\t{p['x']:g}\t\t{dm / ev:.5f}\t{df / ev:.5f}\t{(dm - df) / ev:.5f}\t\t{p['name']}\n")
     ecu = out["lattices"]["FCC_A1"]["E_endmembers_eV"][0]
@@ -188,9 +188,9 @@ def main() -> None:
         + "  PFMLIP 'PhaseForge workflow (Zhu, Sariturk, Arroyave 2025), GRACE-2L-OMAT energies, m_scraps SQS; this work'\n  !\n"
     )
     (root / "tdb").mkdir(exist_ok=True)
-    (root / "tdb/CuZr-PhaseForge-MLIP.tdb").write_text(tdb, encoding="utf-8")
+    (root / "tdb/CuZr-PhaseForge-MLIP.tdb").write_text(tdb, encoding="utf-8", newline="\n")
     out["symbols"] = syms
-    (root / "tdb/mlip_fit.json").write_text(json.dumps(out, indent=1), encoding="utf-8")
+    (root / "tdb/mlip_fit.json").write_text(json.dumps(out, indent=1), encoding="utf-8", newline="\n")
     for lat in lats:
         f = out["lattices"][lat]
         print(f"{lat:<7} L0 {f['L0']:9.0f}  L1 {f['L1']:9.0f} J/mol  rms resid {f['rms_resid']:.0f} J/mol")

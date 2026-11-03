@@ -114,7 +114,7 @@ for lat in ("FCC_A1", "BCC_A2", "HCP_A3", "LIQUID"):
             r.update(source="ATAT sqsdb (PhaseForgePlus Pt-W example)", lattice=lat, x_Zr=x, n_atoms=len(a), dir=d.name)
             res.append(r)
 (root / "results").mkdir(exist_ok=True)
-(root / "results/sqs_validation.json").write_text(json.dumps(res, indent=1), encoding="utf-8")
+(root / "results/sqs_validation.json").write_text(json.dumps(res, indent=1), encoding="utf-8", newline="\n")
 
 
 def fmt_value(v) -> str:

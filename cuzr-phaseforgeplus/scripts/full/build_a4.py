@@ -73,6 +73,6 @@ for factor in (3, 10, 30):
         if d["output"] == "ZPF":
             w = d.get("weight", 1.0)
             d["weight"] = [x * factor for x in w] if isinstance(w, list) else w * factor
-        (out / Path(f).name).write_text(json.dumps(d), encoding="utf-8")
-(root / f"data/{prefix}_manifest.json").write_text(json.dumps(man, indent=1), encoding="utf-8")
+        (out / Path(f).name).write_text(json.dumps(d), encoding="utf-8", newline="\n")
+(root / f"data/{prefix}_manifest.json").write_text(json.dumps(man, indent=1), encoding="utf-8", newline="\n")
 print(len(files), {k: round(v) for k, v in sd.items()}, sorted({round(v) for v in man["sigma_eff"].values()}))

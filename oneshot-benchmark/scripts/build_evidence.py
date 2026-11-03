@@ -329,7 +329,7 @@ def main() -> None:
         "phase_mapping_evidence": mt,
         "points": points,
     }
-    with Path(a.o).open("w", encoding="utf-8") as f:
+    with Path(a.o).open("w", encoding="utf-8", newline="\n") as f:
         json.dump(out, f, indent=1, ensure_ascii=False)
     print(a.o, out["counts"], "dups skipped", dup)
     for m in mt:

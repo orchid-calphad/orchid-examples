@@ -60,7 +60,7 @@ for split in ("fit", "holdout"):
                 }
             )
 (root / "results").mkdir(parents=True, exist_ok=True)
-(root / "results" / "printed_invariants.json").write_text(json.dumps(rows, indent=1), encoding="utf-8")
+(root / "results" / "printed_invariants.json").write_text(json.dumps(rows, indent=1), encoding="utf-8", newline="\n")
 c = collections.defaultdict(list)
 for r in rows:
     c[(r["reaction"], r["split"])].append(r["T_K"])

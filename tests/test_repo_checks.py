@@ -50,7 +50,7 @@ class TestFileProblems(TestCase):
         """A local absolute path in a text file is reported with its line number."""
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
-            (root / "run.md").write_text("ok\nsee /home/alice/data\n", encoding="utf-8")
+            (root / "run.md").write_text("ok\nsee /home/alice/data\n", encoding="utf-8", newline="\n")
             problems = hygiene.file_problems("run.md", root)
             assert len(problems) == 1
             assert problems[0].startswith("run.md:2: local absolute path")
@@ -63,16 +63,16 @@ class TestMetadataProblems(TestCase):
         """A grants key in .zenodo.json and a funding key in CITATION.cff are both reported."""
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
-            (root / ".zenodo.json").write_text('{"grants": []}', encoding="utf-8")
-            (root / "CITATION.cff").write_text("funding: x\n", encoding="utf-8")
+            (root / ".zenodo.json").write_text('{"grants": []}', encoding="utf-8", newline="\n")
+            (root / "CITATION.cff").write_text("funding: x\n", encoding="utf-8", newline="\n")
             assert hygiene.metadata_problems(root) == [".zenodo.json has 'grants'", "CITATION.cff has a 'funding' key"]
 
     def test_clean_metadata_passes(self):
         """Metadata without grants or funding keys produces no problems."""
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
-            (root / ".zenodo.json").write_text('{"title": "x"}', encoding="utf-8")
-            (root / "CITATION.cff").write_text("title: x\n", encoding="utf-8")
+            (root / ".zenodo.json").write_text('{"title": "x"}', encoding="utf-8", newline="\n")
+            (root / "CITATION.cff").write_text("title: x\n", encoding="utf-8", newline="\n")
             assert hygiene.metadata_problems(root) == []
 
 

@@ -77,7 +77,7 @@ out = {
     "espei_weight": weight_scale / (s_mlip * j_per_kj),
     "pairs": rows,
 }
-(root / "results/sigma_mlip.json").write_text(json.dumps(out, indent=1), encoding="utf-8")
+(root / "results/sigma_mlip.json").write_text(json.dumps(out, indent=1), encoding="utf-8", newline="\n")
 for r in rows:
     used_text = "used" if r["used"] else "not used (structure differs)"
     print(

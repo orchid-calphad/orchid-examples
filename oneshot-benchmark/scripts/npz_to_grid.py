@@ -22,7 +22,7 @@ def main() -> None:
     with np.load(a.npz, allow_pickle=False) as z:
         temps, xs, lab = z["T"], z["x"], z["lab"]
         with Path(a.csv).open("w", newline="", encoding="utf-8") as f:
-            w = csv.writer(f)
+            w = csv.writer(f, lineterminator="\n")
             w.writerow(["T_K", "x_Zr", "phases"])
             for i, temp in enumerate(temps):
                 for j, x in enumerate(xs):

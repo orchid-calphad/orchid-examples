@@ -50,7 +50,7 @@ def write(path: str, values: dict[str, float], label: str) -> None:
         f"$ Derived from {src.name} (sha256 {digest}) by orchid-examples cuzr-espei-mcmc/scripts/make_param_tdb.py.\n"
     )
     txt = txt.replace(" TEMP-LIM", hdr + funcs + " TEMP-LIM", 1)
-    Path(path).write_text(txt, encoding="utf-8")
+    Path(path).write_text(txt, encoding="utf-8", newline="\n")
 
 
 if __name__ == "__main__":
@@ -58,4 +58,4 @@ if __name__ == "__main__":
     start = {s: v for s, _, _, _, v in _fit_params}
     write("tdb/CuZr-94Zen-LB_param.tdb", start, "Starting model: SGTE values, fitted coefficients as VV symbols.")
     params_json = [{"symbol": s, "parameter": d, "start": v} for s, d, _, _, v in _fit_params]
-    Path("tdb/params.json").write_text(json.dumps(params_json, indent=1), encoding="utf-8")
+    Path("tdb/params.json").write_text(json.dumps(params_json, indent=1), encoding="utf-8", newline="\n")

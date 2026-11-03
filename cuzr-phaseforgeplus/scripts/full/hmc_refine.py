@@ -87,5 +87,5 @@ out = {
     "best_lnL": nuts.best[0],
     "best_x": nuts.best[1].tolist(),
 }
-(nuts.root / f"runs/hmc/{run}/refine.json").write_text(json.dumps(out, indent=1), encoding="utf-8")
+(nuts.root / f"runs/hmc/{run}/refine.json").write_text(json.dumps(out, indent=1), encoding="utf-8", newline="\n")
 print("done", run, st, out["start_lnL"], out["best_lnL"], out["n_eval"])

@@ -59,7 +59,7 @@ def main() -> None:
     for _, n, d in rows + [(0, a, json.loads((example_root / p).read_text(encoding="utf-8"))) for a, p in ref]:
         out.append("| " + " | ".join([n, *cell(d, "field"), *cell(d, "boundary")]) + " |")
     s = "\n".join(out)
-    (example_root / "results" / "mlips_summary.md").write_text(s + "\n", encoding="utf-8")
+    (example_root / "results" / "mlips_summary.md").write_text(s + "\n", encoding="utf-8", newline="\n")
     print(s)
 
 

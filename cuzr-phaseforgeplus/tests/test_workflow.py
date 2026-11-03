@@ -140,9 +140,9 @@ class TestRunner(TestCase):
         source = self.tmp_path / "source"
         source.mkdir()
         out = self.tmp_path / "run"
-        (source / "requirements.txt").write_text("", encoding="utf-8")
+        (source / "requirements.txt").write_text("", encoding="utf-8", newline="\n")
         script = source / "write.py"
-        script.write_text("import pathlib,sys;pathlib.Path(sys.argv[1]).write_text('ok')", encoding="utf-8")
+        script.write_text("import pathlib,sys;pathlib.Path(sys.argv[1]).write_text('ok')", encoding="utf-8", newline="\n")
         m = {
             "id": "test",
             "input_sha256": {},
@@ -162,7 +162,7 @@ class TestRunner(TestCase):
             ],
         }
         manifest = source / "manifest.json"
-        manifest.write_text(json.dumps(m), encoding="utf-8")
+        manifest.write_text(json.dumps(m), encoding="utf-8", newline="\n")
         argv = ["workflow", "run", "--manifest", str(manifest), "--stage", "test", "--run-dir", str(out)]
         with (
             mock.patch.object(workflow_mod, "example", source),
@@ -174,7 +174,7 @@ class TestRunner(TestCase):
             self.assertEqual(receipt["outputs"][str(out / "result.txt")], workflow_mod.sha(out / "result.txt"))
             with mock.patch.object(sys, "argv", [*argv, "--resume"]):
                 self.assertEqual(workflow_mod.main(), 0)
-            (out / "result.txt").write_text("changed", encoding="utf-8")
+            (out / "result.txt").write_text("changed", encoding="utf-8", newline="\n")
             with (
                 mock.patch.object(sys, "argv", [*argv, "--resume"]),
                 self.assertRaisesRegex(ValueError, "Stage inputs/outputs changed"),

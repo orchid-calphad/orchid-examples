@@ -212,11 +212,11 @@ class SQSMaker:
                 )
         a.pbc = True
         write_str_out(a, d / "str.out")
-        (d / "lat.in").write_text(self.lat_in(lat), encoding="utf-8")
+        (d / "lat.in").write_text(self.lat_in(lat), encoding="utf-8", newline="\n")
         a.write(d / "POSCAR", format="vasp", direct=True, sort=True)
-        (d / "wait").write_text("", encoding="utf-8")
+        (d / "wait").write_text("", encoding="utf-8", newline="\n")
         meta["seconds"] = round(time.time() - t0, 2)
-        (d / "sqs_meta.json").write_text(json.dumps(meta, indent=1), encoding="utf-8")
+        (d / "sqs_meta.json").write_text(json.dumps(meta, indent=1), encoding="utf-8", newline="\n")
         return d, meta
 
 
@@ -227,7 +227,7 @@ def write_str_out(atoms: object, path: str | Path) -> None:
         atoms (object): ASE Atoms of the structure.
         path (str | Path): Output file.
     """
-    with Path(path).open("w", encoding="utf-8") as f:
+    with Path(path).open("w", encoding="utf-8", newline="\n") as f:
         for r in np.eye(3):
             f.write(f"{r[0]:.6f} {r[1]:.6f} {r[2]:.6f}\n")
         for r in atoms.cell:

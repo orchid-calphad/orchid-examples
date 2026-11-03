@@ -194,7 +194,7 @@ def _recall_cell(m: dict, kind: str) -> str:
 def main() -> None:
     """Write results/comparison.json and print the comparisons and the markdown tables."""
     out = _print_comparisons()
-    with (example_root / "results" / "comparison.json").open("w", encoding="utf-8") as f:
+    with (example_root / "results" / "comparison.json").open("w", encoding="utf-8", newline="\n") as f:
         json.dump(out, f, indent=1)
     for k, v in out.items():
         print(k, {kk: (round(vv["delta_weighted_recall"], 3), [round(x, 3) for x in vv["ci95"]]) for kk, vv in v.items()})

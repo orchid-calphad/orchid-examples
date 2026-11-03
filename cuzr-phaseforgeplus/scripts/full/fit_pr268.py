@@ -81,7 +81,7 @@ scale = np.array(
         for i, s in enumerate(syms)
     ]
 )
-tr = (out_dir / "trace.jsonl").open("w", encoding="utf-8")
+tr = (out_dir / "trace.jsonl").open("w", encoding="utf-8", newline="\n")
 t0 = time.time()
 n = [0]
 best = [np.inf, x0.copy()]
@@ -181,7 +181,7 @@ txt = tdb_path.read_text(encoding="utf-8")
 for s, v in zip(syms, best[1], strict=True):
     txt = re.sub(rf"(FUNCTION\s+{s}\s+298\.15\s+)[-+.\dEe]+;", rf"\g<1>{v:.6f};", txt)
 (out_dir / "tuned.tdb").write_text(
-    f"$ PhaseForge+ rerun with ESPEI PR #268 9039ea2 (start {sid}); demonstration only\n" + txt, encoding="utf-8"
+    f"$ PhaseForge+ rerun with ESPEI PR #268 9039ea2 (start {sid}); demonstration only\n" + txt, encoding="utf-8", newline="\n"
 )
 lik, grad, per = lnl_grad(best[1])
 (out_dir / "result.json").write_text(
@@ -205,5 +205,6 @@ lik, grad, per = lnl_grad(best[1])
         indent=1,
     ),
     encoding="utf-8",
+    newline="\n",
 )
 print("done", sid, final, lik, n[0], time.time() - t0)
