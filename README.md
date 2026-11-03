@@ -19,6 +19,9 @@ project site <https://orchid-project.org>. Paper: *TODO: arXiv / journal link*. 
 
 ## Run an example
 
+Python 3.11 or newer is required (`cuzr-phaseforgeplus` uses `datetime.UTC`; the pinned numpy 2.3.2 also needs 3.11); the
+pins were recorded with CPython 3.12.
+
 ```sh
 git clone https://github.com/orchid-calphad/orchid-examples && cd orchid-examples/<example>
 python3.12 -m venv .venv && . .venv/bin/activate

@@ -2,6 +2,7 @@
 # paper's MLIP-only TDB was built with (orchid-phaseforge-demo env/pip_freeze.txt, macOS arm64). Local sources replaced
 # by their public repositories at the same commits. m_scraps needs an MPI build (Homebrew open-mpi 5.0.10, eigen 5.0.1).
 # GRACE-2L-OMAT weights: Academic Software License (non-commercial); downloaded by tensorpotential on first use.
+# Needs Python 3.11 or newer (scripts/workflow.py uses datetime.UTC).
 absl-py==2.5.1
 annotated-types==0.8.0
 ase==3.29.0
