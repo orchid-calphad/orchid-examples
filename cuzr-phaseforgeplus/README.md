@@ -31,8 +31,6 @@ The [TDB provenance manifest](tdb/model-provenance.json) distinguishes PhaseForg
 
 ## Quick path: cached TDBs → gate table and figure (no GPU, about 3–4 min)
 
-**Python 3.11 or newer is required** (`scripts/workflow.py` uses `datetime.UTC`, added in 3.11; the pinned numpy 2.3.2 also needs 3.11). The pins were recorded with CPython 3.12; Python 3.10 does not work.
-
 ```sh
 python -m venv .venv && . .venv/bin/activate          # CPython 3.12
 pip install -r requirements.txt                      # numpy 2.3.2, matplotlib 3.10.7

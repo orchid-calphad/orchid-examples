@@ -1,7 +1,6 @@
 # Full path, fit and NUTS steps (data assembly, PhaseForge+ gradient fit, evaluation, HMC): CPython 3.12.14, exact
 # versions of the venv the paper's final fit ran in (ESPEI PR #268 head 9039ea2 + pycalphad develop 9a6939d + C. Kunselman's
 # littlemcmc fork). Local sources replaced by their public repositories at the same commits.
-# Needs Python 3.11 or newer (scripts/workflow.py uses datetime.UTC).
 annotated-types==0.8.0
 anyio==4.15.1
 beautifulsoup4==4.15.0
