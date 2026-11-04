@@ -24,7 +24,7 @@ extend-exclude = ["*.ipynb"]  # the executed quickstart notebook is generated ou
 
 [tool.ruff.lint]
 select = ["A", "B", "C4", "D", "E", "ERA", "F", "FA", "I", "ICN", "N", "PL", "PTH", "Q", "SIM", "TC", "UP", "W"]
-ignore = ["E501", "PLR0913", "PLR2004"]  # long lines and magic-value comparisons are judgment calls, not lint failures
+ignore = ["E501", "PLR0913", "PLR2004", "UP017"]  # long lines and magic-value comparisons are judgment calls; UP017 would force datetime.UTC, which needs Python 3.11 (workflow.py keeps timezone.utc for 3.10)
 pydocstyle.convention = "google"
 
 [tool.ruff.format]

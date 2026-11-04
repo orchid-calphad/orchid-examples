@@ -11,7 +11,7 @@ import math
 import os
 import subprocess
 import sys
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 example = Path(__file__).resolve().parents[1]
@@ -450,7 +450,7 @@ def _run_stage(stage: dict, m: dict, a: argparse.Namespace, run: Path) -> None:
     env.update(ORCHID_WORK=str(run), ORCHID_SEED_CACHED="0")
     if a.potential_dir:
         env["GRACE_CACHE"] = str(a.potential_dir.resolve().parent)
-    started = datetime.now(UTC).isoformat()
+    started = datetime.now(timezone.utc).isoformat()
     for i, argv in enumerate(commands):
         env["ORCHID_MD_SEED"] = str(a.md_seed + i)
         with (run / "logs" / f"{stage['id']}-{i}.log").open("w", encoding="utf-8", newline="\n") as log:
@@ -472,7 +472,7 @@ def _run_stage(stage: dict, m: dict, a: argparse.Namespace, run: Path) -> None:
         "inputs": inputs,
         "outputs": outputs,
         "started": started,
-        "finished": datetime.now(UTC).isoformat(),
+        "finished": datetime.now(timezone.utc).isoformat(),
     }
     receipt.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8", newline="\n")
     print("Completed " + stage["id"], flush=True)
