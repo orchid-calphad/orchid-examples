@@ -7,9 +7,13 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   hygiene:
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
@@ -18,8 +22,43 @@ jobs:
       - run: python tests/check_hygiene.py
       - name: MLIP example reads the shipped inputs (BL-031)
         run: python tests/check_inputs_gz.py
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          version: "0.12.17"
+          enable-cache: true
       - name: CITATION.cff is valid
-        run: pip install cffconvert==2.0.0 && cffconvert --validate
+        run: uvx --from cffconvert==2.0.0 cffconvert --validate
+  lint:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: "3.12"
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          version: "0.12.17"
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - run: uv sync --frozen --only-group dev
+      - run: uv run --no-sync ruff check .
+      - run: uv run --no-sync ruff format --check .
+  unit-tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: "3.12"
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          version: "0.12.17"
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - run: uv sync --frozen --only-group dev
+      - run: uv run --no-sync pytest -q tests
   quick-path:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
@@ -32,10 +71,14 @@ jobs:
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
         with:
           python-version: "3.12"
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          version: "0.12.17"
+          enable-cache: true
+          cache-dependency-glob: ${{ matrix.example }}/requirements.txt
       - name: Pinned environment of the example
         run: |
-          python -m venv .venv
-          .venv/bin/pip install --upgrade pip
-          .venv/bin/pip install -r ${{ matrix.example }}/requirements.txt
+          uv venv --python 3.12 .venv
+          uv pip install -r ${{ matrix.example }}/requirements.txt
       - name: Quick path regenerates the committed outputs
         run: .venv/bin/python tests/check_quick_paths.py ${{ matrix.example }} --pixel-tol 2.0

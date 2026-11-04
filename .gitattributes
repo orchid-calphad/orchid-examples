@@ -1,4 +1,12 @@
+# Text files are LF in the repository and in every checkout.
 * text=auto eol=lf
-# Release data files stored with CRLF: keep their bytes (checksummed data, not source).
-mlip-formation-enthalpy/inputs/pairs_identical_set.csv -text
-quickstart/sample-release/espei/index.csv -text
+
+# Checksummed or binary assets: never normalised (figures/SHA256SUMS stays text).
+*.tdb -text
+*.TDB -text
+*.npz -text
+*.png -text
+*.pdf -text
+
+# Written by csv.writer (CRLF line terminator); kept byte-identical to what the scripts produce.
+*.csv -text
